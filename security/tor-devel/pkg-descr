@@ -1,0 +1,23 @@
+Tor: The Onion Routing Network (anonymizing overlay network for TCP)
+
+Tor is free software and an open network that helps you defend against 
+traffic analysis, a form of network surveillance that threatens 
+personal freedom and privacy, confidential business activities and 
+relationships, and state security.
+
+Protect your privacy! Defend yourself against network surveillance.
+
+	o prevents people from learning your location or browsing habits;
+	o Tor is for web browsers, instant messaging clients, and more.
+
+Tor is a toolset for a wide range of organizations and people that want 
+to improve their safety and security on the Internet. Using Tor can help 
+you anonymize web browsing and publishing, instant messaging, IRC, SSH, 
+and more. Tor also provides a platform on which software developers can 
+build new applications with built-in anonymity, safety, and privacy features.
+
+	*** This version is not a stable Tor release ***
+	***  Remember that this is development code  ***
+	*** DON'T RELY ON THIS VERSION FOR ANONYMITY ***
+
+WWW: https://www.torproject.org/
