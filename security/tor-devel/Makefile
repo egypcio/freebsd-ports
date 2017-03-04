@@ -1,4 +1,3 @@
-# Created by: peter.thoenen@yahoo.com
 # $FreeBSD$
 
 PORTNAME=	tor
