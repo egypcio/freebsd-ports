@@ -1,15 +1,15 @@
 # Created by: peter.thoenen@yahoo.com
-# $FreeBSD: head/security/tor-devel/Makefile 424187 2016-10-18 17:31:55Z rene $
+# $FreeBSD$
 
 PORTNAME=	tor
-DISTVERSION=	0.2.9.5-alpha
+DISTVERSION=	0.3.0.4-rc
 # PORTREVISION=	1
 CATEGORIES=	security net ipv6
 MASTER_SITES=	TOR
 PKGNAMESUFFIX=	-devel
 
-MAINTAINER=	yuri@rawbw.com
-COMMENT=	Anonymizing overlay network for TCP
+MAINTAINER=	egypcio@googlemail.com
+COMMENT=	unofficial/experimental version of security/tor-devel
 
 LICENSE=	BSD3CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
