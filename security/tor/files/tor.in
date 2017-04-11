@@ -1,20 +1,22 @@
 #!/bin/sh
 #
-# $FreeBSD: head/security/tor-devel/files/tor.in 403904 2015-12-17 10:58:13Z amdmi3 $
+# $FreeBSD$
 #
 # PROVIDE: tor
 # REQUIRE: DAEMON FILESYSTEMS
 # BEFORE: LOGIN
 #
-# Add the following lines to /etc/rc.conf to enable tor.
-# All these options will overide any settings in your local torrc as
-# they are command line options.
+# tor_enable (bool):	Set it to "YES" to enable Tor.	Default: NO
+# tor_conf (str):	Tor's config file.		Default: %%PREFIX%%/etc/tor/torrc
 #
-# tor_enable (bool):	Set it to "YES" to enable tor. Default: NO
-# tor_conf (str):	Points to your torrc file.
-#			Default: %%PREFIX%%/etc/tor/torrc
-# tor_user (str):	Tor daemon user. Default: _tor
-# tor_datadir (str):	Tor datadir.  Default: /var/db/tor
+# This options are command line options used by Tor. That said,
+# 	setting up 'User', 'DataDirectory' or 'Log' using these 
+# 	options will result in configuration overwriting.
+#
+# tor_user (str):	User to run the Tor daemon.	Default: _tor
+# tor_datadir (str):	Tor's DataDirecoty.		Default: /var/db/tor
+# tor_logdir (str):	Log directory.			Default: /var/log/tor
+# tor_loglevel (str):	Log severity level.		Default: notice
 #
 
 . /etc/rc.subr
@@ -29,12 +31,14 @@ load_rc_config ${name}
 : ${tor_user="_tor"}
 : ${tor_pidfile="/var/run/tor/tor.pid"}
 : ${tor_datadir="/var/db/tor"}
+: ${tor_logdir="/var/log/tor"}
+: ${tor_loglevel="notice"}
 
 required_files=${tor_conf}
 required_dirs=${tor_datadir}
 pidfile=${tor_pidfile}
 command="%%PREFIX%%/bin/${name}"
-command_args="-f ${tor_conf} --PidFile ${tor_pidfile} --RunAsDaemon 1 --DataDirectory ${tor_datadir}"
+command_args="-f ${tor_conf} --RunAsDaemon 1 --PidFile ${tor_pidfile} --DataDirectory ${tor_datadir} --Log ${tor_loglevel}\\ file\\ ${tor_logdir}/${tor_loglevel}.log"
 extra_commands="reload"
 
 run_rc_command "$1"
