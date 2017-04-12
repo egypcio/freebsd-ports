@@ -129,14 +129,6 @@ post-patch:
 		${WRKSRC}/doc/tor.1.* \
 		${WRKSRC}/doc/tor.html.in
 
-# post-patch-STATIC-off:
-#	@${REINPLACE_CMD} -e "s@-ltcmalloc@${LOCALBASE}/lib/libtcmalloc.so@" \
-#		${WRKSRC}/configure
-
-# post-patch-STATIC-on:
-#	@${REINPLACE_CMD} -e "s@-ltcmalloc@${LOCALBASE}/lib/libtcmalloc.a@" \
-#		${WRKSRC}/configure
-
 post-configure:
 	@${REINPLACE_CMD} -e '\|^nodist_man1_MANS =|s|$$|$$(install_mans:=.1)|' \
 		${WRKSRC}/Makefile
