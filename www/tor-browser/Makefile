@@ -1,15 +1,11 @@
 # $FreeBSD$
 
 PORTNAME=       	tor-browser
-PORTVERSION=    	6.0.5
-# PORTREVISION=		
-# PORTEPOCH=		
+PORTVERSION=    	6.5.2
 PORT_MOZCONFIG=		${FILESDIR}/mozconfig.in
-DISTVERSION=		${PORTVERSION}
-DISTVERSIONSUFFIX=	-esr45.4.0
+DISTVERSION=		v${PORTVERSION}
+DISTVERSIONSUFFIX=	-esr45.9.0
 CPE_VENDOR=		torproject
-# CPE_VERSION=		${DISTVERSION:C/-.*//}
-# CPE_UPDATE=		${DISTVERSION:C/.*-//}
 CATEGORIES=     	www security ipv6
 MAINTAINER=     	egypcio@googlemail.com
 COMMENT=        	unofficial/experimental version of www/tor-browser
@@ -17,7 +13,9 @@ LICENSE=		BSD3CLAUSE
 LICENSE_FILE=		${WRKDIR}/${GH_PROJECT}-${GH_TAGNAME}/LICENSE
 DIST_SUBDIR=    	${PORTNAME}
 
-GNU_CONFIGURE=	yes
+# GNU_CONFIGURE=	yes
+
+USES=		gmake
 
 USE_GITHUB=	yes
 USE_GL=		gl
@@ -25,12 +23,12 @@ USE_PERL5=	build
 USE_GECKO=	gecko
 USE_MOZILLA=	
 
-# AUTOCONF_VERSION=	2.13
-# AUTOCONF_PORT=	devel/autoconf213
+AUTOCONF_VERSION=	2.13
+AUTOCONF_PORT=		devel/autoconf213
 
 GH_ACCOUNT=	torbsd
 GH_PROJECT=	torb
-GH_TAGNAME=	11de352
+GH_TAGNAME=	15cf08a
 
 # MOZILLA=		${PORTNAME}
 # MOZILLA_BIN=		${PORTNAME}-freebsd
@@ -61,9 +59,8 @@ MOZ_MK_OPTIONS=	BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 PERMIT_PACKAGE_CDROM=yes DIS
 # MOZ_RPATH=		${MOZILLA}
 
 CONFIGURE_ARGS+=	${MOZ_OPTIONS}
-# CONFIGURE_ENV+=	${MOZ_MK_OPTIONS}
 MAKE_ARGS+=		${MOZ_MK_OPTIONS}
-# MAKE_ENV+=		${MOZ_MK_OPTIONS}
+MAKE_ENV+=		MOZCONFIG=${PORT_MOZCONFIG} CC=clang CXX=clang++ CPP=clang-cpp
 
 # BUILD_DEPENDS= nspr>=4.12:devel/nspr \
 #		nss>=3.21.1:security/nss \
@@ -87,9 +84,8 @@ WRKSRC:=	${WRKDIR}/${GH_PROJECT}-${GH_TAGNAME}
 
 pre-configure:
 	(cd ${WRKSRC} && ${LOCALBASE}/bin/autoconf-2.13)
-	(cd ${WRKSRC}/js/src/ && ${LOCALBASE}/bin/autoconf-2.13)
+	(cd ${WRKSRC}/js/src && ${LOCALBASE}/bin/autoconf-2.13)
 	(cp ${PORT_MOZCONFIG} ${WRKSRC}/.mozconfig)
-	# (cd ${WRKSRC} && ./mach build)
+	(cd ${WRKSRC} && ${LOCALBASE}/bin/gmake -f client.mk build CC=clang CXX=clang++ CPP=clang-cpp)
 
 .include <bsd.port.mk>
-

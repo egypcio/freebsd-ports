@@ -1,8 +1,9 @@
 # . $topsrcdir/browser/config/mozconfig
 
 mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/obj-@CONFIG_GUESS@
-mk_add_options MOZ_APP_DISPLAYNAME="tor-browser"
+mk_add_options MOZ_APP_DISPLAYNAME="Tor Browser"
 mk_add_options MOZ_APP_NAME="tor-browser"
+mk_add_options MOZ_MAKE_FLAGS="${MOZ_MAKE_FLAGS} CC=clang CXX=clang++ CPP=clang-cpp"
 mk_add_options MOZILLA_OFFICIAL=1
 mk_add_options BUILD_OFFICIAL=1
 
@@ -12,7 +13,7 @@ ac_add_options --enable-official-branding
 ac_add_options --enable-update-packaging
 ac_add_options --enable-signmar
 ac_add_options --enable-verify-mar
-ac_add_options --enable-tor-browser-data-in-home-dir
+ac_add_options --enable-tor-browser-update
 
 ac_add_options --disable-strip
 ac_add_options --disable-install-strip
@@ -24,8 +25,6 @@ ac_add_options --disable-webrtc
 ac_add_options --disable-eme
 ac_add_options --disable-loop
 ac_add_options --disable-gstreamer
-ac_add_options --disable-tor-browser-update
 
-ac_add_options --with-tor-browser-version=6.0.5
+ac_add_options --with-tor-browser-version=6.5.2
 ac_add_options --program-transform-name='s/firefox/tor\-browser'
-
