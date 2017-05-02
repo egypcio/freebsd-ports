@@ -2,7 +2,6 @@
 
 PORTNAME=	tor
 DISTVERSION=	0.3.0.5-rc
-# PORTREVISION=	1
 CATEGORIES=	security net ipv6
 MASTER_SITES=	TOR
 PKGNAMESUFFIX=	-devel
@@ -19,8 +18,6 @@ BROKEN_sparc64=		Does not build: error: Need a uint128_t implementation!
 
 USES=		cpe
 CPE_VENDOR=	torproject
-# CPE_VERSION=	${DISTVERSION:C/-.*//}
-# CPE_UPDATE=	${DISTVERSION:C/.*-//}
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--disable-asciidoc \
 		--with-tor-user=${USERS} --with-tor-group=${GROUPS} \
@@ -31,7 +28,7 @@ CONFIGURE_ENV=	TOR_CPPFLAGS_zlib='-I/usr/include' \
 		TOR_CPPFLAGS_libevent='-I${LOCALBASE}/include' \
 		TOR_LDFLAGS_libevent='-L${LOCALBASE}/lib'
 
-OPTIONS_DEFINE=		STATIC TOR2WEB
+OPTIONS_DEFINE=		GNU_MAKE STATIC TOR2WEB
 
 OPTIONS_RADIO=		MALLOC
 OPTIONS_RADIO_MALLOC=	DMALLOC TCMALLOC
@@ -40,7 +37,9 @@ OPTIONS_SINGLE=		SSLTLS
 OPTIONS_SINGLE_SSLTLS=	SSLTLS_FREEBSD SSLTLS_PORTS
 
 DMALLOC_DESC=		Use debug memory allocation library
+GNU_MAKE_DESC=		Use 'gmake' as default 'make' tool
 MALLOC_DESC=		Dynamic memory allocation management
+SSLTLS_DESC=		SSL/TLS support
 SSLTLS_FREEBSD_DESC=	Use FreeBSD's base SSL/TLS libraries
 SSLTLS_PORTS_DESC=	Use SSL/TLS from ports instead of FreeBSD's
 STATIC_DESC=		Create an entirely static Tor binary
@@ -84,12 +83,11 @@ CONFLICTS=	tor-[0-9]*
 
 .if ${OSVERSION} < 1000015
 DEFAULT_VERSIONS+=	ssl=openssl
-# OPENSSL_PORT=		security/openssl
 WITH_OPENSSL_PORT=	yes
 .endif
 
-.if ${OSVERSION} < 903511
-OPTIONS_DEFAULT=	SSLTLS_PORTS
+.if !empty(PORT_OPTIONS:MGNU_MAKE)
+USES+=	gmake
 .endif
 
 .if !empty(PORT_OPTIONS:MSSLTLS_PORTS)

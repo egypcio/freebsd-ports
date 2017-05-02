@@ -1,11 +1,9 @@
 # $FreeBSD$
 
 PORTNAME=		tor
-DISTVERSION=		0.2.9.9
-# PORTREVISION=		1
+DISTVERSION=		0.3.0.6
 CATEGORIES=		security net ipv6
 MASTER_SITES=		TOR
-# PKGNAMESUFFIX=	-devel
 
 MAINTAINER=	egypcio@googlemail.com
 COMMENT=	unofficial/experimental version of security/tor
@@ -19,8 +17,6 @@ BROKEN_sparc64=		Does not build: error: Need a uint128_t implementation!
 
 USES=		cpe
 CPE_VENDOR=	torproject
-# CPE_VERSION=	${DISTVERSION:C/-.*//}
-# CPE_UPDATE=	${DISTVERSION:C/.*-//}
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--disable-asciidoc \
 		--with-tor-user=${USERS} --with-tor-group=${GROUPS} \
@@ -41,6 +37,7 @@ OPTIONS_SINGLE_SSLTLS=	SSLTLS_FREEBSD SSLTLS_PORTS
 
 DMALLOC_DESC=		Use debug memory allocation library
 MALLOC_DESC=		Dynamic memory allocation management
+SSLTLS_DESC=		SSL/TLS support
 SSLTLS_FREEBSD_DESC=	Use FreeBSD's base SSL/TLS libraries
 SSLTLS_PORTS_DESC=	Use SSL/TLS from ports instead of FreeBSD's
 STATIC_DESC=		Create an entirely static Tor binary
@@ -84,12 +81,7 @@ CONFLICTS=	tor-devel*
 
 .if ${OSVERSION} < 1000015
 DEFAULT_VERSIONS+=	ssl=openssl
-# OPENSSL_PORT=		security/openssl
 WITH_OPENSSL_PORT=	yes
-.endif
-
-.if ${OSVERSION} < 903511
-OPTIONS_DEFAULT=	SSLTLS_PORTS
 .endif
 
 .if !empty(PORT_OPTIONS:MSSLTLS_PORTS)
