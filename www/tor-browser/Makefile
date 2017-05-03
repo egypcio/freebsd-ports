@@ -86,6 +86,8 @@ pre-configure:
 	(cd ${WRKSRC} && ${LOCALBASE}/bin/autoconf-2.13)
 	(cd ${WRKSRC}/js/src && ${LOCALBASE}/bin/autoconf-2.13)
 	(cp ${PORT_MOZCONFIG} ${WRKSRC}/.mozconfig)
+
+do-build:
 	(cd ${WRKSRC} && ${LOCALBASE}/bin/gmake -f client.mk build CC=clang CXX=clang++ CPP=clang-cpp)
 
 .include <bsd.port.mk>
