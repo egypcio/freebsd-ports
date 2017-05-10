@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	tor
-DISTVERSION=	0.3.0.5-rc
+DISTVERSION=	0.3.1.0-alpha-dev
 CATEGORIES=	security net ipv6
 MASTER_SITES=	TOR
 PKGNAMESUFFIX=	-devel
@@ -28,7 +28,7 @@ CONFIGURE_ENV=	TOR_CPPFLAGS_zlib='-I/usr/include' \
 		TOR_CPPFLAGS_libevent='-I${LOCALBASE}/include' \
 		TOR_LDFLAGS_libevent='-L${LOCALBASE}/lib'
 
-OPTIONS_DEFINE=		GNU_MAKE STATIC TOR2WEB
+OPTIONS_DEFINE=		ASCIIDOC GNU_MAKE STATIC TOR2WEB ZSTD
 
 OPTIONS_RADIO=		MALLOC
 OPTIONS_RADIO_MALLOC=	DMALLOC TCMALLOC
@@ -36,6 +36,7 @@ OPTIONS_RADIO_MALLOC=	DMALLOC TCMALLOC
 OPTIONS_SINGLE=		SSLTLS
 OPTIONS_SINGLE_SSLTLS=	SSLTLS_FREEBSD SSLTLS_PORTS
 
+ASCIIDOC_DESC=		Use asciidoc for building manpages
 DMALLOC_DESC=		Use debug memory allocation library
 GNU_MAKE_DESC=		Use 'gmake' as default 'make' tool
 MALLOC_DESC=		Dynamic memory allocation management
@@ -45,9 +46,13 @@ SSLTLS_PORTS_DESC=	Use SSL/TLS from ports instead of FreeBSD's
 STATIC_DESC=		Create an entirely static Tor binary
 TCMALLOC_DESC=		Use tcmalloc memory allocation library
 TOR2WEB_DESC=		Support Tor2Web non-anonymous mode
+ZSTD_DESC=		Enable support for Zstandard compression
 
 OPTIONS_DEFAULT=	SSLTLS_FREEBSD
 
+ASCIIDOC_BUILD_DEPENDS=		asciidoc:textproc/asciidoc
+ASCIIDOC_CONFIGURE_OFF=		--disable-asciidoc
+ASCIIDOC_CONFIGURE_ON=
 DMALLOC_CONFIGURE_ON=		--with-dmalloc
 DMALLOC_CONFIGURE_OFF=
 DMALLOC_LIB_DEPENDS=		libdmalloc.so:devel/dmalloc
@@ -70,12 +75,17 @@ TCMALLOC_CONFIGURE_OFF=
 TCMALLOC_LIB_DEPENDS=		libtcmalloc.so:devel/google-perftools
 TOR2WEB_CONFIGURE_ON=		--enable-tor2web-mode
 TOR2WEB_CONFIGURE_OFF=
-
-USE_RC_SUBR=	tor
-SUB_FILES=	pkg-message
+ZSTD_LIB_DEPENDS=		libzstd.so:archivers/zstd
+ZSTD_CONFIGURE_ON=		--enable-zstd
+ZSTD_CONFIGURE_OFF=		--disable-zstd
 
 GROUPS=		_tor
 USERS=		_tor
+
+PLIST_SUB=	USER="${USERS}" GROUP="${GROUPS}"
+SUB_LIST=	USER="${USERS}" GROUP="${GROUPS}"
+SUB_FILES=	pkg-message
+USE_RC_SUBR=	tor
 
 CONFLICTS=	tor-[0-9]*
 
