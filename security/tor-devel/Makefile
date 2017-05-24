@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	tor
-DISTVERSION=	0.3.1.0-alpha-dev
+DISTVERSION=	0.3.1.1-alpha
 CATEGORIES=	security net ipv6
 MASTER_SITES=	TOR
 PKGNAMESUFFIX=	-devel
@@ -53,31 +53,31 @@ OPTIONS_DEFAULT=	SSLTLS_FREEBSD
 ASCIIDOC_BUILD_DEPENDS=		asciidoc:textproc/asciidoc
 ASCIIDOC_CONFIGURE_OFF=		--disable-asciidoc
 ASCIIDOC_CONFIGURE_ON=
-DMALLOC_CONFIGURE_ON=		--with-dmalloc
 DMALLOC_CONFIGURE_OFF=
+DMALLOC_CONFIGURE_ON=		--with-dmalloc
 DMALLOC_LIB_DEPENDS=		libdmalloc.so:devel/dmalloc
-SSLTLS_FREEBSD_CONFIGURE_ON=	--with-openssl-dir=/usr --includedir=/usr/include
-SSLTLS_FREEBSD_CONFIGURE_OFF=
 SSLTLS_FREEBSD_CONFIGURE_ENV=	SSL_DEFAULT=base DEFAULT_VERSIONS+='ssl=base'
 SSLTLS_FREEBSD_CONFIGURE_ENV+=	OPENSSLBASE=/usr OPENSSLRPATH=/usr/lib USE_OPENSSL_RPATH=yes
 SSLTLS_FREEBSD_CONFIGURE_ENV+=	TOR_CPPFLAGS_openssl='-I/usr/include'
 SSLTLS_FREEBSD_CONFIGURE_ENV+=	TOR_LDFLAGS_openssl='-L/usr/lib -Wl,-rpath,/usr/lib'
+SSLTLS_FREEBSD_CONFIGURE_OFF=
+SSLTLS_FREEBSD_CONFIGURE_ON=	--with-openssl-dir=/usr --includedir=/usr/include
 SSLTLS_FREEBSD_LIB_DEPENDS=	libevent.so:devel/libevent2
-SSLTLS_PORTS_CONFIGURE_ON=	--with-openssl-dir=${OPENSSLBASE}
-SSLTLS_PORTS_CONFIGURE_OFF=
 SSLTLS_PORTS_CONFIGURE_ENV=	TOR_CPPFLAGS_openssl='-I${OPENSSLBASE}/include' TOR_LDFLAGS_openssl='-L${OPENSSLBASE}/lib'
+SSLTLS_PORTS_CONFIGURE_OFF=
+SSLTLS_PORTS_CONFIGURE_ON=	--with-openssl-dir=${OPENSSLBASE}
 SSLTLS_PORTS_LIB_DEPENDS=	libevent.so:devel/libevent2
-STATIC_CONFIGURE_ON=		--enable-static-tor
-STATIC_CONFIGURE_OFF=
 STATIC_CONFIGURE_BUILD_DEPENDS=	libevent.a:devel/libevent2
-TCMALLOC_CONFIGURE_ON=		--with-tcmalloc
+STATIC_CONFIGURE_OFF= 
+STATIC_CONFIGURE_ON=		--enable-static-tor
 TCMALLOC_CONFIGURE_OFF=
+TCMALLOC_CONFIGURE_ON=		--with-tcmalloc
 TCMALLOC_LIB_DEPENDS=		libtcmalloc.so:devel/google-perftools
-TOR2WEB_CONFIGURE_ON=		--enable-tor2web-mode
 TOR2WEB_CONFIGURE_OFF=
-ZSTD_LIB_DEPENDS=		libzstd.so:archivers/zstd
+TOR2WEB_CONFIGURE_ON=		--enable-tor2web-mode
+ZSTD_CONFIGURE_OFF=                           
 ZSTD_CONFIGURE_ON=		--enable-zstd
-ZSTD_CONFIGURE_OFF=		--disable-zstd
+ZSTD_LIB_DEPENDS=		libzstd.so:archivers/zstd
 
 GROUPS=		_tor
 USERS=		_tor
