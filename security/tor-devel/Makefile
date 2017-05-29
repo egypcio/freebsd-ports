@@ -62,12 +62,12 @@ SSLTLS_FREEBSD_CONFIGURE_ENV+=	TOR_CPPFLAGS_openssl='-I/usr/include'
 SSLTLS_FREEBSD_CONFIGURE_ENV+=	TOR_LDFLAGS_openssl='-L/usr/lib -Wl,-rpath,/usr/lib'
 SSLTLS_FREEBSD_CONFIGURE_OFF=
 SSLTLS_FREEBSD_CONFIGURE_ON=	--with-openssl-dir=/usr --includedir=/usr/include
-SSLTLS_FREEBSD_LIB_DEPENDS=	libevent.so:devel/libevent2
+SSLTLS_FREEBSD_LIB_DEPENDS=	libevent.so:devel/libevent
 SSLTLS_PORTS_CONFIGURE_ENV=	TOR_CPPFLAGS_openssl='-I${OPENSSLBASE}/include' TOR_LDFLAGS_openssl='-L${OPENSSLBASE}/lib'
 SSLTLS_PORTS_CONFIGURE_OFF=
 SSLTLS_PORTS_CONFIGURE_ON=	--with-openssl-dir=${OPENSSLBASE}
-SSLTLS_PORTS_LIB_DEPENDS=	libevent.so:devel/libevent2
-STATIC_CONFIGURE_BUILD_DEPENDS=	libevent.a:devel/libevent2
+SSLTLS_PORTS_LIB_DEPENDS=	libevent.so:devel/libevent
+STATIC_CONFIGURE_BUILD_DEPENDS=	libevent.a:devel/libevent
 STATIC_CONFIGURE_OFF= 
 STATIC_CONFIGURE_ON=		--enable-static-tor
 TCMALLOC_CONFIGURE_OFF=
