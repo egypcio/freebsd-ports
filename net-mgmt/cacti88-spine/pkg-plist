@@ -1,0 +1,5 @@
+@group	%%CACTIGROUP%%
+@owner	%%CACTIUSER%%
+@sample	etc/spine.conf.sample
+bin/spine
+man/man1/spine.1.gz

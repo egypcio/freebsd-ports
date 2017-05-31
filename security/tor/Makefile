@@ -6,7 +6,7 @@ CATEGORIES=		security net ipv6
 MASTER_SITES=		TOR
 
 MAINTAINER=	egypcio@googlemail.com
-COMMENT=	unofficial/experimental version of security/tor
+COMMENT=	Unofficial/experimental version of security/tor
 
 LICENSE=	BSD3CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
@@ -75,7 +75,7 @@ SUB_FILES=	pkg-message
 GROUPS=		_tor
 USERS=		_tor
 
-CONFLICTS=	tor-devel*
+CONFLICTS=	tor-devel-[0-9]*
 
 .include <bsd.port.options.mk>
 

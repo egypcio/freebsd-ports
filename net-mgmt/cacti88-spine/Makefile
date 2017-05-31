@@ -1,13 +1,13 @@
 # $FreeBSD$
 
-PORTNAME=	spine88
+PORTNAME=	spine
 PORTVERSION=	0.8.8h
 CATEGORIES=	net-mgmt
 MASTER_SITES=	http://www.cacti.net/downloads/spine/
 DISTNAME=	cacti-spine-${PORTVERSION}
 
 MAINTAINER=	egypcio@googlemail.com
-COMMENT=	unofficial/experimental version of net-mgmt/cacti-spine
+COMMENT=	Unofficial/experimental version of net-mgmt/cacti-spine
 
 LICENSE=	GPLv2
 
@@ -20,7 +20,7 @@ CPPFLAGS+=	`net-snmp-config --cflags`
 LDFLAGS+=	`net-snmp-config --libs`
 USES=		libtool mysql ssl
 
-CONFLICTS=	cacti-spine* spine-[1-9]*
+CONFLICTS=	spine-[1-9]*
 
 post-patch:
 	@${REINPLACE_CMD} 's,#define\ *DEFAULT_CONF_FILE .*,#define DEFAULT_CONF_FILE "${PREFIX}/etc/spine.conf",' ${WRKSRC}/spine.h

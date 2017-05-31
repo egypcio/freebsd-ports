@@ -1,13 +1,13 @@
 # $FreeBSD$
 
 PORTNAME=	tor
-DISTVERSION=	0.3.1.1-alpha
+DISTVERSION=	0.3.1.2-alpha
 CATEGORIES=	security net ipv6
 MASTER_SITES=	TOR
 PKGNAMESUFFIX=	-devel
 
 MAINTAINER=	egypcio@googlemail.com
-COMMENT=	unofficial/experimental version of security/tor-devel
+COMMENT=	Unofficial/experimental version of security/tor-devel
 
 LICENSE=	BSD3CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE

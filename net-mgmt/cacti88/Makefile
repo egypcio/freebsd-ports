@@ -5,7 +5,7 @@ PORTVERSION=	0.8.8h${PATCHLEVEL}
 CATEGORIES=	net-mgmt www
 MASTER_SITES=	http://www.cacti.net/downloads/
 MAINTAINER=	egypcio@googlemail.com
-COMMENT=	unofficial/experimental version of net-mgmt/cacti
+COMMENT=	Unofficial/experimental version of net-mgmt/cacti
 
 LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/LICENSE
