@@ -1,12 +1,20 @@
-%%CACTIDIR%%/LICENSE
-%%CACTIDIR%%/README
+@comment
+@comment
+@comment Manage the new Cacti dirs from their prior default location.
+@dir /var/db/cacti
+@dir /var/db/cacti/rra
+@dir /var/db/cacti/scripts
+@dir /var/log/cacti
+@group %%CACTIGROUP%%
+@group wheel
+@owner %%CACTIUSER%%
+@owner root
+%%CACTIDIR%%/%%CACTIUSER%%.sql
 %%CACTIDIR%%/about.php
 %%CACTIDIR%%/auth_changepassword.php
 %%CACTIDIR%%/auth_login.php
-%%CACTIDIR%%/%%CACTIUSER%%.sql
 %%CACTIDIR%%/cdef.php
 %%CACTIDIR%%/cli/.htaccess
-%%CACTIDIR%%/cli/index.php
 %%CACTIDIR%%/cli/add_data_query.php
 %%CACTIDIR%%/cli/add_device.php
 %%CACTIDIR%%/cli/add_graph_template.php
@@ -19,6 +27,7 @@
 %%CACTIDIR%%/cli/data_template_associate_rra.php
 %%CACTIDIR%%/cli/host_update_template.php
 %%CACTIDIR%%/cli/import_template.php
+%%CACTIDIR%%/cli/index.php
 %%CACTIDIR%%/cli/poller_data_sources_reapply_names.php
 %%CACTIDIR%%/cli/poller_graphs_reapply_names.php
 %%CACTIDIR%%/cli/poller_output_empty.php
@@ -37,13 +46,11 @@
 %%CACTIDIR%%/data_templates.php
 %%CACTIDIR%%/docs/CHANGELOG
 %%CACTIDIR%%/docs/CONTRIB
-%%CACTIDIR%%/docs/README
-%%CACTIDIR%%/docs/html/LICENSE.html
+%%CACTIDIR%%/docs/html/%%CACTIUSER%%_help.html
 %%CACTIDIR%%/docs/html/advanced_topics.html
 %%CACTIDIR%%/docs/html/basics.html
 %%CACTIDIR%%/docs/html/batch_copy_users.html
 %%CACTIDIR%%/docs/html/bsd_ports.html
-%%CACTIDIR%%/docs/html/%%CACTIUSER%%_help.html
 %%CACTIDIR%%/docs/html/cdefs.html
 %%CACTIDIR%%/docs/html/check_%%CACTIUSER%%_poller.html
 %%CACTIDIR%%/docs/html/check_data_gathering.html
@@ -111,6 +118,7 @@
 %%CACTIDIR%%/docs/html/install_unix.html
 %%CACTIDIR%%/docs/html/install_windows.html
 %%CACTIDIR%%/docs/html/installation.html
+%%CACTIDIR%%/docs/html/LICENSE.html
 %%CACTIDIR%%/docs/html/making_scripts_work_with_%%CACTIUSER%%.html
 %%CACTIDIR%%/docs/html/migration_php_scripts_to_script_server.html
 %%CACTIDIR%%/docs/html/new_graphs.html
@@ -132,26 +140,31 @@
 %%CACTIDIR%%/docs/html/unix_configure_mysql.html
 %%CACTIDIR%%/docs/html/unix_configure_php.html
 %%CACTIDIR%%/docs/html/unix_configure_spine.html
-%%CACTIDIR%%/docs/html/upgrade.html
 %%CACTIDIR%%/docs/html/upgrade_using_hostmib_data_queries.html
+%%CACTIDIR%%/docs/html/upgrade.html
 %%CACTIDIR%%/docs/html/user_management.html
 %%CACTIDIR%%/docs/html/using_spine.html
 %%CACTIDIR%%/docs/html/variables.html
+%%CACTIDIR%%/docs/README
 %%CACTIDIR%%/docs/txt/manual.txt
 %%CACTIDIR%%/gprint_presets.php
-%%CACTIDIR%%/graph.php
 %%CACTIDIR%%/graph_image.php
 %%CACTIDIR%%/graph_settings.php
-%%CACTIDIR%%/graph_templates.php
 %%CACTIDIR%%/graph_templates_inputs.php
 %%CACTIDIR%%/graph_templates_items.php
+%%CACTIDIR%%/graph_templates.php
 %%CACTIDIR%%/graph_view.php
 %%CACTIDIR%%/graph_xport.php
-%%CACTIDIR%%/graphs.php
+%%CACTIDIR%%/graph.php
 %%CACTIDIR%%/graphs_items.php
 %%CACTIDIR%%/graphs_new.php
-%%CACTIDIR%%/host.php
+%%CACTIDIR%%/graphs.php
 %%CACTIDIR%%/host_templates.php
+%%CACTIDIR%%/host.php
+%%CACTIDIR%%/images/%%CACTIUSER%%_about_logo.gif
+%%CACTIDIR%%/images/%%CACTIUSER%%_backdrop.gif
+%%CACTIDIR%%/images/%%CACTIUSER%%_backdrop2.gif
+%%CACTIDIR%%/images/%%CACTIUSER%%_logo.gif
 %%CACTIDIR%%/images/arrow.gif
 %%CACTIDIR%%/images/auth_deny.gif
 %%CACTIDIR%%/images/auth_login.gif
@@ -175,24 +188,20 @@
 %%CACTIDIR%%/images/button_save.gif
 %%CACTIDIR%%/images/button_view.gif
 %%CACTIDIR%%/images/button_yes.gif
-%%CACTIDIR%%/images/%%CACTIUSER%%_about_logo.gif
-%%CACTIDIR%%/images/%%CACTIUSER%%_backdrop.gif
-%%CACTIDIR%%/images/%%CACTIUSER%%_backdrop2.gif
-%%CACTIDIR%%/images/%%CACTIUSER%%_logo.gif
 %%CACTIDIR%%/images/calendar.gif
-%%CACTIDIR%%/images/delete_icon.gif
 %%CACTIDIR%%/images/delete_icon_large.gif
+%%CACTIDIR%%/images/delete_icon.gif
 %%CACTIDIR%%/images/disable_icon.png
-%%CACTIDIR%%/images/enable_icon.png
 %%CACTIDIR%%/images/enable_icon_disabled.png
+%%CACTIDIR%%/images/enable_icon.png
 %%CACTIDIR%%/images/favicon.ico
 %%CACTIDIR%%/images/graph_page_top.gif
 %%CACTIDIR%%/images/graph_properties.gif
 %%CACTIDIR%%/images/graph_query.png
 %%CACTIDIR%%/images/graph_zoom.gif
 %%CACTIDIR%%/images/hide.gif
-%%CACTIDIR%%/images/install_icon.png
 %%CACTIDIR%%/images/install_icon_disabled.png
+%%CACTIDIR%%/images/install_icon.png
 %%CACTIDIR%%/images/left_border.gif
 %%CACTIDIR%%/images/menu_line.gif
 %%CACTIDIR%%/images/menuarrow.gif
@@ -201,26 +210,26 @@
 %%CACTIDIR%%/images/move_right.gif
 %%CACTIDIR%%/images/move_up.gif
 %%CACTIDIR%%/images/reload_icon_small.gif
-%%CACTIDIR%%/images/server.png
-%%CACTIDIR%%/images/server_chart.png
 %%CACTIDIR%%/images/server_chart_curve.png
+%%CACTIDIR%%/images/server_chart.png
 %%CACTIDIR%%/images/server_dataquery.png
-%%CACTIDIR%%/images/shadow.gif
+%%CACTIDIR%%/images/server.png
 %%CACTIDIR%%/images/shadow_gray.gif
+%%CACTIDIR%%/images/shadow.gif
 %%CACTIDIR%%/images/show.gif
 %%CACTIDIR%%/images/tab_%%CACTIUSER%%.gif
-%%CACTIDIR%%/images/tab_console.gif
 %%CACTIDIR%%/images/tab_console_down.gif
-%%CACTIDIR%%/images/tab_graphs.gif
+%%CACTIDIR%%/images/tab_console.gif
 %%CACTIDIR%%/images/tab_graphs_down.gif
-%%CACTIDIR%%/images/tab_mode_list.gif
+%%CACTIDIR%%/images/tab_graphs.gif
 %%CACTIDIR%%/images/tab_mode_list_down.gif
-%%CACTIDIR%%/images/tab_mode_preview.gif
+%%CACTIDIR%%/images/tab_mode_list.gif
 %%CACTIDIR%%/images/tab_mode_preview_down.gif
-%%CACTIDIR%%/images/tab_mode_tree.gif
+%%CACTIDIR%%/images/tab_mode_preview.gif
 %%CACTIDIR%%/images/tab_mode_tree_down.gif
-%%CACTIDIR%%/images/tab_settings.gif
+%%CACTIDIR%%/images/tab_mode_tree.gif
 %%CACTIDIR%%/images/tab_settings_down.gif
+%%CACTIDIR%%/images/tab_settings.gif
 %%CACTIDIR%%/images/transparent_line.gif
 %%CACTIDIR%%/images/uninstall_icon.gif
 %%CACTIDIR%%/images/view_none.gif
@@ -230,11 +239,11 @@
 %%CACTIDIR%%/include/csrf/csrf-magic.js
 %%CACTIDIR%%/include/csrf/csrf-magic.php
 %%CACTIDIR%%/include/csrf/index.php
-%%CACTIDIR%%/include/global.php
 %%CACTIDIR%%/include/global_arrays.php
 %%CACTIDIR%%/include/global_constants.php
 %%CACTIDIR%%/include/global_form.php
 %%CACTIDIR%%/include/global_settings.php
+%%CACTIDIR%%/include/global.php
 %%CACTIDIR%%/include/js/images/ui-bg_diagonals-thick_18_b81900_40x40.png
 %%CACTIDIR%%/include/js/images/ui-bg_diagonals-thick_20_666666_40x40.png
 %%CACTIDIR%%/include/js/images/ui-bg_flat_10_000000_40x100.png
@@ -249,13 +258,13 @@
 %%CACTIDIR%%/include/js/images/ui-icons_ef8c08_256x240.png
 %%CACTIDIR%%/include/js/images/ui-icons_ffd27a_256x240.png
 %%CACTIDIR%%/include/js/images/ui-icons_ffffff_256x240.png
+%%CACTIDIR%%/include/js/jquery-ui.css
+%%CACTIDIR%%/include/js/jquery-ui.js
 %%CACTIDIR%%/include/js/jquery.cookie.js
 %%CACTIDIR%%/include/js/jquery.dropdown.js
 %%CACTIDIR%%/include/js/jquery.js
 %%CACTIDIR%%/include/js/jquery.zoom.css
 %%CACTIDIR%%/include/js/jquery.zoom.js
-%%CACTIDIR%%/include/js/jquery-ui.css
-%%CACTIDIR%%/include/js/jquery-ui.js
 %%CACTIDIR%%/include/js/jstree.js
 %%CACTIDIR%%/include/js/themes/default-dark/32px.png
 %%CACTIDIR%%/include/js/themes/default-dark/40px.png
@@ -303,8 +312,8 @@
 %%CACTIDIR%%/include/jscalendar/lang/calendar-pl.js
 %%CACTIDIR%%/include/jscalendar/lang/calendar-pt.js
 %%CACTIDIR%%/include/jscalendar/lang/calendar-ro.js
-%%CACTIDIR%%/include/jscalendar/lang/calendar-ru.js
 %%CACTIDIR%%/include/jscalendar/lang/calendar-ru_win_.js
+%%CACTIDIR%%/include/jscalendar/lang/calendar-ru.js
 %%CACTIDIR%%/include/jscalendar/lang/calendar-si.js
 %%CACTIDIR%%/include/jscalendar/lang/calendar-sk.js
 %%CACTIDIR%%/include/jscalendar/lang/calendar-sp.js
@@ -380,10 +389,10 @@
 %%CACTIDIR%%/lib/adodb/datadict/datadict-sapdb.inc.php
 %%CACTIDIR%%/lib/adodb/datadict/datadict-sybase.inc.php
 %%CACTIDIR%%/lib/adodb/drivers/adodb-access.inc.php
-%%CACTIDIR%%/lib/adodb/drivers/adodb-ado.inc.php
-%%CACTIDIR%%/lib/adodb/drivers/adodb-ado5.inc.php
 %%CACTIDIR%%/lib/adodb/drivers/adodb-ado_access.inc.php
 %%CACTIDIR%%/lib/adodb/drivers/adodb-ado_mssql.inc.php
+%%CACTIDIR%%/lib/adodb/drivers/adodb-ado.inc.php
+%%CACTIDIR%%/lib/adodb/drivers/adodb-ado5.inc.php
 %%CACTIDIR%%/lib/adodb/drivers/adodb-borland_ibase.inc.php
 %%CACTIDIR%%/lib/adodb/drivers/adodb-csv.inc.php
 %%CACTIDIR%%/lib/adodb/drivers/adodb-db2.inc.php
@@ -402,11 +411,11 @@
 %%CACTIDIR%%/lib/adodb/drivers/adodb-oci8.inc.php
 %%CACTIDIR%%/lib/adodb/drivers/adodb-oci805.inc.php
 %%CACTIDIR%%/lib/adodb/drivers/adodb-oci8po.inc.php
-%%CACTIDIR%%/lib/adodb/drivers/adodb-odbc.inc.php
 %%CACTIDIR%%/lib/adodb/drivers/adodb-odbc_mssql.inc.php
 %%CACTIDIR%%/lib/adodb/drivers/adodb-odbc_oracle.inc.php
-%%CACTIDIR%%/lib/adodb/drivers/adodb-odbtp.inc.php
+%%CACTIDIR%%/lib/adodb/drivers/adodb-odbc.inc.php
 %%CACTIDIR%%/lib/adodb/drivers/adodb-odbtp_unicode.inc.php
+%%CACTIDIR%%/lib/adodb/drivers/adodb-odbtp.inc.php
 %%CACTIDIR%%/lib/adodb/drivers/adodb-oracle.inc.php
 %%CACTIDIR%%/lib/adodb/drivers/adodb-pdo.inc.php
 %%CACTIDIR%%/lib/adodb/drivers/adodb-postgres.inc.php
@@ -454,12 +463,12 @@
 %%CACTIDIR%%/lib/functions.php
 %%CACTIDIR%%/lib/graph_export.php
 %%CACTIDIR%%/lib/graph_variables.php
-%%CACTIDIR%%/lib/html.php
-%%CACTIDIR%%/lib/html_form.php
 %%CACTIDIR%%/lib/html_form_template.php
+%%CACTIDIR%%/lib/html_form.php
 %%CACTIDIR%%/lib/html_tree.php
 %%CACTIDIR%%/lib/html_utility.php
 %%CACTIDIR%%/lib/html_validate.php
+%%CACTIDIR%%/lib/html.php
 %%CACTIDIR%%/lib/import.php
 %%CACTIDIR%%/lib/ldap.php
 %%CACTIDIR%%/lib/ping.php
@@ -475,12 +484,14 @@
 %%CACTIDIR%%/lib/utility.php
 %%CACTIDIR%%/lib/variables.php
 %%CACTIDIR%%/lib/xml.php
+%%CACTIDIR%%/LICENSE
 %%CACTIDIR%%/logout.php
 %%CACTIDIR%%/plugins.php
 %%CACTIDIR%%/plugins/index.php
-%%CACTIDIR%%/poller.php
 %%CACTIDIR%%/poller_commands.php
 %%CACTIDIR%%/poller_export.php
+%%CACTIDIR%%/poller.php
+%%CACTIDIR%%/README
 %%CACTIDIR%%/resource/script_queries/host_cpu.xml
 %%CACTIDIR%%/resource/script_queries/host_disk.xml
 %%CACTIDIR%%/resource/script_queries/unix_disk.xml
@@ -499,8 +510,8 @@
 %%CACTIDIR%%/scripts/diskfree.pl
 %%CACTIDIR%%/scripts/diskfree.sh
 %%CACTIDIR%%/scripts/linux_memory.pl
-%%CACTIDIR%%/scripts/loadavg.pl
 %%CACTIDIR%%/scripts/loadavg_multi.pl
+%%CACTIDIR%%/scripts/loadavg.pl
 %%CACTIDIR%%/scripts/ping.pl
 %%CACTIDIR%%/scripts/query_host_cpu.php
 %%CACTIDIR%%/scripts/query_host_partitions.php
@@ -521,14 +532,3 @@
 %%CACTIDIR%%/tree.php
 %%CACTIDIR%%/user_admin.php
 %%CACTIDIR%%/utilities.php
-@comment
-@comment Manage the new Cacti dirs from their prior default location.
-@comment
-@owner %%CACTIUSER%%
-@group %%CACTIGROUP%%
-@dir /var/log/cacti
-@dir /var/db/cacti/rra
-@dir /var/db/cacti/scripts
-@dir /var/db/cacti
-@group wheel
-@owner root

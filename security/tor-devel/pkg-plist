@@ -4,14 +4,14 @@
 @sample etc/tor/torrc.sample
 %%DATADIR%%/geoip
 %%DATADIR%%/geoip6
-%%MANPAGES%%man/man1/tor-gencert.1.gz
-%%MANPAGES%%man/man1/tor-resolve.1.gz
-%%MANPAGES%%man/man1/tor.1.gz
-%%MANPAGES%%man/man1/torify.1.gz
-%%PORTDOCS%%%%DOCSDIR%%/tor-gencert.html
-%%PORTDOCS%%%%DOCSDIR%%/tor-resolve.html
-%%PORTDOCS%%%%DOCSDIR%%/tor.html
-%%PORTDOCS%%%%DOCSDIR%%/torify.html
+%%DOCSDIR%%/tor-gencert.html
+%%DOCSDIR%%/tor-resolve.html
+%%DOCSDIR%%/tor.html
+%%DOCSDIR%%/torify.html
+%%MANPREFIX%%/man1/tor-gencert.1.gz
+%%MANPREFIX%%/man1/tor-resolve.1.gz
+%%MANPREFIX%%/man1/tor.1.gz
+%%MANPREFIX%%/man1/torify.1.gz
 bin/tor
 bin/tor-gencert
 bin/tor-resolve

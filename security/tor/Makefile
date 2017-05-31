@@ -69,11 +69,13 @@ TCMALLOC_LIB_DEPENDS=		libtcmalloc.so:devel/google-perftools
 TOR2WEB_CONFIGURE_ON=		--enable-tor2web-mode
 TOR2WEB_CONFIGURE_OFF=
 
-USE_RC_SUBR=	tor
-SUB_FILES=	pkg-message
-
 GROUPS=		_tor
 USERS=		_tor
+
+PLIST_SUB=	USER="${USERS}" GROUP="${GROUPS}"   
+SUB_LIST=	USER="${USERS}" GROUP="${GROUPS}"
+SUB_FILES=	pkg-message
+USE_RC_SUBR=	tor
 
 CONFLICTS=	tor-devel-[0-9]*
 

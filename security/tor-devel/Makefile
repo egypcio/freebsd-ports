@@ -16,11 +16,10 @@ BROKEN_mips64=		Does not build: error: Need a uint128_t implementation!
 BROKEN_powerpc64=	Does not build.
 BROKEN_sparc64=		Does not build: error: Need a uint128_t implementation!
 
-USES=		cpe
+USES=		cpe ssl
 CPE_VENDOR=	torproject
 GNU_CONFIGURE=	yes
-CONFIGURE_ARGS=	--disable-asciidoc \
-		--with-tor-user=${USERS} --with-tor-group=${GROUPS} \
+CONFIGURE_ARGS=	--with-tor-user=${USERS} --with-tor-group=${GROUPS} \
 		--with-libevent-dir=${LOCALBASE} \
 		--with-zlib-dir=/usr
 CONFIGURE_ENV=	TOR_CPPFLAGS_zlib='-I/usr/include' \
@@ -48,7 +47,7 @@ TCMALLOC_DESC=		Use tcmalloc memory allocation library
 TOR2WEB_DESC=		Support Tor2Web non-anonymous mode
 ZSTD_DESC=		Enable support for Zstandard compression
 
-OPTIONS_DEFAULT=	SSLTLS_FREEBSD
+OPTIONS_DEFAULT=	MANPAGES SSLTLS_FREEBSD
 
 ASCIIDOC_BUILD_DEPENDS=		asciidoc:textproc/asciidoc
 ASCIIDOC_CONFIGURE_OFF=		--disable-asciidoc
@@ -100,9 +99,9 @@ WITH_OPENSSL_PORT=	yes
 USES+=	gmake
 .endif
 
-.if !empty(PORT_OPTIONS:MSSLTLS_PORTS)
-USES+=	ssl
-.endif
+#.if !empty(PORT_OPTIONS:MSSLTLS_PORTS)
+#USES+=	ssl
+#.endif
 
 .if !empty(PORT_OPTIONS:MSTATIC)
 .	if !empty(PORT_OPTIONS:MDMALLOC)
