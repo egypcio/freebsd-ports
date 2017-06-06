@@ -1,13 +1,23 @@
 
-This port/software comes all 'working out of the box'.
+This package/port comes all working out of the box. By default it 
+is using a free, non-logged, uncensored resolver over IPv4 only.
 
-By default this port is using OpenDNS' resolvers, other services are possible.
+Other resolvers are also available. Please check the CSV list at 
+%%PREFIX%%/share/dnscrypt-proxy/dnscrypt-resolvers.csv if you want to 
+customize the resolver to be used.
 
-To enable dnscrypt-proxy at boot:
-sysrc dnscrypt_proxy_enable=YES
-sysrc dnscrypt_proxy_flags='-a 127.0.0.2'
+To redirect a local resolver through dnscrypt-proxy:
+	# ifconfig lo0 127.0.53.1/32 alias
+	# sysrc dnscrypt_proxy_flags="-a 127.0.53.1"
+	# service dnscrypt-proxy onestart
 
-To view available options, run:
-%%PREFIX%%/sbin/dnscrypt-proxy --help
-or read the manual: `man dnscrypt-proxy`
+To enable dnscrypt-proxy (redirecting local resolver) at boot:
+	# sysrc dnscrypt_proxy_enable="YES"
+	# sysrc dnscrypt_proxy_flags="-a 127.0.53.1"
+	# sysrc ifconfig_lo0_alias0="inet 127.0.53.1/32"
+
+To view available options:
+	# %%PREFIX%%/sbin/dnscrypt-proxy --help
+	  or
+	# man dnscrypt-proxy
 
