@@ -7,11 +7,12 @@ DISTVERSION=		v${PORTVERSION}
 DISTVERSIONSUFFIX=	-esr45.9.0
 CPE_VENDOR=		torproject
 CATEGORIES=     	www security ipv6
-MAINTAINER=     	egypcio@googlemail.com
-COMMENT=        	Unofficial/experimental version of www/tor-browser
 LICENSE=		BSD3CLAUSE
 LICENSE_FILE=		${WRKDIR}/${GH_PROJECT}-${GH_TAGNAME}/LICENSE
-DIST_SUBDIR=    	${PORTNAME}
+DIST_SUBDIR=		${PORTNAME}
+
+MAINTAINER=     	egypcio@googlemail.com
+COMMENT=        	Unofficial/experimental version of www/tor-browser
 
 # GNU_CONFIGURE=	yes
 

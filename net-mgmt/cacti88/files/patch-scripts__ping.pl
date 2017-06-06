@@ -1,6 +1,6 @@
---- ./scripts/ping.pl.orig	2014-08-15 15:39:56.000000000 +0200
-+++ ./scripts/ping.pl	2014-08-15 15:40:35.000000000 +0200
-@@ -6,7 +6,7 @@
+--- scripts/ping.pl.orig	2017-06-01 00:09:48 UTC
++++ scripts/ping.pl
+@@ -7,7 +7,7 @@ $host =~ s/:[0-9]{1,5}/$1/gis;
  
  # old linux version use "icmp_seq"
  # newer use "icmp_req" instead

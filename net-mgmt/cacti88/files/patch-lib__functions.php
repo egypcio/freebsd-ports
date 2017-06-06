@@ -1,6 +1,6 @@
---- lib/functions.php.orig	2016-05-28 10:58:17.522042409 +0100
-+++ lib/functions.php	2016-05-28 11:00:31.399032747 +0100
-@@ -670,8 +670,10 @@
+--- lib/functions.php.orig	2016-05-08 14:46:52 UTC
++++ lib/functions.php
+@@ -670,8 +670,10 @@ function update_host_status($status, $ho
  	$issue_log_message   = false;
  	$ping_failure_count  = read_config_option("ping_failure_count");
  	$ping_recovery_count = read_config_option("ping_recovery_count");

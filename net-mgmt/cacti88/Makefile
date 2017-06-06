@@ -1,24 +1,29 @@
 # $FreeBSD$
 
 PORTNAME=	cacti
-PORTVERSION=	0.8.8h${PATCHLEVEL}
+PORTVERSION=	0.8.8h
 CATEGORIES=	net-mgmt www
 MASTER_SITES=	http://www.cacti.net/downloads/
-MAINTAINER=	egypcio@googlemail.com
-COMMENT=	Unofficial/experimental version of net-mgmt/cacti
+PKGNAMESUFFIX=	88
 
-LICENSE=	GPLv2
+MAINTAINER=	egypcio@googlemail.com
+COMMENT=	Unofficial/experimental version of net-mgmt/cacti88
+
+LICENSE=	GPLv2+
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 RUN_DEPENDS=	rrdtool:databases/rrdtool
 
-USES=		cpe mysql shebangfix
+USES=		cpe mysql php:web shebangfix
 USE_PHP=	mysqli pcre session sockets snmp xml
-WANT_PHP_WEB=	yes
+
 NO_ARCH=	yes
 NO_BUILD=	yes
-PKGMESSAGE=	${WRKDIR}/pkg-message
+
+IGNORE_WITH_PHP=	70 71
+
 SUB_FILES=	pkg-message
+
 SHEBANG_FILES=	scripts/3com_cable_modem.pl \
 		scripts/diskfree.pl \
 		scripts/linux_memory.pl \
@@ -32,23 +37,21 @@ SHEBANG_FILES=	scripts/3com_cable_modem.pl \
 		scripts/weatherbug.pl \
 		scripts/webhits.pl
 
-CACTIDIR?=	share/cacti
-CACTIUSER?=	cacti
-CACTIGROUP?=	cacti
+CACTIDIR=	share/cacti
+CACTIUSER=	cacti
+CACTIGROUP=	cacti
 
-USERS?=		${CACTIUSER}
-GROUPS?=	${CACTIGROUP}
-
-WRKSRC=		${WRKDIR}/${PORTNAME}-${SITEDISTVERSION}
-
-SITEDISTVERSION=	${PORTVERSION:S/${PATCHLEVEL}$//}
+USERS=		${CACTIUSER}
+GROUPS=		${CACTIGROUP}
 
 PLIST_SUB+=	CACTIDIR=${CACTIDIR}  CACTIUSER=${CACTIUSER} \
 		CACTIGROUP=${CACTIGROUP}
 SUB_LIST+=	CACTIDIR=${CACTIDIR} CACTIUSER=${CACTIUSER} \
 		CACTIGROUP=${CACTIGROUP}
 
-CONFLICTS=	cacti-[1-9]*
+CONFLICTS_INSTALL=	cacti
+
+PORTSCOUT=	limit:^0.*
 
 post-patch:
 	@${FIND} ${WRKSRC} -name \*.orig -delete; \

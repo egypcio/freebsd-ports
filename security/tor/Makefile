@@ -1,9 +1,9 @@
 # $FreeBSD$
 
-PORTNAME=		tor
-DISTVERSION=		0.3.0.7
-CATEGORIES=		security net ipv6
-MASTER_SITES=		TOR
+PORTNAME=	tor
+DISTVERSION=	0.3.0.7
+CATEGORIES=	security net ipv6
+MASTER_SITES=	TOR
 
 MAINTAINER=	egypcio@googlemail.com
 COMMENT=	Unofficial/experimental version of security/tor
