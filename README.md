@@ -1,2 +1,3 @@
 # freebsd-ports
-FreeBSD Ports
+
+Unofficial/experimental/voluntary/partial FreeBSD's Ports Collection
