@@ -9,14 +9,14 @@ CPE_VENDOR=		torproject
 CATEGORIES=     	www security ipv6
 LICENSE=		BSD3CLAUSE
 LICENSE_FILE=		${WRKDIR}/${GH_PROJECT}-${GH_TAGNAME}/LICENSE
-DIST_SUBDIR=		${PORTNAME}
+# DIST_SUBDIR=		${PORTNAME}
 
 MAINTAINER=     	egypcio@googlemail.com
 COMMENT=        	Unofficial/experimental version of www/tor-browser
 
 # GNU_CONFIGURE=	yes
 
-USES=		gmake
+USES=		cpe gmake
 
 USE_GITHUB=	yes
 USE_GL=		gl
@@ -26,6 +26,9 @@ USE_MOZILLA=
 
 AUTOCONF_VERSION=	2.13
 AUTOCONF_PORT=		devel/autoconf213
+
+CPE_VENDOR=	torproject
+CPE_PRODUCT=	${PORTNAME}
 
 GH_ACCOUNT=	torbsd
 GH_PROJECT=	torb
@@ -60,8 +63,8 @@ MOZ_MK_OPTIONS=	BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 PERMIT_PACKAGE_CDROM=yes DIS
 # MOZ_RPATH=		${MOZILLA}
 
 CONFIGURE_ARGS+=	${MOZ_OPTIONS}
-MAKE_ARGS+=		${MOZ_MK_OPTIONS}
-MAKE_ENV+=		MOZCONFIG=${PORT_MOZCONFIG} CC=clang CXX=clang++ CPP=clang-cpp
+# MAKE_ARGS+=		${MOZ_MK_OPTIONS}
+# MAKE_ENV+=		MOZCONFIG=${PORT_MOZCONFIG} CC=clang CXX=clang++ CPP=clang-cpp
 
 # BUILD_DEPENDS= nspr>=4.12:devel/nspr \
 #		nss>=3.21.1:security/nss \
@@ -83,12 +86,27 @@ MAKE_ENV+=		MOZCONFIG=${PORT_MOZCONFIG} CC=clang CXX=clang++ CPP=clang-cpp
 
 WRKSRC:=	${WRKDIR}/${GH_PROJECT}-${GH_TAGNAME}
 
+# post-extract:
+#	@${SED} -e 's|@FIREFOX_ICON@|${FIREFOX_ICON}|' -e 's|@MOZILLA@|${MOZILLA}|' \
+#		-e 's|@MOZILLA_NAME@|${MOZILLA_NAME}|' \
+#		<${FILESDIR}/firefox.desktop.in >${WRKDIR}/${MOZILLA}.desktop
+
+post-patch:
+	@${REINPLACE_CMD} -e 's|%%LOCALBASE%%|${LOCALBASE}|g' \
+		${WRKSRC}/browser/app/nsBrowserApp.cpp
+
+# post-install:
+#	${MKDIR} ${STAGEDIR}${PREFIX}/share/pixmaps
+#	${INSTALL_DATA} ${WRKDIR}/${MOZILLA}.desktop ${STAGEDIR}${PREFIX}/share/applications/
+#	${LN} -sf ${FIREFOX_ICON_SRC} ${STAGEDIR}${PREFIX}/share/pixmaps/${FIREFOX_ICON}
+
 pre-configure:
+	(cp ${PORT_MOZCONFIG} ${WRKSRC}/.mozconfig)
 	(cd ${WRKSRC} && ${LOCALBASE}/bin/autoconf-2.13)
 	(cd ${WRKSRC}/js/src && ${LOCALBASE}/bin/autoconf-2.13)
-	(cp ${PORT_MOZCONFIG} ${WRKSRC}/.mozconfig)
 
 do-build:
-	(cd ${WRKSRC} && ${LOCALBASE}/bin/gmake -f client.mk build CC=clang CXX=clang++ CPP=clang-cpp)
+#	(cd ${WRKSRC} && ${LOCALBASE}/bin/gmake -f client.mk build CC=clang CXX=clang++ CPP=clang-cpp)
+	(cd ${WRKSRC} && ${MAKE_CMD} build)
 
-.include <bsd.port.mk>
+.include <bsd.port.mk> 
