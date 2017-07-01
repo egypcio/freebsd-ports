@@ -27,7 +27,7 @@ CONFIGURE_ENV=	TOR_CPPFLAGS_zlib='-I/usr/include' \
 		TOR_CPPFLAGS_libevent='-I${LOCALBASE}/include' \
 		TOR_LDFLAGS_libevent='-L${LOCALBASE}/lib'
 
-OPTIONS_DEFINE=		ASCIIDOC GNU_MAKE STATIC TOR2WEB ZSTD
+OPTIONS_DEFINE=		GNU_MAKE MANPAGES STATIC TOR2WEB ZSTD
 
 OPTIONS_RADIO=		MALLOC
 OPTIONS_RADIO_MALLOC=	DMALLOC TCMALLOC
@@ -35,10 +35,10 @@ OPTIONS_RADIO_MALLOC=	DMALLOC TCMALLOC
 OPTIONS_SINGLE=		SSLTLS
 OPTIONS_SINGLE_SSLTLS=	SSLTLS_FREEBSD SSLTLS_PORTS
 
-ASCIIDOC_DESC=		Use asciidoc for building manpages
 DMALLOC_DESC=		Use debug memory allocation library
 GNU_MAKE_DESC=		Use 'gmake' as default 'make' tool
 MALLOC_DESC=		Dynamic memory allocation management
+MANPAGES_DESC=		Install manual pages and documentations
 SSLTLS_DESC=		SSL/TLS support
 SSLTLS_FREEBSD_DESC=	Use FreeBSD's base SSL/TLS libraries
 SSLTLS_PORTS_DESC=	Use SSL/TLS from ports instead of FreeBSD's
@@ -49,12 +49,12 @@ ZSTD_DESC=		Enable support for Zstandard compression
 
 OPTIONS_DEFAULT=	MANPAGES SSLTLS_FREEBSD
 
-ASCIIDOC_BUILD_DEPENDS=		asciidoc:textproc/asciidoc
-ASCIIDOC_CONFIGURE_OFF=		--disable-asciidoc
-ASCIIDOC_CONFIGURE_ON=
 DMALLOC_CONFIGURE_OFF=
 DMALLOC_CONFIGURE_ON=		--with-dmalloc
 DMALLOC_LIB_DEPENDS=		libdmalloc.so:devel/dmalloc
+MANPAGES_CONFIGURE_OFF=		--disable-asciidoc
+MANPAGES_CONFIGURE_ON=
+MANPAGES_BUILD_DEPENDS=		asciidoc:textproc/asciidoc
 SSLTLS_FREEBSD_CONFIGURE_ENV=	SSL_DEFAULT=base DEFAULT_VERSIONS+='ssl=base'
 SSLTLS_FREEBSD_CONFIGURE_ENV+=	OPENSSLBASE=/usr OPENSSLRPATH=/usr/lib USE_OPENSSL_RPATH=yes
 SSLTLS_FREEBSD_CONFIGURE_ENV+=	TOR_CPPFLAGS_openssl='-I/usr/include'
@@ -135,10 +135,6 @@ post-patch:
 		${WRKSRC}/src/config/torrc.*.in \
 		${WRKSRC}/doc/tor.1.* \
 		${WRKSRC}/doc/tor.html.in
-
-post-configure:
-	@${REINPLACE_CMD} -e '\|^nodist_man1_MANS =|s|$$|$$(install_mans:=.1)|' \
-		${WRKSRC}/Makefile
 
 post-install:
 	@${MKDIR} ${STAGEDIR}/var/log/tor ${STAGEDIR}/var/run/tor
