@@ -21,13 +21,15 @@ CPE_VENDOR=	torproject
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--with-tor-user=${USERS} --with-tor-group=${GROUPS} \
 		--with-libevent-dir=${LOCALBASE} \
+		--with-openssl-dir=${OPENSSLBASE} \
 		--with-zlib-dir=/usr
 CONFIGURE_ENV=	TOR_CPPFLAGS_zlib='-I/usr/include' \
 		TOR_LDFLAGS_zlib='-L/usr/lib' \
 		TOR_CPPFLAGS_libevent='-I${LOCALBASE}/include' \
-		TOR_LDFLAGS_libevent='-L${LOCALBASE}/lib'
+		TOR_LDFLAGS_libevent='-L${LOCALBASE}/lib' \
+		TOR_CPPFLAGS_openssl='-I${OPENSSLBASE}/include' \
 
-OPTIONS_DEFINE=		GNU_MAKE MANPAGES STATIC TOR2WEB ZSTD
+OPTIONS_DEFINE=		DOCS GNU_MAKE STATIC TOR2WEB ZSTD
 
 OPTIONS_RADIO=		MALLOC
 OPTIONS_RADIO_MALLOC=	DMALLOC TCMALLOC
@@ -38,7 +40,7 @@ OPTIONS_SINGLE_SSLTLS=	SSLTLS_FREEBSD SSLTLS_PORTS
 DMALLOC_DESC=		Use debug memory allocation library
 GNU_MAKE_DESC=		Use 'gmake' as default 'make' tool
 MALLOC_DESC=		Dynamic memory allocation management
-MANPAGES_DESC=		Install manual pages and documentations
+DOCS_DESC=		Build and install documentations, plus manual pages
 SSLTLS_DESC=		SSL/TLS support
 SSLTLS_FREEBSD_DESC=	Use FreeBSD's base SSL/TLS libraries
 SSLTLS_PORTS_DESC=	Use SSL/TLS from ports instead of FreeBSD's
@@ -47,35 +49,29 @@ TCMALLOC_DESC=		Use tcmalloc memory allocation library
 TOR2WEB_DESC=		Support Tor2Web non-anonymous mode
 ZSTD_DESC=		Enable support for Zstandard compression
 
-OPTIONS_DEFAULT=	MANPAGES SSLTLS_FREEBSD
+OPTIONS_DEFAULT=	DOCS SSLTLS_FREEBSD
 
-DMALLOC_CONFIGURE_OFF=
-DMALLOC_CONFIGURE_ON=		--with-dmalloc
+DMALLOC_CONFIGURE_WITH=		dmalloc
 DMALLOC_LIB_DEPENDS=		libdmalloc.so:devel/dmalloc
-MANPAGES_CONFIGURE_OFF=		--disable-asciidoc
-MANPAGES_CONFIGURE_ON=
-MANPAGES_BUILD_DEPENDS=		asciidoc:textproc/asciidoc
-SSLTLS_FREEBSD_CONFIGURE_ENV=	SSL_DEFAULT=base DEFAULT_VERSIONS+='ssl=base'
-SSLTLS_FREEBSD_CONFIGURE_ENV+=	OPENSSLBASE=/usr OPENSSLRPATH=/usr/lib USE_OPENSSL_RPATH=yes
-SSLTLS_FREEBSD_CONFIGURE_ENV+=	TOR_CPPFLAGS_openssl='-I/usr/include'
+GNU_MAKE_USES=			gmake:build
+DOCS_CONFIGURE_ENABLE=		asciidoc
+DOCSS_BUILD_DEPENDS=		asciidoc:textproc/asciidoc
+SSLTLS_FREEBSD_CONFIGURE_ENV=	USE_OPENSSL_RPATH=yes
 SSLTLS_FREEBSD_CONFIGURE_ENV+=	TOR_LDFLAGS_openssl='-L/usr/lib -Wl,-rpath,/usr/lib'
 SSLTLS_FREEBSD_CONFIGURE_OFF=
-SSLTLS_FREEBSD_CONFIGURE_ON=	--with-openssl-dir=/usr --includedir=/usr/include
+SSLTLS_FREEBSD_CONFIGURE_ON=	
 SSLTLS_FREEBSD_LIB_DEPENDS=	libevent.so:devel/libevent
-SSLTLS_PORTS_CONFIGURE_ENV=	TOR_CPPFLAGS_openssl='-I${OPENSSLBASE}/include' TOR_LDFLAGS_openssl='-L${OPENSSLBASE}/lib'
+SSLTLS_PORTS_CONFIGURE_ENV=	USE_OPENSSL_RPATH=yes
+SSLTLS_PORTS_CONFIGURE_ENV+=	TOR_LDFLAGS_openssl='-L${OPENSSLBASE}/lib -Wl,-rpath,${OPENSSLBASE}/lib'
 SSLTLS_PORTS_CONFIGURE_OFF=
-SSLTLS_PORTS_CONFIGURE_ON=	--with-openssl-dir=${OPENSSLBASE}
+SSLTLS_PORTS_CONFIGURE_ON=	
 SSLTLS_PORTS_LIB_DEPENDS=	libevent.so:devel/libevent
 STATIC_CONFIGURE_BUILD_DEPENDS=	libevent.a:devel/libevent
-STATIC_CONFIGURE_OFF= 
-STATIC_CONFIGURE_ON=		--enable-static-tor
-TCMALLOC_CONFIGURE_OFF=
-TCMALLOC_CONFIGURE_ON=		--with-tcmalloc
+STATIC_CONFIGURE_ENABLE=	static-tor
+TCMALLOC_CONFIGURE_WITH=	tcmalloc
 TCMALLOC_LIB_DEPENDS=		libtcmalloc.so:devel/google-perftools
-TOR2WEB_CONFIGURE_OFF=
-TOR2WEB_CONFIGURE_ON=		--enable-tor2web-mode
-ZSTD_CONFIGURE_OFF=                           
-ZSTD_CONFIGURE_ON=		--enable-zstd
+TOR2WEB_CONFIGURE_ENABLE=	tor2web-mode
+ZSTD_CONFIGURE_ENABLE=		zstd
 ZSTD_LIB_DEPENDS=		libzstd.so:archivers/zstd
 
 GROUPS=		_tor
@@ -94,14 +90,6 @@ CONFLICTS=	tor-[0-9]*
 DEFAULT_VERSIONS+=	ssl=openssl
 WITH_OPENSSL_PORT=	yes
 .endif
-
-.if !empty(PORT_OPTIONS:MGNU_MAKE)
-USES+=	gmake
-.endif
-
-#.if !empty(PORT_OPTIONS:MSSLTLS_PORTS)
-#USES+=	ssl
-#.endif
 
 .if !empty(PORT_OPTIONS:MSTATIC)
 .	if !empty(PORT_OPTIONS:MDMALLOC)
