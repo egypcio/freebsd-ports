@@ -125,10 +125,6 @@ post-patch:
 		${WRKSRC}/doc/tor.1.* \
 		${WRKSRC}/doc/tor.html.in
 
-# post-configure:
-#	@${REINPLACE_CMD} -e '\|^nodist_man1_MANS =|s|$$|$$(install_mans:=.1)|' \
-#		${WRKSRC}/Makefile
-
 post-install:
 	@${MKDIR} ${STAGEDIR}/var/log/tor ${STAGEDIR}/var/run/tor ${STAGEDIR}/var/db/tor
 
