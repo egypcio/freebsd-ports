@@ -4,6 +4,7 @@ PORTNAME=	tor
 DISTVERSION=	0.3.1.4-alpha
 CATEGORIES=	security net ipv6
 MASTER_SITES=	TOR
+PKGNAMESUFFIX=	-devel
 
 MAINTAINER=	egypcio@googlemail.com
 COMMENT=	Unofficial/experimental version of security/tor
@@ -78,7 +79,7 @@ SUB_LIST=	USER="${USERS}" GROUP="${GROUPS}"
 SUB_FILES=	pkg-message
 USE_RC_SUBR=	tor
 
-CONFLICTS=	tor-devel-[0-9]*
+CONFLICTS=	tor-[0-9]*
 
 .include <bsd.port.options.mk>
 
