@@ -1,10 +1,9 @@
 # $FreeBSD$
 
 PORTNAME=       	tor-browser
-PORTVERSION=    	6.5.2
-PORT_MOZCONFIG=		${FILESDIR}/mozconfig.in
+PORTVERSION=    	7.0.1
 DISTVERSION=		v${PORTVERSION}
-DISTVERSIONSUFFIX=	-esr45.9.0
+DISTVERSIONSUFFIX=	-esr52.2.0
 CPE_VENDOR=		torproject
 CATEGORIES=     	www security ipv6
 LICENSE=		BSD3CLAUSE
@@ -16,13 +15,14 @@ COMMENT=        	Unofficial/experimental version of www/tor-browser
 
 # GNU_CONFIGURE=	yes
 
-USES=		cpe gmake
+USES=		cpe
 
 USE_GITHUB=	yes
 USE_GL=		gl
-USE_PERL5=	build
 USE_GECKO=	gecko
-USE_MOZILLA=	
+
+#		cairo event ffi graphite harfbuzz hunspell icu jpeg nspr nss png pixman soundtouch sqlite vpx
+USE_MOZILLA=	-hunspell -soundtouch
 
 AUTOCONF_VERSION=	2.13
 AUTOCONF_PORT=		devel/autoconf213
@@ -32,37 +32,39 @@ CPE_PRODUCT=	${PORTNAME}
 
 GH_ACCOUNT=	torbsd
 GH_PROJECT=	torb
-GH_TAGNAME=	15cf08a
+GH_TAGNAME=	345e19c
 
 # MOZILLA=		${PORTNAME}
-# MOZILLA_BIN=		${PORTNAME}-freebsd
-# MOZILLA_VER=		${PORTVERSION}
-# MOZILLA_NAME=		"Tor Browser"
-# MOZILLA_EXEC_NAME=	${MOZILLA_BIN}
+MOZILLA_BIN=		${PORTNAME}
+MOZILLA_VER=		${PORTVERSION}
+MOZILLA_NAME=		Tor Browser
+MOZILLA_EXEC_NAME=	${MOZILLA_BIN}
+
 MOZ_PKGCONFIG_FILES=	
 
-MOZ_OPTIONS=	--disable-crashreporter --disable-debug --disable-eme \
-		--disable-install-strip --disable-loop --disable-maintenance-service \
-		--disable-strip --disable-tests --disable-webrtc --disable-gstreamer \
-		--disable-tor-browser-update --with-tor-browser-version=${PORTVERSION} \
-		--disable-android-include-fonts --enable-default-toolkit=cairo-gtk2 \
-		--disable-printing --disable-accessibility \
-		--disable-webspeech --disable-webspeechtestbackend \
-		--disable-wmf --disable-gamepad --disable-updater \
-		--disable-parental-controls --disable-necko-wifi \
-		--enable-optimize --enable-official-branding \
-		--enable-application=browser --enable-signmar --enable-verify-mar \
-		--enable-tor-browser-update \
-		--program-transform-name='s/firefox/tor\-browser'
+# MOZ_OPTIONS=	--disable-crashreporter --disable-debug --disable-eme \
+#		--disable-install-strip --disable-loop --disable-maintenance-service \
+#		--disable-strip --disable-tests --disable-webrtc --disable-gstreamer \
+#		--disable-tor-browser-update --with-tor-browser-version=${PORTVERSION} \
+#		--disable-android-include-fonts --enable-default-toolkit=cairo-gtk2 \
+#		--disable-printing --disable-accessibility \
+#		--disable-webspeech --disable-webspeechtestbackend \
+#		--disable-wmf --disable-gamepad --disable-updater \
+#		--disable-parental-controls --disable-necko-wifi \
+#		--enable-optimize --enable-official-branding \
+#		--enable-application=browser --enable-signmar --enable-verify-mar \
+#		--enable-tor-browser-update \
+#		--program-transform-name='s/firefox/tor\-browser/'
+MOZ_OPTIONS=	--enable-application=browser --enable-official-branding
 
-MOZ_MK_OPTIONS=	BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 PERMIT_PACKAGE_CDROM=yes DISTFILE_IS_XPI=no \
-		MOZ_JEMALLOC3=1 MOZ_JEMALLOC4=1 BROWSER_NAME=${PORTNAME} \
-		MOZ_APP_NAME=${PORTNAME} MOZ_APP_DISPLAYNAME=${PORTNAME}
+# MOZ_MK_OPTIONS=	BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 PERMIT_PACKAGE_CDROM=yes DISTFILE_IS_XPI=no \
+#			MOZ_JEMALLOC3=1 MOZ_JEMALLOC4=1 BROWSER_NAME=${PORTNAME} \
+#			MOZ_APP_NAME=${PORTNAME} MOZ_APP_DISPLAYNAME=${PORTNAME}
 
 # MOZ_EXPORT=		${MOZ_MK_OPTIONS}
 # MOZ_RPATH=		${MOZILLA}
 
-CONFIGURE_ARGS+=	${MOZ_OPTIONS}
+# CONFIGURE_ARGS+=	${MOZ_OPTIONS}
 # MAKE_ARGS+=		${MOZ_MK_OPTIONS}
 # MAKE_ENV+=		MOZCONFIG=${PORT_MOZCONFIG} CC=clang CXX=clang++ CPP=clang-cpp
 
@@ -105,8 +107,8 @@ pre-configure:
 	(cd ${WRKSRC} && ${LOCALBASE}/bin/autoconf-2.13)
 	(cd ${WRKSRC}/js/src && ${LOCALBASE}/bin/autoconf-2.13)
 
-do-build:
-#	(cd ${WRKSRC} && ${LOCALBASE}/bin/gmake -f client.mk build CC=clang CXX=clang++ CPP=clang-cpp)
-	(cd ${WRKSRC} && ${MAKE_CMD} build)
+# do-build:
+# #	(cd ${WRKSRC} && ${LOCALBASE}/bin/gmake -f client.mk build CC=clang CXX=clang++ CPP=clang-cpp)
+#	(cd ${WRKSRC} && ${MAKE_CMD} build)
 
 .include <bsd.port.mk> 

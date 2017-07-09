@@ -1,3 +1,3 @@
-TIMESTAMP = 1498337353
-SHA256 (torbsd-torb-v6.5.2-esr45.9.0-15cf08a_GH0.tar.gz) = af8734ab4e357a53fa1f7542a2be38d28c7268d136ecc24a7be805804ced8d02
-SIZE (torbsd-torb-v6.5.2-esr45.9.0-15cf08a_GH0.tar.gz) = 256753528
+TIMESTAMP = 1499616307
+SHA256 (torbsd-torb-v7.0.1-esr52.2.0-345e19c_GH0.tar.gz) = 07a0109c047c131210d4bb46e08bef91a431d3e1b21962be092ffe6f223e211a
+SIZE (torbsd-torb-v7.0.1-esr52.2.0-345e19c_GH0.tar.gz) = 293929039
