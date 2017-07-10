@@ -1,3 +1,13 @@
+======================================================================
 
-	/dev/null
+  To enable this Pluggable Transport in your Tor relay/bridge, use the
+following configurations in your torrc file:
+
+	ServerTransportPlugin obfs4 exec %%PREFIX%%/bin/obfs4proxy
+	ExtORPort auto
+
+ For mor information, please consulte the official wiki page at 
+https://trac.torproject.org/projects/tor/wiki/doc/PluggableTransports/obfs4proxy
+
+======================================================================
 
