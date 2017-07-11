@@ -19,16 +19,20 @@ GH_TAGNAME=	${PORTNAME}-${PORTVERSION}
 SUB_FILES=	pkg-message
 
 GO_PKGNAME=	git.torproject.org/pluggable-transports/${GH_PROJECT}.git
-GO_TARGET=	${GO_PKGNAME}/${PORTNAME}
+GO_TARGET=	${GO_PKGNAME}/${PORTNAME} \
+		${GO_PKGNAME}/common/log \
+		${GO_PKGNAME}/common/socks5 \
+		${GO_PKGNAME}/transports \
+		${GO_PKGNAME}/transports/base
 
 BUILD_DEPENDS=	${LOCALBASE}/${GO_LIBDIR}/git.torproject.org/pluggable-transports/goptlib.git.a:security/goptlib \
-		${LOCALBASE}/${GO_LIBDIR}/golang.org/x/net/ipv4.a:net/go.net \
-		${LOCALBASE}/${GO_LIBDIR}/golang.org/x/net/ipv6.a:net/go.net \
-		${LOCALBASE}/${GO_LIBDIR}/golang.org/x/crypto/bcrypt.a:security/go.crypto \
+		${LOCALBASE}/${GO_LIBDIR}/github.com/agl/ed25519/extra25519.a:security/go-ed25519 \
 		${LOCALBASE}/${GO_LIBDIR}/github.com/dchest/siphash.a:security/go-siphash \
-		${LOCALBASE}/${GO_LIBDIR}/github.com/agl/ed25519/extra25519.a:security/go-ed25519
+		${LOCALBASE}/${GO_LIBDIR}/golang.org/x/crypto/bcrypt.a:security/go.crypto \
+		${LOCALBASE}/${GO_LIBDIR}/golang.org/x/net/ipv4.a:net/go.net \
+		${LOCALBASE}/${GO_LIBDIR}/golang.org/x/net/ipv6.a:net/go.net
 
-# post-install:
-#	${INSTALL_MAN} ${WRKSRC}/doc/obfs4proxy.1 ${STAGEDIR}${PREFIX}/man/man1
+post-install:
+	${INSTALL_MAN} ${WRKSRC}/doc/obfs4proxy.1 ${STAGEDIR}${PREFIX}/man/man1
 
 .include <bsd.port.mk>
