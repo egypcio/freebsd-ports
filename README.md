@@ -1,3 +1,4 @@
-# freebsd-ports
+# freebsd-ports (Tor BSD Diversity Project)
 
-Unofficial/experimental/voluntary/partial FreeBSD's Ports Collection
+TorBSD's FreeBSD Ports
+https://github.com/torbsd
