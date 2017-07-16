@@ -26,11 +26,10 @@
 # ac_add_options --disable-loop
 # ac_add_options --disable-gstreamer
 #
-# ac_add_options --with-tor-browser-version=6.5.2
 # ac_add_options --program-transform-name='s/firefox/tor\-browser'
 ######################################################################
 
-. ${WRKSRC}/browser/config/mozconfig
+. browser/config/mozconfig
 
 # mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/obj-@CONFIG_GUESS@
 # mk_add_options MOZ_APP_DISPLAYNAME="Tor Browser"
@@ -58,3 +57,5 @@ ac_add_options --disable-webrtc
 # Let's make sure no preference is enabling either Adobe's or Google's CDM.
 ac_add_options --disable-eme
 # ac_add_options --disable-ctypes
+
+ac_add_options --with-tor-browser-version=7.0.1
