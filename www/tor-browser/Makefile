@@ -2,91 +2,25 @@
 
 PORTNAME=       	tor-browser
 PORTVERSION=    	7.0.1
-DISTVERSION=		v${PORTVERSION}
-DISTVERSIONSUFFIX=	-esr52.2.0
 CPE_VENDOR=		torproject
 CATEGORIES=     	www security ipv6
 LICENSE=		BSD3CLAUSE
-LICENSE_FILE=		${WRKDIR}/${GH_PROJECT}-${GH_TAGNAME}/LICENSE
-# DIST_SUBDIR=		${PORTNAME}
+LICENSE_FILE=		${WRKSRC}/LICENSE
+MOZCONFIG=		${FILESDIR}/mozconfig.in
 
 MAINTAINER=     	egypcio@googlemail.com
 COMMENT=        	Unofficial/experimental version of www/tor-browser
 
-# GNU_CONFIGURE=	yes
-
 USES=		cpe
-
 USE_GITHUB=	yes
-USE_GL=		gl
-USE_GECKO=	gecko
-
-#		cairo event ffi graphite harfbuzz hunspell icu jpeg nspr nss png pixman soundtouch sqlite vpx
-USE_MOZILLA=	-hunspell -soundtouch
-
-AUTOCONF_VERSION=	2.13
-AUTOCONF_PORT=		devel/autoconf213
 
 CPE_VENDOR=	torproject
-CPE_PRODUCT=	${PORTNAME}
 
 GH_ACCOUNT=	torbsd
 GH_PROJECT=	torb
 GH_TAGNAME=	345e19c
 
-# MOZILLA=		${PORTNAME}
-MOZILLA_BIN=		${PORTNAME}
-MOZILLA_VER=		${PORTVERSION}
-MOZILLA_NAME=		Tor Browser
-MOZILLA_EXEC_NAME=	${MOZILLA_BIN}
-
-MOZ_PKGCONFIG_FILES=	
-
-# MOZ_OPTIONS=	--disable-crashreporter --disable-debug --disable-eme \
-#		--disable-install-strip --disable-loop --disable-maintenance-service \
-#		--disable-strip --disable-tests --disable-webrtc --disable-gstreamer \
-#		--disable-tor-browser-update --with-tor-browser-version=${PORTVERSION} \
-#		--disable-android-include-fonts --enable-default-toolkit=cairo-gtk2 \
-#		--disable-printing --disable-accessibility \
-#		--disable-webspeech --disable-webspeechtestbackend \
-#		--disable-wmf --disable-gamepad --disable-updater \
-#		--disable-parental-controls --disable-necko-wifi \
-#		--enable-optimize --enable-official-branding \
-#		--enable-application=browser --enable-signmar --enable-verify-mar \
-#		--enable-tor-browser-update \
-#		--program-transform-name='s/firefox/tor\-browser/'
-MOZ_OPTIONS=	--enable-application=browser --enable-official-branding
-
-# MOZ_MK_OPTIONS=	BUILD_OFFICIAL=1 MOZILLA_OFFICIAL=1 PERMIT_PACKAGE_CDROM=yes DISTFILE_IS_XPI=no \
-#			MOZ_JEMALLOC3=1 MOZ_JEMALLOC4=1 BROWSER_NAME=${PORTNAME} \
-#			MOZ_APP_NAME=${PORTNAME} MOZ_APP_DISPLAYNAME=${PORTNAME}
-
-# MOZ_EXPORT=		${MOZ_MK_OPTIONS}
-# MOZ_RPATH=		${MOZILLA}
-
-# CONFIGURE_ARGS+=	${MOZ_OPTIONS}
-# MAKE_ARGS+=		${MOZ_MK_OPTIONS}
-# MAKE_ENV+=		MOZCONFIG=${PORT_MOZCONFIG} CC=clang CXX=clang++ CPP=clang-cpp
-
-# BUILD_DEPENDS= nspr>=4.12:devel/nspr \
-#		nss>=3.21.1:security/nss \
-#		libevent2>=2.0.21_2:devel/libevent2 \
-#		soundtouch>=1.9.0:audio/soundtouch \
-#		harfbuzz>=1.1.0:print/harfbuzz \
-#		graphite2>=1.3.6:graphics/graphite2 \
-#		png>=1.6.19:graphics/png \
-#		libvorbis>=1.3.5,3:audio/libvorbis \
-#		libvpx>=1.5.0:multimedia/libvpx \
-#		sqlite3>=3.9.1:databases/sqlite3 \
-#		${PYTHON_PKGNAMEPREFIX}sqlite3>0:databases/py-sqlite3 \
-#		v4l_compat>0:multimedia/v4l_compat \
-#		autoconf-2.13:devel/autoconf213 \
-#		yasm:devel/yasm \
-#		zip:archivers/zip
-#
-# LIB_DEPENDS=	libv4l2.so:multimedia/libv4l
-
-WRKSRC:=	${WRKDIR}/${GH_PROJECT}-${GH_TAGNAME}
+#		Yes! Missing *all* build and lib depends, but works.
 
 # post-extract:
 #	@${SED} -e 's|@FIREFOX_ICON@|${FIREFOX_ICON}|' -e 's|@MOZILLA@|${MOZILLA}|' \
@@ -103,12 +37,11 @@ post-patch:
 #	${LN} -sf ${FIREFOX_ICON_SRC} ${STAGEDIR}${PREFIX}/share/pixmaps/${FIREFOX_ICON}
 
 pre-configure:
-	(cp ${PORT_MOZCONFIG} ${WRKSRC}/.mozconfig)
+	(cp ${MOZCONFIG} ${WRKSRC}/.mozconfig)
 	(cd ${WRKSRC} && ${LOCALBASE}/bin/autoconf-2.13)
 	(cd ${WRKSRC}/js/src && ${LOCALBASE}/bin/autoconf-2.13)
 
-# do-build:
-# #	(cd ${WRKSRC} && ${LOCALBASE}/bin/gmake -f client.mk build CC=clang CXX=clang++ CPP=clang-cpp)
-#	(cd ${WRKSRC} && ${MAKE_CMD} build)
+do-build:
+	(cd ${WRKSRC} && /bin/sh mach build)
 
 .include <bsd.port.mk> 
