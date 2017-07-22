@@ -90,10 +90,6 @@ SSL_DEFAULT=		openssl
 WITH_OPENSSL_PORT=	yes
 .endif
 
-.if emtpy(PORT_OPTIONS:MDOCS)
-	USES+=	imake:noman
-.endif
-
 .if !empty(PORT_OPTIONS:MSTATIC)
 .	if !empty(PORT_OPTIONS:MDMALLOC)
 BUILD_DEPENDS+=		${LOCALBASE}/lib/libdmalloc.a:devel/dmalloc
