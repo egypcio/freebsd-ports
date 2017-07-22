@@ -63,6 +63,7 @@ SSLTLS_BASE_CONFIGURE_ENV=	OPENSSLRPATH=/usr/lib
 SSLTLS_BASE_LIB_DEPENDS=	libevent.so:devel/libevent
 SSLTLS_PORTS_CONFIGURE_ENV=	OPENSSLRPATH=${OPENSSLLIB}
 SSLTLS_PORTS_LIB_DEPENDS=	libevent.so:devel/libevent
+SSLTLS_PORTS_USES=		localbase
 STATIC_CONFIGURE_ENABLE=	-static-tor
 STATIC_CONFIGURE_BUILD_DEPENDS=	libevent.a:devel/libevent
 TCMALLOC_CONFIGURE_WITH=	-tcmalloc
@@ -87,10 +88,6 @@ CONFLICTS=	tor-[0-9]*
 DEFAULT_VERSIONS=	ssl=openssl
 SSL_DEFAULT=		openssl
 WITH_OPENSSL_PORT=	yes
-.endif
-
-.if emtpy(PORT_OPTIONS:MDOCS)
-	USES+=	imake:noman
 .endif
 
 .if !empty(PORT_OPTIONS:MSTATIC)
