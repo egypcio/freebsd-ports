@@ -13,13 +13,15 @@ COMMENT=        	Unofficial/experimental version of www/tor-browser
 
 CPE_VENDOR=	torproject
 
-USES=		cpe python:2.7
+USES=		cpe gmake python:2.7
 
 USE_GITHUB=	yes
 
 GH_ACCOUNT=	torbsd
 GH_PROJECT=	torb
 GH_TAGNAME=	345e19c
+
+PREFIX=		${LOCALBASE}/${PORTNAME}
 
 AUTOCONF_VERSION=	2.13
 AUTOCONF_PORT=		devel/autoconf213
