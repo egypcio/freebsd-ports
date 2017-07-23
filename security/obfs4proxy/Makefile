@@ -28,9 +28,7 @@ GO_TARGET=	${GO_PKGNAME}/${PORTNAME} \
 BUILD_DEPENDS=	${LOCALBASE}/${GO_LIBDIR}/git.torproject.org/pluggable-transports/goptlib.git.a:security/goptlib \
 		${LOCALBASE}/${GO_LIBDIR}/github.com/agl/ed25519/extra25519.a:security/go-ed25519 \
 		${LOCALBASE}/${GO_LIBDIR}/github.com/dchest/siphash.a:security/go-siphash \
-		${LOCALBASE}/${GO_LIBDIR}/golang.org/x/crypto/bcrypt.a:security/go.crypto \
-		${LOCALBASE}/${GO_LIBDIR}/golang.org/x/net/ipv4.a:net/go.net \
-		${LOCALBASE}/${GO_LIBDIR}/golang.org/x/net/ipv6.a:net/go.net
+		${LOCALBASE}/${GO_LIBDIR}/golang.org/x/net/ipv4.a:net/go.net
 
 post-install:
 	${INSTALL_MAN} ${WRKSRC}/doc/obfs4proxy.1 ${STAGEDIR}${PREFIX}/man/man1
