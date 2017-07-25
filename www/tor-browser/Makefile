@@ -13,7 +13,7 @@ COMMENT=        	Unofficial/experimental version of www/tor-browser
 
 CPE_VENDOR=	torproject
 
-USES=		cpe gmake python:2.7
+USES=		cpe gmake pkgconfig python:2.7
 
 USE_GITHUB=	yes
 
@@ -27,7 +27,8 @@ AUTOCONF_VERSION=	2.13
 AUTOCONF_PORT=		devel/autoconf213
 AUTOCONF=		${LOCALBASE}/bin/autoconf-${AUTOCONF_VERSION}
 
-BUILD_DEPENDS=	${AUTOCONF}:${AUTOCONF_PORT}
+BUILD_DEPENDS=	${AUTOCONF}:${AUTOCONF_PORT} \
+		libpangocairo-1.0.so:x11-toolkits/pango
 
 pre-configure:
 	(cp ${MOZCONFIG} ${WRKSRC}/.mozconfig)
