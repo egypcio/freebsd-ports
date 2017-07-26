@@ -1,4 +1,4 @@
-# freebsd-ports (Tor BSD Diversity Project)
+# freebsd-ports (TorBSD Diversity Project)
 
 TorBSD's FreeBSD Ports
 
