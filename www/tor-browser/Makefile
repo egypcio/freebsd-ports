@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=       	tor-browser
-PORTVERSION=    	7.0.1
+PORTVERSION=    	7.0.2
 CPE_VENDOR=		torproject
 CATEGORIES=     	www security ipv6
 LICENSE=		BSD3CLAUSE
@@ -11,20 +11,28 @@ MOZCONFIG=		${FILESDIR}/mozconfig.in
 MAINTAINER=     	egypcio@googlemail.com
 COMMENT=        	Unofficial/experimental version of www/tor-browser
 
-USES=		cpe
-USE_AUTOTOOLS=	autoconf
-USE_GITHUB=	yes
-
-CPE_VENDOR=	torproject
-
 AUTOCONF_VERSION=	2.13
 AUTOCONF_PORT=		devel/autoconf213
+AUTOCONF=		${LOCALBASE}/bin/autoconf-${AUTOCONF_VERSION}
+
+USES=		cpe gmake pkgconfig python:2.7
+
+USE_GITHUB=	yes
 
 GH_ACCOUNT=	torbsd
 GH_PROJECT=	torb
 GH_TAGNAME=	345e19c
 
-#		Yes! Missing *all* build and lib depends, but works.
+PREFIX=		${LOCALBASE}/${PORTNAME}
+
+BUILD_DEPENDS=	${AUTOCONF}:${AUTOCONF_PORT} \
+		yasm:devel/yasm \
+		zip:archivers/zip
+
+LIB_DEPENDS=	libgconf-2.so:devel/gconf2 \
+		libgtk-x11-2.0.so:x11-toolkits/gtk20 \
+		libpangocairo-1.0.so:x11-toolkits/pango \
+		libpulse.so:audio/pulseaudio
 
 pre-configure:
 	(cp ${MOZCONFIG} ${WRKSRC}/.mozconfig)

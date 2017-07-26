@@ -15,7 +15,7 @@ ac_add_options	--enable-signmar
 ac_add_options	--enable-tor-browser-update
 ac_add_options	--enable-verify-mar
 
-ac_add_options	--with-tor-browser-version=7.0.1
+ac_add_options	--with-tor-browser-version=7.0.2
 
 mk_add_options	BUILD_OFFICIAL=1
 mk_add_options	MOZ_APP_DISPLAYNAME="Tor Browser"
