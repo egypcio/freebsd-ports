@@ -11,6 +11,10 @@ MOZCONFIG=		${FILESDIR}/mozconfig.in
 MAINTAINER=     	egypcio@googlemail.com
 COMMENT=        	Unofficial/experimental version of www/tor-browser
 
+AUTOCONF_VERSION=	2.13
+AUTOCONF_PORT=		devel/autoconf213
+AUTOCONF=		${LOCALBASE}/bin/autoconf-${AUTOCONF_VERSION}
+
 USES=		cpe gmake pkgconfig python:2.7
 
 USE_GITHUB=	yes
@@ -20,10 +24,6 @@ GH_PROJECT=	torb
 GH_TAGNAME=	345e19c
 
 PREFIX=		${LOCALBASE}/${PORTNAME}
-
-AUTOCONF_VERSION=	2.13
-AUTOCONF_PORT=		devel/autoconf213
-AUTOCONF=		${LOCALBASE}/bin/autoconf-${AUTOCONF_VERSION}
 
 BUILD_DEPENDS=	${AUTOCONF}:${AUTOCONF_PORT} \
 		yasm:devel/yasm \
