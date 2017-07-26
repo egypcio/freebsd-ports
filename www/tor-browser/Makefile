@@ -11,8 +11,6 @@ MOZCONFIG=		${FILESDIR}/mozconfig.in
 MAINTAINER=     	egypcio@googlemail.com
 COMMENT=        	Unofficial/experimental version of www/tor-browser
 
-CPE_VENDOR=	torproject
-
 USES=		cpe gmake pkgconfig python:2.7
 
 USE_GITHUB=	yes
