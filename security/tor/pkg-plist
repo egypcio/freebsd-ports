@@ -1,7 +1,7 @@
 @dir(%%USER%%,%%GROUP%%,700) /var/db/tor
 @dir(%%USER%%,%%GROUP%%,700) /var/log/tor
 @dir(%%USER%%,%%GROUP%%,700) /var/run/tor
-@sample etc/tor/torrc.sample
+@sample %%ETCDIR%%/torrc.sample
 %%DATADIR%%/geoip
 %%DATADIR%%/geoip6
 %%PORTDOCS%%%%DOCSDIR%%/tor-gencert.html
