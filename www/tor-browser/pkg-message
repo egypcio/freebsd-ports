@@ -1,5 +1,15 @@
+======================================================================
+    __        __   _      ____    _   _   ___   _   _    ____ 
+    \ \      / /  / \    |  _ \  | \ | | |_ _| | \ | |  / ___|
+     \ \ /\ / /  / _ \   | |_) | |  \| |  | |  |  \| | | |  _ 
+      \ V  V /  / ___ \  |  _ <  | |\  |  | |  | |\  | | |_| |
+       \_/\_/  /_/   \_\ |_| \_\ |_| \_| |___| |_| \_|  \____|
+                                                            
+    ----------------------------------------------------------
 
-	This is a very experimental version of Tor Browser for FreeBSD.
+  This is a very experimental version of Tor Browser for FreeBSD. 
+Please, *DO NOT* rely on this port for privacy! Use it at your own risk.
 
-		It's based on https://github.com/torbsd/torb
+	Work based on https://github.com/torbsd/torb
 
+======================================================================

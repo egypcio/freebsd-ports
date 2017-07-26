@@ -51,19 +51,19 @@ TOR2WEB_DESC=		Support Tor2Web non-anonymous mode
 
 OPTIONS_DEFAULT=	DOCS SSLTLS_BASE
 
-DMALLOC_CONFIGURE_WITH=		-dmalloc
+DMALLOC_CONFIGURE_ON=		--with-dmalloc
 DMALLOC_LIB_DEPENDS=		libdmalloc.so:devel/dmalloc
-DOCS_CONFIGURE_ENABLE=		-asciidoc
+DOCS_CONFIGURE_ENABLE=		asciidoc
 DOCS_BUILD_DEPENDS=		asciidoc:textproc/asciidoc
 SSLTLS_BASE_CONFIGURE_ENV=	OPENSSLRPATH=/usr/lib
 SSLTLS_BASE_LIB_DEPENDS=	libevent.so:devel/libevent
 SSLTLS_PORTS_CONFIGURE_ENV=	OPENSSLRPATH=${OPENSSLLIB}
 SSLTLS_PORTS_LIB_DEPENDS=	libevent.so:devel/libevent
-STATIC_CONFIGURE_ENABLE=	-static-tor
+STATIC_CONFIGURE_ENABLE=	static-tor
 STATIC_CONFIGURE_BUILD_DEPENDS=	libevent.a:devel/libevent
-TCMALLOC_CONFIGURE_WITH=	-tcmalloc
+TCMALLOC_CONFIGURE_ON=		--with-tcmalloc
 TCMALLOC_LIB_DEPENDS=		libtcmalloc.so:devel/google-perftools
-TOR2WEB_CONFIGURE_ENABLE=	-tor2web-mode
+TOR2WEB_CONFIGURE_ENABLE=	tor2web-mode
 
 USERS=		_tor
 GROUPS=		_tor
@@ -77,17 +77,7 @@ CONFLICTS=	tor-devel-[0-9]*
 
 .include <bsd.port.options.mk>
 
-.if ${OSVERSION} < 1000015
-DEFAULT_VERSIONS=	ssl=openssl
-SSL_DEFAULT=		openssl
-WITH_OPENSSL_PORT=	yes
-.endif
-
-.if emtpy(PORT_OPTIONS:MDOCS)
-	USES+=	imake:noman
-.endif
-
-.if !empty(PORT_OPTIONS:MSTATIC)
+.if ${PORT_OPTIONS:MSTATIC}
 .	if !empty(PORT_OPTIONS:MDMALLOC)
 BUILD_DEPENDS+=		${LOCALBASE}/lib/libdmalloc.a:devel/dmalloc
 .	endif

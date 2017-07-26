@@ -54,9 +54,9 @@ ZSTD_DESC=		Enable support for Zstandard compression
 
 OPTIONS_DEFAULT=	DOCS SSLTLS_BASE
 
-DMALLOC_CONFIGURE_WITH=		-dmalloc
+DMALLOC_CONFIGURE_ON=		--with-dmalloc
 DMALLOC_LIB_DEPENDS=		libdmalloc.so:devel/dmalloc
-DOCS_CONFIGURE_ENABLE=		-asciidoc
+DOCS_CONFIGURE_ENABLE=		asciidoc
 DOCS_BUILD_DEPENDS=		asciidoc:textproc/asciidoc
 GNUMAKE_USES=			gmake
 SSLTLS_BASE_CONFIGURE_ENV=	OPENSSLRPATH=/usr/lib
@@ -64,12 +64,12 @@ SSLTLS_BASE_LIB_DEPENDS=	libevent.so:devel/libevent
 SSLTLS_PORTS_CONFIGURE_ENV=	OPENSSLRPATH=${OPENSSLLIB}
 SSLTLS_PORTS_LIB_DEPENDS=	libevent.so:devel/libevent
 SSLTLS_PORTS_USES=		localbase
-STATIC_CONFIGURE_ENABLE=	-static-tor
+STATIC_CONFIGURE_ENABLE=	static-tor
 STATIC_CONFIGURE_BUILD_DEPENDS=	libevent.a:devel/libevent
-TCMALLOC_CONFIGURE_WITH=	-tcmalloc
+TCMALLOC_CONFIGURE_ON=		--with-tcmalloc
 TCMALLOC_LIB_DEPENDS=		libtcmalloc.so:devel/google-perftools
-TOR2WEB_CONFIGURE_ENABLE=	-tor2web-mode
-ZSTD_CONFIGURE_ENABLE=		-zstd
+TOR2WEB_CONFIGURE_ENABLE=	tor2web-mode
+ZSTD_CONFIGURE_ENABLE=		zstd
 ZSTD_LIB_DEPENDS=		libzstd.so:archivers/zstd
 
 USERS=		_tor
@@ -84,13 +84,7 @@ CONFLICTS=	tor-[0-9]*
 
 .include <bsd.port.options.mk>
 
-.if ${OSVERSION} < 1000015
-DEFAULT_VERSIONS=	ssl=openssl
-SSL_DEFAULT=		openssl
-WITH_OPENSSL_PORT=	yes
-.endif
-
-.if !empty(PORT_OPTIONS:MSTATIC)
+.if ${PORT_OPTIONS:MSTATIC}
 .	if !empty(PORT_OPTIONS:MDMALLOC)
 BUILD_DEPENDS+=		${LOCALBASE}/lib/libdmalloc.a:devel/dmalloc
 .	endif
