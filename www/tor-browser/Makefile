@@ -28,7 +28,13 @@ AUTOCONF_PORT=		devel/autoconf213
 AUTOCONF=		${LOCALBASE}/bin/autoconf-${AUTOCONF_VERSION}
 
 BUILD_DEPENDS=	${AUTOCONF}:${AUTOCONF_PORT} \
-		libpangocairo-1.0.so:x11-toolkits/pango
+		yasm:devel/yasm \
+		zip:archivers/zip
+
+LIB_DEPENDS=	libgconf-2.so:devel/gconf2 \
+		libgtk-x11-2.0.so:x11-toolkits/gtk20 \
+		libpangocairo-1.0.so:x11-toolkits/pango \
+		libpulse.so:audio/pulseaudio
 
 pre-configure:
 	(cp ${MOZCONFIG} ${WRKSRC}/.mozconfig)
