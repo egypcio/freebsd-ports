@@ -17,6 +17,8 @@ AUTOCONF=		${LOCALBASE}/bin/autoconf-${AUTOCONF_VERSION}
 
 USES=		cpe gmake pkgconfig python:2.7
 
+GNU_CONFIGURE=	yes
+
 USE_GITHUB=	yes
 
 GH_ACCOUNT=	torbsd

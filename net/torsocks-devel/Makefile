@@ -1,19 +1,20 @@
 # $FreeBSD$
 
 PORTNAME=		torsocks
-PORTVERSION=		2.2.0
-DISTVERSIONPREFIX=	v
+PORTVERSION=		20170224
 CATEGORIES=		net security
+PKGNAMESUFFIX=		-devel
 
 MAINTAINER=	egypcio@googlemail.com
-COMMENT=	Unofficial/experimental version of net/torsocks
+COMMENT=	Unofficial/experimental version of net/torsocks-devel
 
 LICENSE=	GPLv2
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	dgoulet
+GH_TAGNAME=	0b199d9
 
-CONFLICTS=	torsocks-devel-[0-9]*
+CONFLICTS=	torsocks-[0-9]*
 
 GNU_CONFIGURE=	yes
 USES=		alias autoreconf gmake libtool
