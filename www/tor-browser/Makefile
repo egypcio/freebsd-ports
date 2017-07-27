@@ -15,7 +15,7 @@ AUTOCONF_VERSION=	2.13
 AUTOCONF_PORT=		devel/autoconf213
 AUTOCONF=		${LOCALBASE}/bin/autoconf-${AUTOCONF_VERSION}
 
-USES=		cpe gmake pkgconfig python:2.7
+USES=		cpe libtool gmake pkgconfig python:2.7
 
 USE_GITHUB=	yes
 
