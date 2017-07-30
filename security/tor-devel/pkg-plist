@@ -1,17 +1,20 @@
 @dir(%%USER%%,%%GROUP%%,700) /var/db/tor
 @dir(%%USER%%,%%GROUP%%,700) /var/log/tor
 @dir(%%USER%%,%%GROUP%%,700) /var/run/tor
+@sample %%ETCDIR%%/torrc.minimal
 @sample %%ETCDIR%%/torrc.sample
+@sample %%PORTDOCS%%/contrib/operator-tools/tor-exit-notice.html
+@sample %%PORTDOCS%%/contrib/operator-tools/tor.logrotate
 %%DATADIR%%/geoip
 %%DATADIR%%/geoip6
 %%PORTDOCS%%%%DOCSDIR%%/tor-gencert.html
 %%PORTDOCS%%%%DOCSDIR%%/tor-resolve.html
 %%PORTDOCS%%%%DOCSDIR%%/tor.html
 %%PORTDOCS%%%%DOCSDIR%%/torify.html
-%%PORTDOCS%%man/man1/tor-gencert.1.gz
-%%PORTDOCS%%man/man1/tor-resolve.1.gz
-%%PORTDOCS%%man/man1/tor.1.gz
-%%PORTDOCS%%man/man1/torify.1.gz
+%%PORTDOCS%%%%MANPAGES%%man/man1/tor-gencert.1.gz
+%%PORTDOCS%%%%MANPAGES%%man/man1/tor-resolve.1.gz
+%%PORTDOCS%%%%MANPAGES%%man/man1/tor.1.gz
+%%PORTDOCS%%%%MANPAGES%%man/man1/torify.1.gz
 bin/tor
 bin/tor-gencert
 bin/tor-resolve

@@ -7,7 +7,7 @@ MASTER_SITES=	TOR
 PKGNAMESUFFIX=	-devel
 
 MAINTAINER=	egypcio@googlemail.com
-COMMENT=	Unofficial/experimental version of security/tor
+COMMENT=	Unofficial/experimental version of security/tor-devel
 
 LICENSE=	BSD3CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
@@ -112,6 +112,8 @@ pre-everything::
 post-patch:
 	@${REINPLACE_CMD} -E -e "s@(-z) (relro|now)@-Wl,\1,\2@g" \
 		${WRKSRC}/configure
+	@${REINPLACE_CMD} -e 's|/etc/init.d|${LOCALBASE}/etc/rc.d|' \
+		${WRKSRC}/contrib/operator-tools/tor.logrotate.in
 	@${REINPLACE_CMD} -e 's|lib/tor|db/tor|' \
 		${WRKSRC}/src/config/torrc.*.in \
 		${WRKSRC}/doc/tor.1.* \
