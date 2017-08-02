@@ -1,16 +1,18 @@
 ================================================================================
-To enable Tor, please set tor_enable="YES" in your /etc/rc.conf and 
+
+  To enable Tor, please set tor_enable="YES" in your /etc/rc.conf and 
 edit %%PREFIX%%/etc/tor/torrc as desired (however, note that the 
 %%PREFIX%%/etc/rc.d/tor rc.subr script can override some torrc's options; 
 see this script for details).
 
-To use torify(1), you need to install the 'net/torsocks' port.
+  To use torify(1), you need to install the 'net/torsocks' port.
 
-Tor users are strongly advised to prevent traffic analysis that exploits 
+  Tor users are strongly advised to prevent traffic analysis that exploits 
 sequential IP ID by setting:
 
 	# sysctl net.inet.ip.random_id=1
 
-Please refer to sysctl.conf(5) for more information on how to make this change
+  Please refer to sysctl.conf(5) for more information on how to make this change
 permanent.
+
 ================================================================================
