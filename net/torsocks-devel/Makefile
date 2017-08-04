@@ -16,7 +16,7 @@ GH_TAGNAME=	0b199d9
 CONFLICTS=	torsocks-[0-9]*
 
 GNU_CONFIGURE=	yes
-USES=		alias libtool
+USES=		alias autoreconf libtool
 USE_LDCONFIG=	yes
 INSTALL_TARGET=	install-strip
 
