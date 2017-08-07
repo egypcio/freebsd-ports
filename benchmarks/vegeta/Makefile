@@ -15,7 +15,9 @@ USE_GITHUB=	yes
 GH_ACCOUNT=	tsenart
 GH_TAGNAME=	v${PORTVERSION}
 
-GO_PKGNAME=	github.com/tsenart/${GH_PROJECT}
+GO_PKGNAME=	github.com/${GH_ACCOUNT}/${GH_PROJECT}
+
+GO_TARGET=	${GO_PKGNAME}/lib
 
 BUILD_DEPENDS=	${LOCALBASE}/${GO_LIBDIR}/github.com/streadway/quantile.a:benchmarks/go-quantile \
 		${LOCALBASE}/${GO_LIBDIR}/golang.org/x/net/http2.a:net/go.net
