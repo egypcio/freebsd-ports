@@ -1,6 +1,0 @@
-%%GO_LIBDIR%%/%%GO_PKGNAME%%.a
-%%GO_SRCDIR%%/%%GO_PKGNAME%%/LICENSE
-%%GO_SRCDIR%%/%%GO_PKGNAME%%/README.md
-%%GO_SRCDIR%%/%%GO_PKGNAME%%/example_test.go
-%%GO_SRCDIR%%/%%GO_PKGNAME%%/quantile.go
-%%GO_SRCDIR%%/%%GO_PKGNAME%%/quantile_test.go
