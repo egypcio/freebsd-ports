@@ -3,22 +3,18 @@
 PORTNAME=	obfs4proxy
 PORTVERSION=	0.0.7
 CATEGORIES=	security net ipv6
+MASTER_SITES=	http://people.torproject.org/~yawning/releases/${PORTNAME}/
 LICENSE=	BSD3CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 MAINTAINER=	egypcio@googlemail.com
 COMMENT=	Unofficial/experimental version of security/obfs4proxy
 
-USES=		go
-USE_GITHUB=	yes
-
-GH_ACCOUNT=	yawning
-GH_PROJECT=	obfs4
-GH_TAGNAME=	${PORTNAME}-${PORTVERSION}
+USES=		go tar:xz
 
 SUB_FILES=	pkg-message
 
-GO_PKGNAME=	git.torproject.org/pluggable-transports/${GH_PROJECT}.git
+GO_PKGNAME=	git.torproject.org/pluggable-transports/obfs4.git
 GO_TARGET=	${GO_PKGNAME}/${PORTNAME} \
 		${GO_PKGNAME}/common/log \
 		${GO_PKGNAME}/common/socks5 \

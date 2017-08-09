@@ -1,0 +1,3 @@
+Go implementation of a space efficient streaming quantile estimator.
+
+WWW: https://github.com/streadway/quantile
