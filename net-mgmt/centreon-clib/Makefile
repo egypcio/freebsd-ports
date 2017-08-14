@@ -9,6 +9,7 @@ COMMENT=	Unofficial/experimental version of net-mgmt/centreon-clib
 
 USES=		cmake
 USE_GITHUB=	yes
+USE_LDCONFIG=	${PREFIX}/lib/centreon
 
 GH_ACCOUNT=	centreon
 GH_TAGNAME=	a3adaf5
