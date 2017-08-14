@@ -17,7 +17,7 @@ BUILD_DEPENDS=		${LOCALBASE}/lib/centreon/libcentreon_clib.so:net-mgmt/centreon-
 
 CMAKE_SOURCE_PATH=	${WRKSRC}/build
 CMAKE_ARGS=		-DWITH_PREFIX=${PREFIX} \
-			-DWITH_PREFIX_BIN=${PREFIX}/sbin \
+			-DWITH_PREFIX_BIN=${PREFIX}/bin \
 			-DWITH_PREFIX_CONF=${PREFIX}/etc/centreon \
 			-DWITH_PREFIX_LIB=${PREFIX}/lib/centreon \
 			-DWITH_CENTREON_CLIB_LIBRARY_DIR=${PREFIX}/lib/centreon \

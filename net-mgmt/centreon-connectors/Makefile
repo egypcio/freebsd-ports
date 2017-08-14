@@ -7,18 +7,23 @@ LICENSE=	AGPLv3
 MAINTAINER=	egypcio@googlemail.com
 COMMENT=	Unofficial/experimental version of net-mgmt/centreon-connectors
 
-USES=		cmake
+USES=		cmake perl5 pkgconfig
 USE_GITHUB=	yes
-USE_LDCONFIG=	yes
 
 GH_ACCOUNT=	centreon
 GH_TAGNAME=	1e4014d
 
-# Considering Centreon's SSH Connector Only
-CMAKE_SOURCE_PATH=	${WRKSRC}/ssh/build
+BUILD_DEPENDS=		${LOCALBASE}/lib/centreon/libcentreon_clib.so:net-mgmt/centreon-clib
+LIB_DEPENDS=		libgcrypt.so:security/libgcrypt \
+			libssh2.so:security/libssh2
 
-CMAKE_ARGS=	-DWITH_PREFIX=${PREFIX} \
-		-DWITH_PREFIX_INC=${PREFIX}/include/centreon \
-		-DWITH_PKGCONFIG_DIR=${PREFIX}/libdata/pkgconfig
+CMAKE_ARGS=		-DWITH_PREFIX=${PREFIX} \
+			-DWITH_PREFIX_BIN=${PREFIX}/bin \
+			-DWITH_CENTREON_CLIB_LIBRARIES=${PREFIX}/lib/centreon/libcentreon_clib.so \
+			-DWITH_CENTREON_CLIB_INCLUDE_DIR=${PREFIX}/include/centreon \
+			-DWITH_PKGCONFIG_DIR=${PREFIX}/libdata/pkgconfig
+
+pre-configure:
+	(cp ${FILESDIR}/CMakeLists.txt ${WRKSRC}/.)
 
 .include <bsd.port.mk>
