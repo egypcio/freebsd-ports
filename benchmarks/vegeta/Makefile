@@ -17,9 +17,18 @@ GH_TAGNAME=	v${PORTVERSION}
 
 GO_PKGNAME=	github.com/${GH_ACCOUNT}/${GH_PROJECT}
 
-GO_TARGET=	${GO_PKGNAME}/lib
-
 BUILD_DEPENDS=	${LOCALBASE}/${GO_LIBDIR}/github.com/streadway/quantile.a:benchmarks/go-quantile \
 		${LOCALBASE}/${GO_LIBDIR}/golang.org/x/net/http2.a:net/go.net
+
+do-build:
+	@(cd ${GO_WRKSRC}; ${SETENV} ${MAKE_ENV} ${GO_ENV} ${GO_CMD} build -o ${PORTNAME})
+	@(cd ${GO_WRKSRC}; ${SETENV} ${MAKE_ENV} ${GO_ENV} ${GO_CMD} install -v ${GO_PKGNAME}/lib)
+
+do-install:                                                
+	${MKDIR} ${STAGEDIR}/${PREFIX}/${GO_LIBDIR}/${GO_PKGNAME}/lib \
+		 ${STAGEDIR}/${PREFIX}/${GO_SRCDIR}/${GO_PKGNAME}
+	${INSTALL_DATA} ${GO_WRKDIR_PKG}/${GO_PKGNAME}/lib.a ${STAGEDIR}/${PREFIX}/${GO_LIBDIR}/${GO_PKGNAME}
+	${INSTALL_PROGRAM} ${GO_WRKDIR_SRC}/${GO_PKGNAME}/${PORTNAME} ${STAGEDIR}/${LOCALBASE}/bin
+	(cd ${GO_WRKDIR_SRC}/${GO_PKGNAME} && ${COPYTREE_SHARE} \* ${STAGEDIR}/${PREFIX}/${GO_SRCDIR}/${GO_PKGNAME})
 
 .include <bsd.port.mk>
