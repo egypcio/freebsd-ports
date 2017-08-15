@@ -61,4 +61,5 @@ include/centreon/com/centreon/timestamp.hh
 include/centreon/com/centreon/unique_array_ptr.hh
 include/centreon/com/centreon/unordered_hash.hh
 lib/centreon/libcentreon_clib.so
+libdata/ldconfig/centreon-clib
 libdata/pkgconfig/centreon-clib.pc

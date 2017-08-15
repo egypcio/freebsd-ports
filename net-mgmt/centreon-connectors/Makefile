@@ -3,7 +3,7 @@
 PORTNAME=	centreon-connectors
 PORTVERSION=	1.1.1
 CATEGORIES=	net-mgmt
-LICENSE=	AGPLv3
+LICENSE=	APACHE20
 MAINTAINER=	egypcio@googlemail.com
 COMMENT=	Unofficial/experimental version of net-mgmt/centreon-connectors
 
@@ -13,9 +13,9 @@ USE_GITHUB=	yes
 GH_ACCOUNT=	centreon
 GH_TAGNAME=	1e4014d
 
-BUILD_DEPENDS=		${LOCALBASE}/lib/centreon/libcentreon_clib.so:net-mgmt/centreon-clib
 LIB_DEPENDS=		libgcrypt.so:security/libgcrypt \
-			libssh2.so:security/libssh2
+			libssh2.so:security/libssh2 \
+			libcentreon_clib.so:net-mgmt/centreon-clib
 
 CMAKE_ARGS=		-DWITH_PREFIX=${PREFIX} \
 			-DWITH_PREFIX_BIN=${PREFIX}/bin \
