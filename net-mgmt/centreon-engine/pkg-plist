@@ -1,3 +1,4 @@
+@dir(%%USER%%,%%GROUP%%,750) /var/db/%%USER%%
 etc/centreon/centengine.cfg
 etc/centreon/objects/commands.cfg
 etc/centreon/objects/contacts.cfg

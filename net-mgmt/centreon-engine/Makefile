@@ -14,6 +14,11 @@ USE_LDCONFIG=	${PREFIX}/lib/centreon
 GH_ACCOUNT=	centreon
 GH_TAGNAME=	4fb81d9
 
+USERS=		centreon
+GROUPS=		centreon
+
+SUB_LIST=		USER="${USERS}" GROUP="${GROUPS}"
+
 LIB_DEPENDS=		libcentreon_clib.so:net-mgmt/centreon-clib
 
 CMAKE_SOURCE_PATH=	${WRKSRC}/build
@@ -29,7 +34,7 @@ CMAKE_ARGS=		-DWITH_PREFIX=${PREFIX} \
 			-DWITH_VAR_DIR=/var/db/centreon \
 			-DWITH_RW_DIR=/var/db/centreon/rw \
 			-DWITH_LOCK_FILE=/var/run/centreon.lock \
-			-DWITH_USER=root -DWITH_GROUP=wheel
+			-DWITH_USER=${USER} -DWITH_GROUP=${GROUP}
 
 post-build:
 	${FIND} ${BUILD_WRKSRC}/ -name "cmake_install.cmake" -type f | ${XARGS} ${REINPLACE_CMD} -e '/mkdir_chown(/,+d'
