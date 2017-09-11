@@ -10,6 +10,7 @@ COMMENT=	Unofficial/experimental version of net-mgmt/centreon-broker
 USES=		cmake:outsource pkgconfig
 USE_GITHUB=	yes
 USE_LDCONFIG=	${PREFIX}/lib/centreon
+USE_QT4=	yes
 
 GH_ACCOUNT=	centreon
 GH_TAGNAME=	d51b73a
