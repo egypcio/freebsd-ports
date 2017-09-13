@@ -10,13 +10,15 @@ COMMENT=	Unofficial/experimental version of net-mgmt/centreon-broker
 USES=		cmake:outsource pkgconfig
 USE_GITHUB=	yes
 USE_LDCONFIG=	${PREFIX}/lib/centreon
-USE_QT4=	yes
+USE_QT4=	# EMPTY
 
 GH_ACCOUNT=	centreon
 GH_TAGNAME=	d51b73a
 
 USERS=		centreon
 GROUPS=		centreon
+
+CONFIGURE_ENV=		QT_SELECT=qt4
 
 SUB_LIST=		USER="${USERS}" GROUP="${GROUPS}"
 
@@ -43,9 +45,9 @@ CMAKE_ARGS=		-DWITH_PREFIX=${PREFIX} \
 			-DWITH_LOCK_FILE=/var/run/centreon-broker.lock \
 			-DWITH_USER=${USER} -DWITH_GROUP=${GROUP} \
 
-post-build:
-	${FIND} ${BUILD_WRKSRC}/ -name "cmake_install.cmake" -type f | ${XARGS} ${REINPLACE_CMD} -e '/mkdir_chown(/,+d'
-	${FIND} ${BUILD_WRKSRC}/ -name "cmake_install.cmake" -type f | ${XARGS} ${REINPLACE_CMD} -e '/my_chown(/,+d'
-	${FIND} ${BUILD_WRKSRC}/ -name "cmake_install.cmake" -type f | ${XARGS} ${REINPLACE_CMD} -e '/touch_chown(/,+d'
+# post-build:
+#	${FIND} ${BUILD_WRKSRC}/ -name "cmake_install.cmake" -type f | ${XARGS} ${REINPLACE_CMD} -e '/mkdir_chown(/,+d'
+#	${FIND} ${BUILD_WRKSRC}/ -name "cmake_install.cmake" -type f | ${XARGS} ${REINPLACE_CMD} -e '/my_chown(/,+d'
+#	${FIND} ${BUILD_WRKSRC}/ -name "cmake_install.cmake" -type f | ${XARGS} ${REINPLACE_CMD} -e '/touch_chown(/,+d'
 
 .include <bsd.port.mk>
