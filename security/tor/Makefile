@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	tor
-DISTVERSION=	0.3.0.10
+DISTVERSION=	0.3.1.7
 CATEGORIES=	security net ipv6
 MASTER_SITES=	TOR
 CPE_VENDOR=	torproject
@@ -30,7 +30,7 @@ CONFIGURE_ENV=	TOR_CPPFLAGS_libevent='-I${LOCALBASE}/include' \
 
 MAKE_ENV=	USE_OPENSSL_RPATH=yes
 
-OPTIONS_DEFINE=		DOCS GNUMAKE STATIC TOR2WEB
+OPTIONS_DEFINE=		DOCS GNUMAKE LZMA STATIC TOR2WEB ZSTD
 OPTIONS_RADIO=		MALLOC
 OPTIONS_RADIO_MALLOC=	DMALLOC TCMALLOC
 OPTIONS_SINGLE=		SSLTLS
@@ -43,9 +43,11 @@ GNUMAKE_DESC=		Use 'gmake' as default 'make' tool
 SSLTLS_DESC=		SSL/TLS support
 BASE_SSLTLS_DESC=	Use FreeBSD's base SSL/TLS libraries
 PORTS_SSLTLS_DESC=	Use SSL/TLS from ports instead of FreeBSD's
+LZMA_DESC=		LZMA compression support scheme
 STATIC_DESC=		Create an entirely static Tor binary
 TCMALLOC_DESC=		Use tcmalloc memory allocation library
 TOR2WEB_DESC=		Support Tor2Web non-anonymous mode
+ZSTD_DESC=		Zstandard compression support scheme
 
 OPTIONS_DEFAULT=	DOCS BASE_SSLTLS
 
@@ -54,6 +56,8 @@ DMALLOC_LIB_DEPENDS=		libdmalloc.so:devel/dmalloc
 DOCS_CONFIGURE_ENABLE=		asciidoc
 DOCS_BUILD_DEPENDS=		asciidoc:textproc/asciidoc
 GNUMAKE_USE=			gmake
+LZMA_CONFIGURE_ENABLE=		lzma
+LZMA_USE=			pkgconfig
 BASE_SSLTLS_CONFIGURE_ENV=	OPENSSLRPATH=/usr/lib
 BASE_SSLTLS_LIB_DEPENDS=	libevent.so:devel/libevent
 PORTS_SSLTLS_USE=		localbase
@@ -66,6 +70,9 @@ STATIC_BUILD_DEPENDS=		${LOCALBASE}/lib/libevent.a:devel/libevent
 TCMALLOC_CONFIGURE_ON=		--with-tcmalloc
 TCMALLOC_LIB_DEPENDS=		libtcmalloc.so:devel/google-perftools
 TOR2WEB_CONFIGURE_ENABLE=	tor2web-mode
+ZSTD_CONFIGURE_ENABLE=		zstd
+ZSTD_LIB_DEPENDS=		libzstd.so:archivers/zstd
+ZSTD_USE=			pkgconfig
 
 USERS=		_tor
 GROUPS=		_tor
