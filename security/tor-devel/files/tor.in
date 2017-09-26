@@ -10,7 +10,7 @@
 # tor_conf (str):	Tor's config file.		Default: %%PREFIX%%/etc/tor/torrc
 #
 # This options are command line options used by Tor. That said,
-# 	setting up 'User', 'DataDirectory' or 'Log' using these 
+# 	setting up 'DataDirectory' or 'Log' using these 
 # 	options will result in configuration overwriting.
 #
 # tor_user (str):	User to run the Tor daemon.	Default: %%USER%%
@@ -38,7 +38,7 @@ required_files=${tor_conf}
 required_dirs=${tor_datadir}
 pidfile=${tor_pidfile}
 command="%%PREFIX%%/bin/${name}"
-command_args="-f ${tor_conf} -User ${tor_user} --RunAsDaemon 1 --PidFile ${tor_pidfile} --DataDirectory ${tor_datadir} --Log ${tor_loglevel}\\ file\\ ${tor_logdir}/${tor_loglevel}.log"
+command_args="-f ${tor_conf} --RunAsDaemon 1 --PidFile ${tor_pidfile} --DataDirectory ${tor_datadir} --Log ${tor_loglevel}\\ file\\ ${tor_logdir}/${tor_loglevel}.log"
 extra_commands="reload"
 
 run_rc_command "$1"

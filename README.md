@@ -2,4 +2,5 @@
 
 TorBSD's FreeBSD Ports
 
-    https://github.com/torbsd
+    * https://torbsd.org
+    * https://github.com/torbsd
