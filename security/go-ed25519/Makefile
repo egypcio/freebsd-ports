@@ -3,13 +3,15 @@
 PORTNAME=	go-ed25519
 PORTVERSION=	20170116
 CATEGORIES=	security devel
-LICENSE=	BSD3CLAUSE
-LICENSE_FILE=	${WRKSRC}/LICENSE
 
 MAINTAINER=	egypcio@googlemail.com
 COMMENT=	Unofficial/experimental version of security/go-ed25519
 
+LICENSE=	BSD3CLAUSE
+LICENSE_FILE=	${WRKSRC}/LICENSE
+
 USES=		go
+
 USE_GITHUB=	yes
 
 GH_ACCOUNT=	agl
