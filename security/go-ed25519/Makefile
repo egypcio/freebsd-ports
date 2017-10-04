@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	go-ed25519
-PORTVERSION=	20170116
+DISTVERSION=	g20170116
 CATEGORIES=	security devel
 
 MAINTAINER=	egypcio@googlemail.com
