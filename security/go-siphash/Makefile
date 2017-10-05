@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	go-siphash
-PORTVERSION=	20170831
+DISTVERSION=	g20170831
 CATEGORIES=	security devel
 
 MAINTAINER=	egypcio@googlemail.com
