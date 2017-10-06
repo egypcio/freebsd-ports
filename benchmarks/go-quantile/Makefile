@@ -3,15 +3,15 @@
 PORTNAME=	go-quantile
 PORTVERSION=	20150917
 CATEGORIES=	benchmarks net
-LICENSE=	BSD2CLAUSE
-LICENSE_FILE=	${WRKSRC}/LICENSE
 
 MAINTAINER=	egypcio@googlemail.com
 COMMENT=	Unofficial/experimental version of benchmarks/go-quantile
 
+LICENSE=	BSD2CLAUSE
+LICENSE_FILE=	${WRKSRC}/LICENSE
+
 USES=		go
 USE_GITHUB=	yes
-
 GH_ACCOUNT=	streadway
 GH_PROJECT=	quantile
 GH_TAGNAME=	b0c5887
