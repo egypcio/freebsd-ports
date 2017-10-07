@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	go-quantile
-PORTVERSION=	20150917
+DISTVERSION=	g20150917
 CATEGORIES=	benchmarks net
 
 MAINTAINER=	egypcio@googlemail.com

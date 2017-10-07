@@ -1,8 +1,9 @@
 # $FreeBSD$
 
-PORTNAME=	vegeta
-PORTVERSION=	6.3.0
-CATEGORIES=	benchmarks www net
+PORTNAME=		vegeta
+DISTVERSION=		6.3.0
+DISTVERSIONPREFIX=	v
+CATEGORIES=		benchmarks www net
 
 MAINTAINER=	egypcio@googlemail.com
 COMMENT=	Unofficial/experimental version of benchmarks/vegeta
@@ -17,7 +18,7 @@ USES=		go
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	tsenart
-GH_TAGNAME=	v${PORTVERSION}
+# GH_TAGNAME=	
 GO_PKGNAME=	github.com/${GH_ACCOUNT}/${GH_PROJECT}
 
 do-build:
