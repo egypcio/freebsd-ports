@@ -14,7 +14,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 USES=		python
 
 USE_GITHUB=	yes
-USE_PYTHON=	distutils autoplist
+USE_PYTHON=	distutils
 
 GH_ACCOUNT=	micahflee
 
