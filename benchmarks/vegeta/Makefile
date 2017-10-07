@@ -18,7 +18,6 @@ USES=		go
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	tsenart
-# GH_TAGNAME=	
 GO_PKGNAME=	github.com/${GH_ACCOUNT}/${GH_PROJECT}
 
 do-build:
