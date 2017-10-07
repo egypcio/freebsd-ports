@@ -1,8 +1,9 @@
 # $FreeBSD$
 
-PORTNAME=	onionshare
-DISTVERSION=	1.1
-CATEGORIES=	www security ipv6
+PORTNAME=		onionshare
+DISTVERSION=		1.1
+DISTVERSIONPREFIX=	v
+CATEGORIES=		www security ipv6
 
 MAINTAINER=	egypcio@googlemail.com
 COMMENT=	Unofficial/experimental version of www/onionshare
@@ -18,7 +19,5 @@ USE_PYTHON=	distutils autoplist
 GH_ACCOUNT=	micahflee
 
 SUB_FILES=	pkg-message
-
-.include <bsd.port.options.mk>
 
 .include <bsd.port.mk>
