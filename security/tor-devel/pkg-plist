@@ -1,10 +1,8 @@
 @dir(%%USER%%,%%GROUP%%,700) /var/db/tor
 @dir(%%USER%%,%%GROUP%%,700) /var/log/tor
 @dir(%%USER%%,%%GROUP%%,700) /var/run/tor
-@sample %%PORTEXAMPLES%%%%EXAMPLESDIR%%/exit-notice-de.html
-@sample %%PORTEXAMPLES%%%%EXAMPLESDIR%%/exit-notice-en.html
-@sample %%PORTEXAMPLES%%%%EXAMPLESDIR%%/exit-notice-es.html
-@sample %%PORTEXAMPLES%%%%EXAMPLESDIR%%/logrotate
+@sample %%PORTEXAMPLES%%%%EXAMPLESDIR%%/tor-exit-notice.html
+@sample %%PORTEXAMPLES%%%%EXAMPLESDIR%%/tor.logrotate
 @sample %%PORTEXAMPLES%%%%EXAMPLESDIR%%/torrc.minimal
 @sample %%PORTEXAMPLES%%%%EXAMPLESDIR%%/torrc.sample
 %%DATADIR%%/geoip
