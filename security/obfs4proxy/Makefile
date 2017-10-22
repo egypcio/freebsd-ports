@@ -30,6 +30,10 @@ GH_TUPLE=	agl:ed25519:5312a61:ed25519/github.com/agl/ed25519		\
 
 GO_TARGET=	${GH_SUBDIR}/${PORTNAME}
 
+pre-build:
+	${LN} -sf ${WRKSRC}/git* ${GO_WRKDIR_SRC}/.
+	${LN} -sf ${WRKSRC}/gol* ${GO_WRKDIR_SRC}/.
+
 post-install:
 	${INSTALL_MAN} ${WRKSRC}/doc/obfs4proxy.1 ${STAGEDIR}${PREFIX}/man/man1
 
