@@ -3,13 +3,14 @@
 PORTNAME=	obfs4proxy
 DISTVERSION=	0.0.7
 CATEGORIES=	security net ipv6
-DISTFILES=	${DISTNAME}${EXTRACT_SUFX}
 MASTER_SITES=	https://people.torproject.org/~yawning/releases/${PORTNAME}/
+DISTFILES=	${DISTNAME}${EXTRACT_SUFX}
 
 MAINTAINER=	egypcio@googlemail.com
 COMMENT=	Unofficial/experimental version of security/obfs4proxy
 
 LICENSE=	BSD3CLAUSE
+LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	goptlib>=0.5:security/goptlib
 
@@ -27,7 +28,7 @@ GH_TUPLE=	agl:ed25519:5312a61:ed25519/github.com/agl/ed25519		\
 		golang:crypto:edd5e9b:crypto/golang.net/x/crypto		\
 		golang:net:cd69bc3:net/golang.net/x/net
 
-GO_TARGET=      ${GH_SUBDIR}/${PORTNAME}
+GO_TARGET=	${GH_SUBDIR}/${PORTNAME}
 
 post-install:
 	${INSTALL_MAN} ${WRKSRC}/doc/obfs4proxy.1 ${STAGEDIR}${PREFIX}/man/man1
