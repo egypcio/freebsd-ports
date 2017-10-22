@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=		tor-browser
-PORTVERSION=		7.0.5
+PORTVERSION=		7.0.6
 CATEGORIES=		www security ipv6
 
 MAINTAINER=		egypcio@googlemail.com
@@ -39,10 +39,10 @@ MAKE_ENV=	MOZILLA_NAME="Tor Browser" \
 USES=		cpe libtool gmake pkgconfig python:2.7
 
 USE_GITHUB=	yes
-#		v7.0.5-esr52.3.0
+#		v7.0.6-esr52.4.0
 GH_ACCOUNT=	torbsd
 GH_PROJECT=	torb
-GH_TAGNAME=	e3d89be
+GH_TAGNAME=	852e4a1
 
 pre-configure:
 	(cp ${MOZCONFIG} ${WRKSRC}/.mozconfig)
