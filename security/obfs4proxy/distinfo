@@ -1,3 +1,11 @@
-TIMESTAMP = 1502290761
+TIMESTAMP = 1508702590
 SHA256 (obfs4proxy-0.0.7.tar.xz) = c07a1a690ebab3057c8b566e1a4902439c77d1ba5c35bbf42fcdc5b46ab3ca63
 SIZE (obfs4proxy-0.0.7.tar.xz) = 56184
+SHA256 (agl-ed25519-5312a61_GH0.tar.gz) = 8508e21ca8bf39df655cd7d7ade16b168530a2dbc3791c00f0d2a62ca9003faa
+SIZE (agl-ed25519-5312a61_GH0.tar.gz) = 107273
+SHA256 (dchest-siphash-42ba037_GH0.tar.gz) = 68211b8ba9830d4052f5de2b60877f0deee7e8df9316628d9f9d5cbbcbd66463
+SIZE (dchest-siphash-42ba037_GH0.tar.gz) = 4462
+SHA256 (golang-crypto-edd5e9b_GH0.tar.gz) = f6dbf33b18da2749d1117c56fbe9ccca35cd377981face9996dc9f4ab7190dba
+SIZE (golang-crypto-edd5e9b_GH0.tar.gz) = 1435403
+SHA256 (golang-net-cd69bc3_GH0.tar.gz) = 276bc9b5781cce0af006eeaa18403b35e3c2212457ddcd6554ebe386d28dba81
+SIZE (golang-net-cd69bc3_GH0.tar.gz) = 923070
