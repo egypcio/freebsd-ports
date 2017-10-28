@@ -17,16 +17,21 @@ USES=		go
 USE_GITHUB=	yes
 
 GH_ACCOUNT=	tsenart
+GH_PROJECT=	${PORTNAME}
+# GH_SUBDIR=	github.com/${GH_ACCOUNT}/${GH_PROJECT}
 GH_TUPLE=	streadway:quantile:b0c5887:quantile/github.com/streadway/quantile \
 		golang:net:ab54850:net/golang.org/x/net \
 		golang:text:ab5ac5f:text/golang.org/x/text
 
-GO_PKGNAME=	github.com/${GH_ACCOUNT}/${PORTNAME}
+GO_BUILD_FLAGS=	-ldflags -X main.Version=${DISTVERSION}
+GO_ENV=		CGO_ENABLED=0
+GO_PKGNAME=	github.com/${GH_ACCOUNT}/${GH_PROJECT}
+# GO_TARGET=	${GO_PKGNAME}/lib
 
-# do-build:
-#	@(cd ${GO_WRKSRC}; ${SETENV} ${MAKE_ENV} ${GO_ENV} ${GO_CMD} build -o ${PORTNAME})
-#	@(cd ${GO_WRKSRC}; ${SETENV} ${MAKE_ENV} ${GO_ENV} ${GO_CMD} install -v ${GO_PKGNAME}/lib)
-#
+do-build:
+	@(cd ${GO_WRKSRC}; ${SETENV} ${MAKE_ENV} ${GO_ENV} ${GO_CMD} build ${GO_BUILD_FLAGS} -o ${PORTNAME})
+	@(cd ${GO_WRKSRC}; ${SETENV} ${MAKE_ENV} ${GO_ENV} ${GO_CMD} install -v ${GO_PKGNAME}/lib)
+
 # do-install:
 #	${MKDIR} ${STAGEDIR}/${PREFIX}/${GO_LIBDIR}/${GO_PKGNAME}/lib \
 #		 ${STAGEDIR}/${PREFIX}/${GO_SRCDIR}/${GO_PKGNAME}
