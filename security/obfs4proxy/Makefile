@@ -16,25 +16,30 @@ BUILD_DEPENDS=	goptlib>=0.5:security/goptlib
 
 CPE_VENDOR=	torproject
 
-PLIST_FILES=	bin/obfs4proxy man/man1/obfs4proxy.1.gz
+PLIST_FILES=	bin/${PORTNAME} man/man1/${PORTNAME}.1.gz
 SUB_FILES=	pkg-message
 
 USES=		cpe go tar:xz
 USE_GITHUB=	nodefault
 
-GH_SUBDIR=	git.torproject.org/pluggable-transports/obfs4.git
 GH_TUPLE=	agl:ed25519:5312a61:ed25519/github.com/agl/ed25519		\
 		dchest:siphash:42ba037:siphash/github.com/dchest/siphash	\
 		golang:crypto:edd5e9b:crypto/golang.net/x/crypto		\
 		golang:net:cd69bc3:net/golang.net/x/net
 
-GO_TARGET=	${GH_SUBDIR}/${PORTNAME}
+GO_PKGNAME_SUB=	git.torproject.org/pluggable-transports
+GO_PKGNAME=	${GO_PKGNAME_SUB}/obfs4.git
+GO_TARGET=	${GO_PKGNAME}/${PORTNAME}
 
-pre-build:
-	${LN} -sf ${WRKSRC}/git* ${GO_WRKDIR_SRC}/.
-	${LN} -sf ${WRKSRC}/gol* ${GO_WRKDIR_SRC}/.
+post-extract:
+	${MKDIR} ${WRKSRC}/${GO_PKGNAME_SUB}
+	${MKDIR} ${GO_WRKDIR_SRC}/${GO_PKGNAME_SUB}
+	${LN} -sf ${WRKSRC}         ${WRKSRC}/${GO_PKGNAME}
+	${LN} -sf ${WRKSRC}         ${GO_WRKDIR_SRC}/${GO_PKGNAME}
+	${LN} -sf ${WRKSRC}/github* ${GO_WRKDIR_SRC}/.
+	${LN} -sf ${WRKSRC}/golang* ${GO_WRKDIR_SRC}/.
 
 post-install:
-	${INSTALL_MAN} ${WRKSRC}/doc/obfs4proxy.1 ${STAGEDIR}${PREFIX}/man/man1
+	${INSTALL_MAN} ${WRKSRC}/doc/${GO_TARGET}.1 ${STAGEDIR}${PREFIX}/man/man1
 
 .include <bsd.port.mk>
