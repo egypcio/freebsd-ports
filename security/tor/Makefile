@@ -1,12 +1,13 @@
 # $FreeBSD$
 
 PORTNAME=	tor
-DISTVERSION=	0.3.1.7
+PORTVERSION=	0.3.1.9
 CATEGORIES=	security net ipv6
 MASTER_SITES=	TOR
-CPE_VENDOR=	torproject
+
 MAINTAINER=	egypcio@googlemail.com
 COMMENT=	Unofficial/experimental version of security/tor
+
 LICENSE=	BSD3CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
@@ -14,13 +15,17 @@ BROKEN_mips64=		Does not build: error: Need a uint128_t implementation!
 BROKEN_powerpc64=	Does not build: error: Need a uint128_t implementation!
 BROKEN_sparc64=		Does not build: error: Need a uint128_t implementation!
 
+CPE_VENDOR=	torproject
+
 USES=		cpe ssl
 
 GNU_CONFIGURE=	yes
+
 CONFIGURE_ARGS=	--with-tor-user=${USERS} --with-tor-group=${GROUPS} \
 		--with-openssl-dir=${OPENSSLBASE} \
 		--with-libevent-dir=${LOCALBASE} \
 		--with-zlib-dir=/usr
+
 CONFIGURE_ENV=	TOR_CPPFLAGS_libevent='-I${LOCALBASE}/include' \
 		TOR_CPPFLAGS_openssl='-I${OPENSSLINC}' \
 		TOR_CPPFLAGS_zlib='-I/usr/include' \
