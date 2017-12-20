@@ -21,7 +21,7 @@ GH_PROJECT=	${PORTNAME}
 # GH_SUBDIR=	github.com/${GH_ACCOUNT}/${GH_PROJECT}
 GH_TUPLE=	streadway:quantile:b0c5887:quantile/github.com/streadway/quantile \
 		golang:net:ab54850:net/golang.org/x/net \
-		golang:text:ab5ac5f:text/golang.org/x/text
+		golang:text:c4d099d:text/golang.org/x/text
 
 GO_BUILD_FLAGS=	-ldflags -X main.Version=${DISTVERSION}
 GO_ENV=		CGO_ENABLED=0
