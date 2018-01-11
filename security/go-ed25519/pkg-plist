@@ -1,6 +1,0 @@
-%%GO_LIBDIR%%/%%GO_PKGNAME%%/edwards25519.a
-%%GO_LIBDIR%%/%%GO_PKGNAME%%/extra25519.a
-%%GO_SRCDIR%%/%%GO_PKGNAME%%/edwards25519/const.go
-%%GO_SRCDIR%%/%%GO_PKGNAME%%/edwards25519/edwards25519.go
-%%GO_SRCDIR%%/%%GO_PKGNAME%%/extra25519/extra25519.go
-%%GO_SRCDIR%%/%%GO_PKGNAME%%/extra25519/extra25519_test.go
