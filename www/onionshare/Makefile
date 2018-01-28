@@ -1,9 +1,9 @@
 # $FreeBSD$
 
 PORTNAME=		onionshare
-DISTVERSION=		1.1
+DISTVERSION=		1.2
 DISTVERSIONPREFIX=	v
-CATEGORIES=		www security ipv6
+CATEGORIES=		www security
 
 MAINTAINER=	egypcio@googlemail.com
 COMMENT=	Unofficial/experimental version of www/onionshare
@@ -11,7 +11,9 @@ COMMENT=	Unofficial/experimental version of www/onionshare
 LICENSE=	GPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		python
+RUN_DEPENDS=	tor:security/tor
+
+USES=		python:3.4+
 
 USE_GITHUB=	yes
 USE_PYTHON=	distutils
