@@ -5,41 +5,38 @@ DISTVERSION=	0.0.7
 CATEGORIES=	security net ipv6
 MASTER_SITES=	https://people.torproject.org/~yawning/releases/${PORTNAME}/
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX}
+PKGNAMESUFFIX=	-tor
 
 MAINTAINER=	egypcio@googlemail.com
-COMMENT=	Unofficial/experimental version of security/obfs4proxy
+COMMENT=	Pluggable transport proxy for Tor (obfs4, The Obfuscator)
 
 LICENSE=	BSD3CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-BUILD_DEPENDS=	goptlib>=0.5:security/goptlib
+BUILD_DEPENDS=	go:lang/go
 
 CPE_VENDOR=	torproject
 
-PLIST_FILES=	bin/${PORTNAME} man/man1/${PORTNAME}.1.gz
+USES=		cpe tar:xz
+USE_GITHUB=	nodefault
+GH_TUPLE=	Yawning:goptlib:9b7a700:goptlib/obfs4proxy/src/git.torproject.org/pluggable-transports/goptlib.git \
+		agl:ed25519:5312a61:ed25519/obfs4proxy/src/github.com/agl/ed25519 \
+		dchest:siphash:4ebf1de:siphash/obfs4proxy/src/github.com/dchest/siphash \
+		golang:crypto:d585fd2:crypto/obfs4proxy/src/golang.org/x/crypto \
+		golang:net:d866cfc:net/obfs4proxy/src/golang.org/x/net
+
 SUB_FILES=	pkg-message
 
-USES=		cpe go tar:xz
-USE_GITHUB=	nodefault
+PLIST_FILES=	bin/obfs4proxy \
+		man/man1/obfs4proxy.1.gz
 
-GH_TUPLE=	agl:ed25519:5312a61:ed25519/github.com/agl/ed25519		\
-		dchest:siphash:42ba037:siphash/github.com/dchest/siphash	\
-		golang:crypto:edd5e9b:crypto/golang.net/x/crypto		\
-		golang:net:cd69bc3:net/golang.net/x/net
+do-build:
+	@${RLN} ${WRKSRC} ${WRKSRC}/obfs4proxy/src/git.torproject.org/pluggable-transports/obfs4.git 
+	@cd ${WRKSRC}/obfs4proxy && \
+		${SETENV} GOPATH=${WRKSRC}/obfs4proxy go build
 
-GO_PKGNAME_SUB=	git.torproject.org/pluggable-transports
-GO_PKGNAME=	${GO_PKGNAME_SUB}/obfs4.git
-GO_TARGET=	${GO_PKGNAME}/${PORTNAME}
-
-post-extract:
-	${MKDIR} ${WRKSRC}/${GO_PKGNAME_SUB}
-	${MKDIR} ${GO_WRKDIR_SRC}/${GO_PKGNAME_SUB}
-	${LN} -sf ${WRKSRC}         ${WRKSRC}/${GO_PKGNAME}
-	${LN} -sf ${WRKSRC}         ${GO_WRKDIR_SRC}/${GO_PKGNAME}
-	${LN} -sf ${WRKSRC}/github* ${GO_WRKDIR_SRC}/.
-	${LN} -sf ${WRKSRC}/golang* ${GO_WRKDIR_SRC}/.
-
-post-install:
-	${INSTALL_MAN} ${WRKSRC}/doc/${GO_TARGET}.1 ${STAGEDIR}${PREFIX}/man/man1
+do-install:
+	${INSTALL_PROGRAM} ${WRKSRC}/obfs4proxy/obfs4proxy ${STAGEDIR}${PREFIX}/bin
+	${INSTALL_MAN} ${WRKSRC}/doc/obfs4proxy.1 ${STAGEDIR}${PREFIX}/man/man1
 
 .include <bsd.port.mk>
