@@ -13,9 +13,9 @@ LICENSE=	GPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 RUN_DEPENDS=	tor>=0.3.1.9:security/tor	\
-		desktop-file-utils>=0.23:devel/desktop-file-utils		\
+		desktop-file-utils>=0.23:devel/desktop-file-utils	\
+		${PYQT_PY_RELNAME}-gui>=${PYQT5_VERSION}:x11-toolkits/py-qt5-gui@${FLAVOR} \
 		${PYTHON_PKGNAMEPREFIX}Flask>=1.12.2:www/py-flask@${FLAVOR}	\
-		${PYQT_PY_RELNAME}-gui>=${PYQT5_VERSION}:x11-toolkits/py-qt5-gui@${FLAVOR}	\
 		${PYTHON_PKGNAMEPREFIX}sip>=4.19.6:devel/py-sip@${FLAVOR}	\
 		${PYTHON_PKGNAMEPREFIX}stem>=1.6.0:security/py-stem@${FLAVOR}
 
