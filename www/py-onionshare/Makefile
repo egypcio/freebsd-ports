@@ -22,7 +22,7 @@ RUN_DEPENDS=	tor>=0.3.1.9:security/tor	\
 USES=		python:3.4+ pyqt:5
 
 USE_GITHUB=	yes
-USE_PYTHON=	autoplist distutils
+USE_PYTHON=	distutils
 
 GH_ACCOUNT=	micahflee
 
