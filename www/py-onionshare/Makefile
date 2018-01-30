@@ -26,6 +26,4 @@ USE_PYQT=	gui_run
 
 GH_ACCOUNT=	micahflee
 
-SUB_FILES=	pkg-message
-
 .include <bsd.port.mk>
