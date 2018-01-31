@@ -1,8 +1,16 @@
 # $FreeBSD$
 
 PORTNAME=		tor-browser
-PORTVERSION=		7.0.6
+PORTVERSION=		7.0.11
 CATEGORIES=		www security ipv6
+MASTER_SITES=		http://bits.torbsd.org/pub/OpenBSD/distfiles/
+
+TB_BUTTON=	1.9.7.10
+TB_LAUNCHER=	0.2.12.3
+
+DISTFILES=		${PORTNAME}-${PORTVERSION}.tar.gz \
+			torbutton-${TB_BUTTON}.tar.gz \
+			tor-launcher-${TB_LAUNCHER}.tar.gz
 
 MAINTAINER=		egypcio@googlemail.com
 COMMENT=		Unofficial/experimental version of www/tor-browser
@@ -32,12 +40,6 @@ MAKEFILE=	${WRKSRC}/client.mk
 MOZCONFIG=	${FILESDIR}/mozconfig.in
 
 USES=		cpe libtool gmake pkgconfig python:2.7
-
-USE_GITHUB=	yes
-
-GH_ACCOUNT=	torbsd
-GH_PROJECT=	torb
-GH_TAGNAME=	852e4a1
 
 pre-configure:
 	(cp ${MOZCONFIG} ${WRKSRC}/.mozconfig)
