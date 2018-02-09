@@ -7,7 +7,7 @@ CATEGORIES=		www python security
 PKGNAMEPREFIX=		${PYTHON_PKGNAMEPREFIX}
 
 MAINTAINER=	egypcio@googlemail.com
-COMMENT=	Secure and anonymous file-sharing via Tor
+COMMENT=	Unofficial/experimental version of www/py-onionshare
 
 LICENSE=	GPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE
