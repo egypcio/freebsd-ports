@@ -1,5 +1,5 @@
 bin/dnscrypt-proxy
-%%ETCDIR%%/dnscrypt-proxy.toml
+etc/dnscrypt-proxy.toml
 %%PORTDOCS%%%%DOCSDIR%%/README.md
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/example-blacklist.txt
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/example-cloaking-rules.txt
