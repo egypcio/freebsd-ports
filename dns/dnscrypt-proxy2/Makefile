@@ -13,7 +13,8 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	go:lang/go
 
-PORTDOCS=	README*
+PORTDOCS=	${WRKSRC}/README.*
+PORTEXAMPLES=	${WRKSRC}/${PORTNAME}/example*
 
 CONFLICTS=	dnscrypt-proxy-[0-1]*
 
@@ -24,18 +25,25 @@ SUB_FILES=	pkg-message
 
 PLIST_FILES=	bin/${PORTNAME}
 
+USES=		uidfix
+
 USE_GITHUB=	yes
 
 GH_ACCOUNT=	jedisct1
 
 do-build:
-	@${RLN} ${WRKSRC}/${PORTNAME} ${WRKSRC}/vendor/github.com/${GH_ACCOUNT}/${PORTNAME}
-	@${RLN} ${WRKSRC}/vendor ${WRKSRC}/src
-	@cd ${WRKSRC}/${PORTNAME} && \
+	${RLN} ${WRKSRC}/vendor ${WRKSRC}/src
+	cd ${WRKSRC}/${PORTNAME} && \
 		${SETENV} GOPATH=${WRKSRC} \
-		go build -ldflags "-s -w -X main.Version=${DISTVERSION}" -o ${WRKDIR}/bin/${PORTNAME}
+		go build -ldflags "-s -w" -o ${WRKDIR}/bin/${PORTNAME}
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKDIR}/bin/${PORTNAME} ${STAGEDIR}/${LOCALBASE}/bin
+	${MKDIR} ${STAGEDIR}/${DOCSDIR}
+	${MKDIR} ${STAGEDIR}/${EXAMPLESDIR}
+	${INSTALL_PROGRAM} ${WRKDIR}/bin/${PORTNAME} ${STAGEDIR}/${LOCALBASE}/bin/.
+	${INSTALL_DATA} ${PORTDOCS}     ${STAGEDIR}/${DOCSDIR}/.
+	${INSTALL_DATA} ${PORTEXAMPLES} ${STAGEDIR}/${EXAMPLESDIR}/.
+	${INSTALL_DATA} ${WRKSRC}/${PORTNAME}/example-${PORTNAME}.toml \
+		${STAGEDIR}/${LOCALBASE}/etc/${PORTNAME}.toml
 
 .include <bsd.port.mk>

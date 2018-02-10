@@ -19,7 +19,7 @@ BROKEN_powerpc64=	fails to compile: fpst.c: error: redefinition of typedef 'FPST
 
 LIB_DEPENDS=	libsodium.so:security/libsodium
 
-CONFLICTS=	dnscrypt-proxy-[2-9]*
+CONFLICTS=	dnscrypt-proxy-[2-9]* dnscrypt-proxy2-*
 
 USERS=		_dnscrypt-proxy
 GROUPS=		_dnscrypt-proxy
