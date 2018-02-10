@@ -13,6 +13,8 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	go:lang/go
 
+RUN_DEPENDS=	ca_root_nss>=3.35:security/ca_root_nss
+
 PORTDOCS=	${WRKSRC}/README.*
 PORTEXAMPLES=	${WRKSRC}/${PORTNAME}/example*
 
@@ -22,6 +24,8 @@ USERS=		_dnscrypt-proxy
 GROUPS=		_dnscrypt-proxy
 
 SUB_FILES=	pkg-message
+
+USE_RC_SUBR=	${PORTNAME}
 
 USES=		uidfix
 
@@ -33,12 +37,16 @@ do-build:
 	${RLN} ${WRKSRC}/vendor ${WRKSRC}/src
 	cd ${WRKSRC}/${PORTNAME} && \
 		${SETENV} GOPATH=${WRKSRC} \
-		go build -ldflags "-s -w" -o ${WRKDIR}/bin/${PORTNAME}
+		go build -ldflags "-s -w" -o ${WRKDIR}/sbin/${PORTNAME}
+
+pre-install:
+	@${REINPLACE_CMD} -e 's|^require_dnssec|require_dnssec\ \=\ true|' \
+		${WRKSRC}/${PORTNAME}/example-${PORTNAME}.toml
 
 do-install:
 	${MKDIR} ${STAGEDIR}/${DOCSDIR}
 	${MKDIR} ${STAGEDIR}/${EXAMPLESDIR}
-	${INSTALL_PROGRAM} ${WRKDIR}/bin/${PORTNAME} ${STAGEDIR}/${LOCALBASE}/bin/.
+	${INSTALL_PROGRAM} ${WRKDIR}/sbin/${PORTNAME} ${STAGEDIR}/${LOCALBASE}/sbin/.
 	${INSTALL_DATA} ${PORTDOCS}     ${STAGEDIR}/${DOCSDIR}/.
 	${INSTALL_DATA} ${PORTEXAMPLES} ${STAGEDIR}/${EXAMPLESDIR}/.
 	${INSTALL_DATA} ${WRKSRC}/${PORTNAME}/example-${PORTNAME}.toml \
