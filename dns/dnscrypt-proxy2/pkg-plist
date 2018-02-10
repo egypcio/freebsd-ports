@@ -1,5 +1,3 @@
-etc/dnscrypt-proxy.toml
-sbin/dnscrypt-proxy
 @dir(%%USER%%,%%GROUP%%,700) /var/log/dnscrypt-proxy
 @dir(%%USER%%,%%GROUP%%,700) /var/run/dnscrypt-proxy
 @sample %%PORTEXAMPLES%%%%EXAMPLESDIR%%/example-blacklist.txt
@@ -7,3 +5,5 @@ sbin/dnscrypt-proxy
 @sample %%PORTEXAMPLES%%%%EXAMPLESDIR%%/example-dnscrypt-proxy.toml
 @sample %%PORTEXAMPLES%%%%EXAMPLESDIR%%/example-forwarding-rules.txt
 %%PORTDOCS%%%%DOCSDIR%%/README.md
+etc/dnscrypt-proxy.toml
+sbin/dnscrypt-proxy

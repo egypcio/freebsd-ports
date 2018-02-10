@@ -23,10 +23,9 @@ load_rc_config $name
 
 dnscrypt_proxy_user="_dnscrypt-proxy"
 dnscrypt_proxy_command="%%PREFIX%%/sbin/dnscrypt-proxy -config ${dnscrypt_proxy_config}"
-dnscrypt_proxy_log="/var/log/dnscrypt-proxy/dnscrypt-proxy.log"
 
 pidfile="/var/run/dnscrypt-proxy/dnscrypt-proxy.pid"
 command="/usr/sbin/daemon"
-command_args="-P ${pidfile} -r -u ${dnscrypt_proxy_user} -f ${dnscrypt_proxy_command}"
+command_args="-P ${pidfile} -r -f ${dnscrypt_proxy_command} -logfile /var/log/dnscrypt-proxy/dnscrypt-proxy.log"
 
 run_rc_command "$1"

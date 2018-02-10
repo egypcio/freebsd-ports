@@ -12,7 +12,6 @@ LICENSE=	ISCL
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	go:lang/go
-
 RUN_DEPENDS=	ca_root_nss>=3.35:security/ca_root_nss
 
 PORTDOCS=	${WRKSRC}/README.*
@@ -25,9 +24,11 @@ GROUPS=		_dnscrypt-proxy
 
 SUB_FILES=	pkg-message
 
-USE_RC_SUBR=	${PORTNAME}
+PLIST_SUB=	USER="${USERS}" GROUP="${GROUPS}"
 
-USES=		uidfix
+USES=		uidfix fakeroot
+
+USE_RC_SUBR=	${PORTNAME}
 
 USE_GITHUB=	yes
 
@@ -40,16 +41,16 @@ do-build:
 		go build -ldflags "-s -w" -o ${WRKDIR}/sbin/${PORTNAME}
 
 do-install:
-	${MKDIR} ${STAGEDIR}/${DOCSDIR} ${STAGEDIR}/${EXAMPLESDIR}
-	${MKDIR} ${STAGEDIR}/var/log/${PORTNAME} ${STAGEDIR}/var/run/${PORTNAME}
-	${INSTALL_PROGRAM} ${WRKDIR}/sbin/${PORTNAME} ${STAGEDIR}/${LOCALBASE}/sbin/.
-	${INSTALL_DATA} ${PORTDOCS}     ${STAGEDIR}/${DOCSDIR}/.
-	${INSTALL_DATA} ${PORTEXAMPLES} ${STAGEDIR}/${EXAMPLESDIR}/.
+	${MKDIR} ${STAGEDIR}${DOCSDIR} ${STAGEDIR}${EXAMPLESDIR}
+	${INSTALL_PROGRAM} ${WRKDIR}/sbin/${PORTNAME} ${STAGEDIR}${LOCALBASE}/sbin/.
+	${INSTALL_DATA} ${PORTDOCS} ${STAGEDIR}${DOCSDIR}/.
+	${INSTALL_DATA} ${PORTEXAMPLES} ${STAGEDIR}${EXAMPLESDIR}/.
 	${INSTALL_DATA} ${WRKSRC}/${PORTNAME}/example-${PORTNAME}.toml \
-		${STAGEDIR}/${LOCALBASE}/etc/${PORTNAME}.toml
+		${STAGEDIR}${LOCALBASE}/etc/${PORTNAME}.toml
 
 post-install:
-	@${REINPLACE_CMD} -e 's|require_dnssec\ \=\ false|require_dnssec\ \=\ true|g' \
-		${STAGEDIR}/${LOCALBASE}/etc/${PORTNAME}.toml
+	${MKDIR} ${STAGEDIR}/var/log/${PORTNAME} ${STAGEDIR}/var/run/${PORTNAME}
+	${REINPLACE_CMD} -e 's|require_dnssec\ \=\ false|require_dnssec\ \=\ true|g' \
+		${STAGEDIR}${LOCALBASE}/etc/${PORTNAME}.toml
 
 .include <bsd.port.mk>
