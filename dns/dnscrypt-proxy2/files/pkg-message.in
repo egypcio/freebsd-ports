@@ -5,5 +5,5 @@ To enable dnscrypt-proxy at boot:
 
   # sysrc dnscrypt_proxy_enable=YES
 
-By default it is set to support resolvers offering DNSSEC validation!
+dnscrypt-proxy is set to use resolvers offering DNSSEC by default!
 

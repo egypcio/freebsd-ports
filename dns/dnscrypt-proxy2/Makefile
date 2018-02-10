@@ -39,10 +39,6 @@ do-build:
 		${SETENV} GOPATH=${WRKSRC} \
 		go build -ldflags "-s -w" -o ${WRKDIR}/sbin/${PORTNAME}
 
-pre-install:
-	@${REINPLACE_CMD} -e 's|^require_dnssec|require_dnssec\ \=\ true|' \
-		${WRKSRC}/${PORTNAME}/example-${PORTNAME}.toml
-
 do-install:
 	${MKDIR} ${STAGEDIR}/${DOCSDIR}
 	${MKDIR} ${STAGEDIR}/${EXAMPLESDIR}
@@ -51,5 +47,10 @@ do-install:
 	${INSTALL_DATA} ${PORTEXAMPLES} ${STAGEDIR}/${EXAMPLESDIR}/.
 	${INSTALL_DATA} ${WRKSRC}/${PORTNAME}/example-${PORTNAME}.toml \
 		${STAGEDIR}/${LOCALBASE}/etc/${PORTNAME}.toml
+
+post-install:
+	@${REINPLACE_CMD} -e 's|require_dnssec\ \=\ false|require_dnssec\ \=\ true|g' \
+		${STAGEDIR}/${LOCALBASE}/etc/${PORTNAME}.toml
+
 
 .include <bsd.port.mk>
