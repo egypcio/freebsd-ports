@@ -8,7 +8,7 @@
 # KEYWORD: shutdown
 #
 # dnscrypt_proxy_enable	(bool):	Enable service on boot.	Default: NO
-# dnscrypt_proxy_conf	(str):	Config file to use.	Default: %%PREFIX%%/etc/dnscrypt-proxy.toml
+# dnscrypt_proxy_config	(str):	Config file to use.	Default: %%PREFIX%%/etc/dnscrypt-proxy.toml
 #
 
 . /etc/rc.subr
@@ -19,7 +19,7 @@ rcvar="${name}_enable"
 load_rc_config ${name}
 
 : ${dnscrypt_proxy_enable:=NO}
-: ${dnscrypt_proxy_enable:=%%PREFIX%%/etc/dnscrypt-proxy.toml}
+: ${dnscrypt_proxy_config:=%%PREFIX%%/etc/dnscrypt-proxy.toml}
 : ${dnscrypt_proxy_uid=_dnscrypt-proxy}
 : ${dnscrypt_proxy_pidfile=/var/run/dnscrypt-proxy.pid}
 
