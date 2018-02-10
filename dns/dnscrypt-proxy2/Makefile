@@ -23,8 +23,6 @@ GROUPS=		_dnscrypt-proxy
 
 SUB_FILES=	pkg-message
 
-PLIST_FILES=	bin/${PORTNAME}
-
 USES=		uidfix
 
 USE_GITHUB=	yes
