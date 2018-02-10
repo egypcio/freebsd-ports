@@ -1,0 +1,7 @@
+bin/dnscrypt-proxy
+%%ETCDIR%%/dnscrypt-proxy.toml
+%%PORTDOCS%%%%DOCSDIR%%/README.md
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/example-blacklist.txt
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/example-cloaking-rules.txt
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/example-dnscrypt-proxy.toml
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/example-forwarding-rules.txt
