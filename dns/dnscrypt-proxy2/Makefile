@@ -40,8 +40,8 @@ do-build:
 		go build -ldflags "-s -w" -o ${WRKDIR}/sbin/${PORTNAME}
 
 do-install:
-	${MKDIR} ${STAGEDIR}/${DOCSDIR}
-	${MKDIR} ${STAGEDIR}/${EXAMPLESDIR}
+	${MKDIR} ${STAGEDIR}/${DOCSDIR} ${STAGEDIR}/${EXAMPLESDIR}
+	${MKDIR} ${STAGEDIR}/var/log/${PORTNAME} ${STAGEDIR}/var/run/${PORTNAME}
 	${INSTALL_PROGRAM} ${WRKDIR}/sbin/${PORTNAME} ${STAGEDIR}/${LOCALBASE}/sbin/.
 	${INSTALL_DATA} ${PORTDOCS}     ${STAGEDIR}/${DOCSDIR}/.
 	${INSTALL_DATA} ${PORTEXAMPLES} ${STAGEDIR}/${EXAMPLESDIR}/.
@@ -51,6 +51,5 @@ do-install:
 post-install:
 	@${REINPLACE_CMD} -e 's|require_dnssec\ \=\ false|require_dnssec\ \=\ true|g' \
 		${STAGEDIR}/${LOCALBASE}/etc/${PORTNAME}.toml
-
 
 .include <bsd.port.mk>
