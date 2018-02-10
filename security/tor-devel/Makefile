@@ -1,9 +1,9 @@
 # $FreeBSD$
 
-PORTNAME=		tor
-DISTVERSION=		0.3.3.1-alpha
-CATEGORIES=		security net ipv6
-MASTER_SITES=		TOR
+PORTNAME=	tor
+DISTVERSION=	0.3.3.1-alpha
+CATEGORIES=	security net ipv6
+MASTER_SITES=	TOR
 PKGNAMESUFFIX=	-devel
 
 MAINTAINER=	egypcio@googlemail.com
@@ -130,11 +130,13 @@ post-patch:
 		${WRKSRC}/doc/tor.html.in
 
 post-install:
-	@${MKDIR} ${STAGEDIR}/var/log/tor ${STAGEDIR}/var/run/tor ${STAGEDIR}/var/db/tor
 	@${MKDIR} ${STAGEDIR}${EXAMPLESDIR}
+	@${MKDIR} ${STAGEDIR}/var/db/tor
+	@${MKDIR} ${STAGEDIR}/var/log/tor
+	@${MKDIR} ${STAGEDIR}/var/run/tor
 	${INSTALL_DATA} ${WRKSRC}/contrib/operator-tools/tor-exit-notice.html ${STAGEDIR}${EXAMPLESDIR}
-	${INSTALL_DATA} ${WRKSRC}/contrib/operator-tools/tor.logrotate ${STAGEDIR}${EXAMPLESDIR}
+	${INSTALL_DATA} ${WRKSRC}/contrib/operator-tools/tor.logrotate        ${STAGEDIR}${EXAMPLESDIR}
 	${INSTALL_DATA} ${WRKSRC}/src/config/torrc.minimal ${STAGEDIR}${EXAMPLESDIR}
-	${INSTALL_DATA} ${WRKSRC}/src/config/torrc.sample ${STAGEDIR}${EXAMPLESDIR}
+	${INSTALL_DATA} ${WRKSRC}/src/config/torrc.sample  ${STAGEDIR}${EXAMPLESDIR}
 
 .include <bsd.port.mk>
