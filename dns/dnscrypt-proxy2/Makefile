@@ -22,11 +22,9 @@ CONFLICTS=	dnscrypt-proxy-[0-1]*
 USERS=		_dnscrypt-proxy
 GROUPS=		_dnscrypt-proxy
 
-SUB_FILES=	pkg-message
-
 PLIST_SUB=	USER="${USERS}" GROUP="${GROUPS}"
 
-USES=		uidfix fakeroot
+SUB_FILES=	pkg-message
 
 USE_RC_SUBR=	${PORTNAME}
 
@@ -40,16 +38,14 @@ do-build:
 		${SETENV} GOPATH=${WRKSRC} \
 		go build -ldflags "-s -w" -o ${WRKDIR}/sbin/${PORTNAME}
 
-do-install:
+post-install:
 	${MKDIR} ${STAGEDIR}${DOCSDIR} ${STAGEDIR}${EXAMPLESDIR}
+	${MKDIR} ${STAGEDIR}/var/log/${PORTNAME} ${STAGEDIR}/var/run/${PORTNAME}
 	${INSTALL_PROGRAM} ${WRKDIR}/sbin/${PORTNAME} ${STAGEDIR}${LOCALBASE}/sbin/.
 	${INSTALL_DATA} ${PORTDOCS} ${STAGEDIR}${DOCSDIR}/.
 	${INSTALL_DATA} ${PORTEXAMPLES} ${STAGEDIR}${EXAMPLESDIR}/.
 	${INSTALL_DATA} ${WRKSRC}/${PORTNAME}/example-${PORTNAME}.toml \
 		${STAGEDIR}${LOCALBASE}/etc/${PORTNAME}.toml
-
-post-install:
-	${MKDIR} ${STAGEDIR}/var/log/${PORTNAME} ${STAGEDIR}/var/run/${PORTNAME}
 	${REINPLACE_CMD} -e 's|require_dnssec\ \=\ false|require_dnssec\ \=\ true|g' \
 		${STAGEDIR}${LOCALBASE}/etc/${PORTNAME}.toml
 

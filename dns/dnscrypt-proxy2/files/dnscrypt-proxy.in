@@ -3,12 +3,14 @@
 # $FreeBSD$
 #
 # PROVIDE: dnscrypt_proxy
-# REQUIRE: SERVERS cleanvar ldconfig
-# BEFORE: dnsmasq local_unbound unbound named
-# KEYWORD: shutdown
+# REQUIRE: NETWORKING cleanvar
+# BEFORE:  dnsmasq local_unbound unbound named
+#
+# These are some lines to configure dnscrypt-proxy on /etc/rc.conf:
 #
 # dnscrypt_proxy_enable	(bool):	Enable service on boot.	Default: NO
-# dnscrypt_proxy_config	(str):	Config file to be used.	Default: %%PREFIX%%/etc/dnscrypt-proxy.toml
+# dnscrypt_proxy_conf	(str):	Config file to use.	Default: %%PREFIX%%/etc/dnscrypt-proxy.toml
+# dnscrypt_proxy_log	(str):	Log notice/warns here.	Default: /var/log/dnscrypt-proxy/dnscrypt-proxy.log
 #
 
 . /etc/rc.subr
@@ -19,13 +21,15 @@ rcvar="dnscrypt_proxy_enable"
 load_rc_config $name
 
 : ${dnscrypt_proxy_enable:=NO}
-: ${dnscrypt_proxy_config:=%%PREFIX%%/etc/dnscrypt-proxy.toml}
+: ${dnscrypt_proxy_conf:=%%PREFIX%%/etc/dnscrypt-proxy.toml}
+: ${dnscrypt_proxy_log:=/var/log/dnscrypt-proxy/dnscrypt-proxy.log}
 
-dnscrypt_proxy_user="_dnscrypt-proxy"
-dnscrypt_proxy_command="%%PREFIX%%/sbin/dnscrypt-proxy -config ${dnscrypt_proxy_config}"
+dnscrypt_proxy_command="%%PREFIX%%/sbin/dnscrypt-proxy"
+dnscrypt_proxy_flags="-config ${dnscrypt_proxy_conf} -logfile ${dnscrypt_proxy_log}"
 
 pidfile="/var/run/dnscrypt-proxy/dnscrypt-proxy.pid"
+
 command="/usr/sbin/daemon"
-command_args="-P ${pidfile} -r -f ${dnscrypt_proxy_command} -logfile /var/log/dnscrypt-proxy/dnscrypt-proxy.log"
+command_args="-P ${pidfile} -r -u %%USER%% -f ${dnscrypt_proxy_command}"
 
 run_rc_command "$1"
