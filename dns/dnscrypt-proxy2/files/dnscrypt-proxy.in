@@ -3,7 +3,7 @@
 # $FreeBSD$
 #
 # PROVIDE: dnscrypt_proxy
-# REQUIRE: NETWORKING cleanvar
+# REQUIRE: cleanvar SERVERS
 # BEFORE:  dnsmasq local_unbound unbound named
 #
 # These are some lines to configure dnscrypt-proxy on /etc/rc.conf:
