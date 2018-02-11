@@ -37,9 +37,10 @@ do-build:
 	cd ${WRKSRC}/${PORTNAME} && \
 		${SETENV} GOPATH=${WRKSRC} \
 		go build -ldflags "-s -w" -o ${WRKDIR}/sbin/${PORTNAME}
+do-install:
+	${MKDIR} ${STAGEDIR}${DOCSDIR} ${STAGEDIR}${EXAMPLESDIR}
 
 post-install:
-	${MKDIR} ${STAGEDIR}${DOCSDIR} ${STAGEDIR}${EXAMPLESDIR}
 	${MKDIR} ${STAGEDIR}/var/log/${PORTNAME} ${STAGEDIR}/var/run/${PORTNAME}
 	${INSTALL_PROGRAM} ${WRKDIR}/sbin/${PORTNAME} ${STAGEDIR}${LOCALBASE}/sbin/.
 	${INSTALL_DATA} ${PORTDOCS} ${STAGEDIR}${DOCSDIR}/.
