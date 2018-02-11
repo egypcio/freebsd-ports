@@ -10,27 +10,23 @@
 #
 # dnscrypt_proxy_enable	(bool):	Enable service on boot.	Default: NO
 # dnscrypt_proxy_conf	(str):	Config file to use.	Default: %%PREFIX%%/etc/dnscrypt-proxy.toml
-# dnscrypt_proxy_log	(str):	Log notice/warns here.	Default: /var/log/dnscrypt-proxy/dnscrypt-proxy.log
+# dnscrypt_proxy_log	(str):	Log notice/warns here.	Default: /var/log/dnscrypt-proxy.log
 #
 
 . /etc/rc.subr
 
 name="dnscrypt_proxy"
 rcvar="dnscrypt_proxy_enable"
+pidfile="/var/run/dnscrypt-proxy.pid"
+procname="%%PREFIX%%/sbin/dnscrypt-proxy"
 
 load_rc_config $name
 
 : ${dnscrypt_proxy_enable:=NO}
 : ${dnscrypt_proxy_conf:=%%PREFIX%%/etc/dnscrypt-proxy.toml}
-: ${dnscrypt_proxy_log:=/var/log/dnscrypt-proxy/dnscrypt-proxy.log}
-
-dnscrypt_proxy_command="%%PREFIX%%/sbin/dnscrypt-proxy"
-dnscrypt_proxy_flags="-config ${dnscrypt_proxy_conf} -logfile ${dnscrypt_proxy_log}"
-
-pidfile="/var/run/dnscrypt-proxy/dnscrypt-proxy.pid"
-procname="${dnscrypt_proxy_command}"
+: ${dnscrypt_proxy_log:=/var/log/dnscrypt-proxy.log}
 
 command="/usr/sbin/daemon"
-command_args="-u %%USER%% -P ${pidfile} -r -f ${dnscrypt_proxy_command} ${dnscrypt_proxy_flags}"
+command_args="-P ${pidfile} -r -f ${procname} -config ${dnscrypt_proxy_conf} -logfile ${dnscrypt_proxy_log}"
 
 run_rc_command "$1"
