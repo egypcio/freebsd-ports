@@ -28,7 +28,7 @@ dnscrypt_proxy_command="%%PREFIX%%/sbin/dnscrypt-proxy"
 dnscrypt_proxy_flags="-config ${dnscrypt_proxy_conf} -logfile ${dnscrypt_proxy_log}"
 
 pidfile="/var/run/dnscrypt-proxy/dnscrypt-proxy.pid"
-procname="${dnscrypt_proxy_command"
+procname="${dnscrypt_proxy_command}"
 
 command="/usr/sbin/daemon"
 command_args="-u %%USER%% -P ${pidfile} -r -f ${dnscrypt_proxy_command} ${dnscrypt_proxy_flags}"
