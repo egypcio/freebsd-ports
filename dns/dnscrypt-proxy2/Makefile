@@ -25,6 +25,7 @@ GROUPS=		_dnscrypt-proxy
 PLIST_SUB=	USER="${USERS}" GROUP="${GROUPS}"
 
 SUB_FILES=	pkg-message
+SUB_LIST=	USER="${USERS}" GROUP="${GROUPS}"
 
 USE_RC_SUBR=	${PORTNAME}
 
