@@ -1,5 +1,5 @@
---- wml_misc/Makefile.in.orig
-+++ wml_misc/Makefile.in
+--- wml_misc/Makefile.in.orig	2014-03-29 09:11:38.024718160 +0000
++++ wml_misc/Makefile.in	2014-03-29 09:08:56.459729579 +0000
 @@ -21,10 +21,10 @@
  
  prefix          = @prefix@

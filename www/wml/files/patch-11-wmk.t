@@ -1,5 +1,5 @@
---- wml_test/t/11-wmk.t.orig
-+++ wml_test/t/11-wmk.t
+--- wml_test/t/11-wmk.t	Thu Dec  1 19:22:04 2005
++++ wml_test/t/11-wmk.t	Tue Dec 16 22:13:48 2008
 @@ -37,6 +37,8 @@
  bar
  EOT_IN
