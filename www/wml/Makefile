@@ -14,7 +14,6 @@ COMMENT=	Unofficial/experimental version of www/wml
 LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/COPYING
 
-BUILD_DEPENDS=	lynx:www/lynx
 LIB_DEPENDS=	libpng.so:graphics/png
 RUN_DEPENDS=	p5-Bit-Vector>=5.2:math/p5-Bit-Vector		\
 		p5-File-PathConvert>0:devel/p5-File-PathConvert	\
@@ -23,6 +22,8 @@ RUN_DEPENDS=	p5-Bit-Vector>=5.2:math/p5-Bit-Vector		\
 		p5-Image-Size>=2.6:graphics/p5-Image-Size	\
 		p5-Term-ReadKey>=2.11:devel/p5-Term-ReadKey	\
 		p5-XML-Parser>=0:textproc/p5-XML-Parser
+BUILD_DEPENDS=	lynx:www/lynx	\
+		${RUN_DEPENDS}
 
 GNU_CONFIGURE=	yes
 
