@@ -26,19 +26,17 @@ RUN_DEPENDS=	p5-Bit-Vector>=5.2:math/p5-Bit-Vector		\
 
 GNU_CONFIGURE=	yes
 
-INFO=		logo-apache logo-freebsd logo-gimp logo-htdig logo-linux logo-netbsd \
+INFO=		logo-apache logo-freebsd logo-gimp logo-htdig logo-linux logo-netbsd	\
 		logo-openbsd logo-php logo-php3 logo-vim logo-wml logo-xemacs
 INFO_PATH=	lib/wml/data/logos
-
-TEST_TARGET=	test
 
 USES=		gettext gmake perl5
 
 post-patch:
-	@${PERL5} -pi -e 's!^(\s+have_\S+)=\S+!\1=1!' \
+	${PERL5} -pi -e 's!^(\s+have_\S+)=\S+!\1=1!' \
 		${WRKSRC}/wml_common/Makefile.in
 
 do-configure:
-	@[ -f ${CONFIGURE_COOKIE}] || (cd ${WRKSRC} && ./configure ${CONFIGURE_ARGS})
+	[ -f ${CONFIGURE_COOKIE}] || (cd ${WRKSRC} && ./configure ${CONFIGURE_ARGS})
 
 .include <bsd.port.mk>
