@@ -5,42 +5,34 @@ PORTVERSION=	2.0.12
 PORTREVISION=	7
 PORTEPOCH=	1
 CATEGORIES=	www lang
-# MASTER_SITES=	SF/thewml
-MASTER_SITES=	https://mirror.amdmi3.ru/berlios/download.berlios.de/thewml/ \
-		http://ftp.nchc.org.tw/BSD/FreeBSD/ports/distfiles/
+MASTER_SITES=	http://ftp.nchc.org.tw/BSD/FreeBSD/ports/distfiles/ \
+		https://mirror.amdmi3.ru/berlios/download.berlios.de/thewml/
 
 MAINTAINER=	egypcio@googlemail.com
 COMMENT=	Unofficial/experimental version of www/wml
 
-# BROKEN=		SF project removed (unfetchable)
-# DEPRECATED=		Broken for more than 6 months (PORTREVISION==6)
-# EXPIRATION_DATE=	2017-03-27
-
 LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/COPYING
 
+BUILD_DEPENDS=	lynx:www/lynx
 LIB_DEPENDS=	libpng.so:graphics/png
-RUN_DEPENDS=	\
-		p5-XML-Parser>=0:textproc/p5-XML-Parser \
-		p5-Bit-Vector>=5.2:math/p5-Bit-Vector \
-		p5-File-PathConvert>0:devel/p5-File-PathConvert \
-		p5-Image-Size>=2.6:graphics/p5-Image-Size \
-		p5-Term-ReadKey>=2.11:devel/p5-Term-ReadKey \
-		p5-HTML-Clean>0:www/p5-HTML-Clean \
-		p5-GD>0:graphics/p5-GD
-BUILD_DEPENDS=	lynx:www/lynx \
-		${RUN_DEPENDS}
+RUN_DEPENDS=	p5-Bit-Vector>=5.2:math/p5-Bit-Vector		\
+		p5-File-PathConvert>0:devel/p5-File-PathConvert	\
+		p5-GD>0:graphics/p5-GD				\
+		p5-HTML-Clean>0:www/p5-HTML-Clean		\
+		p5-Image-Size>=2.6:graphics/p5-Image-Size	\
+		p5-Term-ReadKey>=2.11:devel/p5-Term-ReadKey	\
+		p5-XML-Parser>=0:textproc/p5-XML-Parser
+
+GNU_CONFIGURE=	yes
 
 INFO=		logo-apache logo-freebsd logo-gimp logo-htdig logo-linux logo-netbsd \
 		logo-openbsd logo-php logo-php3 logo-vim logo-wml logo-xemacs
 INFO_PATH=	lib/wml/data/logos
-GNU_CONFIGURE=	yes
-USES=		gettext perl5 gmake
-USE_PERL5=	run build patch
-CONFIGURE_ARGS=	--with-perl=${PERL5} --with-catdir=man \
-		--prefix=${PREFIX}
 
-.include <bsd.port.pre.mk>
+TEST_TARGET=	test
+
+USES=		gettext gmake perl5
 
 post-patch:
 	@${PERL5} -pi -e 's!^(\s+have_\S+)=\S+!\1=1!' \
@@ -49,10 +41,4 @@ post-patch:
 do-configure:
 	@[ -f ${CONFIGURE_COOKIE}] || (cd ${WRKSRC} && ./configure ${CONFIGURE_ARGS})
 
-post-build:
-	@${ECHO_MSG} "===>  Use 'make test' to run a quick test suite."
-
-test:
-	@cd ${WRKSRC} && ${MAKE_CMD} test
-
-.include <bsd.port.post.mk>
+.include <bsd.port.mk>
