@@ -1,0 +1,12 @@
+--- onionshare/common.py.orig
++++ onionshare/common.py
+@@ -77,6 +77,9 @@
+         # Assume OnionShare is installed systemwide in Linux, since we're not running in dev mode
+         prefix = os.path.join(sys.prefix, 'share/onionshare')
+ 
++    elif p == 'FreeBSD':
++        prefix = '/usr/local/share/onionshare'
++
+     elif getattr(sys, 'frozen', False):
+         # Check if app is "frozen"
+         # https://pythonhosted.org/PyInstaller/#run-time-information

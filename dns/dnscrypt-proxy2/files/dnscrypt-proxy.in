@@ -1,0 +1,32 @@
+#!/bin/sh
+#
+# $FreeBSD$
+#
+# PROVIDE: dnscrypt_proxy
+# REQUIRE: cleanvar SERVERS
+# BEFORE:  dnsmasq local_unbound unbound named
+#
+# These are some lines to configure dnscrypt-proxy on /etc/rc.conf:
+#
+# dnscrypt_proxy_enable	(bool):	Enable service on boot.	Default: NO
+# dnscrypt_proxy_conf	(str):	Config file to use.	Default: %%PREFIX%%/etc/dnscrypt-proxy.toml
+# dnscrypt_proxy_log	(str):	Log notice/warns here.	Default: /var/log/dnscrypt-proxy.log
+#
+
+. /etc/rc.subr
+
+name="dnscrypt_proxy"
+rcvar="dnscrypt_proxy_enable"
+pidfile="/var/run/dnscrypt-proxy.pid"
+procname="%%PREFIX%%/sbin/dnscrypt-proxy"
+
+load_rc_config $name
+
+: ${dnscrypt_proxy_enable:=NO}
+: ${dnscrypt_proxy_conf:=%%PREFIX%%/etc/dnscrypt-proxy.toml}
+: ${dnscrypt_proxy_log:=/var/log/dnscrypt-proxy.log}
+
+command="/usr/sbin/daemon"
+command_args="-P ${pidfile} -r -f ${procname} -config ${dnscrypt_proxy_conf} -logfile ${dnscrypt_proxy_log}"
+
+run_rc_command "$1"

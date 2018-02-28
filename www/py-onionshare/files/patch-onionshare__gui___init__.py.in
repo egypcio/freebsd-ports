@@ -1,0 +1,11 @@
+--- onionshare_gui/__init__.py.orig
++++ onionshare_gui/__init__.py
+@@ -36,7 +36,7 @@
+     """
+     def __init__(self):
+         system = platform.system()
+-        if system == 'Linux':
++        if system == 'Linux' or system == 'FreeBSD':
+             self.setAttribute(QtCore.Qt.AA_X11InitThreads, True)
+         QtWidgets.QApplication.__init__(self, sys.argv)
+         self.installEventFilter(self)

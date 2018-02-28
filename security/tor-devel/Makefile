@@ -1,9 +1,9 @@
 # $FreeBSD$
 
-PORTNAME=		tor
-DISTVERSION=		0.3.3.1-alpha
-CATEGORIES=		security net ipv6
-MASTER_SITES=		TOR
+PORTNAME=	tor
+DISTVERSION=	0.3.3.2-alpha
+CATEGORIES=	security net ipv6
+MASTER_SITES=	TOR
 PKGNAMESUFFIX=	-devel
 
 MAINTAINER=	egypcio@googlemail.com
@@ -129,12 +129,20 @@ post-patch:
 		${WRKSRC}/doc/tor.1.* \
 		${WRKSRC}/doc/tor.html.in
 
+post-patch-STATIC-off:
+	@${REINPLACE_CMD} -e "s@-ltcmalloc@${LOCALBASE}/lib/libtcmalloc.so@" \
+		${WRKSRC}/configure
+
+post-patch-STATIC-on:
+	@${REINPLACE_CMD} -e "s@-ltcmalloc@${LOCALBASE}/lib/libtcmalloc.a@" \
+		${WRKSRC}/configure
+
 post-install:
-	@${MKDIR} ${STAGEDIR}/var/log/tor ${STAGEDIR}/var/run/tor ${STAGEDIR}/var/db/tor
 	@${MKDIR} ${STAGEDIR}${EXAMPLESDIR}
+	@${MKDIR} ${STAGEDIR}/var/db/tor ${STAGEDIR}/var/log/tor ${STAGEDIR}/var/run/tor
 	${INSTALL_DATA} ${WRKSRC}/contrib/operator-tools/tor-exit-notice.html ${STAGEDIR}${EXAMPLESDIR}
-	${INSTALL_DATA} ${WRKSRC}/contrib/operator-tools/tor.logrotate ${STAGEDIR}${EXAMPLESDIR}
+	${INSTALL_DATA} ${WRKSRC}/contrib/operator-tools/tor.logrotate        ${STAGEDIR}${EXAMPLESDIR}
 	${INSTALL_DATA} ${WRKSRC}/src/config/torrc.minimal ${STAGEDIR}${EXAMPLESDIR}
-	${INSTALL_DATA} ${WRKSRC}/src/config/torrc.sample ${STAGEDIR}${EXAMPLESDIR}
+	${INSTALL_DATA} ${WRKSRC}/src/config/torrc.sample  ${STAGEDIR}${EXAMPLESDIR}
 
 .include <bsd.port.mk>
