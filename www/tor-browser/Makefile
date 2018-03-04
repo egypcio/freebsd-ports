@@ -41,7 +41,7 @@ PLIST_DIRS=	bin lib share/pixmaps share/applications
 MAKEFILE=	${WRKSRC}/client.mk
 
 # MOZCONFIG=	${FILESDIR}/mozconfig.in
-MOZCONFIG=	${FILESDIR}/mozconfig._torproject.in
+MOZCONFIG=	${FILESDIR}/mozconfig_torproject.in
 
 USES=		cpe libtool gmake pkgconfig python:2.7
 
