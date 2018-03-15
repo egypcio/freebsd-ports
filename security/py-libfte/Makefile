@@ -16,8 +16,10 @@ BUILD_DEPENDS=	regex2dfa:textproc/regex2dfa \
 
 LIB_DEPENDS=	libgmp.so:math/gmp
 
-USES=		python
+USES=		localbase python
 USE_GITHUB=	yes
+USE_PYTHON=	distutils
+
 GH_ACCOUNT=	kpdyer
 
 .include <bsd.port.mk>
