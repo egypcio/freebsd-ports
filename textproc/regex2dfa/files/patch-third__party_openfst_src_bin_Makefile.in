@@ -1,0 +1,11 @@
+--- third_party/openfst/src/bin/Makefile.in.orig	2018-03-15 12:50:11 UTC
++++ third_party/openfst/src/bin/Makefile.in
+@@ -434,7 +434,7 @@ top_build_prefix = @top_build_prefix@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+ AM_CPPFLAGS = -I$(srcdir)/../include -I$(srcdir)/../script $(ICU_FLAGS)
+-LDADD = ../script/libfstscript.la ../lib/libfst.la -lm -ldl
++LDADD = ../script/libfstscript.la ../lib/libfst.la -lm
+ @HAVE_BIN_TRUE@fstarcsort_SOURCES = fstarcsort.cc
+ @HAVE_BIN_TRUE@fstclosure_SOURCES = fstclosure.cc
+ @HAVE_BIN_TRUE@fstcompile_SOURCES = fstcompile.cc

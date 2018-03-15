@@ -1,0 +1,11 @@
+--- third_party/openfst/src/test/Makefile.in.orig	2018-03-15 12:49:59 UTC
++++ third_party/openfst/src/test/Makefile.in
+@@ -213,7 +213,7 @@ top_build_prefix = @top_build_prefix@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+ AM_CPPFLAGS = -I$(srcdir)/../include $(ICU_CPPFLAGS)
+-LDADD = ../lib/libfst.la -lm -ldl
++LDADD = ../lib/libfst.la -lm
+ fst_test_SOURCES = fst_test.cc fst_test.h
+ weight_test_SOURCES = weight_test.cc weight-tester.h
+ algo_test_SOURCES = algo_test.cc algo_test.h

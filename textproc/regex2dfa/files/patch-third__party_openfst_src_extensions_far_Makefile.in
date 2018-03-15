@@ -1,0 +1,11 @@
+--- third_party/openfst/src/extensions/far/Makefile.in.orig	2018-03-15 12:47:39 UTC
++++ third_party/openfst/src/extensions/far/Makefile.in
+@@ -296,7 +296,7 @@ libfstfar_la_LDFLAGS = -version-info 1:0:0
+ @HAVE_SCRIPT_TRUE@libfstfarscript_la_SOURCES = farscript.cc strings.cc main.cc
+ @HAVE_SCRIPT_TRUE@libfstfarscript_la_LDFLAGS = -version-info 1:0:0
+ @HAVE_BIN_TRUE@LDADD = libfstfarscript.la libfstfar.la ../../script/libfstscript.la \
+-@HAVE_BIN_TRUE@        ../../lib/libfst.la -lm -ldl
++@HAVE_BIN_TRUE@        ../../lib/libfst.la -lm
+ 
+ @HAVE_BIN_TRUE@farcompilestrings_SOURCES = farcompilestrings.cc
+ @HAVE_BIN_TRUE@farcreate_SOURCES = farcreate.cc

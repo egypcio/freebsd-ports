@@ -1,0 +1,7 @@
+Format-Transforming Encryption (FTE) is a cryptographic primitive explored in 
+the paper Protocol Misidentiﬁcation Made Easy with Format-Transfor Encryption.
+
+FTE allows a user to specify the format of their ouput ciphertexts using regular
+expressions. The libfte library implements the primitive presented in.
+
+WWW: https://github.com/kpdyer/libfte
