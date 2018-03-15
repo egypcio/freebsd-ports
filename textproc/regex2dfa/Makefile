@@ -12,9 +12,14 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 GNU_CONFIGURE=	yes
 
+PLIST_FILES=	bin/${PORTNAME}
+
 USES=		gmake libtool
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	kpdyer
+
+do-install:
+	${INSTALL_PROGRAM} ${WRKSRC}/bin/${PORTNAME} ${STAGEDIR}${LOCALBASE}/bin/.
 
 .include <bsd.port.mk>
