@@ -35,11 +35,19 @@ LIB_DEPENDS=	libgconf-2.so:devel/gconf2 \
 
 PREFIX=		${LOCALBASE}/${PORTNAME}
 
+BUNDLE_LIBS=	yes
+PLIST_DIRS=	bin lib share/pixmaps share/applications
+
 MAKEFILE=	${WRKSRC}/client.mk
 
-MOZCONFIG=	${FILESDIR}/mozconfig.in
+# MOZCONFIG=	${FILESDIR}/mozconfig.in
+MOZCONFIG=	${FILESDIR}/mozconfig_torproject.in
 
 USES=		cpe libtool gmake pkgconfig python:2.7
+
+.if ${OPSYS} == FreeBSD && ${OSREL} == 11.1
+LLD_UNSAFE=     yes
+.endif
 
 pre-configure:
 	(cp ${MOZCONFIG} ${WRKSRC}/.mozconfig)

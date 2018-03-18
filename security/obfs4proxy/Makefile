@@ -12,7 +12,7 @@ PKGNAMESUFFIX=	-tor
 >>>>>>> master
 
 MAINTAINER=	egypcio@googlemail.com
-COMMENT=	Pluggable transport proxy for Tor (obfs4, The Obfuscator)
+COMMENT=	Unofficial/experimental version of security/obfs4proxy
 
 LICENSE=	BSD3CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE

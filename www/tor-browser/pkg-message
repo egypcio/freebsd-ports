@@ -10,6 +10,8 @@
   This is a very experimental version of Tor Browser for FreeBSD. 
 Please, *DO NOT* rely on this port for privacy! Use it at your own risk.
 
-	Work based on https://github.com/torbsd/torb
+    ----------------------------------------------------------
+
+   https://torbsd.org & https://github.com/torbsd/freebsd-ports
 
 ======================================================================
