@@ -6,13 +6,13 @@ CATEGORIES=	security python
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 
 MAINTAINER=	egypcio@googlemail.com
-COMMENT=	Unofficial/experimental version of security/py-libfte
+COMMENT=	Unofficial/experimental version of security/py-fteproxy
 
 LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	${PYTHON_PKGNAMEPREFIX}pycrypto>=2.6.1:security/py-pycrypto@${FLAVOR}
-		# pyhton, libfte, obfs4, twisted
+		# python, libfte, obfs4, twisted
 
 USES=		localbase python
 USE_GITHUB=	yes
