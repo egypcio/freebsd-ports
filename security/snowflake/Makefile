@@ -10,8 +10,8 @@ COMMENT=	Unofficial/experimental version of security/snowflake
 # LICENSE=	#
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-BUILD_DEPENDS=	cake:lang/coffeescript	\
-		go:lang/go
+BUILD_DEPENDS=	go:lang/go
+#		+cake:lang/coffeescript
 
 USE_GITHUB=	nodefault
 GH_ACCOUNT=	keroserene:snowflake,webrtc

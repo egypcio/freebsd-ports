@@ -15,4 +15,8 @@ BUILD_DEPENDS=	npm:www/npm
 USE_GITHUB=	yes
 GH_ACCOUNT=	jashkenas
 
+do-build:
+	cd ${WRKSRC} && \
+	${LOCALBASE}/bin/npm install --global ${PORTNAME}
+
 .include <bsd.port.mk>
