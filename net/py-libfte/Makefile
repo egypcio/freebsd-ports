@@ -2,7 +2,7 @@
 
 PORTNAME=	libfte
 DISTVERSION=	0.1.0
-CATEGORIES=	security python
+CATEGORIES=	net security python
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 
 MAINTAINER=	egypcio@googlemail.com
