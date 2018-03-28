@@ -10,8 +10,6 @@ COMMENT=	Unofficial/experimental version of security/snowflake
 LICENSE=	MIT
 # LICENSE_FILE=	${WRKSRC}/LICENSE
 
-CGO_CFLAGS+=	-I${GO_WRKSRC:H}/go-webrtc/include
-
 BUILD_DEPENDS=	goptlib>=0.5:security/goptlib
 
 USES=		go
@@ -33,5 +31,7 @@ post-extract:
 		${LN} -sf ${WRKDIR}/snowflake-07291a0 keroserene/snowflake && \
 		${LN} -sf ${WRKDIR}/go-webrtc-52280a1 keroserene/go-webrtc && \
 		${LN} -sf ${WRKDIR}/uniuri-8902c56    dchest/uniuri
+	cd ${GO_WRKSRC:H}/go-webrtc/ && \
+		${LN} -sf include/webrtc webrtc
 
 .include <bsd.port.mk>
