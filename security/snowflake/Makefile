@@ -1,14 +1,17 @@
 # $FreeBSD$
 
 PORTNAME=	snowflake
-DISTVERSION=	g20180322
+PORTVERSION=	g20180322
 CATEGORIES=	security net ipv6
+MASTER_SITES=	https://webrtc.googlesource.com/src/+archive/	\
+		GITHUB
+DISTFILES=	c279861207c5b15fc51069e96595782350e0ac12${EXTRACT_SUFX}
 
 MAINTAINER=	egypcio@googlemail.com
 COMMENT=	Unofficial/experimental version of security/snowflake
 
 LICENSE=	MIT
-# LICENSE_FILE=	${WRKSRC}/LICENSE
+LICENSE_FILE=	${GO_WRKSRC:H}/${PORTNAME}/LICENSE
 
 BUILD_DEPENDS=	goptlib>=0.5:security/goptlib
 
