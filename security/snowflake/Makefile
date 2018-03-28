@@ -3,7 +3,7 @@
 PORTNAME=	snowflake
 PORTVERSION=	g20180322
 CATEGORIES=	security net ipv6
-MASTER_SITES=	https://webrtc.googlesource.com/src/+archive/	\
+MASTER_SITES=	https://bits.torbsd.org/~egypcio/	\
 		GITHUB
 DISTNAME=	c279861207c5b15fc51069e96595782350e0ac12
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX}
