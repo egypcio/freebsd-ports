@@ -35,7 +35,7 @@ CONFIGURE_ENV=	TOR_CPPFLAGS_libevent='-I${LOCALBASE}/include' \
 
 MAKE_ENV=	USE_OPENSSL_RPATH=yes
 
-OPTIONS_DEFINE=		DOCS GNUMAKE LZMA STATIC TOR2WEB ZSTD
+OPTIONS_DEFINE=		DOCS EXAMPLES GNUMAKE LZMA STATIC TOR2WEB ZSTD
 OPTIONS_RADIO=		MALLOC
 OPTIONS_RADIO_MALLOC=	DMALLOC TCMALLOC
 OPTIONS_SINGLE=		SSLTLS
@@ -135,6 +135,11 @@ post-patch-STATIC-on:
 		${WRKSRC}/configure
 
 post-install:
-	@${MKDIR} ${STAGEDIR}/var/log/tor ${STAGEDIR}/var/run/tor ${STAGEDIR}/var/db/tor
+	@${MKDIR} ${STAGEDIR}/var/db/tor ${STAGEDIR}/var/log/tor ${STAGEDIR}/var/run/tor
+	@${MKDIR} ${STAGEDIR}${EXAMPLESDIR}
+	${INSTALL_DATA} ${WRKSRC}/contrib/operator-tools/tor-exit-notice.html ${STAGEDIR}${EXAMPLESDIR}
+	${INSTALL_DATA} ${WRKSRC}/contrib/operator-tools/tor.logrotate        ${STAGEDIR}${EXAMPLESDIR}
+	${INSTALL_DATA} ${WRKSRC}/src/config/torrc.minimal ${STAGEDIR}${EXAMPLESDIR}
+	${INSTALL_DATA} ${WRKSRC}/src/config/torrc.sample  ${STAGEDIR}${EXAMPLESDIR}
 
 .include <bsd.port.mk>
