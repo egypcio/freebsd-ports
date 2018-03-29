@@ -22,7 +22,8 @@ USES=		cpe ssl
 
 GNU_CONFIGURE=	yes
 
-CONFIGURE_ARGS=	--with-tor-user=${USERS} --with-tor-group=${GROUPS} \
+CONFIGURE_ARGS=	--disable-gcc-hardening \
+		--with-tor-user=${USERS} --with-tor-group=${GROUPS} \
 		--with-openssl-dir=${OPENSSLBASE} \
 		--with-libevent-dir=${LOCALBASE} \
 		--with-zlib-dir=/usr
