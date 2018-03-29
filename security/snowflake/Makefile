@@ -36,6 +36,6 @@ post-extract:
 		${LN} -sf ${WRKDIR}/go-webrtc-52280a1 keroserene/go-webrtc && \
 		${LN} -sf ${WRKDIR}/uniuri-8902c56    dchest/uniuri
 	cd ${GO_WRKSRC:H}/go-webrtc/ && \
-		${LN} -sf include/webrtc webrtc
+		${LN} -sf ${WRKDIR}/webrtc webrtc
 
 .include <bsd.port.mk>
