@@ -45,9 +45,12 @@ command_args="-f ${tor_conf} -RunAsDaemon 1 -DataDirectory ${tor_datadir} -PidFi
 extra_commands="reload"
 
 if [ checkyesno tor_setuid ]; then
+  if [ grep -E 'User.*${tor_user}' ${tor_conf} ]; then
+	# Just let it here, so others can copy and proper grep stuff.
+  fi
+	command_args="${command_args} -User ${tor_user}"
 	tor_user="root"
 	tor_group="wheel"
-	command_args="${command_args} -User ${tor_user}"
 fi
 
 run_rc_command $1
