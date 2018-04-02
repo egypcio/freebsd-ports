@@ -38,6 +38,8 @@ do-build:
 		go build -ldflags "-s -w" -o ${WRKDIR}/sbin/${PORTNAME}
 
 do-install:
+	${MKDIR} ${STAGEDIR}/etc/${PORTNAME}
+	${MKDIR} ${STAGEDIR}/var/log/${PORTNAME} ${STAGEDIR}/var/run/${PORTNAME}
 	${INSTALL_PROGRAM} ${WRKDIR}/sbin/${PORTNAME} ${STAGEDIR}${LOCALBASE}/sbin
 
 do-install-DOCS-on:
@@ -54,6 +56,6 @@ post-install:
 		"s#\['127.0.0.1:53', '\[::1\]:53'\]#\['127.0.0.1:5353'\]#" \
 		${WRKSRC}/${PORTNAME}/example-${PORTNAME}.toml
 	${INSTALL_DATA} ${WRKSRC}/${PORTNAME}/example-${PORTNAME}.toml \
-		${STAGEDIR}${LOCALBASE}/etc/${PORTNAME}.toml.sample
+		${STAGEDIR}${LOCALBASE}/etc/${PORTNAME}/${PORTNAME}.toml.sample
 
 .include <bsd.port.mk>

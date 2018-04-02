@@ -1,2 +1,5 @@
-@sample etc/dnscrypt-proxy.toml.sample
+@dir(%%USER%%,%%GROUP%%,700) etc/dnscrypt-proxy
+@dir(%%USER%%,%%GROUP%%,700) /var/log/dnscrypt-proxy
+@dir(%%USER%%,%%GROUP%%,700) /var/run/dnscrypt-proxy
+@sample etc/dnscrypt-proxy/dnscrypt-proxy.toml.sample
 sbin/dnscrypt-proxy

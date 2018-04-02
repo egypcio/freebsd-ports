@@ -4,28 +4,33 @@
 #
 # PROVIDE: dnscrypt_proxy
 # REQUIRE: cleanvar SERVERS
-# BEFORE:  dnsmasq local_unbound unbound named
+# BEFORE:  local_unbound unbound dnsmasq pdns named
 #
-# Options to configure dnscrypt-proxy via /etc/rc.conf:
+#	Options to configure dnscrypt-proxy via /etc/rc.conf:
 #
-# dnscrypt_proxy_enable	(bool)	Enable on boot	# Default: NO
-# dnscrypt_proxy_conf	(str)	Config file	# Default: %%PREFIX%%/etc/dnscrypt-proxy.toml
-# dnscrypt_proxy_uid	(str)	User to run as	# Default: %%USER%%
+# dnscrypt_proxy_enable	(bool)	Start on Boot.	# Default: NO
+# dnscrypt_proxy_config	(str)	Config File.	# Default: %%PREFIX%%/etc/dnscrypt-proxy/dnscrypt-proxy.toml
+# dnscrypt_proxy_setuid	(bool)	Set root priv.	# Default: NO
+# dnscrypt_proxy_userid	(str)	User to run as.	# Default: %%USER%%
+#
 
 . /etc/rc.subr
 
 name="dnscrypt_proxy"
 rcvar="${name}_enable"
-pidfile="/var/run/${name}.pid"
-procname="%%PREFIX%%/sbin/dnscrypt-proxy"
+pidfile="/var/run/dnscrypt-proxy/${name}.pid"
+procname="/usr/local/sbin/dnscrypt-proxy"
 
 load_rc_config $name
 
-: ${dnscrypt_proxy_enable:=NO}
-: ${dnscrypt_proxy_conf:=%%PREFIX%%/etc/dnscrypt-proxy.toml}
-: ${dnscrypt_proxy_uid:=%%USER%%}
+: ${dnscrypt_proxy_enable:="NO"}
+: ${dnscrypt_proxy_config:="%%PREFIX%%/etc/dnscrypt-proxy/dnscrypt-proxy.toml"}
+: ${dnscrypt_proxy_setuid:="NO"}
+: ${dnscrypt_proxy_userid:="%%USER%%"}
+
+checkyesno dnscrypt_proxy_setuid && dnscrypt_proxy_userid="root"
 
 command="/usr/sbin/daemon"
-command_args="-p ${pidfile} -u ${dnscrypt_proxy_uid} -f ${procname} -config ${dnscrypt_proxy_conf}"
+command_args="-p ${pidfile} -t ${name} -u ${dnscrypt_proxy_userid} -f ${procname} -config ${dnscrypt_proxy_config}"
 
-run_rc_command "$1"
+run_rc_command $1
