@@ -1,9 +1,0 @@
-
-This port comes all working "out of the box". It is using random resolvers.
-
-To enable dnscrypt-proxy at boot:
-
-  # sysrc dnscrypt_proxy_enable=YES
-
-dnscrypt-proxy is set to use resolvers offering DNSSEC by default!
-

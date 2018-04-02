@@ -14,20 +14,22 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 BUILD_DEPENDS=	go:lang/go
 RUN_DEPENDS=	ca_root_nss>=3.35:security/ca_root_nss
 
+USERS=		_dnscrypt-proxy
+GROUPS=		_dnscrypt-proxy
+
+PLIST_SUB=      USER="${USERS}" GROUP="${GROUPS}"
+SUB_LIST=       USER="${USERS}" GROUP="${GROUPS}"
 USE_RC_SUBR=	${PORTNAME}
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	jedisct1
-
-USERS=		_dnscrypt-proxy
-GROUPS=		_dnscrypt-proxy
 
 PORTDOCS=	README.*
 PORTEXAMPLES=	example*
 
 CONFLICTS_INSTALL=	dnscrypt-proxy
 
-OPTIONS_DEFINE=	DOCS EXAMPLES
+OPTIONS_DEFINE=		DOCS EXAMPLES
 
 do-build:
 	${RLN} ${WRKSRC}/vendor ${WRKSRC}/src

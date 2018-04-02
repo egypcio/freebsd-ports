@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $FreeBSD: head/dns/dnscrypt-proxy2/files/dnscrypt-proxy.in 465857 2018-03-29 00:49:47Z dbaio $
+# $FreeBSD$
 #
 # PROVIDE: dnscrypt_proxy
 # REQUIRE: cleanvar SERVERS
@@ -8,27 +8,22 @@
 #
 # Options to configure dnscrypt-proxy via /etc/rc.conf:
 #
-# dnscrypt_proxy_enable (bool)	Enable service on boot
-#				Default: NO
-#
-# dnscrypt_proxy_conf (str)	Config file to use
-#				Default: %%PREFIX%%/etc/dnscrypt-proxy.toml
-#
-# dnscrypt_proxy_uid (str)	User to run dnscrypt_proxy as
-#				Default: _dnscrypt-proxy
+# dnscrypt_proxy_enable	(bool)	Enable on boot	# Default: NO
+# dnscrypt_proxy_conf	(str)	Config file	# Default: %%PREFIX%%/etc/dnscrypt-proxy.toml
+# dnscrypt_proxy_uid	(str)	User to run as	# Default: %%USER%%
 
 . /etc/rc.subr
 
 name="dnscrypt_proxy"
-rcvar="dnscrypt_proxy_enable"
-pidfile="/var/run/dnscrypt-proxy.pid"
+rcvar="${name}_enable"
+pidfile="/var/run/${name}.pid"
 procname="%%PREFIX%%/sbin/dnscrypt-proxy"
 
 load_rc_config $name
 
 : ${dnscrypt_proxy_enable:=NO}
 : ${dnscrypt_proxy_conf:=%%PREFIX%%/etc/dnscrypt-proxy.toml}
-: ${dnscrypt_proxy_uid:=_dnscrypt-proxy}
+: ${dnscrypt_proxy_uid:=%%USER%%}
 
 command="/usr/sbin/daemon"
 command_args="-p ${pidfile} -u ${dnscrypt_proxy_uid} -f ${procname} -config ${dnscrypt_proxy_conf}"
