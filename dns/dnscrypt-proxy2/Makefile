@@ -1,12 +1,12 @@
 # $FreeBSD$
 
 PORTNAME=	dnscrypt-proxy
-PORTVERSION=	2.0.0
+PORTVERSION=	2.0.8
 CATEGORIES=	dns security
 PKGNAMESUFFIX=	2
 
 MAINTAINER=	egypcio@googlemail.com
-COMMENT=	Unofficial/experimental version of dns/dnscrypt-proxy2
+COMMENT=	Unofficial/experimental version of dns/dnscrypt-proxy
 
 LICENSE=	ISCL
 LICENSE_FILE=	${WRKSRC}/LICENSE
@@ -14,34 +14,48 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 BUILD_DEPENDS=	go:lang/go
 RUN_DEPENDS=	ca_root_nss>=3.35:security/ca_root_nss
 
-PORTDOCS=	${WRKSRC}/README.*
-PORTEXAMPLES=	${WRKSRC}/${PORTNAME}/example*
+USERS=		_dnscrypt-proxy
+GROUPS=		_dnscrypt-proxy
 
-CONFLICTS=	dnscrypt-proxy-[0-1]*
-
-SUB_FILES=	pkg-message
-
+PLIST_SUB=      USER="${USERS}" GROUP="${GROUPS}"
+SUB_LIST=       USER="${USERS}" GROUP="${GROUPS}"
 USE_RC_SUBR=	${PORTNAME}
 
 USE_GITHUB=	yes
-
 GH_ACCOUNT=	jedisct1
+
+PORTDOCS=	README.*
+PORTEXAMPLES=	example*
+
+CONFLICTS_INSTALL=	dnscrypt-proxy
+
+OPTIONS_DEFINE=		DOCS EXAMPLES
 
 do-build:
 	${RLN} ${WRKSRC}/vendor ${WRKSRC}/src
 	cd ${WRKSRC}/${PORTNAME} && \
-		${SETENV} GOPATH=${WRKSRC} \
+		${SETENV} ${MAKE_ENV} ${BUILD_ENV} GOPATH=${WRKSRC} \
 		go build -ldflags "-s -w" -o ${WRKDIR}/sbin/${PORTNAME}
+
 do-install:
-	${MKDIR} ${STAGEDIR}${DOCSDIR} ${STAGEDIR}${EXAMPLESDIR}
-	${INSTALL_PROGRAM} ${WRKDIR}/sbin/${PORTNAME} ${STAGEDIR}${LOCALBASE}/sbin/.
-	${INSTALL_DATA} ${PORTDOCS} ${STAGEDIR}${DOCSDIR}/.
-	${INSTALL_DATA} ${PORTEXAMPLES} ${STAGEDIR}${EXAMPLESDIR}/.
-	${INSTALL_DATA} ${WRKSRC}/${PORTNAME}/example-${PORTNAME}.toml \
-		${STAGEDIR}${LOCALBASE}/etc/${PORTNAME}.toml
+	${MKDIR} ${STAGEDIR}/etc/${PORTNAME}
+	${MKDIR} ${STAGEDIR}/var/log/${PORTNAME} ${STAGEDIR}/var/run/${PORTNAME}
+	${INSTALL_PROGRAM} ${WRKDIR}/sbin/${PORTNAME} ${STAGEDIR}${LOCALBASE}/sbin
+
+do-install-DOCS-on:
+	${MKDIR} ${STAGEDIR}${DOCSDIR}
+	cd ${WRKSRC} && ${INSTALL_DATA} ${PORTDOCS} ${STAGEDIR}${DOCSDIR}
+
+do-install-EXAMPLES-on:
+	${MKDIR} ${STAGEDIR}${EXAMPLESDIR}
+	cd ${WRKSRC}/${PORTNAME} && ${INSTALL_DATA} ${PORTEXAMPLES} ${STAGEDIR}${EXAMPLESDIR}
 
 post-install:
-	${REINPLACE_CMD} -e 's|require_dnssec\ \=\ false|require_dnssec\ \=\ true|g' \
-		${STAGEDIR}${LOCALBASE}/etc/${PORTNAME}.toml
+	# After install examples because of the priv drop issue with Go
+	@${REINPLACE_CMD} -e \
+		"s#\['127.0.0.1:53', '\[::1\]:53'\]#\['127.0.0.1:5353'\]#" \
+		${WRKSRC}/${PORTNAME}/example-${PORTNAME}.toml
+	${INSTALL_DATA} ${WRKSRC}/${PORTNAME}/example-${PORTNAME}.toml \
+		${STAGEDIR}${LOCALBASE}/etc/${PORTNAME}/${PORTNAME}.toml.sample
 
 .include <bsd.port.mk>
