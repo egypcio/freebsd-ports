@@ -15,7 +15,10 @@ that exploits sequential IP ID by setting:
   Please refer to sysctl.conf(5) for more information on how to make this change
 permanent.
 
-              *** This version is *NOT* a stable Tor release ***
+        ------------------------------------------------------------
+
+    This version is *NOT* a stable Tor release. Expect more bugs than usual.
+
               ***   Remember that this is development code   ***
               ***  DON'T RELY ON THIS VERSION FOR ANONYMITY  ***
 
