@@ -11,6 +11,7 @@ LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	npm:www/npm
+RUN_DEPENDS=	node:www/node
 
 PORTEXAMPLES=	*.coffee
 
@@ -28,6 +29,8 @@ do-install:
 	cd ${WRKSRC} && \
 	${LOCALBASE}/bin/npm set prefix=${STAGEDIR}${PREFIX} && \
 	${LOCALBASE}/bin/npm install --global .
+	# (cd ${WRKSRC}/lib/${PORTNAME} && ${COPYTREE_SHARE} . ${STAGEDIR}${PREFIX}/lib/node_modules/${PORTNAME})
+	# ${INSTALL_PROGRAM} bin/* ${STAGEDIR}${PREFIX}/bin 
 
 do-install-EXAMPLES-on:
 	${MKDIR} ${STAGEDIR}${EXAMPLESDIR}
