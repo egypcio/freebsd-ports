@@ -1,27 +1,6 @@
-/bin/coffee
-/lib/node_modules/coffeescript/LICENSE
-/lib/node_modules/coffeescript/README.md
-/lib/node_modules/coffeescript/bin/cake
-/lib/node_modules/coffeescript/bin/coffee
-/lib/node_modules/coffeescript/lib/coffeescript/browser.js
-/lib/node_modules/coffeescript/lib/coffeescript/cake.js
-/lib/node_modules/coffeescript/lib/coffeescript/coffeescript.js
-/lib/node_modules/coffeescript/lib/coffeescript/command.js
-/lib/node_modules/coffeescript/lib/coffeescript/grammar.js
-/lib/node_modules/coffeescript/lib/coffeescript/helpers.js
-/lib/node_modules/coffeescript/lib/coffeescript/index.js
-/lib/node_modules/coffeescript/lib/coffeescript/lexer.js
-/lib/node_modules/coffeescript/lib/coffeescript/nodes.js
-/lib/node_modules/coffeescript/lib/coffeescript/optparse.js
-/lib/node_modules/coffeescript/lib/coffeescript/parser.js
-/lib/node_modules/coffeescript/lib/coffeescript/register.js
-/lib/node_modules/coffeescript/lib/coffeescript/repl.js
-/lib/node_modules/coffeescript/lib/coffeescript/rewriter.js
-/lib/node_modules/coffeescript/lib/coffeescript/scope.js
-/lib/node_modules/coffeescript/lib/coffeescript/sourcemap.js
-/lib/node_modules/coffeescript/package.json
-/lib/node_modules/coffeescript/register.js
-/lib/node_modules/coffeescript/repl.js
+@dir lib/node_modules/coffeescript
+bin/cake
+bin/coffee
 %%PORTDOCS%%%%DOCSDIR%%/annotated-source/browser.html
 %%PORTDOCS%%%%DOCSDIR%%/annotated-source/cake.html
 %%PORTDOCS%%%%DOCSDIR%%/annotated-source/coffeescript.html
@@ -63,7 +42,43 @@
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/breaking_change_super_in_non-class_methods_refactor_with_apply.coffee
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/breaking_change_super_in_non-class_methods_refactor_with_class.coffee
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/breaking_change_super_this.coffee
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/breaking_change_super_withead.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/breaking_change_super_with_arguments.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/breaking_change_super_without_arguments.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/cake_tasks.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/chaining.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/classes.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/comment.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/comparisons.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/conditionals.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/constructor_destructuring.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/default_args.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/do.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/embedded.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/embedded_block.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/embedded_escaped.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/existence.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/existence_declared.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/existence_undeclared.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/expansion.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/expressions.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/expressions_assignment.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/expressions_comprehension.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/expressions_try.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/fat_arrow.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/functions.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/generator_iteration.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/generators.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/get_set.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/heredocs.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/heregexes.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/interpolation.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/jsx.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/modules.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/modulo.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/multiple_return_values.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/object_comprehensions.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/object_extraction.coffee
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/object_spread.coffee
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/objects_and_arrays.coffee
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/objects_reserved.coffee
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/objects_shorthand.coffee
@@ -85,8 +100,3 @@
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/try.coffee
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/type_annotations.coffee
 %%PORTEXAMPLES%%%%EXAMPLESDIR%%/while.coffee
-@dir /lib/node_modules/coffeescript/bin
-@dir /lib/node_modules/coffeescript/lib/coffeescript
-@dir /lib/node_modules/coffeescript/lib
-@dir /lib/node_modules/coffeescript
-@dir /lib/node_modules
