@@ -2,7 +2,7 @@
 
 PORTNAME=	dnscrypt-proxy
 PORTVERSION=	2.0.8
-PORTREVISION=	2
+PORTREVISION=	1
 CATEGORIES=	dns security ipv6
 PKGNAMESUFFIX=	2
 
@@ -39,7 +39,7 @@ do-build:
 		go build -ldflags "-s -w" -o ${WRKDIR}/sbin/${PORTNAME}
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKDIR}/sbin/${PORTNAME} ${STAGEDIR}${LOCALBASE}/sbin
+	${INSTALL_PROGRAM} ${WRKDIR}/sbin/${PORTNAME} ${STAGEDIR}${PREFIX}/sbin
 
 do-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
@@ -50,11 +50,12 @@ do-install-EXAMPLES-on:
 	cd ${WRKSRC}/${PORTNAME} && ${INSTALL_DATA} ${PORTEXAMPLES} ${STAGEDIR}${EXAMPLESDIR}
 
 post-install:
+	${MKDIR} ${STAGEDIR}/var/run/${PORTNAME} ${STAGEDIR}${PREFIX}/etc/${PORTNAME}
 	# After 'install' because of the priv drop issue with Go; keeping original example files.
 	@${REINPLACE_CMD} -e \
 		"s#\['127.0.0.1:53', '\[::1\]:53'\]#\['127.0.0.1:5353'\]#" \
 		${WRKSRC}/${PORTNAME}/example-${PORTNAME}.toml
 	${INSTALL_DATA} ${WRKSRC}/${PORTNAME}/example-${PORTNAME}.toml \
-		${STAGEDIR}${LOCALBASE}/etc/${PORTNAME}.toml.sample
+		${STAGEDIR}${PREFIX}/etc/${PORTNAME}/${PORTNAME}.toml.sample
 
 .include <bsd.port.mk>
