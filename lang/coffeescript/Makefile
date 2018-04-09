@@ -10,7 +10,6 @@ COMMENT=	Unofficial/experimental version of lang/coffeescript
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-BUILD_DEPENDS=	npm:www/npm
 RUN_DEPENDS=	node:www/node
 
 PORTEXAMPLES=	*.coffee
@@ -26,11 +25,9 @@ NO_BUILD=	yes
 OPTIONS_DEFINE=	EXAMPLES
 
 do-install:
-	cd ${WRKSRC} && \
-	${LOCALBASE}/bin/npm set prefix=${STAGEDIR}${PREFIX} && \
-	${LOCALBASE}/bin/npm install --global .
-	# (cd ${WRKSRC}/lib/${PORTNAME} && ${COPYTREE_SHARE} . ${STAGEDIR}${PREFIX}/lib/node_modules/${PORTNAME})
-	# ${INSTALL_PROGRAM} bin/* ${STAGEDIR}${PREFIX}/bin 
+	${MKDIR} ${STAGEDIR}${PREFIX}/lib/node_modules/${PORTNAME}
+	${INSTALL_SCRIPT} ${WRKSRC}/bin/c* ${STAGEDIR}${PREFIX}/bin/. && \
+	${INSTALL_DATA} ${WRKSRC}/lib/${PORTNAME}/*.js ${STAGEDIR}${PREFIX}/lib/node_modules/${PORTNAME}/.
 
 do-install-EXAMPLES-on:
 	${MKDIR} ${STAGEDIR}${EXAMPLESDIR}
