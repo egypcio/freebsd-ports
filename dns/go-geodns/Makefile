@@ -6,38 +6,24 @@ CATEGORIES=	dns net ipv6
 PKGNAMEPREFIX=	go-
 
 MAINTAINER=	egypcio@googlemail.com
-COMMENT=	Unofficial/experimental version of dns/go-geodns
+COMMENT=	DNS server with per-client targeted responses
 
 LICENSE=	APACHE20
-LICENSE_FILE=	${GO_WRKSRC:H}/LICENSE
+LICENSE_FILE=	${GO_WRKSRC}/LICENSE
 
-USE_RC_SUBR=    ${PORTNAME}
-USES=		go
+BUILD_DEPENDS=	GeoIP>=1.6.12:net/GeoIP
+
+USES=		go pkgconfig
+USE_RC_SUBR=    geodnsd
 USE_GITHUB=	yes
+
 GH_ACCOUNT=	abh
-
-# abh/errorutil
-# davecgh/go-spew
-# golang/geo
-# hpcloud/tail
-# influxdata/influxdb
-# kr/pretty
-# kr/text
-# miekg/dns
-# oschwald/geoip2-golang
-# oschwald/maxminddb-golang
-# pborman/uuid
-# pmezard/go-difflib
-# rcrowley/go-metrics
-# stretchr/testify
-
 GO_PKGNAME=	github.com/${GH_ACCOUNT}/${PORTNAME}
-GO_TARGET=	${GO_PKGNAME}/server
 
-PLIST_FILES=	bin/snowflake
+PLIST_FILES=	sbin/${USE_RC_SUBR}
 
-# post-extract:
-#	${MKDIR} ${GO_WRKSRC:H}
-#	${RLN} ${WRKSRC}/vendor ${WRKSRC}/src
+do-install:
+	${INSTALL_PROGRAM} ${GO_WRKDIR_BIN}/${PORTNAME} 
+		${STAGEDIR}/${PREFIX}/sbin/${USE_RC_SUBR}
 
 .include <bsd.port.mk>
