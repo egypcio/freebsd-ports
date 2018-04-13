@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+# $FreeBSD$
+#
+# PROVIDE: geodnsd
+# REQUIRE: cleanvar SERVERS
+#
+
+. /etc/rc.subr
+
+name="geodnsd"
+rcvar="${name}_enable"
+pidfile="/var/run/${name}.pid"
+procname="%%PREFIX%%/sbin/${name}"
+
+load_rc_config $name
+
+: ${geodnsd_enable:="NO"}
+: ${geodnsd_conf:="%%PREFIX%%/etc/${name}.conf"}
+: ${dnscrypt_proxy_setuid:="NO"}
+: ${geodnsd_uid:="%%USER%%"}
+
+checkyesno geodnsd_setuid && geodns_uid="root"
+
+command="/usr/sbin/daemon"
+command_args="-p ${pidfile} -t ${name} -u ${geodnsd_uid} -f ${procname} -config=${geodnsd_conf}"
+
+run_rc_command $1
