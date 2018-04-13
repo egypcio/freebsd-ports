@@ -23,7 +23,7 @@ GO_PKGNAME=	github.com/${GH_ACCOUNT}/${PORTNAME}
 PLIST_FILES=	sbin/${USE_RC_SUBR}
 
 do-install:
-	${INSTALL_PROGRAM} ${GO_WRKDIR_BIN}/${PORTNAME} 
+	${INSTALL_PROGRAM} ${GO_WRKDIR_BIN}/${PORTNAME} \
 		${STAGEDIR}/${PREFIX}/sbin/${USE_RC_SUBR}
 
 .include <bsd.port.mk>
