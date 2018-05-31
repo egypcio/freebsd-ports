@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	tor
-PORTVERSION=	0.3.2.10
+PORTVERSION=	0.3.3.6
 CATEGORIES=	security net ipv6
 MASTER_SITES=	TOR
 
@@ -21,7 +21,7 @@ USES=		cpe ssl
 
 GNU_CONFIGURE=	yes
 
-CONFIGURE_ARGS=	--disable-gcc-hardening \
+CONFIGURE_ARGS=	--disable-gcc-hardening --disable-gcc-warnings-advisory \
 		--with-tor-user=${USERS} --with-tor-group=${GROUPS} \
 		--with-openssl-dir=${OPENSSLBASE} \
 		--with-libevent-dir=${LOCALBASE} \
