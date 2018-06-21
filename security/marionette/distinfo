@@ -1,3 +1,5 @@
-TIMESTAMP = 1521208204
-SHA256 (marionette-0.0.1.tar.gz) = 6177c69b492076c7b336d39cd73100bfdcac49a8a394995de1ece21ed20f9906
-SIZE (marionette-0.0.1.tar.gz) = 90270
+TIMESTAMP = 1529614617
+SHA256 (redjack-marionette-8967e66_GH0.tar.gz) = a94062e42f609d2f305d6e87f49597599dbe9af8d354a3526e1b2253a98253af
+SIZE (redjack-marionette-8967e66_GH0.tar.gz) = 90368
+SHA256 (armon-go-socks5-e753329_GH0.tar.gz) = cf21024b7db90f8f68adfd8bb80d9d4a7e3e3a36f77a2fff29ea44cbaaf7f63f
+SIZE (armon-go-socks5-e753329_GH0.tar.gz) = 8580
