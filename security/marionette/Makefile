@@ -35,13 +35,24 @@ GH_TUPLE=	armon:go-socks5:e753329:socks5/github.com/armon/go-socks5 \
 		uber-go:multierr:3c49374:multierr/go.uber.org/multierr \
 		uber-go:zap:eeedf31:zap/go.uber.org/zap
 
-do-build:
+CGO_CFLAGS+=	-I${WRKSRC}/third_party/openfst/src/include
+CGO_LDFLAGS+=	-L${WRKSRC}/third_party/openfst/src/lib
+
+post-patch:
 	${MKDIR} ${WRKSRC}/github.com/${GH_ACCOUNT}
 	${RLN} ${WRKSRC} ${WRKSRC}/github.com/${GH_ACCOUNT}/${PORTNAME}
 	${RLN} ${WRKSRC} ${WRKSRC}/src
+	${REINPLACE_CMD} -e 's|-ldl||g' \
+		${WRKSRC}/third_party/openfst/src/bin/Makefile.in \
+		${WRKSRC}/third_party/openfst/src/extensions/far/Makefile.in \
+		${WRKSRC}/third_party/openfst/src/extensions/linear/Makefile.in \
+		${WRKSRC}/third_party/openfst/src/extensions/pdt/Makefile.in \
+		${WRKSRC}/third_party/openfst/src/test/Makefile.in
+
+do-build:
 	cd ${WRKSRC} && \
-		${SETENV} ${MAKE_ENV} ${GO_ENV} ${GO_CMD} \
-			build -ldflags "-X main.Version=${GH_TAGNAME}" -o bin/${PORTNAME}
+		${SETENV} ${MAKE_ENV} ${GO_ENV} GOPATH="${GOPATH}:${WRKSRC}" \
+		  ${GO_CMD} build -ldflags "-X main.Version=${GH_TAGNAME}" -o bin/${PORTNAME}
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
