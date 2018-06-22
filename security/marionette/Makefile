@@ -1,8 +1,8 @@
 # $FreeBSD$
 
-PORTNAME=		marionette
-DISTVERSION=		g20180611
-CATEGORIES=		security net
+PORTNAME=	marionette
+DISTVERSION=	g20180611
+CATEGORIES=	security net
 
 MAINTAINER=	egypcio@googlemail.com
 COMMENT=	Pluggable Transport Proxy for Tor, le Marionette
@@ -12,9 +12,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 CPE_VENDOR=	redjack
 
-BUILD_DEPENDS=	dep:devel/dep \
-		gmp>=1.6.2:math/gmp \
-		go:lang/go \
+BUILD_DEPENDS=	gmp>=1.6.2:math/gmp \
 		openfst>=1.6.3:math/openfst \
 		re2>=20180401:devel/re2 \
 		regex2dfa:textproc/regex2dfa \
@@ -23,14 +21,12 @@ BUILD_DEPENDS=	dep:devel/dep \
 
 PLIST_FILES=	bin/${PORTNAME}
 
-USES=		python:env
+USES=		go python:env
 USE_GITHUB=	yes
 USE_PYTHON=	flavors
 
 GH_ACCOUNT=	redjack
 GH_TAGNAME=	61b8d34
-# redjack:marionette:61b8d34:marionette
-
 GH_TUPLE=	armon:go-socks5:e753329:socks5/github.com/armon/go-socks5 \
 		davecgh:go-spew:346938d:spew/github.com/davecgh/go-spew \
 		golang:net:afe8f62:net/golang.org/x/net \
@@ -44,8 +40,8 @@ do-build:
 	${RLN} ${WRKSRC} ${WRKSRC}/github.com/${GH_ACCOUNT}/${PORTNAME}
 	${RLN} ${WRKSRC} ${WRKSRC}/src
 	cd ${WRKSRC} && \
-		${SETENV} ${MAKE_ENV} GOPATH=${WRKSRC} \
-		go build -ldflags "-X main.Version=${GH_TAGNAME}" -o bin/${PORTNAME}
+		${SETENV} ${MAKE_ENV} ${GO_ENV} ${GO_CMD} \
+			build -ldflags "-X main.Version=${GH_TAGNAME}" -o bin/${PORTNAME}
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
