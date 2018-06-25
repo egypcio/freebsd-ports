@@ -21,7 +21,7 @@ BUILD_DEPENDS=	gmp>=1.6.2:math/gmp \
 
 PLIST_FILES=	bin/${PORTNAME}
 
-USES=		go python:env
+USES=		go localbase python:env
 USE_GITHUB=	yes
 USE_PYTHON=	flavors
 
@@ -35,28 +35,15 @@ GH_TUPLE=	armon:go-socks5:e753329:socks5/github.com/armon/go-socks5 \
 		uber-go:multierr:3c49374:multierr/go.uber.org/multierr \
 		uber-go:zap:eeedf31:zap/go.uber.org/zap
 
-CGO_CFLAGS+=	-I${WRKSRC}/third_party/openfst/src/include
-CGO_LDFLAGS+=	-L${WRKSRC}/third_party/openfst/src/lib \
-		-L${WRKSRC}/third_party/re2/lib
-
 post-patch:
 	${MKDIR} ${WRKSRC}/github.com/${GH_ACCOUNT}
 	${RLN} ${WRKSRC} ${WRKSRC}/github.com/${GH_ACCOUNT}/${PORTNAME}
 	${RLN} ${WRKSRC} ${WRKSRC}/src
-	${REINPLACE_CMD} -e 's|<fst/fstlib.h>|"fst/fstlib.h"|g' \
-		${WRKSRC}/regex2dfa/regex2dfa.cc
-	${REINPLACE_CMD} -e 's|<fst/script/fstscript.h>|"fst/script/fstscript.h"|g' \
-		${WRKSRC}/regex2dfa/regex2dfa.cc
-	${REINPLACE_CMD} -e 's|-ldl||g' \
-		${WRKSRC}/third_party/openfst/src/bin/Makefile.in \
-		${WRKSRC}/third_party/openfst/src/extensions/far/Makefile.in \
-		${WRKSRC}/third_party/openfst/src/extensions/linear/Makefile.in \
-		${WRKSRC}/third_party/openfst/src/extensions/pdt/Makefile.in \
-		${WRKSRC}/third_party/openfst/src/test/Makefile.in
 
 do-build:
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${GO_ENV} GOPATH="${GOPATH}:${WRKSRC}" \
-		${GO_CMD} build -ldflags "-X main.Version=${GH_TAGNAME}" -o bin/${PORTNAME}
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${GO_ENV} GOPATH="${LOCAL_GOPATH}:${WRKSRC}" CGO_ENABLED=1 \
+		${GO_CMD} build -ldflags "-X main.Version=${GH_TAGNAME}" \
+		  -v -o bin/${PORTNAME}
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
