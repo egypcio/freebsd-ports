@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	tor
-DISTVERSION=	0.3.3.3-alpha
+DISTVERSION=	0.3.4.1-alpha
 CATEGORIES=	security net ipv6
 MASTER_SITES=	TOR
 PKGNAMESUFFIX=	-devel
@@ -22,7 +22,8 @@ USES=		cpe ssl
 
 GNU_CONFIGURE=	yes
 
-CONFIGURE_ARGS=	--with-tor-user=${USERS} --with-tor-group=${GROUPS} \
+CONFIGURE_ARGS=	--disable-gcc-hardening --disable-gcc-warnings-advisory \
+		--with-tor-user=${USERS} --with-tor-group=${GROUPS} \
 		--with-openssl-dir=${OPENSSLBASE} \
 		--with-libevent-dir=${LOCALBASE} \
 		--with-zlib-dir=/usr
@@ -84,10 +85,8 @@ USERS=		_tor
 GROUPS=		_tor
 
 PLIST_SUB=	USER="${USERS}" GROUP="${GROUPS}" MANPAGES=""
-
 SUB_LIST=	USER="${USERS}" GROUP="${GROUPS}"
 SUB_FILES=	pkg-message
-
 USE_RC_SUBR=	tor
 
 CONFLICTS=	tor-[0-9]*
@@ -138,8 +137,8 @@ post-patch-STATIC-on:
 		${WRKSRC}/configure
 
 post-install:
-	@${MKDIR} ${STAGEDIR}${EXAMPLESDIR}
 	@${MKDIR} ${STAGEDIR}/var/db/tor ${STAGEDIR}/var/log/tor ${STAGEDIR}/var/run/tor
+	@${MKDIR} ${STAGEDIR}${EXAMPLESDIR}
 	${INSTALL_DATA} ${WRKSRC}/contrib/operator-tools/tor-exit-notice.html ${STAGEDIR}${EXAMPLESDIR}
 	${INSTALL_DATA} ${WRKSRC}/contrib/operator-tools/tor.logrotate        ${STAGEDIR}${EXAMPLESDIR}
 	${INSTALL_DATA} ${WRKSRC}/src/config/torrc.minimal ${STAGEDIR}${EXAMPLESDIR}

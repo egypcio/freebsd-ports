@@ -7,16 +7,19 @@ see this script for details).
 
   To use torify(1), you need to install the 'net/torsocks' port.
 
-  Tor users are strongly advised to prevent traffic analysis that exploits 
-sequential IP ID by setting:
+  Tor users and relay operators are strongly advised to prevent traffic analysis
+that exploits sequential IP ID by setting:
 
 	# sysctl net.inet.ip.random_id=1
 
   Please refer to sysctl.conf(5) for more information on how to make this change
 permanent.
 
-        *** This version is not a stable Tor release ***
-        ***  Remember that this is development code  ***
-        *** DON'T RELY ON THIS VERSION FOR ANONYMITY ***
+        ------------------------------------------------------------
+
+    This version is *NOT* a stable Tor release. Expect more bugs than usual.
+
+              ***   Remember that this is development code   ***
+              ***  DON'T RELY ON THIS VERSION FOR ANONYMITY  ***
 
 ================================================================================

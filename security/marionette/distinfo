@@ -1,0 +1,17 @@
+TIMESTAMP = 1529676760
+SHA256 (redjack-marionette-g20180611-61b8d34_GH0.tar.gz) = bb987f36659707de200fe5ef43fd69be5edb5e17a1773e9fdf30964bfee443f5
+SIZE (redjack-marionette-g20180611-61b8d34_GH0.tar.gz) = 1394403
+SHA256 (armon-go-socks5-e753329_GH0.tar.gz) = cf21024b7db90f8f68adfd8bb80d9d4a7e3e3a36f77a2fff29ea44cbaaf7f63f
+SIZE (armon-go-socks5-e753329_GH0.tar.gz) = 8580
+SHA256 (davecgh-go-spew-346938d_GH0.tar.gz) = 92e706ece5da01f2c61cf632e168d8c24d44866523b25f0e8eb9d1596c5d5f79
+SIZE (davecgh-go-spew-346938d_GH0.tar.gz) = 42343
+SHA256 (golang-net-afe8f62_GH0.tar.gz) = add95527e78962849681bf9f91241ba522c8aec7e6125bfebc13d5c21ba18a45
+SIZE (golang-net-afe8f62_GH0.tar.gz) = 949189
+SHA256 (google-go-cmp-3af367b_GH0.tar.gz) = a95656f396bd9f27df422aa4ba802c36c65e4598438fe5fe7e7492d3a99c31ac
+SIZE (google-go-cmp-3af367b_GH0.tar.gz) = 57876
+SHA256 (uber-go-atomic-1ea20fb_GH0.tar.gz) = 8b698914f7c171263e1ef5dcc068664f98c6ee22a4748fd13d4268e10cb2dc26
+SIZE (uber-go-atomic-1ea20fb_GH0.tar.gz) = 8043
+SHA256 (uber-go-multierr-3c49374_GH0.tar.gz) = ad1e17ddacbc0d0bcf6277711d48a1a5e62b3996ced08de48b648646065ceada
+SIZE (uber-go-multierr-3c49374_GH0.tar.gz) = 9240
+SHA256 (uber-go-zap-eeedf31_GH0.tar.gz) = 191a7af14315d3e86acd50a7528db802ad4f40239d95ac219ac163546654d66b
+SIZE (uber-go-zap-eeedf31_GH0.tar.gz) = 107213

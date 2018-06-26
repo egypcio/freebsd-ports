@@ -1,0 +1,7 @@
+Snowflake is a new WebRTC pluggable transport inspired by Flashproxy. It is 
+currently in alpha, reliably bootstrapping a Tor client to 100% and providing 
+a reasonable browsing experience with Tor Browser. However, Snowflake is 
+under active development. It is not yet considered stable or audited, and 
+should not yet be relied upon for any critical use-cases.
+
+WWW: https://keroserene.net/snowflake/

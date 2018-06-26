@@ -1,0 +1,48 @@
+#!/bin/sh
+#
+# $FreeBSD$
+#
+# PROVIDE: geodnsd
+# REQUIRE: cleanvar SERVERS
+#
+#	Options to configure geodnsd via '/etc/rc.conf'
+#
+# geodnsd_addr		(str)	
+# geodnsd_conf		(str)	"%%PREFIX%%/etc/geodns.conf"
+# geodnsd_enable	(bool)	"NO"
+# geodnsd_port		(str)	"60053"
+# geodnsd_setuid	(bool)	"NO"
+# geodnsd_uid		(str)	"nobody"
+# geodnsd_zones		(str)	"%%ETCDIR%%"
+#
+
+. /etc/rc.subr
+
+name="geodnsd"
+rcvar="${name}_enable"
+pidfile="/var/run/${name}.pid"
+procname="%%PREFIX%%/sbin/${name}"
+
+load_rc_config $name
+
+: ${geodnsd_addr:=""}
+: ${geodnsd_conf:="%%PREFIX%%/etc/geodns.conf"}
+: ${geodnsd_enable:="NO"}
+: ${geodnsd_port:="60053"}
+: ${geodnsd_setuid:="NO"}
+: ${geodnsd_uid:="nobody"}
+: ${geodnsd_zones:="%%ETCDIR%%"}
+
+checkyesno geodnsd_setuid && geodns_uid="root"
+
+command="/usr/sbin/daemon"
+
+cmdpfx="-p ${pidfile} -t ${name} -u ${geodnsd_uid} -f ${procname} -configfile ${geodnsd_conf} -config ${geodnsd_zones}"
+
+if [ -z ${geodnsd_addr} ]; then
+    command_args="${cmdpfx} -port ${geodnsd_port}"
+  else
+    command_args="${cmdpfx} -port ${geodnsd_port} -interface ${geodnsd_addr}"
+fi
+
+run_rc_command $1
