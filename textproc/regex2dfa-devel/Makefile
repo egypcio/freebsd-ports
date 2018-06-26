@@ -11,6 +11,8 @@ COMMENT=	Command-line utility that converts regular expressions to DFA
 LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+BUILD_DEPENDS=	${PYTHON_PKGNAMEPREFIX}cffi>=1.0.0:devel/py-cffi@${PY_FLAVOR}
+
 USES=		gmake libtool python
 USE_GITHUB=	yes
 USE_PYTHON=	distutils flavors
