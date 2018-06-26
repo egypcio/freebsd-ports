@@ -21,7 +21,7 @@ BUILD_DEPENDS=	gmp>=1.6.2:math/gmp \
 
 PLIST_FILES=	bin/${PORTNAME}
 
-USES=		go localbase python:env
+USES=		go python:env
 USE_GITHUB=	yes
 USE_PYTHON=	flavors
 
@@ -41,7 +41,7 @@ post-patch:
 	${RLN} ${WRKSRC} ${WRKSRC}/src
 
 do-build:
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${GO_ENV} GOPATH="${LOCAL_GOPATH}:${WRKSRC}" CGO_ENABLED=1 \
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${GO_ENV} GOPATH="${LOCAL_GOPATH}:${WRKSRC}" \
 		${GO_CMD} build -ldflags "-X main.Version=${GH_TAGNAME}" \
 		  -v -o bin/${PORTNAME}
 
