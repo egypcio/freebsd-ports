@@ -6,7 +6,7 @@ CATEGORIES=	textproc
 PKGNAMESUFFIX=	-devel
 
 MAINTAINER=	egypcio@googlemail.com
-COMMENT=	Command-line utility that converts regular expressions to DFA
+COMMENT=	python/JS/C++/CLI utils to convert regular expressions to DFA
 
 LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/LICENSE
@@ -28,5 +28,6 @@ post-patch:
 		${WRKSRC}/third_party/openfst/src/extensions/linear/Makefile.in \
 		${WRKSRC}/third_party/openfst/src/extensions/pdt/Makefile.in \
 		${WRKSRC}/third_party/openfst/src/test/Makefile.in
+	${REINPLACE_CMD} -e 's|make|gmake|g' ${WRKSRC}/setup.py
 
 .include <bsd.port.mk>
