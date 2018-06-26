@@ -13,8 +13,9 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	${PYTHON_PKGNAMEPREFIX}cffi>=1.0.0:devel/py-cffi@${PY_FLAVOR}
 
-USES=		gmake libtool python
+USES=		gmake libtool python autoreconf
 USE_GITHUB=	yes
+USE_LDCONFIG=	yes
 USE_PYTHON=	distutils flavors
 
 GH_ACCOUNT=	kpdyer
