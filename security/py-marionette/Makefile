@@ -3,7 +3,7 @@
 PORTNAME=		marionette
 DISTVERSION=		0.1.0
 DISTVERSIONPREFIX=	v
-CATEGORIES=		net security python
+CATEGORIES=		security net python
 PKGNAMEPREFIX=		${PYTHON_PKGNAMEPREFIX}
 
 MAINTAINER=	egypcio@googlemail.com
