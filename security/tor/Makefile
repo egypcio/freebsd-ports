@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	tor
-PORTVERSION=	0.3.3.6
+PORTVERSION=	0.3.3.7
 CATEGORIES=	security net ipv6
 MASTER_SITES=	TOR
 
