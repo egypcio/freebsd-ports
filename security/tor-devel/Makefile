@@ -45,7 +45,6 @@ OPTIONS_SINGLE_SSLTLS=	BASE_SSLTLS PORTS_SSLTLS
 
 DMALLOC_DESC=		Use debug memory allocation library
 MALLOC_DESC=		Dynamic memory allocation management
-DOCS_DESC=		Build and install documentations, plus manual pages
 GNUMAKE_DESC=		Use 'gmake' as default 'make' tool
 SSLTLS_DESC=		SSL/TLS support
 BASE_SSLTLS_DESC=	Use FreeBSD's base SSL/TLS libraries
@@ -56,30 +55,32 @@ TCMALLOC_DESC=		Use tcmalloc memory allocation library
 TOR2WEB_DESC=		Support Tor2Web non-anonymous mode
 ZSTD_DESC=		Zstandard compression support scheme
 
-OPTIONS_DEFAULT=	DOCS BASE_SSLTLS
+OPTIONS_DEFAULT=	DOCS EXAMPLES BASE_SSLTLS
 
 DMALLOC_CONFIGURE_ON=		--with-dmalloc
 DMALLOC_LIB_DEPENDS=		libdmalloc.so:devel/dmalloc
 DOCS_CONFIGURE_ENABLE=		asciidoc
 DOCS_BUILD_DEPENDS=		asciidoc:textproc/asciidoc
-GNUMAKE_USE=			gmake
+GNUMAKE_USES=			gmake
 LZMA_CONFIGURE_ENABLE=		lzma
-LZMA_USE=			pkgconfig
+LZMA_USES=			pkgconfig
 BASE_SSLTLS_CONFIGURE_ENV=	OPENSSLRPATH=/usr/lib
 BASE_SSLTLS_LIB_DEPENDS=	libevent.so:devel/libevent
-PORTS_SSLTLS_USE=		localbase
+PORTS_SSLTLS_USES=		localbase
 PORTS_SSLTLS_CONFIGURE_ENV=	OPENSSLRPATH=${OPENSSLLIB}
 PORTS_SSLTLS_LIB_DEPENDS=	libevent.so:devel/libevent \
 				libcrypto.so:${OPENSSL_PORT} \
 				libssl.so:${OPENSSL_PORT}
 STATIC_CONFIGURE_ENABLE=	static-tor
 STATIC_BUILD_DEPENDS=		${LOCALBASE}/lib/libevent.a:devel/libevent
+STATIC_USES=			ssl:build
+STATIC_USES_OFF=		ssl
 TCMALLOC_CONFIGURE_ON=		--with-tcmalloc
 TCMALLOC_LIB_DEPENDS=		libtcmalloc.so:devel/google-perftools
 TOR2WEB_CONFIGURE_ENABLE=	tor2web-mode
 ZSTD_CONFIGURE_ENABLE=		zstd
 ZSTD_LIB_DEPENDS=		libzstd.so:archivers/zstd
-ZSTD_USE=			pkgconfig
+ZSTD_USES=			pkgconfig
 
 USERS=		_tor
 GROUPS=		_tor
