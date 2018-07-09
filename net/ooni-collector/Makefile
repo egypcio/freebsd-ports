@@ -10,60 +10,74 @@ COMMENT=	Unofficial/experimental version of net/ooni-collector
 # LICENSE=	
 # LICENSE_FILE=	
 
-CPE_VENDOR=	ooni
+BUILD_DEPENDS=	dep:devel/dep
+
+CPE_VENDOR=	torproject
 
 PLIST_FILES=	bin/${PORTNAME}
 
 USES=		go
-
 USE_GITHUB=	yes
+
+GO_PKGNAME=	github.com/ooni/collector
+GO_TARGET=	${GO_PKGNAME}/cmd \
+		${GO_PKGNAME}/collector/info
+
 GH_ACCOUNT=	ooni
 GH_PROJECT=	collector
 GH_TAGNAME=	v${DISTVERSION}-alpha
-GH_SUBDIR=	github.com/ooni/collector
 
-GH_TUPLE=	apex:log:v1.0.0:apex/github.com/apex/log \
-		  pkg:errors:v0.8.0:pkg/github.com/pkg/errors \
-		aws:aws-sdk-go:v1.14.21:aws/github.com/aws/aws-sdk-go \
-		dgraph-io:badger:v1.5.2:dgraph/github.com/dgraph-io/badger \
-		  AndreasBriese:bbloom:28f7e88:AndreasBriese/github.com/AndreasBriese/bbloom \
-		  dgryski:go-farm:2de3383:dgryski/github.com/dgryski/go-farm \
-		  golang:net:6f138e0:golang/golang.org/x/net \
-		  golang:sys:1b2967e:golang/golang.org/x/sys \
-		facebookgo:grace:75cf193:facebook/github.com/facebookgo/grace \
-		  facebookgo:httpdown:5979d39:facebook/github.com/facebookgo/httpdown \
-		gin-gonic:gin:v1.2:gin/github.com/gin-gonic/gin \
-		  gin-contrib:sse:22d885f:gin/github.com/gin-contrib/sse \
-		  mattn:go-isatty:v0.0.3:mattn/github.com/mattn/go-isatty \
-		  ugorji:go:v1.1.1:ugorji/github.com/ugorji/go \
-		  go-playground:validator:v8.18.2:pkgin/gopkg.in/go-playground/validator.v8 \
-		  go-yaml:yaml:v2.2.1:pkgin/gopkg.in/go-yaml/yaml.v2 \
-		  golang:protobuf:v1.1.0:golang/golang.org/x/protobuf \
-		prometheus:client_golang:v0.8.0:prometheus/github.com/prometheus/client_golang \
-		  prometheus:common:7600349:prometheus/github.com/prometheus/common \
-		  prometheus:client_model:model-0.0.2:prometheus/github.com/prometheus/client_model \
-		  beorn7:perks:3a771d9:beorn7/github.com/beorn7/perks \
-		rs:xid:v1.1.0:rs/github.com/rs/xid \
-		spf13:cobra:v0.0.3:spf13/github.com/spf13/cobra \
-		spf13:viper:v1.0.2:spf13/github.com/spf13/viper \
-		  spf13:afero:v1.1.1:spf13/github.com/spf13/afero \
-		  spf13:jwalterweatherman:7c0cea3:spf13/github.com/spf13/jwalterweatherman \
-		  spf13:pflag:v1.0.1:spf13/github.com/spf13/pflag \
-		  fsnotify:fsnotify:v1.4.7:fsnotify/github.com/fsnotify/fsnotify \
-		  hashicorp:hcl:ef8a98b:hashicorp/github.com/hashicorp/hcl \
-		  magiconair:properties:v1.8.0:magiconair/github.com/magiconair/properties \
-		  mitchellh:mapstructure:bb74f1d:mitchellh/github.com/mitchellh/mapstructure \
-		  pelletier:go-toml:v1.2.0:pelletier/github.com/pelletier/go-toml \
-		zsais:go-gin-prometheus:3f93884:zsais/github.com/zsais/go-gin-prometheus \
-		  sirupsen:logrus:v1.0.5:sirupsen/github.com/sirupsen/logrus
-
-GO_PKGNAME=	${GH_SUBDIR}
+GH_TUPLE=	AndreasBriese:bbloom:28f7e88:AndreasBriese/github.com/AndreasBriese/bbloom \
+	apex:log:v1.0.0:apex/github.com/apex/log \
+	aws:aws-sdk-go:v1.14.21:aws/github.com/aws/aws-sdk-go \
+	beorn7:perks:3a771d9:beorn7/github.com/beorn7/perks \
+	dgraph-io:badger:v1.5.2:dgraph/github.com/dgraph-io/badger \
+	dgryski:go-farm:2de3383:dgryski/github.com/dgryski/go-farm \
+	facebookgo:clock:600d898:facebook/github.com/facebookgo/clock \
+	facebookgo:grace:75cf193:facebook/github.com/facebookgo/grace \
+	facebookgo:httpdown:5979d39:facebook/github.com/facebookgo/httpdown \
+	facebookgo:stats:1b76add:facebook/github.com/facebookgo/stats \
+	fsnotify:fsnotify:v1.4.7:fsnotify/github.com/fsnotify/fsnotify \
+	gin-contrib:sse:22d885f:gin/github.com/gin-contrib/sse \
+	gin-gonic:gin:v1.2:gin/github.com/gin-gonic/gin \
+	go-ini:ini:v1.37.0:goini/github.com/go-ini/ini \
+	go-playground:validator:v8.18.2:pkgin/gopkg.in/go-playground/validator.v8 \
+	go-yaml:yaml:v2.2.1:pkgin/gopkg.in/go-yaml/yaml.v2 \
+	golang:crypto:a49355c:golang/golang.org/x/crypto \
+	golang:net:6f138e0:golang/golang.org/x/net \
+	golang:protobuf:v1.1.0:golang/golang.org/x/protobuf \
+	golang:sys:1b2967e:golang/golang.org/x/sys \
+	hashicorp:hcl:ef8a98b:hashicorp/github.com/hashicorp/hcl \
+	inconshreveable:mousetrap:v1.0:inconshreveable/github.com/inconshreveable/mousetrap \
+	magiconair:properties:v1.8.0:magiconair/github.com/magiconair/properties \
+	mattn:go-isatty:v0.0.3:mattn/github.com/mattn/go-isatty \
+	matttproud:golang_protobuf_extensions:v1.0.1:matttproud/github.com/matttproud/golang_protobuf_extensions \
+	mitchellh:mapstructure:bb74f1d:mitchellh/github.com/mitchellh/mapstructure \
+	pelletier:go-toml:v1.2.0:pelletier/github.com/pelletier/go-toml \
+	pkg:errors:v0.8.0:pkg/github.com/pkg/errors \
+	prometheus:client_golang:v0.8.0:prometheus/github.com/prometheus/client_golang \
+	prometheus:client_model:model-0.0.2:prometheus/github.com/prometheus/client_model \
+	prometheus:common:7600349:prometheus/github.com/prometheus/common \
+	prometheus:procfs:ae68e2d:prometheus/github.com/prometheus/procfs \
+	rs:xid:v1.1.0:rs/github.com/rs/xid \
+	sirupsen:logrus:v1.0.5:sirupsen/github.com/sirupsen/logrus \
+	spf13:afero:v1.1.1:spf13/github.com/spf13/afero \
+	spf13:cast:v1.2.0:spf13/github.com/spf13/cast \
+	spf13:cobra:v0.0.3:spf13/github.com/spf13/cobra \
+	spf13:jwalterweatherman:7c0cea3:spf13/github.com/spf13/jwalterweatherman \
+	spf13:pflag:v1.0.1:spf13/github.com/spf13/pflag \
+	spf13:viper:v1.0.2:spf13/github.com/spf13/viper \
+	ugorji:go:v1.1.1:ugorji/github.com/ugorji/go \
+	zsais:go-gin-prometheus:3f93884:zsais/github.com/zsais/go-gin-prometheus
 
 do-build:
-	${RLN} ${GO_WRKSRC} ${GO_WRKSRC}/src
-	cd ${GO_WRKSRC} && ${SETENV} ${MAKE_ENV} ${GO_ENV} GOPATH="${LOCAL_GOPATH}:${GO_WRKSRC}" \
-		${GO_CMD} build -ldflags "-X main.Version=${GH_TAGNAME}" \
-		  -v -o bin/${PORTNAME}
+	${MKDIR} ${WRKSRC}/${GO_PKGNAME:H}
+	${RLN} ${WRKSRC} ${WRKSRC}/${GO_PKGNAME}
+	${RLN} ${WRKSRC} ${WRKSRC}/src
+	${RLN} ${WRKSRC} ${WRKSRC}/vendor
+	cd ${WRKSRC}
+	${SETENV} ${MAKE_ENV} ${GO_ENV} GOPATH=${WRKDIR}:${GO_WRKSRC}:${LOCAL_GOPATH} \
+	  ${GO_CMD} build -ldflags "-X main.Version=${GH_TAGNAME}" -v -o bin/${PORTNAME}
 
 # do-install:
 #	${INSTALL_PROGRAM} ${WRKSRC}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
