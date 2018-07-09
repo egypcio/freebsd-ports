@@ -10,8 +10,6 @@ COMMENT=	Unofficial/experimental version of net/ooni-collector
 # LICENSE=	
 # LICENSE_FILE=	
 
-BUILD_DEPENDS=	dep:devel/dep
-
 CPE_VENDOR=	torproject
 
 PLIST_FILES=	bin/${PORTNAME}
@@ -20,8 +18,7 @@ USES=		go
 USE_GITHUB=	yes
 
 GO_PKGNAME=	github.com/ooni/collector
-GO_TARGET=	${GO_PKGNAME}/cmd \
-		${GO_PKGNAME}/collector/info
+GO_TARGET=	${GO_PKGNAME}/cmd
 
 GH_ACCOUNT=	ooni
 GH_PROJECT=	collector
@@ -70,14 +67,15 @@ GH_TUPLE=	AndreasBriese:bbloom:28f7e88:AndreasBriese/github.com/AndreasBriese/bb
 	ugorji:go:v1.1.1:ugorji/github.com/ugorji/go \
 	zsais:go-gin-prometheus:3f93884:zsais/github.com/zsais/go-gin-prometheus
 
-do-build:
+post-extract:
 	${MKDIR} ${WRKSRC}/${GO_PKGNAME:H}
-	${RLN} ${WRKSRC} ${WRKSRC}/${GO_PKGNAME}
-	${RLN} ${WRKSRC} ${WRKSRC}/src
-	${RLN} ${WRKSRC} ${WRKSRC}/vendor
+	${LN} -sf ${WRKSRC} ${WRKSRC}/${GO_PKGNAME}
+	${LN} -sf ${WRKSRC} ${WRKSRC}/src
+	${LN} -sf ${WRKSRC} ${WRKSRC}/vendor
+
+do-build:
 	cd ${WRKSRC}
-	${SETENV} ${MAKE_ENV} ${GO_ENV} GOPATH=${WRKDIR}:${GO_WRKSRC}:${LOCAL_GOPATH} \
-	  ${GO_CMD} build -ldflags "-X main.Version=${GH_TAGNAME}" -v -o bin/${PORTNAME}
+	${SETENV} ${MAKE_ENV} ${GO_ENV} ${GO_CMD} build -v -o bin/${PORTNAME}
 
 # do-install:
 #	${INSTALL_PROGRAM} ${WRKSRC}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
