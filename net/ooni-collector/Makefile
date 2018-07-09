@@ -40,10 +40,14 @@ GH_TUPLE=	apex:log:v1.0.0:apex/github.com/apex/log \
 		rs:xid:v1.1.0:rs/github.com/rs/xid \
 		spf13:cobra:v0.0.3:spf13/github.com/spf13/cobra \
 		spf13:viper:v1.0.2:spf13/github.com/spf13/viper \
+		  spf13:afero:v1.1.1:spf13/github.com/spf13/afero \
+		  spf13:jwalterweatherman:7c0cea3:spf13/github.com/spf13/jwalterweatherman \
+		  spf13:pflag:v1.0.1:spf13/github.com/spf13/pflag \
 		  fsnotify:fsnotify:v1.4.7:fsnotify/github.com/fsnotify/fsnotify \
 		  hashicorp:hcl:ef8a98b:hashicorp/github.com/hashicorp/hcl \
 		  magiconair:properties:v1.8.0:magiconair/github.com/magiconair/properties \
 		  mitchellh:mapstructure:bb74f1d:mitchellh/github.com/mitchellh/mapstructure \
+		  pelletier:go-toml:v1.2.0:pelletier/github.com/pelletier/go-toml \
 		zsais:go-gin-prometheus:3f93884:zsais/github.com/zsais/go-gin-prometheus
 
 GO_PKGNAME=	${GH_SUBDIR}
