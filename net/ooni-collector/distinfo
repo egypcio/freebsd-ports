@@ -1,6 +1,6 @@
-TIMESTAMP = 1531131369
-SHA256 (ooni-collector-v2.0.0-alpha_GH0.tar.gz) = 79226a565316a41bc1619d807e994f5f3313ac051acd02d25693d4077a8140c2
-SIZE (ooni-collector-v2.0.0-alpha_GH0.tar.gz) = 14162
+TIMESTAMP = 1531131953
+SHA256 (ooni-collector-2.0.0-v2.0.0-alpha_GH0.tar.gz) = 79226a565316a41bc1619d807e994f5f3313ac051acd02d25693d4077a8140c2
+SIZE (ooni-collector-2.0.0-v2.0.0-alpha_GH0.tar.gz) = 14162
 SHA256 (apex-log-v1.0.0_GH0.tar.gz) = 05791b9284d47eb563895b0c462be42a76e54be041db755b82d3643bf9ca76dd
 SIZE (apex-log-v1.0.0_GH0.tar.gz) = 23908
 SHA256 (aws-aws-sdk-go-v1.14.21_GH0.tar.gz) = 7e2365189849a09e1fec6504b124393c5c54dc2ef2a67c998eae00439383aa84
