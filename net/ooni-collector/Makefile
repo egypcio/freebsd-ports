@@ -23,6 +23,7 @@ GH_TAGNAME=	v${DISTVERSION}-alpha
 GH_SUBDIR=	github.com/ooni/collector
 
 GH_TUPLE=	apex:log:v1.0.0:apex/github.com/apex/log \
+		  pkg:errors:v0.8.0:pkg/github.com/pkg/errors \
 		aws:aws-sdk-go:v1.14.21:aws/github.com/aws/aws-sdk-go \
 		dgraph-io:badger:v1.5.2:dgraph/github.com/dgraph-io/badger \
 		  AndreasBriese:bbloom:28f7e88:AndreasBriese/github.com/AndreasBriese/bbloom \
@@ -32,6 +33,11 @@ GH_TUPLE=	apex:log:v1.0.0:apex/github.com/apex/log \
 		facebookgo:grace:75cf193:facebook/github.com/facebookgo/grace \
 		  facebookgo:httpdown:5979d39:facebook/github.com/facebookgo/httpdown \
 		gin-gonic:gin:v1.2:gin/github.com/gin-gonic/gin \
+		  gin-contrib:sse:22d885f:gin/github.com/gin-contrib/sse \
+		  mattn:go-isatty:v0.0.3:mattn/github.com/mattn/go-isatty \
+		  ugorji:go:v1.1.1:ugorji/github.com/ugorji/go \
+		  go-playground:validator:v8.18.2:pkgin/gopkg.in/go-playground/validator.v8 \
+		  go-yaml:yaml:v2.2.1:pkgin/gopkg.in/go-yaml/yaml.v2 \
 		  golang:protobuf:v1.1.0:golang/golang.org/x/protobuf \
 		prometheus:client_golang:v0.8.0:prometheus/github.com/prometheus/client_golang \
 		  prometheus:common:7600349:prometheus/github.com/prometheus/common \
@@ -48,7 +54,8 @@ GH_TUPLE=	apex:log:v1.0.0:apex/github.com/apex/log \
 		  magiconair:properties:v1.8.0:magiconair/github.com/magiconair/properties \
 		  mitchellh:mapstructure:bb74f1d:mitchellh/github.com/mitchellh/mapstructure \
 		  pelletier:go-toml:v1.2.0:pelletier/github.com/pelletier/go-toml \
-		zsais:go-gin-prometheus:3f93884:zsais/github.com/zsais/go-gin-prometheus
+		zsais:go-gin-prometheus:3f93884:zsais/github.com/zsais/go-gin-prometheus \
+		  sirupsen:logrus:v1.0.5:sirupsen/github.com/sirupsen/logrus
 
 GO_PKGNAME=	${GH_SUBDIR}
 
