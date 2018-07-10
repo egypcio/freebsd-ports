@@ -7,8 +7,8 @@ CATEGORIES=	net net-mgmt
 MAINTAINER=	egypcio@googlemail.com
 COMMENT=	Unofficial/experimental version of net/ooni-collector
 
-# LICENSE=
-# LICENSE_FILE=
+# LICENSE=	?
+# LICENSE_FILE=	?
 
 CPE_VENDOR=	torproject
 
@@ -18,7 +18,8 @@ USES=		go
 USE_GITHUB=	yes
 
 GO_PKGNAME=	github.com/${GH_ACCOUNT}/${GH_PROJECT}
-GO_TARGET=	${GO_PKGNAME}/cmd
+GO_TARGET=	${GO_PKGNAME}/cmd \
+		${GO_PKGNAME}/collector/info
 
 GH_ACCOUNT=	ooni
 GH_PROJECT=	collector
@@ -76,10 +77,10 @@ pre-build:
 
 do-build:
 	cd ${GO_WRKSRC} && \
-	${SETENV} ${MAKE_ENV} ${GO_ENV} GOPATH=${GO_WRKSRC}/ \
+	${SETENV} ${MAKE_ENV} ${GO_ENV} GOPATH=${LOCAL_GOPATH}:${GO_WRKSRC} \
 	  ${GO_CMD} build -v -o ${WRKDIR}/bin/${PORTNAME}
 
-do-install:
-	${INSTALL_PROGRAM} ${WRKDIR}/bin/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
+# do-install:
+#	${INSTALL_PROGRAM} ${WRKDIR}/bin/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
 
 .include <bsd.port.mk>
