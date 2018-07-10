@@ -7,8 +7,8 @@ CATEGORIES=	net net-mgmt
 MAINTAINER=	egypcio@googlemail.com
 COMMENT=	Unofficial/experimental version of net/ooni-collector
 
-# LICENSE=	?
-# LICENSE_FILE=	?
+LICENSE=	BSD3CLAUSE
+# LICENSE_FILE=	https://github.com/ooni/license/blob/master/software/LICENSE.md
 
 CPE_VENDOR=	torproject
 
