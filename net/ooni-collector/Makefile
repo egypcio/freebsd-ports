@@ -69,14 +69,14 @@ GH_TUPLE=	AndreasBriese:bbloom:28f7e88:AndreasBriese/github.com/AndreasBriese/bb
 
 pre-build:
 	${MKDIR} ${GO_WRKSRC}/code.google.com/p
-	  ${RLN} ${GO_WRKSRC}/github.com/golang/protobuf ${GO_WRKSRC}/code.google.com/p/goprotobuf
+	  ${RLN} ${GO_WRKSRC}/github.com/golang/protobuf ${WRKSRC}/code.google.com/p/goprotobuf
 	${MKDIR} ${GO_WRKSRC}/${GO_PKGNAME:H}
-	  ${RLN} ${GO_WRKSRC} ${GO_WRKSRC}/${GO_PKGNAME}
-	  ${RLN} ${GO_WRKSRC} ${GO_WRKSRC}/src
+	  ${RLN} ${GO_WRKSRC} ${WRKSRC}/${GO_PKGNAME}
+	  ${RLN} ${GO_WRKSRC} ${WRKSRC}/src
 
 do-build:
-	cd ${GO_WRKSRC}
-	${SETENV} ${MAKE_ENV} ${GO_ENV} GOPATH=${WRKSRC}:${GO_WRKSRC} \
+	cd ${GO_WRKSRC} && \
+	${SETENV} ${MAKE_ENV} ${GO_ENV} GOPATH=${GO_WRKSRC}/ \
 	  ${GO_CMD} build -v -o ${WRKDIR}/bin/${PORTNAME}
 
 do-install:
