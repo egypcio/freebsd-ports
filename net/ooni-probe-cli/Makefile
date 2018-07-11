@@ -44,11 +44,11 @@ GH_TUPLE=	ooni:license:3c9d2d8:ooni_license/LICENSE_FILE \
 	alecthomas:units:2efee85:alecthomas_units/github.com/alecthomas/units \
 	fatih:color:v1.7.0:fatih_color/github.com/fatih/color \
 	mattn:go-colorable:v0.0.9:mattn_colorable/github.com/mattn/go-colorable \
-	mattn:go-sqlite3:v1.7.0/mattn_sqlite/github.com/mattn/go-sqlite3 \
+	mattn:go-sqlite3:v1.7.0:mattn_sqlite/github.com/mattn/go-sqlite3 \
 	mgutz:ansi:9520e82:mgutz_ansi/github.com/mgutz/ansi \
 	mitchellh:go-homedir:3864e76:mitchellh_homedir/github.com/mitchellh/go-homedir \
 	oschwald:maxminddb-golang:v1.3.0:oschwald_maxmind/github.com/oschwald/maxminddb-golang \
-	rubenv:sql-migrate:3f452fc:/github.com/rubenv/sql-migrate
+	rubenv:sql-migrate:3f452fc:rubenv_migrate/github.com/rubenv/sql-migrate
 
 pre-build:
 	${MKDIR} ${GO_WRKSRC}/code.google.com/p
