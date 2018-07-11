@@ -27,8 +27,8 @@ GH_TAGNAME=	ba05669
 GH_TUPLE=	ooni:license:3c9d2d8:ooni_license/LICENSE_FILE \
 	measurement-kit:go-measurement-kit:4fe2e61:mk_go/github.com/measurement-kit/go-measurement-kit \
 	alecthomas:kingpin:v2.2.6:alecthomas_kingpin/github.com/alecthomas/kingpin \
-        pkg:errors:v0.8.0:pkg_errors/github.com/pkg/errors \
-        AlecAivazis:survey:v1.4.1:AlecAivazis_survey/gopkg.in/AlecAivazis/survey.v1 \
+	pkg:errors:v0.8.0:pkg_errors/github.com/pkg/errors \
+	AlecAivazis:survey:v1.4.1:AlecAivazis_survey/gopkg.in/AlecAivazis/survey.v1 \
 	apex:log:v1.0.0:apex_log/github.com/apex/log \
 	shuLhan:go-bindata:v3.3.0:shuLhan_bindata/github.com/shuLhan/go-bindata \
 	oschwald:geoip2-golang:v1.2.1:oschwald_geoip/github.com/oschwald/geoip2-golang \
