@@ -8,7 +8,7 @@ MAINTAINER=	egypcio@googlemail.com
 COMMENT=	Unofficial/experimental version of net/ooni-probe
 
 LICENSE=	BSD3CLAUSE
-# LICENSE_FILE=	${WRLDIR}/LICENSE_FILE/software/LICENSE.md
+LICENSE_FILE=	${GO_WRKSRC}/LICENSE_FILE/software/LICENSE.md
 
 CPE_VENDOR=	torproject
 
@@ -16,6 +16,10 @@ PLIST_FILES=	bin/${PORTNAME}
 
 USES=		go
 USE_GITHUB=	yes
+
+GO_PKGNAME=	github.com/${GH_ACCOUNT}/${GH_PROJECT}
+CGO_CFLAGS+=	-I${GO_WRKSRC}/github.com/measurement-kit/include
+CGO_LDFLAGS+=	-L${GO_WRKSRC}/github.com/measurement-kit/.libs
 
 GH_ACCOUNT=	ooni
 GH_PROJECT=	probe-cli
@@ -60,9 +64,9 @@ pre-build:
 do-build:
 	cd ${GO_WRKSRC} && \
 	${SETENV} ${MAKE_ENV} ${GO_ENV} GOPATH=${LOCAL_GOPATH}:${GO_WRKSRC} \
-	${GO_CMD} build -v -o ${WRKDIR}/bin/${PORTNAME}
+	${GO_CMD} build -v -o ${GO_WRKDIR_BIN}/${PORTNAME}
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
+	${INSTALL_PROGRAM} ${GO_WRKDIR_BIN}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
 
 .include <bsd.port.mk>
