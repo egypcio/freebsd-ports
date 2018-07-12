@@ -6,7 +6,7 @@ CATEGORIES=	security net python
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 
 MAINTAINER=	egypcio@googlemail.com
-COMMENT=	Unofficial/experimental version of security/fteproxy
+COMMENT=	Programmable proxy for censorship circumvention
 
 LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/LICENSE
