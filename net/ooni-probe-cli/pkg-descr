@@ -1,3 +1,6 @@
-Next generation OONI Probe CLI, GOONI
+The Open Observatory of Network Interference (OONI) Probe is a groundbreaking
+and complex tool intended for use primarily by network interference researchers.
 
-WWW: https://github.com/ooni/probe-cli
+This is the next generation of OONI Probe, written in Go (a.k.a. Gooni).
+
+WWW: https://ooni.torproject.org

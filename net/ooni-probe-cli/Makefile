@@ -5,21 +5,19 @@ DISTVERSION=	g20180531
 CATEGORIES=	net
 
 MAINTAINER=	egypcio@googlemail.com
-COMMENT=	Unofficial/experimental version of net/ooni-probe
+COMMENT=	OONI Probe written in Go (Gooni)
 
 LICENSE=	BSD3CLAUSE
 LICENSE_FILE=	${GO_WRKSRC}/LICENSE_FILE/software/LICENSE.md
 
 CPE_VENDOR=	torproject
 
-PLIST_FILES=	bin/${PORTNAME}
-
-USES=		go
+USES=		cpe go localbase:ldflags
 USE_GITHUB=	yes
 
 GO_PKGNAME=	github.com/${GH_ACCOUNT}/${GH_PROJECT}
-CGO_CFLAGS+=	-I${GO_WRKSRC}/github.com/measurement-kit/go-measurement-kit/include
-CGO_LDFLAGS+=	-L${GO_WRKSRC}/github.com/measurement-kit/go-measurement-kit/libs
+CGO_CFLAGS+=	-I${GO_WRKSRC}/github.com/measurement-kit/measurement-kit/include
+CGO_LDFLAGS+=	-L${GO_WRKSRC}/github.com/measurement-kit/measurement-kit/libs
 
 GH_ACCOUNT=	ooni
 GH_PROJECT=	probe-cli
@@ -41,6 +39,7 @@ GH_TUPLE=	ooni:license:3c9d2d8:ooni_license/LICENSE_FILE \
 	mattn:go-isatty:v0.0.3:mattn/github.com/mattn/go-isatty \
 	mattn:go-sqlite3:v1.7.0:mattn_sqlite/github.com/mattn/go-sqlite3 \
 	matttproud:golang_protobuf_extensions:v1.0.1:matttproud/github.com/matttproud/golang_protobuf_extensions \
+	measurement-kit:measurement-kit:v0.8.3:mk_libs/github.com/measurement-kit/measurement-kit \
 	measurement-kit:go-measurement-kit:4fe2e61:mk_go/github.com/measurement-kit/go-measurement-kit \
 	mgutz:ansi:9520e82:mgutz_ansi/github.com/mgutz/ansi \
 	oschwald:geoip2-golang:v1.2.1:oschwald_geoip/github.com/oschwald/geoip2-golang \
@@ -52,6 +51,8 @@ GH_TUPLE=	ooni:license:3c9d2d8:ooni_license/LICENSE_FILE \
 	prometheus:procfs:ae68e2d:prometheus_procfs/github.com/prometheus/procfs \
 	rubenv:sql-migrate:3f452fc:rubenv_migrate/github.com/rubenv/sql-migrate \
 	shuLhan:go-bindata:v3.3.0:shuLhan_bindata/github.com/shuLhan/go-bindata
+
+PLIST_FILES=	bin/${PORTNAME}
 
 pre-build:
 	${MKDIR} ${GO_WRKSRC}/code.google.com/p
