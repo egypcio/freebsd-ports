@@ -1,10 +1,11 @@
 # $FreeBSD$
 
-PORTNAME=	tor
-DISTVERSION=	0.3.4.3-alpha
-CATEGORIES=	security net ipv6
-MASTER_SITES=	TOR
-PKGNAMESUFFIX=	-devel
+PORTNAME=		tor
+DISTVERSION=		0.3.4.5
+DISTVERSIONSUFFIX=	-rc
+CATEGORIES=		security net ipv6
+MASTER_SITES=		TOR
+PKGNAMESUFFIX=		-devel
 
 MAINTAINER=	egypcio@googlemail.com
 COMMENT=	Unofficial/experimental version of security/tor-devel
