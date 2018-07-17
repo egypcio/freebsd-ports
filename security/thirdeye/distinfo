@@ -1,5 +1,9 @@
-TIMESTAMP = 1531496524
+TIMESTAMP = 1531835549
 SHA256 (eyedeekay-thirdeye-g20180617-b2970b3_GH0.tar.gz) = ad8655cdcb5819d4002f21be28fc19287cc25db566ebee54d971a610fcf79cac
 SIZE (eyedeekay-thirdeye-g20180617-b2970b3_GH0.tar.gz) = 210044
-SHA256 (eyedeekay-gosam-d26bbfb_GH0.tar.gz) = 4667a8ffb45ffa4183f2144420dc191966c56dae568ffe8db3fb221bc88d0cb2
-SIZE (eyedeekay-gosam-d26bbfb_GH0.tar.gz) = 13857
+SHA256 (eyedeekay-goSam-d26bbfb_GH0.tar.gz) = 4667a8ffb45ffa4183f2144420dc191966c56dae568ffe8db3fb221bc88d0cb2
+SIZE (eyedeekay-goSam-d26bbfb_GH0.tar.gz) = 13857
+SHA256 (cryptix-go-v1.3.0_GH0.tar.gz) = ed40dcac5319da11259ee0ec7193227db4a5c829bfec8b0e931c21c77858fe7d
+SIZE (cryptix-go-v1.3.0_GH0.tar.gz) = 14189
+SHA256 (miolini-datacounter-fd4e42a_GH0.tar.gz) = f536ca2fd62d367dfbaa93dd5365d6176847e00c59a5e973b20989746b226c1a
+SIZE (miolini-datacounter-fd4e42a_GH0.tar.gz) = 2900
