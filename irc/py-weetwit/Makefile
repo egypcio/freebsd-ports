@@ -10,7 +10,7 @@ MAINTAINER=	egypcio@googlemail.com
 COMMENT=	Unofficial/experimental version of irc/py-weetwit
 
 LICENSE=	BSD2CLAUSE
-LICENSE_FILE=	${WRKSRC}/LICENSE
+LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
 USES=		python
 USE_PYTHON=	autoplist distutils
