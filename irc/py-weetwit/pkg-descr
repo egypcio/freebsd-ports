@@ -1,0 +1,8 @@
+Weetwit is a plugin for Weechat that transforms it int a fully-featured
+Twitter client.
+
+Before you can use it, you have to create a new application at Twitter. The
+reason for this is that I can’t include the application keys without t
+becoming public knowledge. The application needs read/write access.
+
+WWW: https://pypi.org/project/weetwit/
