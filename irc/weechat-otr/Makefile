@@ -2,7 +2,7 @@
 
 PORTNAME=	weechat-otr
 PORTVERSION=	1.9.2
-CATEGORIES=	net security python
+CATEGORIES=	irc security python
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 
 MAINTAINER=	egypcio@googlemail.com
