@@ -10,7 +10,7 @@ COMMENT=	Unofficial/experimental version of irc/weechat-otr
 
 # LICENSE=	?
 
-RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}potr-1.0.1:security/py-potr@${PY_FLAVOR}
+RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}potr>=1.0.1:security/py-potr@${PY_FLAVOR}
 BUILD_DEPENDS=	${RUN_DEPENDS}
 
 USES=		python
