@@ -11,8 +11,8 @@ COMMENT=	WeeChat script for Off-the-Record (OTR) messaging
 LICENSE=	GPLv3
 
 BUILD_DEPENDS=	${PYTHON_PKGNAMEPREFIX}potr>=1.0.1:security/py-potr@${PY_FLAVOR}
-RUN_DEPENDS=	${BUILD_DEPENDS} \
-	weechat:irc/weechat
+RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}potr>=1.0.1:security/py-potr@${PY_FLAVOR} \
+		weechat:irc/weechat
 
 USES=		python
 USE_GITHUB=	yes
