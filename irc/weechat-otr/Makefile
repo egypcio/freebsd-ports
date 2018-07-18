@@ -6,12 +6,13 @@ CATEGORIES=	irc security python
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 
 MAINTAINER=	egypcio@googlemail.com
-COMMENT=	Unofficial/experimental version of irc/weechat-otr
+COMMENT=	WeeChat script for Off-the-Record (OTR) messaging
 
 LICENSE=	GPLv3
 
-RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}potr>=1.0.1:security/py-potr@${PY_FLAVOR}
-BUILD_DEPENDS=	${RUN_DEPENDS}
+BUILD_DEPENDS=	${PYTHON_PKGNAMEPREFIX}potr>=1.0.1:security/py-potr@${PY_FLAVOR}
+RUN_DEPENDS=	${BUILD_DEPENDS} \
+	weechat:irc/weechat
 
 USES=		python
 USE_GITHUB=	yes
