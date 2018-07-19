@@ -68,12 +68,12 @@ DOCS_BUILD_DEPENDS=		asciidoc:textproc/asciidoc
 GNUMAKE_USES=			gmake
 LZMA_CONFIGURE_ENABLE=		lzma
 LZMA_LIB_DEPENDS=		liblzma.so:archivers/lzmalib
-SSLTLS_BASE_CONFIGURE_ENV=	OPENSSLRPATH=/usr/lib
 SSLTLS_BASE_LIB_DEPENDS=	libevent.so:devel/libevent
-SSLTLS_PORTS_CONFIGURE_ENV=	OPENSSLRPATH=${OPENSSLLIB}
-SSLTLS_PORTS_LIB_DEPENDS=	libevent.so:devel/libevent \
-				libcrypto.so:${OPENSSL_PORT} \
-				libssl.so:${OPENSSL_PORT}
+SSLTLS_BASE_MAKE_ENV=		OPENSSLRPATH=/usr/lib
+SSLTLS_PORTS_BUILD_DEPENDS=	openssl:${OPENSSL_PORT}
+SSLTLS_PORTS_LIB_DEPENDS=	libevent.so:devel/libevent
+SSLTLS_PORTS_MAKE_ENV=		OPENSSLRPATH=${OPENSSLLIB}
+STATIC_CONFIGURE_ARGS=		--disable-linker-hardening
 STATIC_CONFIGURE_ENABLE=	static-tor
 STATIC_BUILD_DEPENDS=		${LOCALBASE}/lib/libevent.a:devel/libevent
 STATIC_USES=			ssl:build
