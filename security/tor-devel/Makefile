@@ -80,6 +80,7 @@ STATIC_USES=			ssl:build
 STATIC_USES_OFF=		ssl
 TCMALLOC_CONFIGURE_ON=		--with-tcmalloc
 TCMALLOC_LIB_DEPENDS=		libtcmalloc.so:devel/google-perftools
+TCMALLOC_USES=			localbase:ldflags
 TOR2WEB_CONFIGURE_ENABLE=	tor2web-mode
 ZSTD_CONFIGURE_ENABLE=		zstd
 ZSTD_LIB_DEPENDS=		libzstd.so:archivers/zstd
