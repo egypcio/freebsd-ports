@@ -1,9 +1,10 @@
 # $FreeBSD$
 
-PORTNAME=	weechat-otr
-PORTVERSION=	1.9.2
-CATEGORIES=	irc security python
-PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
+PORTNAME=		weechat-otr
+DISTVERSIONPREFIX=	v
+DISTVERSION=		1.9.2
+CATEGORIES=		irc security python
+PKGNAMEPREFIX=		${PYTHON_PKGNAMEPREFIX}
 
 MAINTAINER=	egypcio@googlemail.com
 COMMENT=	WeeChat script for Off-the-Record (OTR) messaging
@@ -18,7 +19,6 @@ USES=		python
 USE_GITHUB=	yes
 
 GH_ACCOUNT=	mmb
-GH_TAGNAME=	v${PORTVERSION}
 
 NO_BUILD=	yes
 
