@@ -67,7 +67,6 @@ DOCS_CONFIGURE_ENABLE=		asciidoc
 DOCS_BUILD_DEPENDS=		asciidoc:textproc/asciidoc
 GNUMAKE_USES=			gmake
 LZMA_CONFIGURE_ENABLE=		lzma
-LZMA_LIB_DEPENDS=		liblzma.so:archivers/lzmalib
 SSLTLS_BASE_LIB_DEPENDS=	libevent.so:devel/libevent
 SSLTLS_BASE_MAKE_ENV=		OPENSSLRPATH=/usr/lib
 SSLTLS_PORTS_BUILD_DEPENDS=	openssl:${OPENSSL_PORT}
