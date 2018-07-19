@@ -19,7 +19,7 @@ BROKEN_sparc64=		Does not build: error: Need a uint128_t implementation!
 
 CPE_VENDOR=	torproject
 
-USES=		cpe
+USES=		cpe pkgconfig
 
 GNU_CONFIGURE=	yes
 
@@ -46,7 +46,7 @@ OPTIONS_RADIO_MALLOC=		DMALLOC TCMALLOC
 OPTIONS_SINGLE=			SSLTLS
 OPTIONS_SINGLE_SSLTLS=		SSLTLS_BASE SSLTLS_PORTS
 
-COMPRESSION_DESC=	Compression support scheme
+COMPRESSION_DESC=	Compression support schemes
 DMALLOC_DESC=		Use debug memory allocation library
 MALLOC_DESC=		Dynamic memory allocation management
 GNUMAKE_DESC=		Use 'GNU Make' as default make tool
@@ -70,7 +70,6 @@ LZMA_CONFIGURE_ENABLE=		lzma
 LZMA_LIB_DEPENDS=		liblzma.so:archivers/lzmalib
 SSLTLS_BASE_CONFIGURE_ENV=	OPENSSLRPATH=/usr/lib
 SSLTLS_BASE_LIB_DEPENDS=	libevent.so:devel/libevent
-SSLTLS_PORTS_USES=		localbase
 SSLTLS_PORTS_CONFIGURE_ENV=	OPENSSLRPATH=${OPENSSLLIB}
 SSLTLS_PORTS_LIB_DEPENDS=	libevent.so:devel/libevent \
 				libcrypto.so:${OPENSSL_PORT} \
@@ -84,7 +83,6 @@ TCMALLOC_LIB_DEPENDS=		libtcmalloc.so:devel/google-perftools
 TOR2WEB_CONFIGURE_ENABLE=	tor2web-mode
 ZSTD_CONFIGURE_ENABLE=		zstd
 ZSTD_LIB_DEPENDS=		libzstd.so:archivers/zstd
-ZSTD_USES=			pkgconfig
 
 USERS=		_tor
 GROUPS=		_tor
@@ -113,14 +111,14 @@ BUILD_DEPENDS+=		${OPENSSLBASE}/lib/libcrypto.a:${OPENSSL_PORT} \
 
 pre-everything::
 .if ${PORT_OPTIONS:MTOR2WEB}
-	@${ECHO_MSG} "									"
-	@${ECHO_MSG} "  WARNING: TOR2WEB is enabled! This option makes Tor working	"
-	@${ECHO_MSG} "	  only for *non-anonymous* hidden service traffic.		"
-	@${ECHO_MSG} "	  Please make sure you understand this option to proceed!	"
-	@${ECHO_MSG} "									"
-	@${ECHO_MSG} "	You may want to stop build with Ctrl+C.				"
-	@${ECHO_MSG} "									"
-	sleep 10
+	@${ECHO_MSG} "                                                            "
+	@${ECHO_MSG} "  WARNING: TOR2WEB is enabled! This option makes Tor work   "
+	@${ECHO_MSG} "    only for *non-anonymous* hidden service traffic.        "
+	@${ECHO_MSG} "    Please make sure you understand this option to proceed! "
+	@${ECHO_MSG} "                                                            "
+	@${ECHO_MSG} "  You may want to stop build with Ctrl+C.                   "
+	@${ECHO_MSG} "                                                            "
+	@sleep 10
 .endif
 
 post-patch:
@@ -132,14 +130,6 @@ post-patch:
 		${WRKSRC}/src/config/torrc.*.in \
 		${WRKSRC}/doc/tor.1.* \
 		${WRKSRC}/doc/tor.html.in
-
-# post-patch-STATIC-off:
-#	@${REINPLACE_CMD} -e "s@-ltcmalloc@${LOCALBASE}/lib/libtcmalloc.so@" \
-#		${WRKSRC}/configure
-#
-# post-patch-STATIC-on:
-#	@${REINPLACE_CMD} -e "s@-ltcmalloc@${LOCALBASE}/lib/libtcmalloc.a@" \
-#		${WRKSRC}/configure
 
 post-install:
 	@${MKDIR} ${STAGEDIR}/var/db/tor ${STAGEDIR}/var/log/tor ${STAGEDIR}/var/run/tor
