@@ -1,9 +1,10 @@
 # $FreeBSD$
 
-PORTNAME=	tor
-PORTVERSION=	0.3.3.9
-CATEGORIES=	security net ipv6
-MASTER_SITES=	TOR
+PORTNAME=		tor
+DISTVERSION=		0.3.3.9
+CATEGORIES=		security net ipv6
+MASTER_SITES=		TOR
+PKGNAMESUFFIX=		-devel
 
 MAINTAINER=	egypcio@googlemail.com
 COMMENT=	Unofficial/experimental version of security/tor
@@ -17,7 +18,7 @@ BROKEN_sparc64=		Does not build: error: Need a uint128_t implementation!
 
 CPE_VENDOR=	torproject
 
-USES=		cpe
+USES=		cpe pkgconfig
 
 GNU_CONFIGURE=	yes
 
@@ -36,25 +37,28 @@ CONFIGURE_ENV=	TOR_CPPFLAGS_libevent='-I${LOCALBASE}/include' \
 
 MAKE_ENV=	USE_OPENSSL_RPATH=yes
 
-OPTIONS_DEFINE=		DOCS EXAMPLES GNUMAKE LZMA STATIC TOR2WEB ZSTD
-OPTIONS_RADIO=		MALLOC
-OPTIONS_RADIO_MALLOC=	DMALLOC TCMALLOC
-OPTIONS_SINGLE=		SSLTLS
-OPTIONS_SINGLE_SSLTLS=	BASE_SSLTLS PORTS_SSLTLS
+OPTIONS_DEFINE=			DOCS EXAMPLES GNUMAKE STATIC TOR2WEB
+OPTIONS_GROUP=			COMPRESSION
+OPTIONS_GROUP_COMPRESSION=	LZMA ZSTD
+OPTIONS_RADIO=			MALLOC
+OPTIONS_RADIO_MALLOC=		DMALLOC TCMALLOC
+OPTIONS_SINGLE=			SSLTLS
+OPTIONS_SINGLE_SSLTLS=		SSLTLS_BASE SSLTLS_PORTS
 
+COMPRESSION_DESC=	Compression support schemes
 DMALLOC_DESC=		Use debug memory allocation library
 MALLOC_DESC=		Dynamic memory allocation management
-GNUMAKE_DESC=		Use 'gmake' as default 'make' tool
+GNUMAKE_DESC=		Use 'GNU Make' as default make tool
 SSLTLS_DESC=		SSL/TLS support
-BASE_SSLTLS_DESC=	Use FreeBSD's base SSL/TLS libraries
-PORTS_SSLTLS_DESC=	Use SSL/TLS from ports instead of FreeBSD's
-LZMA_DESC=		LZMA compression support scheme
+SSLTLS_BASE_DESC=	Use FreeBSD's base SSL/TLS libraries
+SSLTLS_PORTS_DESC=	Use SSL/TLS from ports instead of FreeBSD's
+LZMA_DESC=		Lempel-Ziv-Markov (LZMA)
 STATIC_DESC=		Create an entirely static Tor binary
 TCMALLOC_DESC=		Use tcmalloc memory allocation library
 TOR2WEB_DESC=		Support Tor2Web non-anonymous mode
-ZSTD_DESC=		Zstandard compression support scheme
+ZSTD_DESC=		Zstandard (Zstd)
 
-OPTIONS_DEFAULT=	DOCS EXAMPLES BASE_SSLTLS
+OPTIONS_DEFAULT=	DOCS EXAMPLES SSLTLS_BASE
 
 DMALLOC_CONFIGURE_ON=		--with-dmalloc
 DMALLOC_LIB_DEPENDS=		libdmalloc.so:devel/dmalloc
@@ -62,24 +66,22 @@ DOCS_CONFIGURE_ENABLE=		asciidoc
 DOCS_BUILD_DEPENDS=		asciidoc:textproc/asciidoc
 GNUMAKE_USES=			gmake
 LZMA_CONFIGURE_ENABLE=		lzma
-LZMA_USES=			pkgconfig
-BASE_SSLTLS_CONFIGURE_ENV=	OPENSSLRPATH=/usr/lib
-BASE_SSLTLS_LIB_DEPENDS=	libevent.so:devel/libevent
-PORTS_SSLTLS_USES=		localbase
-PORTS_SSLTLS_CONFIGURE_ENV=	OPENSSLRPATH=${OPENSSLLIB}
-PORTS_SSLTLS_LIB_DEPENDS=	libevent.so:devel/libevent \
-				libcrypto.so:${OPENSSL_PORT} \
-				libssl.so:${OPENSSL_PORT}
+SSLTLS_BASE_LIB_DEPENDS=	libevent.so:devel/libevent
+SSLTLS_BASE_MAKE_ENV=		OPENSSLRPATH=/usr/lib
+SSLTLS_PORTS_BUILD_DEPENDS=	openssl:${OPENSSL_PORT}
+SSLTLS_PORTS_LIB_DEPENDS=	libevent.so:devel/libevent
+SSLTLS_PORTS_MAKE_ENV=		OPENSSLRPATH=${OPENSSLLIB}
+STATIC_CONFIGURE_ARGS=		--disable-linker-hardening
 STATIC_CONFIGURE_ENABLE=	static-tor
 STATIC_BUILD_DEPENDS=		${LOCALBASE}/lib/libevent.a:devel/libevent
 STATIC_USES=			ssl:build
 STATIC_USES_OFF=		ssl
 TCMALLOC_CONFIGURE_ON=		--with-tcmalloc
 TCMALLOC_LIB_DEPENDS=		libtcmalloc.so:devel/google-perftools
+TCMALLOC_USES=			localbase:ldflags
 TOR2WEB_CONFIGURE_ENABLE=	tor2web-mode
 ZSTD_CONFIGURE_ENABLE=		zstd
 ZSTD_LIB_DEPENDS=		libzstd.so:archivers/zstd
-ZSTD_USES=			pkgconfig
 
 USERS=		_tor
 GROUPS=		_tor
@@ -100,7 +102,7 @@ BUILD_DEPENDS+=		${LOCALBASE}/lib/libdmalloc.a:devel/dmalloc
 .	if !empty(PORT_OPTIONS:MTCMALLOC)
 BUILD_DEPENDS+=		${LOCALBASE}/lib/libtcmalloc.a:devel/google-perftools
 .	endif
-.	if !empty(PORT_OPTIONS:MPORTS_SSLTLS)
+.	if !empty(PORT_OPTIONS:MSSLTLS_PORTS)
 BUILD_DEPENDS+=		${OPENSSLBASE}/lib/libcrypto.a:${OPENSSL_PORT} \
 			${OPENSSLBASE}/lib/libssl.a:${OPENSSL_PORT}
 .	endif
@@ -108,14 +110,14 @@ BUILD_DEPENDS+=		${OPENSSLBASE}/lib/libcrypto.a:${OPENSSL_PORT} \
 
 pre-everything::
 .if ${PORT_OPTIONS:MTOR2WEB}
-	@${ECHO_MSG}
-	@${ECHO_MSG} "WARNING: TOR2WEB is enabled! This option makes Tor working	"
-	@${ECHO_MSG} "	only for *non-anonymous* hidden service traffic.		"
-	@${ECHO_MSG} "	Please make sure you understand this option to proceed!		"
-	@${ECHO_MSG}
-	@${ECHO_MSG} "	You may want to stop build with Ctrl+C.				"
-	@${ECHO_MSG}
-	sleep 10
+	@${ECHO_MSG} "                                                            "
+	@${ECHO_MSG} "  WARNING: TOR2WEB is enabled! This option makes Tor work   "
+	@${ECHO_MSG} "    only for *non-anonymous* hidden service traffic.        "
+	@${ECHO_MSG} "    Please make sure you understand this option to proceed! "
+	@${ECHO_MSG} "                                                            "
+	@${ECHO_MSG} "  You may want to stop build with Ctrl+C.                   "
+	@${ECHO_MSG} "                                                            "
+	@sleep 10
 .endif
 
 post-patch:
@@ -127,14 +129,6 @@ post-patch:
 		${WRKSRC}/src/config/torrc.*.in \
 		${WRKSRC}/doc/tor.1.* \
 		${WRKSRC}/doc/tor.html.in
-
-post-patch-STATIC-off:
-	@${REINPLACE_CMD} -e "s@-ltcmalloc@${LOCALBASE}/lib/libtcmalloc.so@" \
-		${WRKSRC}/configure
-
-post-patch-STATIC-on:
-	@${REINPLACE_CMD} -e "s@-ltcmalloc@${LOCALBASE}/lib/libtcmalloc.a@" \
-		${WRKSRC}/configure
 
 post-install:
 	@${MKDIR} ${STAGEDIR}/var/db/tor ${STAGEDIR}/var/log/tor ${STAGEDIR}/var/run/tor
