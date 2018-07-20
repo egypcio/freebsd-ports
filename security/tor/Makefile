@@ -4,7 +4,6 @@ PORTNAME=		tor
 DISTVERSION=		0.3.3.9
 CATEGORIES=		security net ipv6
 MASTER_SITES=		TOR
-PKGNAMESUFFIX=		-devel
 
 MAINTAINER=	egypcio@googlemail.com
 COMMENT=	Unofficial/experimental version of security/tor
