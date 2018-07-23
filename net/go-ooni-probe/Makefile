@@ -1,6 +1,6 @@
 # $FreeBSD$
 
-PORTNAME=	ooni-probe-cli
+PORTNAME=	go-ooni-probe-cli
 DISTVERSION=	g20180531
 CATEGORIES=	net
 
@@ -52,7 +52,7 @@ GH_TUPLE=	ooni:license:3c9d2d8:ooni_license/LICENSE_FILE \
 	rubenv:sql-migrate:3f452fc:rubenv_migrate/github.com/rubenv/sql-migrate \
 	shuLhan:go-bindata:v3.3.0:shuLhan_bindata/github.com/shuLhan/go-bindata
 
-PLIST_FILES=	bin/${PORTNAME}
+PLIST_FILES=	bin/ooni-probe
 
 pre-build:
 	${MKDIR} ${GO_WRKSRC}/code.google.com/p
@@ -64,9 +64,9 @@ pre-build:
 do-build:
 	cd ${GO_WRKSRC} && \
 	${SETENV} ${MAKE_ENV} ${GO_ENV} GOPATH=${LOCAL_GOPATH}:${GO_WRKSRC} \
-	${GO_CMD} build -v -o ${GO_WRKDIR_BIN}/${PORTNAME}
+	${GO_CMD} build -v -o ${GO_WRKDIR_BIN}/ooni-probe
 
 do-install:
-	${INSTALL_PROGRAM} ${GO_WRKDIR_BIN}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
+	${INSTALL_PROGRAM} ${GO_WRKDIR_BIN}/ooni-probe ${STAGEDIR}${PREFIX}/bin
 
 .include <bsd.port.mk>
