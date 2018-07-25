@@ -1,2 +1,8 @@
+OONI (Open Observatory of Network Interference) is a global observation network
+which aims is to collect high quality data using open methodologies,
+using Free and Open Source Software (FL/OSS) to share observations and data
+about the various types, methods, and amounts of network tampering in the world.
 
-WWW: https://github.com/TheTorProject/ooni-probe
+OONI Probe is the client to perform network tests and measurements.
+
+WWW: https://ooni.torproject.org
