@@ -13,10 +13,12 @@ COMMENT=	Unofficial/experimental version of net/py-ooni-probe
 LICENSE=	BSD2CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-RUN_DEPENDS=	GeoIP>=1.6.12:net/GeoIP \
-	ca_root_nss>=3.38:security/ca_root_nss \
+RUN_DEPENDS=	tor:security/tor \
 	obfs4proxy:security/obfs4proxy-tor \
-	tor:security/tor
+	GeoIP>=1.6.12:net/GeoIP \
+	ca_root_nss>=3.38:security/ca_root_nss \
+	${PYTHON_SITELIBDIR}/dnet.so:net/py-libdnet@${PY_FLAVOR} \
+	${PYTHON_SITELIBDIR}/pcap.py:net/py-pcap@${PY_FLAVOR}
 
 LIB_DEPENDS=	libdnet.so:net/libdnet \
 	libffi.so:devel/libffi \
