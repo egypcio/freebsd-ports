@@ -1,4 +1,4 @@
---- lanserv/extcmd.c.orig	2018-07-30 08:08:12.020033000 +0000
+--- lanserv/extcmd.c.orig	2018-07-30 08:08:12 UTC
 +++ lanserv/extcmd.c
 @@ -53,16 +53,11 @@
   *      written permission.

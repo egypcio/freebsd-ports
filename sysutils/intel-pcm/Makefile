@@ -1,9 +1,8 @@
 # Created by: Adrian Chadd
-# $FreeBSD: head/sysutils/intel-pcm/Makefile 452864 2017-10-25 15:11:40Z swills $
+# $FreeBSD: head/sysutils/intel-pcm/Makefile 466729 2018-04-07 14:35:13Z dbaio $
 
 PORTNAME=	intel-pcm
 PORTVERSION=	201710
-PORTREVISION=	1
 CATEGORIES=	sysutils
 
 MAINTAINER=	imp@FreeBSD.org
@@ -21,7 +20,7 @@ GH_ACCOUNT=	opcm
 GH_PROJECT=	pcm
 GH_TAGNAME=	201710
 
-CONFLICTS_INSTALL=	intel-pcm-devel*
+CONFLICTS_INSTALL=	intel-pcm-devel
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/*.x ${STAGEDIR}${PREFIX}/sbin

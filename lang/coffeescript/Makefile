@@ -1,36 +1,38 @@
-# $FreeBSD$
+# $FreeBSD: head/lang/coffeescript/Makefile 473928 2018-07-04 22:00:27Z swills $
 
 PORTNAME=	coffeescript
-DISTVERSION=	2.2.4
+DISTVERSION=	2.3.1
 CATEGORIES=	lang
 
 MAINTAINER=	egypcio@googlemail.com
-COMMENT=	Unofficial/experimental version of lang/coffeescript
+COMMENT=	Unfancy JavaScript
 
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 RUN_DEPENDS=	node:www/node
 
-PORTEXAMPLES=	*.coffee
-
 USE_GITHUB=	yes
 GH_ACCOUNT=	jashkenas
 
-PLIST_SUB=	PORTEXAMPLES=""
-SUB_LIST=	PORTEXAMPLES=""
+PORTEXAMPLES=	*.coffee
 
-NO_BUILD=	yes
+CONFLICTS_INSTALL=	cake
 
 OPTIONS_DEFINE=	EXAMPLES
 
+NO_BUILD=	yes
+
 do-install:
 	${MKDIR} ${STAGEDIR}${PREFIX}/lib/node_modules/${PORTNAME}
-	${INSTALL_SCRIPT} ${WRKSRC}/bin/c* ${STAGEDIR}${PREFIX}/bin/. && \
-	${INSTALL_DATA} ${WRKSRC}/lib/${PORTNAME}/*.js ${STAGEDIR}${PREFIX}/lib/node_modules/${PORTNAME}/.
+	${INSTALL_SCRIPT} ${WRKSRC}/bin/cake ${STAGEDIR}${PREFIX}/bin
+	${INSTALL_SCRIPT} ${WRKSRC}/bin/coffee ${STAGEDIR}${PREFIX}/bin
+	${INSTALL_DATA} ${WRKSRC}/lib/${PORTNAME}/*.js \
+		${STAGEDIR}${PREFIX}/lib/node_modules/${PORTNAME}
 
 do-install-EXAMPLES-on:
 	${MKDIR} ${STAGEDIR}${EXAMPLESDIR}
-	${INSTALL_DATA} ${WRKSRC}/documentation/examples/${PORTEXAMPLES} ${STAGEDIR}${EXAMPLESDIR}
+	${INSTALL_DATA} ${WRKSRC}/documentation/examples/${PORTEXAMPLES} \
+		${STAGEDIR}${EXAMPLESDIR}
 
 .include <bsd.port.mk>
