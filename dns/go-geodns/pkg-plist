@@ -1,3 +1,3 @@
-@dir(nobody,nogroup,750) etc/geodns
+@dir(%%USER%%,%%GROUP%%) %%ETCDIR%%
 @sample etc/geodns.conf.sample
-sbin/geodnsd
+sbin/geodns

@@ -1,7 +1,11 @@
-Format-Transforming Encryption (FTE) is a cryptographic primitive explored in 
-the paper Protocol Misidentiﬁcation Made Easy with Format-Transfor Encryption.
+LibFTE is the first general-purpose library that introduces a unifying framework
+for general-purpose development and deployment of FPE or FTE schemes using 
+formats specified by regular expressions. LibFTE also overcomes some technical 
+limitations of the prior FTE software.
 
-FTE allows a user to specify the format of their ouput ciphertexts using regular
-expressions. The libfte library implements the primitive presented in.
+Previously, ranking was performed using the Deterministic Finite Automata (DFA)
+representation of regular expressions, which means that format-abiding 
+encryption was feasible only for regular expressions for which the DFA 
+representation could be built.
 
-WWW: https://github.com/kpdyer/libfte
+WWW: https://libfte.org/

@@ -1,5 +1,5 @@
 # Created by: Alex Deiter <alex.deiter@gmail.com>
-# $FreeBSD: head/sysutils/openipmi/Makefile 470610 2018-05-22 13:15:13Z mat $
+# $FreeBSD: head/sysutils/openipmi/Makefile 477959 2018-08-24 12:46:07Z garga $
 
 PORTNAME=	openipmi
 PORTVERSION=	2.0.25
@@ -17,11 +17,8 @@ LIB_DEPENDS=	libpopt.so:devel/popt
 
 GNU_CONFIGURE=	yes
 INSTALL_TARGET=	install-strip
-USES=		gmake libtool ncurses pathfix pkgconfig
+USES=		gmake libtool ncurses pathfix pkgconfig localbase:ldflags
 USE_LDCONFIG=	yes
-
-CPPFLAGS+=	-I../include -I${LOCALBASE}/include
-LIBS+=		-L${LOCALBASE}/lib
 
 OPTIONS_DEFINE=	SSL SNMP PERL PYTHON TCL TKINTER GDBM
 OPTIONS_RADIO=	GLIB
@@ -58,8 +55,8 @@ CONFIGURE_ARGS+=	--with-openssl=no
 .endif
 
 .if ${PORT_OPTIONS:MTKINTER}
-USES+=			python
-USE_PYTHON=		yes
+USES+=			python shebangfix
+SHEBANG_FILES=		swig/python/openipmigui.py
 BUILD_DEPENDS+=		${PYTHON_PKGNAMEPREFIX}tkinter>0:x11-toolkits/py-tkinter@${PY_FLAVOR} \
 			${LOCALBASE}/lib/Tix8.4.3/Tix.tcl:x11-toolkits/tix
 CONFIGURE_ARGS+=	--with-tkinter
@@ -72,11 +69,14 @@ PLIST_SUB+=		TKINTER="@comment "
 .if ${PORT_OPTIONS:MPERL}
 WITH_SWIG=		yes
 USES+=			perl5
-CONFIGURE_ARGS+=	--with-perl
-PLIST_SUB+=		PERL=""
+CONFIGURE_ARGS+=	--with-perl ac_cv_path_perlprog=${PERL}
+LDFLAGS+=		-L${SITE_ARCH}
+LIBS+=			-L${SITE_ARCH}
+PLIST_SUB+=		OIPMIPERL=""
+EXTRA_PATCHES+=		${PATCHDIR}/extra-patch-swig_perl_Makefile.in
 .else
 CONFIGURE_ARGS+=	--with-perl=no
-PLIST_SUB+=		PERL="@comment "
+PLIST_SUB+=		OIPMIPERL="@comment "
 .endif
 
 .if ${PORT_OPTIONS:MPYTHON}
@@ -111,7 +111,7 @@ CONFIGURE_ARGS+=	--with-glib --with-glibver=1.2 \
 			--with-glibcflags=-I${LOCALBASE}/include/glib-1.2 \
 			--with-gliblibs="-L${LOCALBASE}/lib -lglib -lgthread"
 MAKE_ENV+=		GLIB_MAJOR_VERSION=1
-EXTRA_PATCHES=		${PATCHDIR}/extra-patch-glib_glib__os__hnd.c
+EXTRA_PATCHES+=		${PATCHDIR}/extra-patch-glib_glib__os__hnd.c
 PLIST_SUB+=		GLIB=""
 .else
 PLIST_SUB+=		GLIB="@comment "

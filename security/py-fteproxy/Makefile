@@ -1,23 +1,25 @@
-# $FreeBSD$
+# $FreeBSD: head/security/py-fteproxy/Makefile 474585 2018-07-13 13:26:54Z garga $
 
 PORTNAME=	fteproxy
 DISTVERSION=	0.2.19
-CATEGORIES=	security python
+CATEGORIES=	security net python
+MASTER_SITES=	CHEESESHOP
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 
 MAINTAINER=	egypcio@googlemail.com
-COMMENT=	Unofficial/experimental version of security/py-fteproxy
+COMMENT=	Programmable proxy for censorship circumvention
 
 LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-BUILD_DEPENDS=	${PYTHON_PKGNAMEPREFIX}pycrypto>=2.6.1:security/py-pycrypto@${FLAVOR}
-		# python, libfte, obfs4, twisted
+RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}twisted>=17.9.0:devel/py-twisted@${PY_FLAVOR} \
+		${PYTHON_PKGNAMEPREFIX}libfte>=0.1.0:net/py-libfte@${PY_FLAVOR} \
+		${PYTHON_PKGNAMEPREFIX}obfsproxy-tor>=0.2.13:security/py-obfsproxy-tor@${PY_FLAVOR} \
+		${PYTHON_PKGNAMEPREFIX}pyptlib>=0.0.6:security/py-pyptlib@${PY_FLAVOR}
 
-USES=		localbase python
-USE_GITHUB=	yes
-USE_PYTHON=	distutils
+USES=		python:2.7
+USE_PYTHON=	autoplist distutils
 
-GH_ACCOUNT=	kpdyer
+NO_BUILD=	yes
 
 .include <bsd.port.mk>

@@ -1,26 +1,30 @@
-# $FreeBSD$
+# Created by: Adrian Chadd
+# $FreeBSD: head/sysutils/intel-pcm-devel/Makefile 478815 2018-09-02 19:53:30Z swills $
 
 PORTNAME=	intel-pcm
-PORTVERSION=	20180319
+DISTVERSION=	g20180717
+PORTEPOCH=	1
 CATEGORIES=	sysutils
 PKGNAMESUFFIX=	-devel
 
 MAINTAINER=	egypcio@googlemail.com
-COMMENT=	Unofficial/experimental version of sysutils/intel-pcm-devel
+COMMENT=	Process Count Monitor (PCM) for Intel processors
 
 LICENSE=	BSD3CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 ONLY_FOR_ARCHS=	amd64 i386
 
+PORTSCOUT=	ignore
+
 USES=		gmake
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	opcm
 GH_PROJECT=	pcm
-GH_TAGNAME=	e7e3dcc
+GH_TAGNAME=	e9b093b
 
-CONFLICTS_INSTALL=	intel-pcm-2017*
+CONFLICTS_INSTALL=	intel-pcm
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/*.x ${STAGEDIR}${PREFIX}/sbin

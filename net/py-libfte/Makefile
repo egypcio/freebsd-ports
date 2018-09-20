@@ -1,25 +1,30 @@
-# $FreeBSD$
+# $FreeBSD: head/net/py-libfte/Makefile 474538 2018-07-12 21:41:35Z yuri $
 
 PORTNAME=	libfte
-DISTVERSION=	0.1.0
+PORTVERSION=	0.1.3
 CATEGORIES=	net security python
+MASTER_SITES=	CHEESESHOP
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
+DISTNAME=	fte-${PORTVERSION}
 
 MAINTAINER=	egypcio@googlemail.com
-COMMENT=	Unofficial/experimental version of security/py-libfte
+COMMENT=	Format-Transforming Encryption Library/Toolkit
 
-LICENSE=	GPLv3
-LICENSE_FILE=	${WRKSRC}/LICENSE
+LICENSE=	APACHE20
 
 BUILD_DEPENDS=	regex2dfa:textproc/regex2dfa \
-		${PYTHON_PKGNAMEPREFIX}pycrypto>=2.6.1:security/py-pycrypto@${FLAVOR}
-
+		${PYTHON_PKGNAMEPREFIX}pycrypto>=2.6.1:security/py-pycrypto@${PY_FLAVOR}
 LIB_DEPENDS=	libgmp.so:math/gmp
 
-USES=		localbase python
-USE_GITHUB=	yes
-USE_PYTHON=	distutils
+USES=		localbase python:2.7
+USE_PYTHON=	autoplist distutils
 
-GH_ACCOUNT=	kpdyer
+# setup.cfg enables inplace, copying extension to final place and breaking
+# autoplist
+post-extract:
+	${RM} ${WRKSRC}/setup.cfg
+
+post-install:
+	${STRIP_CMD} ${STAGEDIR}${PYTHONPREFIX_SITELIBDIR}/fte/cDFA.so
 
 .include <bsd.port.mk>
