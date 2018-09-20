@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	tor-browser
-PORTVERSION=	7.5.5
+PORTVERSION=	8.0
 CATEGORIES=	www security ipv6
 MASTER_SITES=	http://bits.torbsd.org/pub/OpenBSD/distfiles/
 DISTFILES=	${PORTNAME}-${PORTVERSION}.tar.gz \
@@ -35,8 +35,8 @@ MOZCONFIG=      ${FILESDIR}/mozconfig_torproject.in
 BUNDLE_LIBS=    yes
 PLIST_DIRS=     bin lib share/pixmaps share/applications
 
-TB_BUTTON=      1.9.8.6
-TB_LAUNCHER=    0.2.14.4
+TB_BUTTON=      2.0.6
+TB_LAUNCHER=    0.2.16.3
 
 AUTOCONF_PORT=          devel/autoconf213
 AUTOCONF_VERSION=       2.13
