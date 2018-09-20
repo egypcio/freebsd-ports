@@ -42,12 +42,11 @@ OPTIONS_DEFINE=			DOCS EXAMPLES GNUMAKE STATIC TOR2WEB
 OPTIONS_GROUP=			COMPRESSION
 OPTIONS_GROUP_COMPRESSION=	LZMA ZSTD
 OPTIONS_RADIO=			MALLOC
-OPTIONS_RADIO_MALLOC=		DMALLOC TCMALLOC
+OPTIONS_RADIO_MALLOC=		TCMALLOC
 OPTIONS_SINGLE=			SSLTLS
 OPTIONS_SINGLE_SSLTLS=		SSLTLS_BASE SSLTLS_PORTS
 
 COMPRESSION_DESC=	Compression support schemes
-DMALLOC_DESC=		Use debug memory allocation library
 MALLOC_DESC=		Dynamic memory allocation management
 GNUMAKE_DESC=		Use 'GNU Make' as default make tool
 SSLTLS_DESC=		SSL/TLS support
@@ -61,8 +60,6 @@ ZSTD_DESC=		Zstandard (Zstd)
 
 OPTIONS_DEFAULT=	DOCS EXAMPLES SSLTLS_BASE
 
-DMALLOC_CONFIGURE_ON=		--with-dmalloc
-DMALLOC_LIB_DEPENDS=		libdmalloc.so:devel/dmalloc
 DOCS_CONFIGURE_ENABLE=		asciidoc
 DOCS_BUILD_DEPENDS=		asciidoc:textproc/asciidoc
 GNUMAKE_USES=			gmake
@@ -77,7 +74,7 @@ STATIC_CONFIGURE_ENABLE=	static-tor
 STATIC_BUILD_DEPENDS=		${LOCALBASE}/lib/libevent.a:devel/libevent
 STATIC_USES=			ssl:build
 STATIC_USES_OFF=		ssl
-TCMALLOC_CONFIGURE_ON=		--with-tcmalloc
+TCMALLOC_CONFIGURE_ON=		--with-malloc=tcmalloc
 TCMALLOC_LIB_DEPENDS=		libtcmalloc.so:devel/google-perftools
 TCMALLOC_USES=			localbase:ldflags
 TOR2WEB_CONFIGURE_ENABLE=	tor2web-mode
@@ -97,9 +94,6 @@ CONFLICTS=	tor-[0-9]*
 .include <bsd.port.options.mk>
 
 .if ${PORT_OPTIONS:MSTATIC}
-.	if !empty(PORT_OPTIONS:MDMALLOC)
-BUILD_DEPENDS+=		${LOCALBASE}/lib/libdmalloc.a:devel/dmalloc
-.	endif
 .	if !empty(PORT_OPTIONS:MTCMALLOC)
 BUILD_DEPENDS+=		${LOCALBASE}/lib/libtcmalloc.a:devel/google-perftools
 .	endif
