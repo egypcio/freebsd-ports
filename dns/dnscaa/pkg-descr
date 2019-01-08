@@ -1,0 +1,4 @@
+The dnscaa package provides a command-line tool to fetch the 
+DNS CAA (Certification Authority Authorization) records for a hostname.
+
+WWW: https://github.com/weppos/dnscaa

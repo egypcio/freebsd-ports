@@ -1,0 +1,5 @@
+TIMESTAMP = 1545915887
+SHA256 (weppos-dnscaa-g20180624-5d98478_GH0.tar.gz) = afd746f4493bf6bc20944243df60cd138d23935efe7646bb034fe796e005178e
+SIZE (weppos-dnscaa-g20180624-5d98478_GH0.tar.gz) = 1938
+SHA256 (miekg-dns-v1.0.13_GH0.tar.gz) = 22c91b4c03ac9fdc970232f142de31781640d8c3ec3bd7f4b8b0dd6b27bd59aa
+SIZE (miekg-dns-v1.0.13_GH0.tar.gz) = 3880956

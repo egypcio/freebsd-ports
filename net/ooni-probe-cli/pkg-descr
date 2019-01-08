@@ -1,3 +1,8 @@
-Next generation OONI Probe CLI, GOONI
+OONI Probe is free and open source software designed to measure internet 
+censorship and other forms of network interference. This version is the next
+generation of OONI Probe written in Go (a.k.a. GOONI).
+
+All OONI Probe tests are implemented in Measurement Kit, the network measurement
+engine that powers the OONI Probe apps.
 
 WWW: https://github.com/ooni/probe-cli
