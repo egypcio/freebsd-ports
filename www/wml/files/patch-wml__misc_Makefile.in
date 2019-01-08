@@ -1,7 +1,7 @@
---- Makefile.in.orig    2018-12-24 13:19:12 UTC
-+++ Makefile.in
-@@ -25,10 +25,10 @@ TARBALL         = $(SHTOOL) tarball -t
-
+--- wml_misc/Makefile.in.orig	2014-03-29 09:11:38 UTC
++++ wml_misc/Makefile.in
+@@ -21,10 +21,10 @@
+ 
  prefix          = @prefix@
  exec_prefix     = $(prefix)
 -bindir          = $(prefix)/bin
@@ -11,6 +11,6 @@
 -mandir          = $(prefix)/man
 +libdir          = $(DESTDIR)$(prefix)/lib$(libsubdir)
 +mandir          = $(DESTDIR)$(prefix)/man
- catdir          = @catdir@
- tmpdir          = @tmpdir@
-
+ 
+ # ------------------------------------------------
+ #   TARGETS

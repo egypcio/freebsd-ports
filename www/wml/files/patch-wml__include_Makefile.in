@@ -1,6 +1,6 @@
---- Makefile.in.orig    2018-12-24 13:19:12 UTC
-+++ Makefile.in
-@@ -25,10 +25,10 @@ TARBALL         = $(SHTOOL) tarball -t
+--- wml_include/Makefile.in.orig        2018-12-24 13:25:15 UTC
++++ wml_include/Makefile.in
+@@ -21,10 +21,10 @@ MKDIR           = $(top_srcdir)/etc/shtool mkdir -f -p
 
  prefix          = @prefix@
  exec_prefix     = $(prefix)
@@ -11,6 +11,6 @@
 -mandir          = $(prefix)/man
 +libdir          = $(DESTDIR)$(prefix)/lib$(libsubdir)
 +mandir          = $(DESTDIR)$(prefix)/man
- catdir          = @catdir@
- tmpdir          = @tmpdir@
 
+ INSTALLPRIVLIB  = @INSTALLPRIVLIB@
+ INSTALLARCHLIB  = @INSTALLARCHLIB@
