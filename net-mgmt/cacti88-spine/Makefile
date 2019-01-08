@@ -1,5 +1,5 @@
 # Created by: clement@FreeBSD.org
-# $FreeBSD: head/net-mgmt/cacti88-spine/Makefile 442733 2017-06-06 01:10:34Z dbaio $
+# $FreeBSD: head/net-mgmt/cacti88-spine/Makefile 486672 2018-12-05 14:09:12Z egypcio $
 
 PORTNAME=	spine
 PORTVERSION=	0.8.8h
@@ -8,7 +8,7 @@ MASTER_SITES=	http://www.cacti.net/downloads/${PORTNAME}/
 PKGNAMEPREFIX=	cacti88-
 DISTNAME=	cacti-${PORTNAME}-${PORTVERSION}
 
-MAINTAINER=	egypcio@googlemail.com
+MAINTAINER=	egypcio@FreeBSD.org
 COMMENT=	Multithreaded poller for Cacti written in C
 
 LICENSE=	LGPL21+

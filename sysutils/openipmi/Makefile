@@ -1,13 +1,13 @@
 # Created by: Alex Deiter <alex.deiter@gmail.com>
-# $FreeBSD: head/sysutils/openipmi/Makefile 477959 2018-08-24 12:46:07Z garga $
+# $FreeBSD: head/sysutils/openipmi/Makefile 489336 2019-01-05 13:47:15Z egypcio $
 
 PORTNAME=	openipmi
-PORTVERSION=	2.0.25
+PORTVERSION=	2.0.26
 CATEGORIES=	sysutils
 MASTER_SITES=	SF/${PORTNAME}/OpenIPMI%202.0%20Library
 DISTNAME=	OpenIPMI-${PORTVERSION}
 
-MAINTAINER=	egypcio@googlemail.com
+MAINTAINER=	egypcio@FreeBSD.org
 COMMENT=	Complex IPMI management software
 
 LICENSE=	GPLv2
@@ -15,10 +15,12 @@ LICENSE_FILE=	${WRKSRC}/COPYING
 
 LIB_DEPENDS=	libpopt.so:devel/popt
 
+USES=		gmake libtool localbase:ldflags ncurses pathfix \
+		pkgconfig readline
+USE_LDCONFIG=	yes
+
 GNU_CONFIGURE=	yes
 INSTALL_TARGET=	install-strip
-USES=		gmake libtool ncurses pathfix pkgconfig localbase:ldflags
-USE_LDCONFIG=	yes
 
 OPTIONS_DEFINE=	SSL SNMP PERL PYTHON TCL TKINTER GDBM
 OPTIONS_RADIO=	GLIB
@@ -126,16 +128,18 @@ PLIST_SUB+=		GLIB="@comment "
 .endif
 
 post-patch:
-	@${REINPLACE_CMD} '/libOpenIPMIutils_la_LIBADD =/s/$$/ -lexecinfo/' \
+	${REINPLACE_CMD} '/libOpenIPMIutils_la_LIBADD =/s/$$/ -lexecinfo/' \
 		${WRKSRC}/utils/Makefile.in
-	@${REINPLACE_CMD} 's|malloc.h|stdlib.h|' \
+	${REINPLACE_CMD} 's|malloc.h|stdlib.h|' \
 		${WRKSRC}/lanserv/sdrcomp/sdrcomp.c \
 		${WRKSRC}/lanserv/extcmd.c \
 		${WRKSRC}/lanserv/bmc_app.c \
 		${WRKSRC}/lanserv/bmc_storage.c \
 		${WRKSRC}/lanserv/bmc_picmg.c \
 		${WRKSRC}/lanserv/bmc_sensor.c
-	@${REINPLACE_CMD} 's|-ldl||' \
+	${REINPLACE_CMD} 's|-ldl||' \
 		${WRKSRC}/lanserv/Makefile.in
+	${REINPLACE_CMD} 's|editline/readline.h|edit/readline/readline.h|' \
+		${WRKSRC}/sample/ipmi_serial_bmc_emu.c
 
 .include <bsd.port.mk>

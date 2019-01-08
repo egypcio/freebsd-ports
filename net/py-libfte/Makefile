@@ -1,4 +1,4 @@
-# $FreeBSD: head/net/py-libfte/Makefile 474538 2018-07-12 21:41:35Z yuri $
+# $FreeBSD: head/net/py-libfte/Makefile 486672 2018-12-05 14:09:12Z egypcio $
 
 PORTNAME=	libfte
 PORTVERSION=	0.1.3
@@ -7,7 +7,7 @@ MASTER_SITES=	CHEESESHOP
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 DISTNAME=	fte-${PORTVERSION}
 
-MAINTAINER=	egypcio@googlemail.com
+MAINTAINER=	egypcio@FreeBSD.org
 COMMENT=	Format-Transforming Encryption Library/Toolkit
 
 LICENSE=	APACHE20

@@ -1,0 +1,67 @@
+# Created by: Michael Neumann <mneumann@ntecs.de>
+# $FreeBSD: head/emulators/hatari/Makefile 487243 2018-12-11 17:03:52Z linimon $
+
+PORTNAME=	hatari
+PORTVERSION=	2.1.0
+CATEGORIES=	emulators
+MASTER_SITES=	http://download.tuxfamily.org/hatari/${PORTVERSION}/
+
+MAINTAINER=	egypcio@FreeBSD.org
+COMMENT=	Atari ST emulator
+
+LICENSE=	GPLv2+
+LICENSE_FILE=	${WRKSRC}/gpl.txt
+
+BROKEN_aarch64=		fails to configure: error: unrecognized CPU type
+BROKEN_armv6=		fails to configure: CMake Error: Generator: execution of make failed
+
+LIB_DEPENDS=	libportaudio.so:audio/portaudio \
+		libpng.so:graphics/png
+
+USES=		cmake desktop-file-utils python:2.7 readline shared-mime-info \
+		shebangfix tar:bzip2
+USE_GNOME=	pygtk2
+USE_XORG=	sm ice x11 xext
+
+SHEBANG_FILES=	python-ui/*.py tools/atari-convert-dir.py \
+		tools/debugger/hatari_profile.py tools/hconsole/*.py
+
+CMAKE_ARGS=	-DETCDIR:PATH="${PREFIX}/etc" \
+		-DMANDIR:PATH="man/man1" \
+		-DREADLINE_FOUND:BOOL=ON
+
+INSTALLS_ICONS=	yes
+
+OPTIONS_DEFINE=		DEBUG DOCS SDL2 WINUAE
+
+DEBUG_CFLAGS_OFF=	-DNDEBUG
+SDL2_DESC=		Use SDL2 libraries instead of SDL 1.2
+SDL2_USES=		iconv
+SDL2_USE=		sdl=sdl2
+SDL2_USE_OFF=		sdl=sdl
+SDL2_CMAKE_ON=		-DENABLE_SDL2:BOOL=ON
+SDL2_CFLAGS=		-I${ICONV_INCLUDE_PATH}
+WINUAE_DESC=		Build with WinUAE CPU core (experimental)
+WINUAE_CMAKE_ON=	-DENABLE_WINUAE_CPU:BOOL=ON
+
+post-patch:
+.for i in doc/hatari.1 doc/fr/hatari.1 tools/hconsole/hconsole.1
+	@${REINPLACE_CMD} -e \
+		's|^/etc/hatari.cfg .*|${PREFIX}/etc/hatari.cfg| ; \
+		 s|/usr/share|${PREFIX}/share|' ${WRKSRC}/${i}
+.endfor
+	@${REINPLACE_CMD} -e \
+		's|-Wno-maybe-uninitialized||' ${WRKSRC}/src/cpu/CMakeLists.txt
+	@${REINPLACE_CMD} -e \
+		's|%%PYTHON_CMD%%|${PYTHON_CMD}| ; \
+		 s|%%PYTHON_VERSION%%|${PYTHON_VERSION}|' ${WRKSRC}/tools/atari-hd-image.sh
+
+post-install:
+	@${MKDIR} ${STAGEDIR}${MANPREFIX}/man/fr/man1
+	${INSTALL_MAN} ${WRKSRC}/doc/fr/${PORTNAME}.1 ${STAGEDIR}${MANPREFIX}/man/fr/man1
+
+post-install-DOCS-on:
+	@${MKDIR} ${STAGEDIR}${DOCSDIR}/fr
+	${INSTALL_DATA} ${WRKSRC}/doc/fr/*.txt ${STAGEDIR}${DOCSDIR}/fr
+
+.include <bsd.port.mk>

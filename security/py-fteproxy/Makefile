@@ -1,4 +1,4 @@
-# $FreeBSD: head/security/py-fteproxy/Makefile 474585 2018-07-13 13:26:54Z garga $
+# $FreeBSD: head/security/py-fteproxy/Makefile 486672 2018-12-05 14:09:12Z egypcio $
 
 PORTNAME=	fteproxy
 DISTVERSION=	0.2.19
@@ -6,7 +6,7 @@ CATEGORIES=	security net python
 MASTER_SITES=	CHEESESHOP
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 
-MAINTAINER=	egypcio@googlemail.com
+MAINTAINER=	egypcio@FreeBSD.org
 COMMENT=	Programmable proxy for censorship circumvention
 
 LICENSE=	APACHE20

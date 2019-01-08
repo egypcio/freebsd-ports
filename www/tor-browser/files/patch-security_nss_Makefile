@@ -1,0 +1,11 @@
+--- security/nss/Makefile.orig	2019-01-01 20:22:53 UTC
++++ security/nss/Makefile
+@@ -47,7 +47,7 @@ include $(CORE_DEPTH)/coreconf/rules.mk
+ # (7) Execute "local" rules. (OPTIONAL).                              #
+ #######################################################################
+ 
+-nss_build_all: build_nspr all latest
++nss_build_all: all latest
+ 
+ nss_clean_all: clobber_nspr clobber
+ 

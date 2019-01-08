@@ -1,11 +1,11 @@
-# $FreeBSD: head/dns/go-geodns/Makefile 471924 2018-06-07 14:18:54Z dbaio $
+# $FreeBSD: head/dns/go-geodns/Makefile 486672 2018-12-05 14:09:12Z egypcio $
 
 PORTNAME=	geodns
 PORTVERSION=	2.7.0
 CATEGORIES=	dns net ipv6
 PKGNAMEPREFIX=	go-
 
-MAINTAINER=	egypcio@googlemail.com
+MAINTAINER=	egypcio@FreeBSD.org
 COMMENT=	DNS server with per-client targeted responses
 
 LICENSE=	APACHE20

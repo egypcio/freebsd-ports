@@ -1,11 +1,11 @@
-# $FreeBSD$
+# $FreeBSD: head/security/onionscan/Makefile 486672 2018-12-05 14:09:12Z egypcio $
 
 PORTNAME=	onionscan
 DISTVERSIONPREFIX=	OnionScan-
 DISTVERSION=	0.2
 CATEGORIES=	security net
 
-MAINTAINER=	egypcio@googlemail.com
+MAINTAINER=	egypcio@FreeBSD.org
 COMMENT=	Free and open source tool for investigating Onion Services
 
 LICENSE=	MIT

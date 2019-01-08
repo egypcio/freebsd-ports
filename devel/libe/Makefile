@@ -1,12 +1,12 @@
 # Created by: Veniamin Gvozdikov <vg@FreeBSD.org>
-# $FreeBSD: head/devel/libe/Makefile 462745 2018-02-23 21:09:47Z rene $
+# $FreeBSD: head/devel/libe/Makefile 486672 2018-12-05 14:09:12Z egypcio $
 
 PORTNAME=		libe
-DISTVERSIONPREFIX=	releases/
 PORTVERSION=		0.11.0
+DISTVERSIONPREFIX=	releases/
 CATEGORIES=		devel
 
-MAINTAINER=	egypcio@googlemail.com
+MAINTAINER=	egypcio@FreeBSD.org
 COMMENT=	High-performance datastructures and utilities for C++
 
 LICENSE=	BSD3CLAUSE

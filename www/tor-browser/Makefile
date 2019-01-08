@@ -1,54 +1,72 @@
 # $FreeBSD$
 
 PORTNAME=	tor-browser
-PORTVERSION=	8.0
+PORTVERSION=	8.0.3
 CATEGORIES=	www security ipv6
 MASTER_SITES=	http://bits.torbsd.org/pub/OpenBSD/distfiles/
 DISTFILES=	${PORTNAME}-${PORTVERSION}.tar.gz \
 		torbutton-${TB_BUTTON}.tar.gz \
 		tor-launcher-${TB_LAUNCHER}.tar.gz
 
-MAINTAINER=	egypcio@googlemail.com
-COMMENT=	Unofficial/experimental version of www/tor-browser
+MAINTAINER=	egypcio@FreeBSD.org
+COMMENT=	Tor Browser for FreeBSD (experimental/unofficial)
 
 LICENSE=	BSD3CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-CPE_VENDOR=	torproject
-
-BUILD_DEPENDS=	${AUTOCONF}:${AUTOCONF_PORT} \
+BUILD_DEPENDS=	autoconf-2.13:devel/autoconf213 \
 		yasm:devel/yasm \
-		zip:archivers/zip
-
+		zip:archivers/zip \
+		wx31-gtk3>=0:x11-toolkits/wxgtk31 \
+		freetype2>=0:print/freetype2 \
+		dbus-glib>=0:devel/dbus-glib \
+		fontconfig>=0:x11-fonts/fontconfig \
+		rustc:lang/rust \
+		llvm70>=0:devel/llvm70 \
+		rust-cbindgen>=0:devel/rust-cbindgen
 LIB_DEPENDS=	libgconf-2.so:devel/gconf2 \
 		libgtk-x11-2.0.so:x11-toolkits/gtk20 \
 		libpangocairo-1.0.so:x11-toolkits/pango \
-		libpulse.so:audio/pulseaudio
+		libpulse.so:audio/pulseaudio \
+		libXt.so:x11-toolkits/libXt \
+		libIDL-2.so:devel/libIDL \
+		libnspr4.so:devel/nspr
+RUN_DEPENDS=	tor:security/tor \
+		obfs4proxy:security/obfs4proxy-tor
 
-USES=		cpe libtool gmake pkgconfig python:2.7
+USES=		compiler:gcc-c++11-lib cpe libtool gmake \
+		perl5 pkgconfig python:2.7 localbase:ldflags
+USE_GCC=	yes
 USE_PYTHON=	yes
 
-PREFIX=		${LOCALBASE}/${PORTNAME}
-MAKEFILE=       ${WRKSRC}/client.mk
-MOZCONFIG=      ${FILESDIR}/mozconfig_torproject.in
+CPE_VENDOR=	torproject
 
-BUNDLE_LIBS=    yes
-PLIST_DIRS=     bin lib share/pixmaps share/applications
+# BUNDLE_LIBS=	yes
+# MAKEFILE=	${WRKSRC}/client.mk
+PLIST_DIRS=	bin lib \
+		share/applications share/pixmaps
 
-TB_BUTTON=      2.0.6
-TB_LAUNCHER=    0.2.16.3
+CONFIGURE_ARGS=	--prefix=${PREFIX} \
+		--disable-debug-symbols \
+		--disable-tor-browser-update \
+		--enable-pie \
+		--enable-release \
+		--enable-rust-simd \
+		--with-app-name=${PORTNAME} \
+		--with-tor-browser-version=${PORTVERSION}
 
-AUTOCONF_PORT=          devel/autoconf213
-AUTOCONF_VERSION=       2.13
-AUTOCONF=               autoconf-${AUTOCONF_VERSION}
+CONFIGURE_ENV=	LLVM_CONFIG=${LOCALBASE}/bin/llvm-config70
+
+TB_BUTTON=	2.0.7
+TB_LAUNCHER=	0.2.16.6
 
 pre-configure:
-	(cp ${MOZCONFIG} ${WRKSRC}/.mozconfig)
-	(cd ${WRKSRC} && ${AUTOCONF})
-	(cd ${WRKSRC}/js/src && ${AUTOCONF})
+	(cd ${WRKSRC} && ${LOCALBASE}/bin/autoconf-2.13)
+	(cd ${WRKSRC}/js/src && ${LOCALBASE}/bin/autoconf-2.13)
 
 do-configure:
-	(cd ${WRKSRC} && ${SETENV} ${CONFIGURE_ENV} ${MAKE_ENV} ${SH} mach configure)
+	(cd ${WRKSRC} && \
+		${SETENV} ${CONFIGURE_ENV} ${MAKE_ENV} ${SH} mach configure ${CONFIGURE_ARGS})
 
 do-build:
 	(cd ${WRKSRC} && ${SETENV} ${CONFIGURE_ENV} ${MAKE_ENV} ${SH} mach build)

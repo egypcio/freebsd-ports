@@ -1,11 +1,12 @@
-# $FreeBSD: head/www/onionshare/Makefile 474425 2018-07-11 06:45:34Z yuri $
+# $FreeBSD: head/www/onionshare/Makefile 486672 2018-12-05 14:09:12Z egypcio $
 
 PORTNAME=	onionshare
 DISTVERSIONPREFIX=	v
 DISTVERSION=	1.3.1
+PORTREVISION=	1
 CATEGORIES=	www python security
 
-MAINTAINER=	egypcio@googlemail.com
+MAINTAINER=	egypcio@FreeBSD.org
 COMMENT=	Secure and anonymous file sharing via Tor
 
 LICENSE=	GPLv3

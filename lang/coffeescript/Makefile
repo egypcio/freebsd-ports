@@ -1,10 +1,10 @@
-# $FreeBSD: head/lang/coffeescript/Makefile 473928 2018-07-04 22:00:27Z swills $
+# $FreeBSD: head/lang/coffeescript/Makefile 486672 2018-12-05 14:09:12Z egypcio $
 
 PORTNAME=	coffeescript
-DISTVERSION=	2.3.1
+DISTVERSION=	2.3.2
 CATEGORIES=	lang
 
-MAINTAINER=	egypcio@googlemail.com
+MAINTAINER=	egypcio@FreeBSD.org
 COMMENT=	Unfancy JavaScript
 
 LICENSE=	MIT

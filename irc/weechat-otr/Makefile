@@ -1,4 +1,4 @@
-# $FreeBSD: head/irc/weechat-otr/Makefile 475253 2018-07-24 13:45:03Z garga $
+# $FreeBSD: head/irc/weechat-otr/Makefile 486672 2018-12-05 14:09:12Z egypcio $
 
 PORTNAME=	weechat-otr
 DISTVERSIONPREFIX=	v
@@ -6,7 +6,7 @@ DISTVERSION=	1.9.2
 CATEGORIES=	irc security python
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 
-MAINTAINER=	egypcio@googlemail.com
+MAINTAINER=	egypcio@FreeBSD.org
 COMMENT=	WeeChat script for Off-the-Record (OTR) messaging
 
 LICENSE=	GPLv3

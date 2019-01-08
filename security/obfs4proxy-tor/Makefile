@@ -1,4 +1,4 @@
-# $FreeBSD: head/security/obfs4proxy-tor/Makefile 463611 2018-03-04 23:14:00Z yuri $
+# $FreeBSD: head/security/obfs4proxy-tor/Makefile 486672 2018-12-05 14:09:12Z egypcio $
 
 PORTNAME=	obfs4proxy
 DISTVERSION=	0.0.7
@@ -8,7 +8,7 @@ MASTER_SITES=	https://people.torproject.org/~yawning/releases/${PORTNAME}/
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX}
 PKGNAMESUFFIX=	-tor
 
-MAINTAINER=	egypcio@googlemail.com
+MAINTAINER=	egypcio@FreeBSD.org
 COMMENT=	Pluggable transport proxy for Tor (obfs4, The Obfuscator)
 
 LICENSE=	BSD3CLAUSE

@@ -1,16 +1,18 @@
 # Created by: Veniamin Gvozdikov <vg@FreeBSD.org>
-# $FreeBSD: head/devel/busybee/Makefile 462745 2018-02-23 21:09:47Z rene $
+# $FreeBSD: head/devel/busybee/Makefile 486672 2018-12-05 14:09:12Z egypcio $
 
 PORTNAME=		busybee
-DISTVERSIONPREFIX=	releases/
 PORTVERSION=		0.7.0
+DISTVERSIONPREFIX=	releases/
 CATEGORIES=		devel
 
-MAINTAINER=	egypcio@googlemail.com
+MAINTAINER=	egypcio@FreeBSD.org
 COMMENT=	High-performance messaging layer
 
 LICENSE=	BSD3CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
+
+ONLY_FOR_ARCHS=	amd64
 
 LIB_DEPENDS=	libe.so:devel/libe \
 		libpo6.so:devel/libpo6
@@ -21,7 +23,5 @@ USE_GITHUB=	yes
 USE_LDCONFIG=	yes
 
 GH_ACCOUNT=	rescrv
-
-ONLY_FOR_ARCHS=	amd64
 
 .include <bsd.port.mk>
