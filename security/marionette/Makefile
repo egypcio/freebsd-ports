@@ -1,39 +1,37 @@
 # $FreeBSD$
 
 PORTNAME=	marionette
-DISTVERSION=	g20180611
+DISTVERSION=	g20180930
 CATEGORIES=	security net
 
 MAINTAINER=	egypcio@googlemail.com
-COMMENT=	Pluggable Transport Proxy for Tor, le Marionette
+COMMENT=	Programmable Protocol Obfuscation Tool
 
 LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+BUILD_DEPENDS=	gmp>=1.6.2:math/gmp \
+		goptlib>=0.5:security/goptlib \
+		re2>=20180901:devel/re2
+
+USES=		go
+USE_GITHUB=	yes
+
 CPE_VENDOR=	redjack
 
-BUILD_DEPENDS=	gmp>=1.6.2:math/gmp \
-		openfst>=1.6.3:math/openfst \
-		re2>=20180401:devel/re2 \
-		regex2dfa:textproc/regex2dfa \
-		goptlib>=0.5:security/goptlib \
-		${PYTHON_PKGNAMEPREFIX}libfte>=0.1.0:net/py-libfte@${FLAVOR}
+GH_ACCOUNT=	redjack
+GH_TAGNAME=	5d0d25f
+GH_TUPLE=	armon:go-socks5:e753329:socks5/github.com/armon/go-socks5 \
+		davecgh:go-spew:v1.1.0:spew/github.com/davecgh/go-spew \
+		golang:net:22ae77b:net/golang.org/x/net \
+		google:go-cmp:v0.1.0:cmp/github.com/google/go-cmp \
+		uber-go:atomic:v1.3.1:atomic/go.uber.org/atomic \
+		uber-go:multierr:v1.1.0:multierr/go.uber.org/multierr \
+		uber-go:zap:v1.7.1:zap/go.uber.org/zap
+
+GO_BUILDFLAGS+=	-ldflags "-X main.Version=${GH_TAGNAME}"
 
 PLIST_FILES=	bin/${PORTNAME}
-
-USES=		go python:env
-USE_GITHUB=	yes
-USE_PYTHON=	flavors
-
-GH_ACCOUNT=	redjack
-GH_TAGNAME=	61b8d34
-GH_TUPLE=	armon:go-socks5:e753329:socks5/github.com/armon/go-socks5 \
-		davecgh:go-spew:346938d:spew/github.com/davecgh/go-spew \
-		golang:net:afe8f62:net/golang.org/x/net \
-		google:go-cmp:3af367b:cmp/github.com/google/go-cmp \
-		uber-go:atomic:1ea20fb:atomic/go.uber.org/atomic \
-		uber-go:multierr:3c49374:multierr/go.uber.org/multierr \
-		uber-go:zap:eeedf31:zap/go.uber.org/zap
 
 post-patch:
 	${MKDIR} ${WRKSRC}/github.com/${GH_ACCOUNT}
@@ -41,9 +39,15 @@ post-patch:
 	${RLN} ${WRKSRC} ${WRKSRC}/src
 
 do-build:
+	cd ${WRKSRC}/third_party/openfst && \
+	  ${SETENV} ${CONFIGURE_ENV} ${SH} configure --enable-static=yes && \
+	  ${SETENV} ${MAKE_ENV} ${MAKE_CMD}
+	${MKDIR} ${WRKSRC}/third_party/libs
+	cd ${WRKSRC}/third_party/libs && \
+	  ${LN} -sf ${WRKSRC}/third_party/openfst/src/lib/.libs/libfst.a . && \
+	  ${LN} -sf ${WRKSRC}/third_party/openfst/src/script/.libs/libfstscript.a . && \
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${GO_ENV} GOPATH="${LOCAL_GOPATH}:${WRKSRC}" \
-		${GO_CMD} build -ldflags "-X main.Version=${GH_TAGNAME}" \
-		  -v -o bin/${PORTNAME}
+		${GO_CMD} build ${GO_BUILDFLAGS} -o bin/${PORTNAME}
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
