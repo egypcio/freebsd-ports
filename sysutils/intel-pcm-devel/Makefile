@@ -1,8 +1,8 @@
 # Created by: Adrian Chadd
-# $FreeBSD: head/sysutils/intel-pcm-devel/Makefile 487668 2018-12-17 09:52:41Z egypcio $
+# $FreeBSD: head/sysutils/intel-pcm-devel/Makefile 490386 2019-01-15 16:39:31Z egypcio $
 
 PORTNAME=	intel-pcm
-DISTVERSION=	g20181208
+DISTVERSION=	g20190207
 PORTEPOCH=	1
 CATEGORIES=	sysutils
 PKGNAMESUFFIX=	-devel
@@ -20,9 +20,9 @@ USE_GITHUB=	yes
 
 GH_ACCOUNT=	opcm
 GH_PROJECT=	pcm
-GH_TAGNAME=	21d7f76
+GH_TAGNAME=	0e9461a
 
-PORTSCOUT=	limit:^20190*
+PORTSCOUT=	limit:^20190[3-9]$$
 
 CONFLICTS_INSTALL=	intel-pcm
 

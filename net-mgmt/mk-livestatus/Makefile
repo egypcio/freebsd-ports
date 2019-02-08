@@ -1,8 +1,8 @@
 # Created by: Peter C. Lai <cowbert@gmail.com>
-# $FreeBSD: head/net-mgmt/mk-livestatus/Makefile 487272 2018-12-12 01:35:33Z gerald $
+# $FreeBSD: head/net-mgmt/mk-livestatus/Makefile 490060 2019-01-12 15:20:14Z ehaupt $
 
 PORTNAME=	mk-livestatus
-PORTVERSION=	1.2.8p21
+PORTVERSION=	1.2.8p24
 CATEGORIES=	net-mgmt
 MASTER_SITES=	http://mathias-kettner.de/download/
 DIST_SUBDIR=	check_mk
@@ -26,18 +26,20 @@ EXAMPLE_FILES=	example_multisite.py example.py \
 # parameter "command_file" from nagios.cfg
 COMMAND_FILE?=	/var/spool/nagios/rw/live
 
-OPTIONS_DEFINE=	EXAMPLES
+OPTIONS_DEFINE=	EXAMPLES PERL
 OPTIONS_SINGLE=	NAGIOS
 OPTIONS_SINGLE_NAGIOS=	NAGIOS3 NAGIOS4
 OPTIONS_DEFAULT=	NAGIOS4
 
 NAGIOS3_DESC=	Build support for Nagios 3.x
 NAGIOS4_DESC=	Build support for Nagios 4.x
+PERL_DESC=	Install Monitoring-Livestatus Perl API
 
 EXAMPLES_USES=	python
 NAGIOS3_RUN_DEPENDS=	nagios>=3.5.1:net-mgmt/nagios
 NAGIOS4_CONFIGURE_WITH=	nagios4
 NAGIOS4_RUN_DEPENDS=	nagios4>=4.4:net-mgmt/nagios4
+PERL_RUN_DEPENDS=	p5-Monitoring-Livestatus>=0:net-mgmt/p5-Monitoring-Livestatus
 
 post-patch:
 	${REINPLACE_CMD} -e 's|/usr/local/nagios/var/rw/live|${COMMAND_FILE}|' \

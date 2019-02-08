@@ -2,7 +2,7 @@
 # $FreeBSD: head/devel/hub/Makefile 489335 2019-01-05 13:43:02Z egypcio $
 
 PORTNAME=	hub
-PORTVERSION=	2.7.0
+PORTVERSION=	2.8.4
 DISTVERSIONPREFIX=	v
 CATEGORIES=	devel sysutils
 
@@ -12,7 +12,6 @@ COMMENT=	Introduces git to GitHub
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-BUILD_DEPENDS=	ronn:textproc/rubygem-ronn
 RUN_DEPENDS=	git:devel/git
 
 USES=		go
@@ -22,34 +21,33 @@ GH_ACCOUNT=	github
 
 GO_PKGNAME=	github.com/github/hub
 
-PLIST_FILES=	bin/hub	\
-		man/man1/hub.1.gz
+PLIST_FILES=	bin/hub \
+		etc/bash_completion.d/hub \
+		share/fish/completions/hub.fish \
+		share/zsh/site-functions/_hub
 
-OPTIONS_DEFINE=		BASH FISH ZSH
+OPTIONS_DEFINE=		MANPAGES
+OPTIONS_DEFAULT=	MANPAGES
 
-BASH_PLIST_FILES=	etc/bash_completion.d/hub
-BASH_RUN_REPENDS=	bash:shells/bash
-FISH_PLIST_FILES=	share/fish/completions/hub.fish
-FISH_RUN_REPENDS=	fish:shells/fish
-ZSH_PLIST_FILES=	share/zsh/site-functions/_hub
-ZSH_RUN_REPENDS=	zsh:shells/zsh
+MANPAGES_PLIST_FILES=	man/man1/hub.1.gz
 
-post-build:
-	${MKDIR} ${STAGEDIR}${MAN1PREFIX}/man/man1
-	cd ${WRKSRC}/share/man/man1 && \
-		${LOCALBASE}/bin/ronn -r hub.1.ronn
-	${INSTALL_MAN} ${WRKSRC}/share/man/man1/hub.1 ${STAGEDIR}${MAN1PREFIX}/man/man1
+do-build-MANPAGES-on:
+	(cd ${GO_WRKSRC} && \
+	  ${SETENV} ${MAKE_ENV} ${GO_ENV} ${GO_CMD} install ${GO_BUILDFLAGS} ${GO_TARGET}/md2roff-bin)
+	(cd ${GO_WRKSRC} && \
+	  ${WRKDIR}/bin/md2roff-bin --manual="hub manual" --version="${PORTVERSION}" \
+	  --template=${GO_WRKSRC}/man-template.html share/man/man1/*.md)
 
-post-install-BASH-on:
+post-install:
 	${MKDIR} ${STAGEDIR}${PREFIX}/etc/bash_completion.d
 	${INSTALL_DATA} ${WRKSRC}/etc/hub.bash_completion.sh ${STAGEDIR}${PREFIX}/etc/bash_completion.d/hub
-
-post-install-FISH-on:
 	${MKDIR} ${STAGEDIR}${PREFIX}/share/fish/completions
 	${INSTALL_DATA} ${WRKSRC}/etc/hub.fish_completion ${STAGEDIR}${PREFIX}/share/fish/completions/hub.fish
-
-post-install-ZSH-on:
 	${MKDIR} ${STAGEDIR}${PREFIX}/share/zsh/site-functions
 	${INSTALL_DATA} ${WRKSRC}/etc/hub.zsh_completion ${STAGEDIR}${PREFIX}/share/zsh/site-functions/_hub
+
+post-install-MANPAGES-on:
+	${MKDIR} ${STAGEDIR}${MAN1PREFIX}/man/man1
+	${INSTALL_MAN} ${WRKSRC}/share/man/man1/*.1 ${STAGEDIR}${MAN1PREFIX}/man/man1
 
 .include <bsd.port.mk>

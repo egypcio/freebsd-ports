@@ -1,3 +1,3 @@
-TIMESTAMP = 1544541868
-SHA256 (check_mk/mk-livestatus-1.2.8p21.tar.gz) = a38b467a00b9e05a56c77997663bfc2738c5beb85aa61084ec135c5c51d41aad
-SIZE (check_mk/mk-livestatus-1.2.8p21.tar.gz) = 453539
+TIMESTAMP = 1549545300
+SHA256 (check_mk/mk-livestatus-1.2.8p24.tar.gz) = 54ee1bd7da5dee157121b0acb1a0302ab5fc21e904c1c9cb53f7012c4427eae9
+SIZE (check_mk/mk-livestatus-1.2.8p24.tar.gz) = 453519
