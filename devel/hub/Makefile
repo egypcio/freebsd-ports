@@ -12,8 +12,6 @@ COMMENT=	Introduces git to GitHub
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-RUN_DEPENDS=	git:devel/git
-
 USES=		go
 
 USE_GITHUB=	yes
@@ -26,10 +24,14 @@ PLIST_FILES=	bin/hub \
 		share/fish/completions/hub.fish \
 		share/zsh/site-functions/_hub
 
-OPTIONS_DEFINE=		MANPAGES
+OPTIONS_DEFINE=		GIT_SUBVERSION MANPAGES
 OPTIONS_DEFAULT=	MANPAGES
 
-MANPAGES_PLIST_FILES=	man/man1/hub.1.gz
+GIT_SUBVERSION_DESC=	Use 'git-subversion' instead of 'git' as backend
+
+GIT_SUBVERSION_RUN_DEPENDS=	git-subversion>0:devel/git-subversion
+GIT_SUBVERSION_RUN_DEPENDS_OFF=	git:devel/git
+MANPAGES_PLIST_FILES=		man/man1/hub.1.gz
 
 do-build-MANPAGES-on:
 	(cd ${GO_WRKSRC} && \
