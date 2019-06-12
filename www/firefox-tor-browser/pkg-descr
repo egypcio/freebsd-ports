@@ -1,0 +1,8 @@
+  Tor Browser is a customized version of Firefox Extended Service Release (ESR)
+built specifically for internet browsing over the Tor network. Its default 
+configuration aims to mitigate attacks on a client's anonymity, including 
+determining the client's actual IP address and browser fingerprinting. Other
+aspects of Firefox have also been patched to plug privacy leaks in ways not 
+possible any other way.
+
+WWW: https://www.torproject.org/projects/torbrowser.html.en

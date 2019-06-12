@@ -1,18 +1,17 @@
 # $FreeBSD$
 
-PORTNAME=	tor-browser
-PORTVERSION=	8.0.9
+PORTNAME=	firefox-tor-browser
+DISTVERSION=	60.7.0esr-8.5-1-build2
 CATEGORIES=	www security ipv6
-MASTER_SITES=	http://bits.torbsd.org/pub/OpenBSD/distfiles/
-DISTFILES=	${PORTNAME}-${PORTVERSION}.tar.gz \
-		torbutton-${TBB_BUTTON}.tar.gz \
-		tor-launcher-${TBB_LAUNCHER}.tar.gz
+MASTER_SITES=	https://dist.torproject.org/torbrowser/8.5.1/
+DISTFILES=	src-firefox-tor-browser-60.7.0esr-8.5-1-build2.tar.xz \
+		src-tor-launcher-0.2.18.3.tar.xz \
+		src-torbutton-2.1.10.tar.xz 
 
 MAINTAINER=	egypcio@FreeBSD.org
 COMMENT=	Tor Browser for FreeBSD (experimental/unofficial)
 
 LICENSE=	BSD3CLAUSE
-LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	autoconf-2.13:devel/autoconf213 \
 		yasm:devel/yasm \
@@ -34,9 +33,8 @@ LIB_DEPENDS=	libgconf-2.so:devel/gconf2 \
 RUN_DEPENDS=	tor:security/tor \
 		obfs4proxy:security/obfs4proxy-tor
 
-USES=		compiler:gcc-c++11-lib cpe libtool gmake \
+USES=		compiler:c++11-lib cpe libtool gmake \
 		perl5 pkgconfig python:2.7 localbase:ldflags
-USE_GCC=	yes
 
 CPE_VENDOR=	torproject
 
@@ -54,9 +52,6 @@ CONFIGURE_ARGS=	--prefix=${PREFIX} \
 		--with-tor-browser-version=${PORTVERSION}
 
 CONFIGURE_ENV=	LLVM_CONFIG=${LOCALBASE}/bin/llvm-config70
-
-TBB_BUTTON=	2.0.13
-TBB_LAUNCHER=	0.2.16.6
 
 pre-configure:
 	(cd ${WRKSRC} && ${LOCALBASE}/bin/autoconf-2.13)
