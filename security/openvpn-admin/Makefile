@@ -1,5 +1,5 @@
 # Created by: Remington Lang <MrL0Lz@gmail.com>
-# $FreeBSD: head/security/openvpn-admin/Makefile 486672 2018-12-05 14:09:12Z egypcio $
+# $FreeBSD: head/security/openvpn-admin/Makefile 505768 2019-07-03 18:35:16Z egypcio $
 
 PORTNAME=	openvpn-admin
 PORTVERSION=	1.9.4
@@ -19,7 +19,7 @@ RUN_DEPENDS=	openvpn:security/openvpn
 WRKSRC=		${WRKDIR}/${PORTNAME}-${PORTVERSION}
 
 NO_ARCH=	yes
-PORTSCOUT=	ignore
+PORTSCOUT=	skipv:${PORTVERSION}${DISTVERSIONSUFFIX}
 
 USES=		gettext gmake pkgconfig
 USE_GNOME=	gtksharp20 intltool

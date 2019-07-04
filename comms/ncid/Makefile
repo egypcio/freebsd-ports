@@ -1,8 +1,8 @@
 # Created by: David
-# $FreeBSD: head/comms/ncid/Makefile 431256 2017-01-12 11:54:07Z cpm $
+# $FreeBSD: head/comms/ncid/Makefile 498722 2019-04-12 15:01:52Z egypcio $
 
 PORTNAME=	ncid
-PORTVERSION=	1.10
+PORTVERSION=	1.10.1
 CATEGORIES=	comms
 MASTER_SITES=	SF
 DISTNAME=	${PORTNAME}-${PORTVERSION}-src
@@ -17,7 +17,7 @@ BUILD_DEPENDS=	${RUN_DEPENDS}
 LIB_DEPENDS=	libpcre.so:devel/pcre
 RUN_DEPENDS=	bash:shells/bash
 
-USES=		gmake perl5 tk shebangfix
+USES=		compiler:c11 gmake perl5 tk shebangfix
 
 SHEBANG_FILES=	extensions/*.sh \
 		gateway/*.pl gateway/*.sh \
@@ -59,6 +59,10 @@ post-patch:
 		-e 's|$$(prefix)/share|$${PREFIX}/share|g' \
 		-e 's|$$(SHARE)/man|$${MANPREFIX}/man/|g' \
 		-e 's|$$(SHARE)/ncid|$${DATADIR}|g' ${WRKSRC}/Makefile
+.if exists(/usr/lib/libstdc++.so)
+	@${REINPLACE_CMD} -e 's|-Wno-stringop-truncation||g' \
+		${WRKSRC}/Makefile ${WRKSRC}/server/Makefile
+.endif
 
 do-install:
 	@${MKDIR} ${STAGEDIR}${ETCDIR}

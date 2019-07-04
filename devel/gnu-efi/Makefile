@@ -1,5 +1,5 @@
 # Created by: Edward Tomasz Napierala <trasz@FreeBSD.org>
-# $FreeBSD: head/devel/gnu-efi/Makefile 487272 2018-12-12 01:35:33Z gerald $
+# $FreeBSD: head/devel/gnu-efi/Makefile 491716 2019-01-31 13:23:41Z tobik $
 
 PORTNAME=	gnu-efi
 PORTVERSION=	3.0.9
@@ -25,9 +25,9 @@ MAKE_ARGS+=	CC=${CC} HOSTCC=${CC} AR=${AR}
 .include <bsd.port.pre.mk>
 
 .if ${ARCH} == amd64
-PLIST_SUB=	ARCH_amd64="" ARCH_i386="@comment "
+PLIST_SUB+=	ARCH_amd64="" ARCH_i386="@comment "
 .elif ${ARCH} == i386
-PLIST_SUB=	ARCH_i386="" ARCH_amd64="@comment "
+PLIST_SUB+=	ARCH_i386="" ARCH_amd64="@comment "
 .endif
 
 post-install:

@@ -1,8 +1,9 @@
 # Created by: Michael Neumann <mneumann@ntecs.de>
-# $FreeBSD: head/emulators/hatari/Makefile 487243 2018-12-11 17:03:52Z linimon $
+# $FreeBSD: head/emulators/hatari/Makefile 500752 2019-05-03 21:06:51Z linimon $
 
 PORTNAME=	hatari
 PORTVERSION=	2.1.0
+PORTREVISION=	1
 CATEGORIES=	emulators
 MASTER_SITES=	http://download.tuxfamily.org/hatari/${PORTVERSION}/
 
@@ -12,7 +13,6 @@ COMMENT=	Atari ST emulator
 LICENSE=	GPLv2+
 LICENSE_FILE=	${WRKSRC}/gpl.txt
 
-BROKEN_aarch64=		fails to configure: error: unrecognized CPU type
 BROKEN_armv6=		fails to configure: CMake Error: Generator: execution of make failed
 
 LIB_DEPENDS=	libportaudio.so:audio/portaudio \

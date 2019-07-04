@@ -1,8 +1,8 @@
-# $FreeBSD: head/benchmarks/vegeta/Makefile 486672 2018-12-05 14:09:12Z egypcio $
+# $FreeBSD: head/benchmarks/vegeta/Makefile 501631 2019-05-14 08:38:12Z egypcio $
 
 PORTNAME=	vegeta
 DISTVERSIONPREFIX=	cli/v
-DISTVERSION=	12.1.0
+DISTVERSION=	12.5.1
 CATEGORIES=	benchmarks www
 
 MAINTAINER=	egypcio@FreeBSD.org
@@ -39,8 +39,7 @@ do-build:
 	@cd ${WRKSRC} && \
 	  ${SETENV} ${MAKE_ENV} ${GO_ENV} CGO_ENABLED=0 GOPATH=${WRKSRC} \
 	  ${GO_CMD} build -v -a -tags=netgo -ldflags \
-	  '-s -w -extldflags "-static" -X main.Version=${DISTVERSION} -X main.Date=20180818' \
-	  -o bin/${PORTNAME}
+	  '-s -w -extldflags "-static" -X main.Version=${DISTVERSION}' -o bin/${PORTNAME}
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/bin/${PORTNAME} ${STAGEDIR}/${LOCALBASE}/bin

@@ -1,5 +1,4 @@
-# Created by: mat
-# $FreeBSD: head/irc/anope/Makefile 488341 2018-12-25 20:25:39Z tcberner $
+# $FreeBSD: head/irc/anope/Makefile 502104 2019-05-20 13:04:24Z mat $
 
 PORTNAME=	anope
 PORTVERSION=	2.0.6
@@ -46,6 +45,11 @@ SASL_LIB_DEPENDS=	libsasl2.so:security/cyrus-sasl2
 SQLITE_USES=	sqlite
 
 TRE_LIB_DEPENDS=	libtre.so:textproc/libtre
+
+post-patch:
+# Avoid conflict with C++20 <version> by adding -bin suffix
+	@${REINPLACE_CMD} -i .c++20 's/version /version-bin /' \
+		${WRKSRC}/include/CMakeLists.txt
 
 post-patch-GNUTLS-on:
 	${LN} -s ${WRKSRC}/modules/extra/m_ssl_gnutls.cpp ${WRKSRC}/modules/

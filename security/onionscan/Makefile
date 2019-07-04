@@ -1,4 +1,4 @@
-# $FreeBSD: head/security/onionscan/Makefile 486672 2018-12-05 14:09:12Z egypcio $
+# $FreeBSD: head/security/onionscan/Makefile 505321 2019-06-29 03:51:13Z tobik $
 
 PORTNAME=	onionscan
 DISTVERSIONPREFIX=	OnionScan-
@@ -10,8 +10,6 @@ COMMENT=	Free and open source tool for investigating Onion Services
 
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
-
-BUILD_DEPENDS=	go:lang/go
 
 USES=		go
 USE_GITHUB=	yes

@@ -1,8 +1,8 @@
-# $FreeBSD: head/devel/git-lfs/Makefile 486752 2018-12-06 11:34:14Z egypcio $
+# $FreeBSD: head/devel/git-lfs/Makefile 505769 2019-07-03 18:49:33Z egypcio $
 
 PORTNAME=		git-lfs
 DISTVERSIONPREFIX=	v
-DISTVERSION=		2.6.1
+DISTVERSION=		2.7.2
 CATEGORIES=		devel
 
 MAINTAINER=	egypcio@FreeBSD.org
@@ -13,11 +13,8 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.md
 
 RUN_DEPENDS=	git:devel/git
 
-USES=		go
+USES=		go:modules
 USE_GITHUB=	yes
-
-GH_TUPLE=	davecgh:go-spew:d8f796a:davecgh_spew/vendor/github.com/davecgh/go-spew \
-		pmezard:go-difflib:792786c:pmezard_difflib/vendor/github.com/pmezard/go-difflib
 
 GO_PKGNAME=	github.com/${PORTNAME}/${PORTNAME}
 

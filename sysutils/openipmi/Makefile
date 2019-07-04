@@ -1,8 +1,9 @@
 # Created by: Alex Deiter <alex.deiter@gmail.com>
-# $FreeBSD: head/sysutils/openipmi/Makefile 489336 2019-01-05 13:47:15Z egypcio $
+# $FreeBSD: head/sysutils/openipmi/Makefile 500408 2019-04-29 12:41:14Z egypcio $
 
 PORTNAME=	openipmi
-PORTVERSION=	2.0.26
+PORTVERSION=	2.0.27
+PORTREVISION=	2
 CATEGORIES=	sysutils
 MASTER_SITES=	SF/${PORTNAME}/OpenIPMI%202.0%20Library
 DISTNAME=	OpenIPMI-${PORTVERSION}
@@ -22,9 +23,9 @@ USE_LDCONFIG=	yes
 GNU_CONFIGURE=	yes
 INSTALL_TARGET=	install-strip
 
-OPTIONS_DEFINE=	SSL SNMP PERL PYTHON TCL TKINTER GDBM
-OPTIONS_RADIO=	GLIB
-OPTIONS_RADIO_GLIB=	GLIB12 GLIB20
+OPTIONS_DEFINE=	GDBM GLIB20 PERL PYTHON SNMP SSL TCL TKINTER
+TKINTER_IMPLIES=	PYTHON
+
 SSL_DESC=	IPMI 2.0 RMCP+ encryption and authentication
 SNMP_DESC=	SNMP trap support for the sample programs
 PERL_DESC=	Perl interface for OpenIPMI library
@@ -32,7 +33,6 @@ PYTHON_DESC=	Python interface for OpenIPMI library
 TCL_DESC=	TCL interface for OpenIPMI library
 TKINTER_DESC=	GUI for OpenIPMI, written in Python
 GDBM_DESC=	Local SDR caching on startup
-GLIB12_DESC=	Simply OS handler for glib 1.2
 GLIB20_DESC=	Simply OS handler for glib 2.0
 
 .include <bsd.port.options.mk>
@@ -57,7 +57,7 @@ CONFIGURE_ARGS+=	--with-openssl=no
 .endif
 
 .if ${PORT_OPTIONS:MTKINTER}
-USES+=			python shebangfix
+USES+=			shebangfix
 SHEBANG_FILES=		swig/python/openipmigui.py
 BUILD_DEPENDS+=		${PYTHON_PKGNAMEPREFIX}tkinter>0:x11-toolkits/py-tkinter@${PY_FLAVOR} \
 			${LOCALBASE}/lib/Tix8.4.3/Tix.tcl:x11-toolkits/tix
@@ -83,13 +83,15 @@ PLIST_SUB+=		OIPMIPERL="@comment "
 
 .if ${PORT_OPTIONS:MPYTHON}
 USES+=			python
-CONFIGURE_ARGS+=	--with-python --with-swig ac_cv_path_pythonprog=${PYTHON_CMD}
+USE_PYTHON=		py3kplist
+CONFIGURE_ARGS+=	--with-python --with-swig
+CONFIGURE_ENV+=	ac_cv_path_pythonprog=${PYTHON_CMD}
 BUILD_DEPENDS+=		swig3.0:devel/swig30
-PLIST_SUB+=		PYTHON=""
+PLIST_SUB+=		OIPMIPYTHON=""
 BINARY_ALIAS=		swig=swig3.0
 .else
 CONFIGURE_ARGS+=	--with-python=no --with-swig=no
-PLIST_SUB+=		PYTHON="@comment "
+PLIST_SUB+=		OIPMIPYTHON="@comment "
 .endif
 
 .if ${PORT_OPTIONS:MTCL}
@@ -107,20 +109,9 @@ PLIST_SUB+=		TCL="@comment "
 LIB_DEPENDS+=		libgdbm.so:databases/gdbm
 .endif
 
-.if ${PORT_OPTIONS:MGLIB12}
-USE_GNOME=		glib12
-CONFIGURE_ARGS+=	--with-glib --with-glibver=1.2 \
-			--with-glibcflags=-I${LOCALBASE}/include/glib-1.2 \
-			--with-gliblibs="-L${LOCALBASE}/lib -lglib -lgthread"
-MAKE_ENV+=		GLIB_MAJOR_VERSION=1
-EXTRA_PATCHES+=		${PATCHDIR}/extra-patch-glib_glib__os__hnd.c
-PLIST_SUB+=		GLIB=""
-.else
-PLIST_SUB+=		GLIB="@comment "
-.endif
-
 .if ${PORT_OPTIONS:MGLIB20}
-USE_GNOME=		glib20
+USES+=			gnome
+USE_GNOME+=		glib20
 CONFIGURE_ARGS+=	--with-glib --with-glibver=2.0
 PLIST_SUB+=		GLIB=""
 .else
@@ -141,5 +132,9 @@ post-patch:
 		${WRKSRC}/lanserv/Makefile.in
 	${REINPLACE_CMD} 's|editline/readline.h|edit/readline/readline.h|' \
 		${WRKSRC}/sample/ipmi_serial_bmc_emu.c
+
+do-install-PYTHON-on:
+	@${PYTHON_CMD} -m compileall -d ${PYTHON_SITELIBDIR} ${STAGEDIR}${PYTHON_SITELIBDIR} && \
+	  ${PYTHON_CMD} -O -m compileall -d ${PYTHON_SITELIBDIR} ${STAGEDIR}${PYTHON_SITELIBDIR}
 
 .include <bsd.port.mk>
