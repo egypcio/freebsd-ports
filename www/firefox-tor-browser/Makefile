@@ -1,10 +1,10 @@
 # $FreeBSD$
 
 PORTNAME=	firefox-tor-browser
-DISTVERSION=	60.7.0esr-8.5-1-build2
+DISTVERSION=	60.7.0esr-8.5-2-build2
 CATEGORIES=	www security ipv6
-MASTER_SITES=	https://dist.torproject.org/torbrowser/8.5.1/
-DISTFILES=	src-firefox-tor-browser-60.7.0esr-8.5-1-build2.tar.xz \
+MASTER_SITES=	https://dist.torproject.org/torbrowser/8.5.3/
+DISTFILES=	src-firefox-tor-browser-${DISTVERSION}.tar.xz \
 		src-tor-launcher-0.2.18.3.tar.xz \
 		src-torbutton-2.1.10.tar.xz 
 
@@ -21,7 +21,7 @@ BUILD_DEPENDS=	autoconf-2.13:devel/autoconf213 \
 		dbus-glib>=0:devel/dbus-glib \
 		fontconfig>=0:x11-fonts/fontconfig \
 		rustc:lang/rust \
-		llvm70>=0:devel/llvm70 \
+		llvm80>=0:devel/llvm80 \
 		rust-cbindgen>=0:devel/rust-cbindgen
 LIB_DEPENDS=	libgconf-2.so:devel/gconf2 \
 		libgtk-x11-2.0.so:x11-toolkits/gtk20 \
@@ -34,7 +34,7 @@ RUN_DEPENDS=	tor:security/tor \
 		obfs4proxy:security/obfs4proxy-tor
 
 USES=		compiler:c++11-lib cpe libtool gmake \
-		perl5 pkgconfig python:2.7 localbase:ldflags
+		perl5 pkgconfig python:3.6 localbase:ldflags
 
 CPE_VENDOR=	torproject
 

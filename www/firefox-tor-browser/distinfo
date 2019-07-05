@@ -1,6 +1,6 @@
-TIMESTAMP = 1560327507
-SHA256 (src-firefox-tor-browser-60.7.0esr-8.5-1-build2.tar.xz) = 880bc36d7e36c36d6c27bc9b9b432962a37b6cfb1fa57c7964d442a2487fa862
-SIZE (src-firefox-tor-browser-60.7.0esr-8.5-1-build2.tar.xz) = 279420636
+TIMESTAMP = 1562333360
+SHA256 (src-firefox-tor-browser-60.7.0esr-8.5-2-build2.tar.xz) = e622bbc00fe279e4f8207fc19518baeaabd060d9a0c63fb636b5404b2b0a1e8b
+SIZE (src-firefox-tor-browser-60.7.0esr-8.5-2-build2.tar.xz) = 279395840
 SHA256 (src-tor-launcher-0.2.18.3.tar.xz) = 2c3c188e62a9157d8e3772e5bf4fa8840a1ea6b184af340d2c0d66b96c98a38a
 SIZE (src-tor-launcher-0.2.18.3.tar.xz) = 204796
 SHA256 (src-torbutton-2.1.10.tar.xz) = a2420170509f1a683f6d6ea1927b910c6fbd73c40fdd3c0116df9ad64b44a6ca
