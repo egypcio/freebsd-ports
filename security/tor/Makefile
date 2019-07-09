@@ -1,11 +1,11 @@
 # $FreeBSD$
 
 PORTNAME=		tor
-DISTVERSION=		0.3.4.8
+DISTVERSION=		0.4.0.5
 CATEGORIES=		security net ipv6
 MASTER_SITES=		TOR
 
-MAINTAINER=	egypcio@googlemail.com
+MAINTAINER=	egypcio@FreeBSD.org
 COMMENT=	Unofficial/experimental version of security/tor
 
 LICENSE=	BSD3CLAUSE
@@ -21,7 +21,8 @@ USES=		cpe pkgconfig
 
 GNU_CONFIGURE=	yes
 
-CONFIGURE_ARGS=	--disable-gcc-hardening --disable-gcc-warnings-advisory \
+CONFIGURE_ARGS=	--disable-android \
+		--disable-gcc-hardening --disable-gcc-warnings-advisory \
 		--with-tor-user=${USERS} --with-tor-group=${GROUPS} \
 		--with-openssl-dir=${OPENSSLBASE} \
 		--with-libevent-dir=${LOCALBASE} \
@@ -36,16 +37,15 @@ CONFIGURE_ENV=	TOR_CPPFLAGS_libevent='-I${LOCALBASE}/include' \
 
 MAKE_ENV=	USE_OPENSSL_RPATH=yes
 
-OPTIONS_DEFINE=			DOCS EXAMPLES GNUMAKE STATIC TOR2WEB
+OPTIONS_DEFINE=			DOCS EXAMPLES GNUMAKE STATIC
 OPTIONS_GROUP=			COMPRESSION
 OPTIONS_GROUP_COMPRESSION=	LZMA ZSTD
 OPTIONS_RADIO=			MALLOC
-OPTIONS_RADIO_MALLOC=		DMALLOC TCMALLOC
+OPTIONS_RADIO_MALLOC=		TCMALLOC
 OPTIONS_SINGLE=			SSLTLS
 OPTIONS_SINGLE_SSLTLS=		SSLTLS_BASE SSLTLS_PORTS
 
 COMPRESSION_DESC=	Compression support schemes
-DMALLOC_DESC=		Use debug memory allocation library
 MALLOC_DESC=		Dynamic memory allocation management
 GNUMAKE_DESC=		Use 'GNU Make' as default make tool
 SSLTLS_DESC=		SSL/TLS support
@@ -54,17 +54,16 @@ SSLTLS_PORTS_DESC=	Use SSL/TLS from ports instead of FreeBSD's
 LZMA_DESC=		Lempel-Ziv-Markov (LZMA)
 STATIC_DESC=		Create an entirely static Tor binary
 TCMALLOC_DESC=		Use tcmalloc memory allocation library
-TOR2WEB_DESC=		Support Tor2Web non-anonymous mode
 ZSTD_DESC=		Zstandard (Zstd)
 
 OPTIONS_DEFAULT=	DOCS EXAMPLES SSLTLS_BASE
 
-DMALLOC_CONFIGURE_ON=		--with-dmalloc
-DMALLOC_LIB_DEPENDS=		libdmalloc.so:devel/dmalloc
 DOCS_CONFIGURE_ENABLE=		asciidoc
 DOCS_BUILD_DEPENDS=		asciidoc:textproc/asciidoc
 GNUMAKE_USES=			gmake
 LZMA_CONFIGURE_ENABLE=		lzma
+LZMA_CONFIGURE_ENV=		TOR_CPPFLAGS_lzma='-I/usr/include' \
+				TOR_LDFLAGS_lzma='-L/usr/lib'
 SSLTLS_BASE_LIB_DEPENDS=	libevent.so:devel/libevent
 SSLTLS_BASE_MAKE_ENV=		OPENSSLRPATH=/usr/lib
 SSLTLS_PORTS_BUILD_DEPENDS=	openssl:${OPENSSL_PORT}
@@ -75,11 +74,12 @@ STATIC_CONFIGURE_ENABLE=	static-tor
 STATIC_BUILD_DEPENDS=		${LOCALBASE}/lib/libevent.a:devel/libevent
 STATIC_USES=			ssl:build
 STATIC_USES_OFF=		ssl
-TCMALLOC_CONFIGURE_ON=		--with-tcmalloc
+TCMALLOC_CONFIGURE_ON=		--with-malloc=tcmalloc
 TCMALLOC_LIB_DEPENDS=		libtcmalloc.so:devel/google-perftools
 TCMALLOC_USES=			localbase:ldflags
-TOR2WEB_CONFIGURE_ENABLE=	tor2web-mode
 ZSTD_CONFIGURE_ENABLE=		zstd
+ZSTD_CONFIGURE_ENV=		TOR_CPPFLAGS_zstd='-I/usr/include' \
+				TOR_LDFLAGS_zstd='-L/usr/lib'
 ZSTD_LIB_DEPENDS=		libzstd.so:archivers/zstd
 
 USERS=		_tor
@@ -95,9 +95,6 @@ CONFLICTS=	tor-devel-[0-9]*
 .include <bsd.port.options.mk>
 
 .if ${PORT_OPTIONS:MSTATIC}
-.	if !empty(PORT_OPTIONS:MDMALLOC)
-BUILD_DEPENDS+=		${LOCALBASE}/lib/libdmalloc.a:devel/dmalloc
-.	endif
 .	if !empty(PORT_OPTIONS:MTCMALLOC)
 BUILD_DEPENDS+=		${LOCALBASE}/lib/libtcmalloc.a:devel/google-perftools
 .	endif
@@ -105,18 +102,6 @@ BUILD_DEPENDS+=		${LOCALBASE}/lib/libtcmalloc.a:devel/google-perftools
 BUILD_DEPENDS+=		${OPENSSLBASE}/lib/libcrypto.a:${OPENSSL_PORT} \
 			${OPENSSLBASE}/lib/libssl.a:${OPENSSL_PORT}
 .	endif
-.endif
-
-pre-everything::
-.if ${PORT_OPTIONS:MTOR2WEB}
-	@${ECHO_MSG} "                                                            "
-	@${ECHO_MSG} "  WARNING: TOR2WEB is enabled! This option makes Tor work   "
-	@${ECHO_MSG} "    only for *non-anonymous* hidden service traffic.        "
-	@${ECHO_MSG} "    Please make sure you understand this option to proceed! "
-	@${ECHO_MSG} "                                                            "
-	@${ECHO_MSG} "  You may want to stop build with Ctrl+C.                   "
-	@${ECHO_MSG} "                                                            "
-	@sleep 10
 .endif
 
 post-patch:

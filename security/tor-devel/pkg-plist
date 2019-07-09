@@ -1,21 +1,25 @@
-@dir(%%USER%%,%%GROUP%%,700) /var/db/tor
-@dir(%%USER%%,%%GROUP%%,700) /var/log/tor
-@dir(%%USER%%,%%GROUP%%,700) /var/run/tor
-@sample %%PORTEXAMPLES%%%%EXAMPLESDIR%%/tor-exit-notice.html
-@sample %%PORTEXAMPLES%%%%EXAMPLESDIR%%/tor.logrotate
-@sample %%PORTEXAMPLES%%%%EXAMPLESDIR%%/torrc.minimal
-@sample %%PORTEXAMPLES%%%%EXAMPLESDIR%%/torrc.sample
-%%DATADIR%%/geoip
-%%DATADIR%%/geoip6
+bin/tor
+bin/tor-gencert
+bin/tor-print-ed-signing-cert
+bin/tor-resolve
+bin/torify
+@sample %%ETCDIR%%/torrc.sample
+man/man1/tor-gencert.1.gz
+man/man1/tor-print-ed-signing-cert.1.gz
+man/man1/tor-resolve.1.gz
+man/man1/tor.1.gz
+man/man1/torify.1.gz
 %%PORTDOCS%%%%DOCSDIR%%/tor-gencert.html
+%%PORTDOCS%%%%DOCSDIR%%/tor-print-ed-signing-cert.html
 %%PORTDOCS%%%%DOCSDIR%%/tor-resolve.html
 %%PORTDOCS%%%%DOCSDIR%%/tor.html
 %%PORTDOCS%%%%DOCSDIR%%/torify.html
-%%PORTDOCS%%%%MANPAGES%%man/man1/tor-gencert.1.gz
-%%PORTDOCS%%%%MANPAGES%%man/man1/tor-resolve.1.gz
-%%PORTDOCS%%%%MANPAGES%%man/man1/tor.1.gz
-%%PORTDOCS%%%%MANPAGES%%man/man1/torify.1.gz
-bin/tor
-bin/tor-gencert
-bin/tor-resolve
-bin/torify
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/tor-exit-notice.html
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/tor.logrotate
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/torrc.minimal
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/torrc.sample
+%%DATADIR%%/geoip
+%%DATADIR%%/geoip6
+@dir(%%USER%%,%%GROUP%%,700) /var/db/tor
+@dir(%%USER%%,%%GROUP%%,700) /var/log/tor
+@dir(%%USER%%,%%GROUP%%,700) /var/run/tor

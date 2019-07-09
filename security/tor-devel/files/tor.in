@@ -15,6 +15,9 @@
 #     options will result in configuration overwriting.
 #
 # tor_datadir	(str):	Tor's DataDirecoty.		Default: /var/db/tor
+# tor_flags	(str):	Extra args used to run Tor.	Default: --Log ${tor_loglevel}\\ file\\ ${tor_logdir}/${tor_loglevel}.log --RunAsDaemon 1
+# tor_logdir	(str):	Log directory.			Default: /var/log/tor
+# tor_loglevel	(str):	Log severity level.		Default: notice
 # tor_setuid	(bool):	Run Tor with setuid bit on.	Default: NO
 # tor_user	(str):	User to run the Tor daemon.	Default: %%USER%%
 #
@@ -29,10 +32,15 @@ load_rc_config ${name}
 : ${tor_enable="NO"}
 : ${tor_conf="%%PREFIX%%/etc/tor/torrc"}
 : ${tor_pidfile="/var/run/tor/tor.pid"}
+
 : ${tor_datadir="/var/db/tor"}
+: ${tor_flags="--Log ${tor_loglevel}\\ file\\ ${tor_logdir}/${tor_loglevel}.log --RunAsDaemon 1"}
+: ${tor_logdir="/var/log/tor"}
+: ${tor_loglevel="notice"}
 : ${tor_setuid="NO"}
 : ${tor_user="%%USER%%"}
-: ${tor_group="%%GROUP%%"}
+
+checkyesno tor_setuid && tor_user="root"
 
 required_files="${tor_conf}"
 required_dirs="${tor_datadir}"
@@ -40,17 +48,8 @@ required_dirs="${tor_datadir}"
 pidfile="${tor_pidfile}"
 
 command="%%PREFIX%%/bin/tor"
-command_args="-f ${tor_conf} -RunAsDaemon 1 -DataDirectory ${tor_datadir} -PidFile ${tor_pidfile}"
+command_args="-f ${tor_conf} -User %%USER%% --DataDirectory ${tor_datadir} --PidFile ${tor_pidfile} ${tor_flags}"
 
 extra_commands="reload"
-
-if [ checkyesno tor_setuid ]; then
-  if [ grep -E 'User.*${tor_user}' ${tor_conf} ]; then
-	# Just let it here, so others can copy and proper grep stuff.
-  fi
-	command_args="${command_args} -User ${tor_user}"
-	tor_user="root"
-	tor_group="wheel"
-fi
 
 run_rc_command $1

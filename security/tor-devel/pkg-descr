@@ -16,8 +16,4 @@ you anonymize web browsing and publishing, instant messaging, IRC, SSH,
 and more. Tor also provides a platform on which software developers can 
 build new applications with built-in anonymity, safety, and privacy features.
 
-	*** This version is not a stable Tor release ***
-	***  Remember that this is development code  ***
-	*** DON'T RELY ON THIS VERSION FOR ANONYMITY ***
-
 WWW: https://www.torproject.org/
