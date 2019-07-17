@@ -1,5 +1,5 @@
 # Created by: Daniel Kahn Gillmor <dkg@fifthhorseman.net>
-# $FreeBSD: head/security/monkeysphere/Makefile 482964 2018-10-25 10:32:53Z tobik $
+# $FreeBSD: head/security/monkeysphere/Makefile 493870 2019-02-25 14:43:23Z egypcio $
 
 PORTNAME=	monkeysphere
 PORTVERSION=	0.42

@@ -1,5 +1,5 @@
 # Created by: David
-# $FreeBSD: head/comms/ncid/Makefile 498722 2019-04-12 15:01:52Z egypcio $
+# $FreeBSD: head/comms/ncid/Makefile 506432 2019-07-12 02:25:07Z linimon $
 
 PORTNAME=	ncid
 PORTVERSION=	1.10.1
@@ -45,6 +45,8 @@ post-extract:
 	@cd ${WRKSRC}/FreeBSD;for i in *.rc; do \
 		x=`echo $$i | cut -f 1 -d .`; ${CP} $$i $$x; done
 
+.include <bsd.port.pre.mk>
+
 post-patch:
 	@${GREP} -lr 'etc/ncid' ${WRKSRC}/ | ${XARGS} ${REINPLACE_CMD} -Ee \
 		's,(/usr/local/etc/ncid | /etc/ncid),${ETCDIR},g'
@@ -59,7 +61,7 @@ post-patch:
 		-e 's|$$(prefix)/share|$${PREFIX}/share|g' \
 		-e 's|$$(SHARE)/man|$${MANPREFIX}/man/|g' \
 		-e 's|$$(SHARE)/ncid|$${DATADIR}|g' ${WRKSRC}/Makefile
-.if exists(/usr/lib/libstdc++.so)
+.if ${CHOSEN_COMPILER_TYPE} == gcc
 	@${REINPLACE_CMD} -e 's|-Wno-stringop-truncation||g' \
 		${WRKSRC}/Makefile ${WRKSRC}/server/Makefile
 .endif
@@ -130,4 +132,4 @@ post-install-LOGROTATE-on:
 	${INSTALL_MAN} ${WRKSRC}/logrotate/*.1 ${STAGEDIR}${MAN1PREFIX}/man/man1
 	${INSTALL_MAN} ${WRKSRC}/logrotate/*.5 ${STAGEDIR}${MAN5PREFIX}/man/man5
 
-.include <bsd.port.mk>
+.include <bsd.port.post.mk>

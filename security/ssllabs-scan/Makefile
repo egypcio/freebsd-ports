@@ -1,8 +1,8 @@
-# $FreeBSD$
+# $FreeBSD: head/security/ssllabs-scan/Makefile 493869 2019-02-25 14:39:01Z egypcio $
 
 PORTNAME=		ssllabs-scan
 DISTVERSIONPREFIX=	v
-DISTVERSION=		1.4.0
+DISTVERSION=		1.5.0
 CATEGORIES=		security net ipv6
 
 MAINTAINER=	egypcio@FreeBSD.org
@@ -10,6 +10,8 @@ COMMENT=	Command-line tool to use the SSL Labs API
 
 LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/LICENSE
+
+RUN_DEPENDS=	ca_root_nss>=0:security/ca_root_nss
 
 USES=		go
 USE_GITHUB=	yes

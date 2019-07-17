@@ -1,4 +1,4 @@
-# $FreeBSD: head/net-mgmt/semaphore/Makefile 486994 2018-12-08 23:26:42Z swills $
+# $FreeBSD: head/net-mgmt/semaphore/Makefile 493955 2019-02-26 09:05:30Z egypcio $
 
 PORTNAME=	semaphore
 PORTVERSION=	2.5.1
@@ -63,11 +63,12 @@ GH_TUPLE=	ansible-semaphore:semaphore-vendor:a44f7be:ansible/github.com/ansible-
 		go-mgo:mgo:3f83fa5:pkgin4/gopkg.in/mgo.v2 \
 		go-yaml:yaml:v2.2.1:pkgin5/gopkg.in/yaml.v2
 
-PLIST_FILES=	bin/${PORTNAME} \
-		"@sample %%ETCDIR%%/semaphore_config.json.sample"
-
 OPTIONS_DEFINE=	MYSQL
 MYSQL_USES=	mysql
+
+post-patch:
+	${REINPLACE_CMD} 's/%%PORTVERSION%%/${PORTVERSION}/g' \
+	  ${WRKSRC}/util/config.go
 
 do-build:
 	${MKDIR} ${WRKSRC}/${GO_TARGET:H}
@@ -75,14 +76,12 @@ do-build:
 	${RLN} ${WRKSRC} ${WRKSRC}/${GO_TARGET}
 	${RLN} ${WRKSRC} ${GO_WRKSRC}/src
 	${RLN} ${WRKSRC} ${GO_WRKSRC}/public/vendor
-	${REINPLACE_CMD} 's/%%PORTVERSION%%/${PORTVERSION}/g' \
-	  ${WRKSRC}/util/config.go
 	(cd ${WRKSRC} && \
 	  ${SETENV} ${MAKE_ENV} ${GO_ENV} GOPATH=${WRKSRC} ${GO_CMD} \
 	  build ${GO_BUILDFLAGS} -o ${WRKSRC}/bin/${PORTNAME} cli)
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/bin/${PORTNAME} ${STAGEDIR}/${LOCALBASE}/bin
+	${INSTALL_PROGRAM} ${WRKSRC}/bin/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
 	${MKDIR} ${STAGEDIR}${PREFIX}/etc/semaphore
 	${CP} ${WRKSRC}/config.json ${STAGEDIR}${PREFIX}/etc/semaphore/semaphore_config.json.sample
 

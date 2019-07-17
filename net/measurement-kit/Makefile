@@ -1,22 +1,44 @@
-# $FreeBSD$
+# $FreeBSD: head/net/measurement-kit/Makefile 503471 2019-06-04 13:23:50Z egypcio $
 
-PORTNAME=	measurement-kit
-DISTVERSION=	0.8.3
-CATEGORIES=	net
+PORTNAME=		measurement-kit
+DISTVERSIONPREFIX=	v
+DISTVERSION=		0.10.4
+CATEGORIES=		net devel
 
-MAINTAINER=	egypcio@googlemail.com
-COMMENT=	Unofficial/experimental version of net/measurement-kit
+MAINTAINER=	egypcio@FreeBSD.org
+COMMENT=	Portable C++14 network measurement library
 
 LICENSE=	BSD2CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-BUILD_DEPENDS=	GeoIP>=1.6.12:net/GeoIP
-LIB_DEPENDS=	libevent.so:devel/libevent
+LIB_DEPENDS=	libcurl.so:ftp/curl \
+		libevent.so:devel/libevent \
+		libmaxminddb.so:net/libmaxminddb
+RUN_DEPENDS=	ca_root_nss>=0:security/ca_root_nss
 
-USES=		autoreconf:build cmake localbase:ldflags
+USES=		autoreconf:build compiler:c++14-lang libtool ssl
 USE_GITHUB=	yes
-USE_LDCONFIG=	yes
 
-GH_TAGNAME=	v${DISTVERSION}
+GNU_CONFIGURE=	yes
+CONFIGURE_ARGS=	--with-libcurl=${LOCALBASE} \
+		--with-libevent=${LOCALBASE} \
+		--with-libmaxminddb=${LOCALBASE} \
+		--with-openssl=${OPENSSLBASE}
+CONFIGURE_ENV=	CC=${CC} \
+		CXX=${CXX}
+
+INSTALL_TARGET=	install-strip
+PORTDOCS=	README.md include/README.md
+
+OPTIONS_DEFINE=	DOCS
+
+do-configure:
+	@(cd ${WRKSRC} && ${SH} autogen.sh --no-geoip && \
+	  ${SETENV} ${CONFIGURE_ENV} ${SH} configure ${CONFIGURE_ARGS})
+
+post-install-DOCS-on:
+	${MKDIR} ${STAGEDIR}${DOCSDIR}/include
+	${INSTALL_DATA} ${WRKSRC}/README.md ${STAGEDIR}${DOCSDIR}
+	${INSTALL_DATA} ${WRKSRC}/include/measurement_kit/README.md ${STAGEDIR}${DOCSDIR}/include
 
 .include <bsd.port.mk>
