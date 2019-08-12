@@ -1,8 +1,9 @@
 # Created by: David
-# $FreeBSD: head/comms/ncid/Makefile 506432 2019-07-12 02:25:07Z linimon $
+# $FreeBSD: head/comms/ncid/Makefile 507372 2019-07-26 20:46:53Z gerald $
 
 PORTNAME=	ncid
 PORTVERSION=	1.10.1
+PORTREVISION=	1
 CATEGORIES=	comms
 MASTER_SITES=	SF
 DISTNAME=	${PORTNAME}-${PORTVERSION}-src

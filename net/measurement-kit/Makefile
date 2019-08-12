@@ -1,8 +1,9 @@
-# $FreeBSD: head/net/measurement-kit/Makefile 503471 2019-06-04 13:23:50Z egypcio $
+# $FreeBSD: head/net/measurement-kit/Makefile 507877 2019-08-02 13:30:40Z jbeich $
 
 PORTNAME=		measurement-kit
 DISTVERSIONPREFIX=	v
 DISTVERSION=		0.10.4
+PORTREVISION=		2
 CATEGORIES=		net devel
 
 MAINTAINER=	egypcio@FreeBSD.org
