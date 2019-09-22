@@ -1,12 +1,12 @@
 # $FreeBSD$
 
-PORTNAME=	firefox-tor-browser
-DISTVERSION=	60.7.0esr-8.5-2-build2
+PORTNAME=	tor-browser-firefox
+DISTVERSION=	60.9.0esr-8.5-2-build2
 CATEGORIES=	www security ipv6
-MASTER_SITES=	https://dist.torproject.org/torbrowser/8.5.3/
+MASTER_SITES=	https://dist.torproject.org/torbrowser/8.5.5/
 DISTFILES=	src-firefox-tor-browser-${DISTVERSION}.tar.xz \
 		src-tor-launcher-0.2.18.3.tar.xz \
-		src-torbutton-2.1.10.tar.xz 
+		src-torbutton-2.1.13.tar.xz
 
 MAINTAINER=	egypcio@FreeBSD.org
 COMMENT=	Tor Browser for FreeBSD (experimental/unofficial)

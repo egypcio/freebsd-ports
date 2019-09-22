@@ -1,0 +1,3 @@
+Unlike vendor-provided TorBrowserBundle, the port stores temporary
+user data under %%USERDATADIR%%. If you wish to start from a clean
+profile either remove the directory or reinstall the package.

@@ -1,0 +1,14 @@
+--- Browser/start-tor-browser~
++++ Browser/start-tor-browser
+@@ -342,6 +342,11 @@ setControlPortPasswd ${TOR_CONTROL_PASSW
+ 
+ cd "${HOME}"
+ 
++# FreeBSD port stores live Data under /tmp, copied from Skeleton
++printf "\nCopying skeleton profile to %%USERDATADIR%%\n"
++umask 077
++cp -nR TorBrowser/Skel/ %%USERDATADIR%%
++
+ # We pass all additional command-line arguments we get to Firefox.
+ #
+ # The --class parameter was added to fix bug 11102.

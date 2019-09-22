@@ -1,11 +1,11 @@
 # Created by: Remington Lang <MrL0Lz@gmail.com>
-# $FreeBSD: head/security/openvpn-admin/Makefile 505768 2019-07-03 18:35:16Z egypcio $
+# $FreeBSD: head/security/openvpn-admin/Makefile 508887 2019-08-14 03:26:09Z meta $
 
 PORTNAME=	openvpn-admin
 PORTVERSION=	1.9.4
 DISTVERSIONSUFFIX=	-2
 PORTREVISION=	6
-CATEGORIES=	security gnome
+CATEGORIES=	security gnome net-vpn
 MASTER_SITES=	SF/${PORTNAME}/${PORTNAME}/release-${PORTVERSION}
 
 MAINTAINER=	egypcio@FreeBSD.org

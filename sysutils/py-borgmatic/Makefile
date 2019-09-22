@@ -1,7 +1,7 @@
-# $FreeBSD: head/sysutils/py-borgmatic/Makefile 508173 2019-08-05 14:07:58Z egypcio $
+# $FreeBSD: head/sysutils/py-borgmatic/Makefile 512410 2019-09-20 12:59:44Z egypcio $
 
 PORTNAME=	borgmatic
-PORTVERSION=	1.3.14
+PORTVERSION=	1.3.16
 CATEGORIES=	sysutils python
 MASTER_SITES=	CHEESESHOP
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
