@@ -1,4 +1,4 @@
-# $FreeBSD: head/security/ssllabs-scan/Makefile 493869 2019-02-25 14:39:01Z egypcio $
+# $FreeBSD: head/security/ssllabs-scan/Makefile 513275 2019-09-29 22:31:57Z dmgk $
 
 PORTNAME=		ssllabs-scan
 DISTVERSIONPREFIX=	v
@@ -19,12 +19,5 @@ USE_GITHUB=	yes
 GH_ACCOUNT=	ssllabs
 
 PLIST_FILES=	bin/${PORTNAME}
-
-do-build:
-	@(cd ${GO_WRKSRC} && \
-	  ${SETENV} ${MAKE_ENV} ${GO_ENV} ${GO_CMD} build ${GO_BUILDFLAGS} -o bin/${PORTNAME})
-
-do-install:
-	${INSTALL_PROGRAM} ${GO_WRKSRC}/bin/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
 
 .include <bsd.port.mk>

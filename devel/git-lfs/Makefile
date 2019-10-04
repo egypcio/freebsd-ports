@@ -1,4 +1,4 @@
-# $FreeBSD: head/devel/git-lfs/Makefile 508165 2019-08-05 12:27:44Z egypcio $
+# $FreeBSD: head/devel/git-lfs/Makefile 513274 2019-09-29 22:29:39Z dmgk $
 
 PORTNAME=		git-lfs
 DISTVERSIONPREFIX=	v
@@ -13,8 +13,6 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.md
 
 USES=		go:modules
 USE_GITHUB=	yes
-
-GO_PKGNAME=	github.com/${PORTNAME}/${PORTNAME}
 
 OPTIONS_DEFINE=		GIT_SUBVERSION MANPAGES
 OPTIONS_DEFAULT=	MANPAGES
