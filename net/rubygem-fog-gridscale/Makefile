@@ -1,7 +1,7 @@
-# $FreeBSD$
+# $FreeBSD: head/net/rubygem-fog-gridscale/Makefile 512409 2019-09-20 12:44:18Z egypcio $
 
 PORTNAME=	fog-gridscale
-PORTVERSION=	0.1.4
+PORTVERSION=	0.1.5
 CATEGORIES=	net rubygems
 MASTER_SITES=	RG
 

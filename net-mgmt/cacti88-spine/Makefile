@@ -1,5 +1,5 @@
 # Created by: clement@FreeBSD.org
-# $FreeBSD: head/net-mgmt/cacti88-spine/Makefile 486672 2018-12-05 14:09:12Z egypcio $
+# $FreeBSD: head/net-mgmt/cacti88-spine/Makefile 524503 2020-01-28 17:20:40Z bapt $
 
 PORTNAME=	spine
 PORTVERSION=	0.8.8h
@@ -16,7 +16,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	help2man:misc/help2man
 LIB_DEPENDS=	libnetsnmp.so:net-mgmt/net-snmp \
-		libpkg.so:ports-mgmt/pkg
+		libpkg.so:${PKG_ORIGIN}
 
 GNU_CONFIGURE=	YES
 CONFIGURE_ARGS+=--with-mysql=${LOCALBASE} --with-snmp=${LOCALBASE}

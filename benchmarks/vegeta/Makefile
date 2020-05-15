@@ -1,8 +1,8 @@
-# $FreeBSD: head/benchmarks/vegeta/Makefile 513274 2019-09-29 22:29:39Z dmgk $
+# $FreeBSD: head/benchmarks/vegeta/Makefile 532974 2020-04-25 20:37:57Z egypcio $
 
 PORTNAME=	vegeta
 DISTVERSIONPREFIX=	v
-DISTVERSION=	12.7.0
+DISTVERSION=	12.8.3
 CATEGORIES=	benchmarks www
 
 MAINTAINER=	egypcio@FreeBSD.org
@@ -11,7 +11,7 @@ COMMENT=	HTTP load testing tool and library
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		go
+USES=		go:modules
 USE_GITHUB=	yes
 
 GH_ACCOUNT=	tsenart
@@ -30,7 +30,6 @@ GH_TUPLE=	alecthomas:jsonschema:f2c9385:jsonschema/vendor/github.com/alecthomas/
 		golang:net:c394268:net/vendor/golang.org/x/net \
 		golang:text:v0.3.0:text/vendor/golang.org/x/text
 
-GO_PKGNAME=	github.com/${GH_ACCOUNT}/${PORTNAME}
 GO_BUILDFLAGS=	-tags=netgo \
 		-ldflags '-s -w -extldflags "-static" -X main.Version=${DISTVERSION}'
 

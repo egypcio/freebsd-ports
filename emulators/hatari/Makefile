@@ -1,5 +1,5 @@
 # Created by: Michael Neumann <mneumann@ntecs.de>
-# $FreeBSD: head/emulators/hatari/Makefile 505897 2019-07-05 12:36:07Z egypcio $
+# $FreeBSD: head/emulators/hatari/Makefile 516802 2019-11-05 15:48:40Z zeising $
 
 PORTNAME=	hatari
 PORTVERSION=	2.2.1
@@ -18,7 +18,7 @@ LIB_DEPENDS=	libportaudio.so:audio/portaudio \
 		libpng.so:graphics/png
 
 USES=		cmake desktop-file-utils gnome python:3.6+ readline \
-		sdl shared-mime-info shebangfix tar:bzip2
+		sdl shared-mime-info shebangfix tar:bzip2 xorg
 USE_GNOME=	gtk30
 USE_XORG=	sm ice x11 xext
 USE_PYTHON=	concurrent

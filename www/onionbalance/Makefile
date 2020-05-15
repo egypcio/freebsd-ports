@@ -1,7 +1,7 @@
-# $FreeBSD: head/www/onionbalance/Makefile 489334 2019-01-05 13:35:00Z egypcio $
+# $FreeBSD: head/www/onionbalance/Makefile 532975 2020-04-25 20:40:03Z egypcio $
 
 PORTNAME=	onionbalance
-PORTVERSION=	0.1.8
+PORTVERSION=	0.2.0
 CATEGORIES=	www python
 MASTER_SITES=	CHEESESHOP
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}

@@ -1,9 +1,8 @@
 # Created by: Alex Deiter <alex.deiter@gmail.com>
-# $FreeBSD: head/sysutils/openipmi/Makefile 500408 2019-04-29 12:41:14Z egypcio $
+# $FreeBSD: head/sysutils/openipmi/Makefile 521940 2020-01-03 13:38:39Z egypcio $
 
 PORTNAME=	openipmi
-PORTVERSION=	2.0.27
-PORTREVISION=	2
+PORTVERSION=	2.0.28
 CATEGORIES=	sysutils
 MASTER_SITES=	SF/${PORTNAME}/OpenIPMI%202.0%20Library
 DISTNAME=	OpenIPMI-${PORTVERSION}

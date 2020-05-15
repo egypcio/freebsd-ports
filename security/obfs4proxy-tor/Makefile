@@ -1,8 +1,9 @@
-# $FreeBSD: head/security/obfs4proxy-tor/Makefile 513275 2019-09-29 22:31:57Z dmgk $
+# $FreeBSD: head/security/obfs4proxy-tor/Makefile 517745 2019-11-16 12:52:39Z dmgk $
 
 PORTNAME=	obfs4proxy
 DISTVERSION=	0.0.11
-CATEGORIES=	security net ipv6
+PORTREVISION=	1
+CATEGORIES=	security net
 MASTER_SITES=	https://people.torproject.org/~yawning/releases/${PORTNAME}/
 PKGNAMESUFFIX=	-tor
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX}

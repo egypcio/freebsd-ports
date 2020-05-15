@@ -1,8 +1,8 @@
 # Created by: Simon Olofsson <simon@olofsson.de>
-# $FreeBSD: head/devel/hub/Makefile 512794 2019-09-25 16:54:48Z egypcio $
+# $FreeBSD: head/devel/hub/Makefile 528232 2020-03-11 13:41:15Z egypcio $
 
 PORTNAME=	hub
-PORTVERSION=	2.12.7
+PORTVERSION=	2.14.2
 DISTVERSIONPREFIX=	v
 CATEGORIES=	devel sysutils
 
@@ -11,6 +11,8 @@ COMMENT=	Introduces git to GitHub
 
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
+
+RUN_DEPENDS=	git:devel/git
 
 USES=		go:modules
 
@@ -24,13 +26,6 @@ PLIST_FILES=	bin/hub \
 		man/man1/hub.1.gz \
 		share/fish/completions/hub.fish \
 		share/zsh/site-functions/_hub
-
-OPTIONS_DEFINE=		GIT_SUBVERSION
-
-GIT_SUBVERSION_DESC=	Use 'git-subversion' instead of 'git' as backend
-
-GIT_SUBVERSION_RUN_DEPENDS=	git-subversion>0:devel/git-subversion
-GIT_SUBVERSION_RUN_DEPENDS_OFF=	git:devel/git
 
 post-build:
 	(cd ${GO_WRKSRC} && \

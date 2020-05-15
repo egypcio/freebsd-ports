@@ -1,8 +1,10 @@
-# $FreeBSD: head/net-mgmt/semaphore/Makefile 513275 2019-09-29 22:31:57Z dmgk $
+# $FreeBSD: head/net-mgmt/semaphore/Makefile 528225 2020-03-11 10:44:16Z egypcio $
 
 PORTNAME=	semaphore
 PORTVERSION=	2.5.1
+PORTREVISION=	1
 DISTVERSIONPREFIX=	v
+PORTREVISION=	1
 CATEGORIES=	net-mgmt
 
 MAINTAINER=	egypcio@FreeBSD.org
@@ -64,15 +66,14 @@ GH_TUPLE=	ansible-semaphore:semaphore-vendor:a44f7be:ansible/vendor/github.com/a
 		go-mgo:mgo:3f83fa5:pkgin4/vendor/gopkg.in/mgo.v2 \
 		go-yaml:yaml:v2.2.1:pkgin5/vendor/gopkg.in/yaml.v2
 
-OPTIONS_DEFINE=	MYSQL
-MYSQL_USES=	mysql
-
 post-patch:
 	${REINPLACE_CMD} 's/%%PORTVERSION%%/${PORTVERSION}/g' \
 	  ${WRKSRC}/util/config.go
 
 post-install:
-	${MKDIR} ${STAGEDIR}${PREFIX}/etc/semaphore
-	${CP} ${WRKSRC}/config.json ${STAGEDIR}${PREFIX}/etc/semaphore/semaphore_config.json.sample
+	${MKDIR} ${STAGEDIR}${PREFIX}/etc/${PORTNAME}
+	${CP} ${WRKSRC}/config.json ${STAGEDIR}${PREFIX}/etc/${PORTNAME}/semaphore_config.json.sample
+	${MKDIR} ${STAGEDIR}${PREFIX}/share/${PORTNAME}
+	${CP} ${WRKSRC}/db/migrations/*.sql ${STAGEDIR}${PREFIX}/share/${PORTNAME}
 
 .include <bsd.port.mk>

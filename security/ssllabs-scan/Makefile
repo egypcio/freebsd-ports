@@ -1,9 +1,10 @@
-# $FreeBSD: head/security/ssllabs-scan/Makefile 513275 2019-09-29 22:31:57Z dmgk $
+# $FreeBSD: head/security/ssllabs-scan/Makefile 517745 2019-11-16 12:52:39Z dmgk $
 
 PORTNAME=		ssllabs-scan
 DISTVERSIONPREFIX=	v
 DISTVERSION=		1.5.0
-CATEGORIES=		security net ipv6
+PORTREVISION=		1
+CATEGORIES=		security net
 
 MAINTAINER=	egypcio@FreeBSD.org
 COMMENT=	Command-line tool to use the SSL Labs API

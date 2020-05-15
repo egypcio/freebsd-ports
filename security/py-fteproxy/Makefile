@@ -1,4 +1,4 @@
-# $FreeBSD: head/security/py-fteproxy/Makefile 486672 2018-12-05 14:09:12Z egypcio $
+# $FreeBSD: head/security/py-fteproxy/Makefile 526925 2020-02-23 15:25:53Z antoine $
 
 PORTNAME=	fteproxy
 DISTVERSION=	0.2.19
@@ -11,6 +11,9 @@ COMMENT=	Programmable proxy for censorship circumvention
 
 LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/LICENSE
+
+DEPRECATED=	Uses deprecated version of python
+EXPIRATION_DATE=	2020-08-15
 
 RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}twisted>=17.9.0:devel/py-twisted@${PY_FLAVOR} \
 		${PYTHON_PKGNAMEPREFIX}libfte>=0.1.0:net/py-libfte@${PY_FLAVOR} \

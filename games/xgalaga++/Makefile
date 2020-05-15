@@ -1,5 +1,5 @@
 # Created by: Rusmir Dusko <nemysis@FreeBSD.org>
-# $FreeBSD: head/games/xgalaga++/Makefile 489337 2019-01-05 13:56:46Z egypcio $
+# $FreeBSD: head/games/xgalaga++/Makefile 516845 2019-11-05 22:16:14Z zeising $
 
 PORTNAME=	xgalaga++
 PORTVERSION=	0.9
@@ -15,7 +15,7 @@ COMMENT=	Classic single screen vertical shoot em up
 
 LICENSE=	GPLv2
 
-USES=		gmake
+USES=		gmake xorg
 USE_XORG=	x11 xpm
 
 ALL_TARGET=	${PORTNAME}

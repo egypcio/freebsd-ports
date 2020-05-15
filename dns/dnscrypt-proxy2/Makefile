@@ -1,8 +1,8 @@
-# $FreeBSD: head/dns/dnscrypt-proxy2/Makefile 513274 2019-09-29 22:29:39Z dmgk $
+# $FreeBSD: head/dns/dnscrypt-proxy2/Makefile 529894 2020-03-30 15:11:28Z garga $
 
 PORTNAME=	dnscrypt-proxy
-PORTVERSION=	2.0.27
-CATEGORIES=	dns security ipv6
+PORTVERSION=	2.0.42
+CATEGORIES=	dns security
 PKGNAMESUFFIX=	2
 
 MAINTAINER=	egypcio@FreeBSD.org
@@ -17,7 +17,7 @@ USES=		go:modules
 USE_RC_SUBR=	${PORTNAME}
 USE_GITHUB=	yes
 
-GH_ACCOUNT=	jedisct1
+GH_ACCOUNT=	DNSCrypt
 
 GO_TARGET=	./dnscrypt-proxy:${PREFIX}/sbin/dnscrypt-proxy
 

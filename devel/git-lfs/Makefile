@@ -1,8 +1,8 @@
-# $FreeBSD: head/devel/git-lfs/Makefile 513274 2019-09-29 22:29:39Z dmgk $
+# $FreeBSD: head/devel/git-lfs/Makefile 525163 2020-02-04 13:38:26Z egypcio $
 
 PORTNAME=		git-lfs
 DISTVERSIONPREFIX=	v
-DISTVERSION=		2.8.0
+DISTVERSION=		2.10.0
 CATEGORIES=		devel
 
 MAINTAINER=	egypcio@FreeBSD.org
@@ -11,16 +11,14 @@ COMMENT=	Git extension for versioning large files
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE.md
 
+RUN_DEPENDS=	git:devel/git
+
 USES=		go:modules
 USE_GITHUB=	yes
 
-OPTIONS_DEFINE=		GIT_SUBVERSION MANPAGES
+OPTIONS_DEFINE=		MANPAGES
 OPTIONS_DEFAULT=	MANPAGES
 OPTIONS_SUB=		yes
-
-GIT_SUBVERSION_DESC=		Use 'git-subversion' instead of 'git' as backend
-GIT_SUBVERSION_RUN_DEPENDS=	git-subversion>0:devel/git-subversion
-GIT_SUBVERSION_RUN_DEPENDS_OFF=	git:devel/git
 
 MANPAGES_BUILD_DEPENDS=	ronn:textproc/rubygem-ronn
 
