@@ -1,17 +1,18 @@
 # $FreeBSD$
 
-PORTNAME=	tor-browser-firefox
-DISTVERSION=	60.9.0esr-8.5-2-build2
+PORTNAME=	tor-browser
+PORTVERSION=	8.0.9
 CATEGORIES=	www security ipv6
-MASTER_SITES=	https://dist.torproject.org/torbrowser/8.5.5/
-DISTFILES=	src-firefox-tor-browser-${DISTVERSION}.tar.xz \
-		src-tor-launcher-0.2.18.3.tar.xz \
-		src-torbutton-2.1.13.tar.xz
+MASTER_SITES=	http://bits.torbsd.org/pub/OpenBSD/distfiles/
+DISTFILES=	${PORTNAME}-${PORTVERSION}.tar.gz \
+		torbutton-${TBB_BUTTON}.tar.gz \
+		tor-launcher-${TBB_LAUNCHER}.tar.gz
 
 MAINTAINER=	egypcio@FreeBSD.org
 COMMENT=	Tor Browser for FreeBSD (experimental/unofficial)
 
 LICENSE=	BSD3CLAUSE
+LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	autoconf-2.13:devel/autoconf213 \
 		yasm:devel/yasm \
@@ -21,7 +22,7 @@ BUILD_DEPENDS=	autoconf-2.13:devel/autoconf213 \
 		dbus-glib>=0:devel/dbus-glib \
 		fontconfig>=0:x11-fonts/fontconfig \
 		rustc:lang/rust \
-		llvm80>=0:devel/llvm80 \
+		llvm70>=0:devel/llvm70 \
 		rust-cbindgen>=0:devel/rust-cbindgen
 LIB_DEPENDS=	libgconf-2.so:devel/gconf2 \
 		libgtk-x11-2.0.so:x11-toolkits/gtk20 \
@@ -33,8 +34,9 @@ LIB_DEPENDS=	libgconf-2.so:devel/gconf2 \
 RUN_DEPENDS=	tor:security/tor \
 		obfs4proxy:security/obfs4proxy-tor
 
-USES=		compiler:c++11-lib cpe libtool gmake \
-		perl5 pkgconfig python:3.6 localbase:ldflags
+USES=		compiler:gcc-c++11-lib cpe libtool gmake \
+		perl5 pkgconfig python:2.7 localbase:ldflags
+USE_GCC=	yes
 
 CPE_VENDOR=	torproject
 
@@ -52,6 +54,9 @@ CONFIGURE_ARGS=	--prefix=${PREFIX} \
 		--with-tor-browser-version=${PORTVERSION}
 
 CONFIGURE_ENV=	LLVM_CONFIG=${LOCALBASE}/bin/llvm-config70
+
+TBB_BUTTON=	2.0.13
+TBB_LAUNCHER=	0.2.16.6
 
 pre-configure:
 	(cd ${WRKSRC} && ${LOCALBASE}/bin/autoconf-2.13)

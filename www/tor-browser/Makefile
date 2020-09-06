@@ -1,18 +1,16 @@
 # $FreeBSD$
 
 PORTNAME=	tor-browser
-PORTVERSION=	8.0.9
-CATEGORIES=	www security ipv6
-MASTER_SITES=	http://bits.torbsd.org/pub/OpenBSD/distfiles/
-DISTFILES=	${PORTNAME}-${PORTVERSION}.tar.gz \
-		torbutton-${TBB_BUTTON}.tar.gz \
-		tor-launcher-${TBB_LAUNCHER}.tar.gz
+DISTVERSION=	68.11.0esr-9.5-1-build1
+CATEGORIES=	www net security
+MASTER_SITES=	https://dist.torproject.org/torbrowser/9.5.3/
+DISTFILES=	src-firefox-tor-browser-${DISTVERSION}.tar.xz \
+		src-tor-launcher-0.2.21.8.tar.xz
 
 MAINTAINER=	egypcio@FreeBSD.org
 COMMENT=	Tor Browser for FreeBSD (experimental/unofficial)
 
 LICENSE=	BSD3CLAUSE
-LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	autoconf-2.13:devel/autoconf213 \
 		yasm:devel/yasm \
@@ -22,8 +20,10 @@ BUILD_DEPENDS=	autoconf-2.13:devel/autoconf213 \
 		dbus-glib>=0:devel/dbus-glib \
 		fontconfig>=0:x11-fonts/fontconfig \
 		rustc:lang/rust \
-		llvm70>=0:devel/llvm70 \
-		rust-cbindgen>=0:devel/rust-cbindgen
+		llvm80>=0:devel/llvm80 \
+		rust-cbindgen>=0:devel/rust-cbindgen \
+		node>=0:www/node \
+		nasm:devel/nasm
 LIB_DEPENDS=	libgconf-2.so:devel/gconf2 \
 		libgtk-x11-2.0.so:x11-toolkits/gtk20 \
 		libpangocairo-1.0.so:x11-toolkits/pango \
@@ -34,32 +34,23 @@ LIB_DEPENDS=	libgconf-2.so:devel/gconf2 \
 RUN_DEPENDS=	tor:security/tor \
 		obfs4proxy:security/obfs4proxy-tor
 
-USES=		compiler:gcc-c++11-lib cpe libtool gmake \
-		perl5 pkgconfig python:2.7 localbase:ldflags
-USE_GCC=	yes
+USES=		compiler:c++11-lib cpe libtool gmake \
+		perl5 pkgconfig python:2.7 shebangfix localbase:ldflags
 
 CPE_VENDOR=	torproject
+CPE_PRODUCT=	browser
 
 BUNDLE_LIBS=	yes
 MAKEFILE=	${WRKSRC}/client.mk
 PLIST_DIRS=	bin lib \
 		share/applications share/pixmaps
 
-CONFIGURE_ARGS=	--prefix=${PREFIX} \
-		--disable-debug-symbols \
-		--disable-tor-browser-update \
-		--enable-pie \
-		--enable-release \
-		--with-app-name=${PORTNAME} \
-		--with-tor-browser-version=${PORTVERSION}
-
-CONFIGURE_ENV=	LLVM_CONFIG=${LOCALBASE}/bin/llvm-config70
-
-TBB_BUTTON=	2.0.13
-TBB_LAUNCHER=	0.2.16.6
+WRKSRC=		${WRKDIR}/firefox-${PORTNAME}-${DISTVERSION}
+CONFIGURE_ENV=	LLVM_CONFIG=${LOCALBASE}/bin/llvm-config80
 
 pre-configure:
-	(cd ${WRKSRC} && ${LOCALBASE}/bin/autoconf-2.13)
+	cp ${FILESDIR}/mozconfig ${WRKSRC}/.mozconfig && \
+	(cd ${WRKSRC} && ${LOCALBASE}/bin/autoconf-2.13) && \
 	(cd ${WRKSRC}/js/src && ${LOCALBASE}/bin/autoconf-2.13)
 
 do-configure:
@@ -68,5 +59,9 @@ do-configure:
 
 do-build:
 	(cd ${WRKSRC} && ${SETENV} ${CONFIGURE_ENV} ${MAKE_ENV} ${SH} mach build)
+
+do-install:
+	(cd ${WRKSRC} && ${SETENV} ${CONFIGURE_ENV} ${MAKE_ENV} ${SH} mach install)
+
 
 .include <bsd.port.mk>
