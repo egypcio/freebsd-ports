@@ -1,15 +1,14 @@
 # $FreeBSD$
 
 PORTNAME=	tor-browser
-DISTVERSION=	68.11.0esr-9.5-1-build1
+PORTVERSION=	10.5.10
 CATEGORIES=	www net security
-MASTER_SITES=	https://dist.torproject.org/torbrowser/9.5.3/
-DISTFILES=	src-firefox-tor-browser-${DISTVERSION}.tar.xz \
-		src-tor-launcher-0.2.21.8.tar.xz
+MASTER_SITES=	https://dist.torproject.org/torbrowser/${PORTVERSION}/
+DISTFILES=	src-firefox-tor-browser-${TOR_FIREFOX}.tar.xz \
+		src-tor-launcher-${TOR_LAUNCHER}.tar.xz
 
 MAINTAINER=	egypcio@FreeBSD.org
 COMMENT=	Tor Browser for FreeBSD (experimental/unofficial)
-
 LICENSE=	BSD3CLAUSE
 
 BUILD_DEPENDS=	autoconf-2.13:devel/autoconf213 \
@@ -35,7 +34,7 @@ RUN_DEPENDS=	tor:security/tor \
 		obfs4proxy:security/obfs4proxy-tor
 
 USES=		compiler:c++11-lib cpe libtool gmake \
-		perl5 pkgconfig python:2.7 shebangfix localbase:ldflags
+		perl5 pkgconfig python shebangfix localbase:ldflags
 
 CPE_VENDOR=	torproject
 CPE_PRODUCT=	browser
@@ -47,6 +46,9 @@ PLIST_DIRS=	bin lib \
 
 WRKSRC=		${WRKDIR}/firefox-${PORTNAME}-${DISTVERSION}
 CONFIGURE_ENV=	LLVM_CONFIG=${LOCALBASE}/bin/llvm-config80
+
+TOR_FIREFOX=	78.15.0esr-10.5-1-build3
+TOR_LAUNCHER=	0.2.30
 
 pre-configure:
 	cp ${FILESDIR}/mozconfig ${WRKSRC}/.mozconfig && \
