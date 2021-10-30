@@ -19,7 +19,7 @@ BUILD_DEPENDS=	autoconf-2.13:devel/autoconf213 \
 		dbus-glib>=0:devel/dbus-glib \
 		fontconfig>=0:x11-fonts/fontconfig \
 		rustc:lang/rust \
-		llvm80>=0:devel/llvm80 \
+		llvm90>=0:devel/llvm90 \
 		rust-cbindgen>=0:devel/rust-cbindgen \
 		node>=0:www/node \
 		nasm:devel/nasm
@@ -44,11 +44,10 @@ MAKEFILE=	${WRKSRC}/client.mk
 PLIST_DIRS=	bin lib \
 		share/applications share/pixmaps
 
-WRKSRC=		${WRKDIR}/firefox-${PORTNAME}-${DISTVERSION}
-CONFIGURE_ENV=	LLVM_CONFIG=${LOCALBASE}/bin/llvm-config80
-
 TOR_FIREFOX=	78.15.0esr-10.5-1-build3
 TOR_LAUNCHER=	0.2.30
+WRKSRC=		${WRKDIR}/firefox-${PORTNAME}-${TOR_FIREFOX}
+CONFIGURE_ENV=	LLVM_CONFIG=${LOCALBASE}/bin/llvm-config80
 
 pre-configure:
 	cp ${FILESDIR}/mozconfig ${WRKSRC}/.mozconfig && \
