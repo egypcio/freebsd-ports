@@ -1,8 +1,18 @@
-  Tor Browser is a customized version of Firefox Extended Service Release (ESR)
-built specifically for internet browsing over the Tor network. Its default 
-configuration aims to mitigate attacks on a client's anonymity, including 
-determining the client's actual IP address and browser fingerprinting. Other
-aspects of Firefox have also been patched to plug privacy leaks in ways not 
-possible any other way.
+Tor Browser uses the Tor network to protect your privacy and anonymity. Using
+the Tor network has two main properties:
 
-WWW: https://www.torproject.org/projects/torbrowser.html.en
+  * Your internet service provider, and anyone watching your connection locally,
+  will not be able to track your internet activity, including the names and
+  addresses of the websites you visit.
+
+  * The operators of the websites and services that you use, and anyone watching
+  them, will see a connection coming from the Tor network instead of your real
+  Internet (IP) address, and will not know who you are unless you explicitly
+  identify yourself.
+
+In addition, Tor Browser is designed to prevent websites from "fingerprinting"
+or identifying you based on your browser configuration. By default, Tor Browser
+does not keep any browsing history. Cookies are only valid for a single session
+(until Tor Browser is exited or a New Identity is requested).
+
+WWW: https://www.torproject.org/

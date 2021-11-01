@@ -1,41 +1,44 @@
-. $topsrcdir/browser/config/mozconfig
+### . $topsrcdir/build/mozconfig.common
 
+TOOLTOOL_DIR=${TOOLTOOL_DIR:-$topsrcdir}
+
+#
 # This mozconfig file is not used in official Tor Browser builds.
-# It is only intended to be used when doing incremental Linux builds
-# during development. The platform-specific mozconfig configuration
-# files used in official Tor Browser releases can be found in the
-# tor-browser-build repo:
-#   https://gitweb.torproject.org/builders/tor-browser-build.git/
-# under:
-#   tor-browser-build/projects/firefox/mozconfig-$OS-$ARCH
+# Platform-specific mozconfig configuration files used in
+# official Tor Browser releases can be found in project's git repository:
+#
+#  * https://gitweb.torproject.org/builders/tor-browser-build
+#
 
 mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/obj-@CONFIG_GUESS@
 mk_add_options MOZ_APP_DISPLAYNAME="Tor Browser"
+mk_add_options AUTOCLOBBER=1
+mk_add_options BUILD_OFFICIAL=1
+mk_add_options MOZILLA_OFFICIAL=1
 export MOZILLA_OFFICIAL=1
+export MOZ_REQUIRE_SIGNING=${MOZ_REQUIRE_SIGNING-0}
+
+ac_add_options MOZ_TELEMETRY_REPORTING=
+
+# ac_add_options --disable-tor-launcher
+# ac_add_options --disable-tor-browser-update
 
 ac_add_options --enable-optimize
 ac_add_options --enable-official-branding
-
-# Let's support GTK3 for ESR60
 ac_add_options --enable-default-toolkit=cairo-gtk3
-
-ac_add_options --disable-tor-launcher
-ac_add_options --disable-tor-browser-update
-ac_add_options --enable-signmar
+ac_add_options --enable-proxy-bypass-protection
 ac_add_options --enable-verify-mar
+ac_add_options --enable-js-shell
+ac_add_options --enable-rust-simd
 
-ac_add_options --disable-strip
-ac_add_options --disable-install-strip
+# ac_add_options --disable-eme
+# ac_add_options --disable-strip
+# ac_add_options --disable-install-strip
+
+ac_add_options --disable-crashreporter
 ac_add_options --disable-tests
 ac_add_options --disable-debug
 ac_add_options --disable-crashreporter
 ac_add_options --disable-webrtc
 
-## Let's make sure no preference is enabling either Adobe's or Google's CDM.
-# ac_add_options --disable-eme
-ac_add_options --enable-proxy-bypass-protection
-
-# Disable telemetry
-ac_add_options MOZ_TELEMETRY_REPORTING=
-
-ac_add_options --with-tor-browser-version=dev-build
+ac_add_options --with-tor-browser-version="FreeBSD Experimental/Unofficial Port"
