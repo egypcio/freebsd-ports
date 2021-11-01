@@ -1,6 +1,7 @@
 ### . $topsrcdir/build/mozconfig.common
 
 TOOLTOOL_DIR=${TOOLTOOL_DIR:-$topsrcdir}
+RUSTC_BOOTSTRAP=0
 #
 CARGO="${PREFIX}/bin/cargo"
 CBINDGEN="${PREFIX}/bin/cbindgen"
