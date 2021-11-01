@@ -1,5 +1,4 @@
 # Created by: Florent Thoumie <flz@xbsd.org>
-# $FreeBSD: head/net-p2p/libbt/Makefile 486672 2018-12-05 14:09:12Z egypcio $
 
 PORTNAME=	libbt
 DISTVERSION=	1.06

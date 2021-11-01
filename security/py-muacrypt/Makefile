@@ -1,5 +1,3 @@
-# $FreeBSD: head/security/py-muacrypt/Makefile 506857 2019-07-18 16:28:45Z egypcio $
-
 PORTNAME=	muacrypt
 PORTVERSION=	0.9.1
 CATEGORIES=	security mail python
@@ -21,7 +19,7 @@ RUN_DEPENDS=	gpg2:security/gnupg	\
 
 TEST_DEPENDS=	${PYTHON_PKGNAMEPREFIX}tox>=0:devel/py-tox@${PY_FLAVOR}
 
-USES=		python
+USES=		python:3.6+
 USE_PYTHON=	autoplist distutils
 
 NO_ARCH=	yes

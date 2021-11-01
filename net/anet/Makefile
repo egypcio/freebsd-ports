@@ -1,5 +1,4 @@
 # Created by: John Marino <marino@FreeBSD.org>
-# $FreeBSD: head/net/anet/Makefile 487670 2018-12-17 09:57:50Z egypcio $
 
 PORTNAME=	anet
 PORTVERSION=	0.4.1

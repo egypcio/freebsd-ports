@@ -1,5 +1,3 @@
-# $FreeBSD: head/benchmarks/py-locust/Makefile 499821 2019-04-24 08:01:33Z egypcio $
-
 PORTNAME=	locust
 PORTVERSION=	0.11.0
 CATEGORIES=	benchmarks www python
@@ -21,7 +19,7 @@ RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}Flask>=0.10.1:www/py-flask@${PY_FLAVOR} \
 		${PYTHON_PKGNAMEPREFIX}six>=1.10.0:devel/py-six@${PY_FLAVOR}
 TEST_DEPENDS=	${PYTHON_PKGNAMEPREFIX}mock>=0:devel/py-mock@${PY_FLAVOR}
 
-USES=		python
+USES=		python:3.6+
 USE_PYTHON=	autoplist concurrent distutils
 
 NO_ARCH=	yes

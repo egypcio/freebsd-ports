@@ -1,8 +1,6 @@
-# $FreeBSD: head/devel/git-lfs/Makefile 525163 2020-02-04 13:38:26Z egypcio $
-
 PORTNAME=		git-lfs
 DISTVERSIONPREFIX=	v
-DISTVERSION=		2.10.0
+DISTVERSION=		3.0.1
 CATEGORIES=		devel
 
 MAINTAINER=	egypcio@FreeBSD.org

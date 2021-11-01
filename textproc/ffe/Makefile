@@ -1,5 +1,4 @@
 # Created by: Andrew Pantyukhin <infofarmer@FreeBSD.org>
-# $FreeBSD: head/textproc/ffe/Makefile 487673 2018-12-17 10:15:09Z egypcio $
 
 PORTNAME=	ffe
 DISTVERSION=	0.3.9

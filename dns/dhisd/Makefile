@@ -1,5 +1,4 @@
 # Created by: Bas Kruit <baskruit@bsltwr.dhis.org>
-# $FreeBSD: head/dns/dhisd/Makefile 486672 2018-12-05 14:09:12Z egypcio $
 
 PORTNAME=	dhisd
 PORTVERSION=	5.5

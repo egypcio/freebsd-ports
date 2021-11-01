@@ -1,7 +1,5 @@
-# $FreeBSD: head/dns/dnscrypt-proxy2/Makefile 529894 2020-03-30 15:11:28Z garga $
-
 PORTNAME=	dnscrypt-proxy
-PORTVERSION=	2.0.42
+PORTVERSION=	2.1.1
 CATEGORIES=	dns security
 PKGNAMESUFFIX=	2
 

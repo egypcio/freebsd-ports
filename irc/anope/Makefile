@@ -1,7 +1,5 @@
-# $FreeBSD: head/irc/anope/Makefile 518107 2019-11-21 19:27:39Z osa $
-
 PORTNAME=	anope
-PORTVERSION=	2.0.7
+PORTVERSION=	2.0.9
 PORTREVISION=	1
 CATEGORIES=	irc
 

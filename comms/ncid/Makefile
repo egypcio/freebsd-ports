@@ -1,5 +1,4 @@
 # Created by: David
-# $FreeBSD: head/comms/ncid/Makefile 525714 2020-02-10 16:28:23Z egypcio $
 
 PORTNAME=	ncid
 PORTVERSION=	1.11

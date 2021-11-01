@@ -1,5 +1,4 @@
 # Created by: Simon Olofsson <simon@olofsson.de>
-# $FreeBSD: head/devel/hub/Makefile 528232 2020-03-11 13:41:15Z egypcio $
 
 PORTNAME=	hub
 PORTVERSION=	2.14.2
@@ -14,7 +13,8 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 RUN_DEPENDS=	git:devel/git
 
-USES=		go:modules
+USES=		cpe go:modules
+CPE_VENDOR=	${PORTNAME}_project
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	github

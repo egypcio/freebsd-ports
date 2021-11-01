@@ -1,8 +1,7 @@
 # Created by: Herve Quiroz <hq@FreeBSD.org>
-# $FreeBSD: head/lang/groovy/Makefile 528349 2020-03-13 14:04:02Z egypcio $
 
 PORTNAME=	groovy
-DISTVERSION=	2.4.19
+DISTVERSION=	2.4.21
 CATEGORIES=	lang java
 MASTER_SITES=	http://dl.bintray.com/groovy/maven/
 DISTFILES=	apache-groovy-binary-${PORTVERSION}${EXTRACT_SUFX}
@@ -12,7 +11,8 @@ COMMENT=	Agile dynamic language for the JVM
 
 LICENSE=	APACHE20
 
-USES=		zip
+USES=		cpe zip
+CPE_VENDOR=	apache
 USE_JAVA=	yes
 
 NO_ARCH=	yes

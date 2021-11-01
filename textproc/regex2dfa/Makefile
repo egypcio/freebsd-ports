@@ -1,5 +1,3 @@
-# $FreeBSD: head/textproc/regex2dfa/Makefile 507372 2019-07-26 20:46:53Z gerald $
-
 PORTNAME=	regex2dfa
 DISTVERSION=	0.1.6
 PORTREVISION=	3

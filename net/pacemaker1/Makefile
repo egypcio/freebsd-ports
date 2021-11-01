@@ -1,13 +1,12 @@
 # Created by: David Shane Holden <dpejesh@yahoo.com>
-# $FreeBSD: head/net/pacemaker1/Makefile 525492 2020-02-07 17:23:49Z egypcio $
 
-PORTVERSION=		1.1.22
-PORTREVISION=		1
+PORTVERSION=		1.1.24
+PORTREVISION=		2
 PKGNAMESUFFIX=		1
 
 .include "${.CURDIR}/Makefile.common"
 
-CONFLICTS+=		pacemaker2-[0-9]*
+CONFLICTS+=		pacemaker2
 
 SHEBANG_FILES+=		cts/cts \
 			cts/lxc_autogen.sh.in \
@@ -24,6 +23,11 @@ SHEBANG_FILES+=		cts/cts \
 REPLACE_ARGS_GETOPT=	-e 's,getopt,${LOCALBASE}/bin/getopt,'
 
 .include <bsd.port.pre.mk>
+
+# Fix building it with clang 11
+.if ${OSVERSION} >= 1300000
+CFLAGS+=	-fcommon
+.endif
 
 .if ${PYTHON_SUFFIX} > 36
 EXTRA_PATCHES+=	${PATCHDIR}/extra-patch-cts_remote.py \

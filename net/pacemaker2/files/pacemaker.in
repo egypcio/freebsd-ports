@@ -1,5 +1,4 @@
 #!/bin/sh
-# $FreeBSD: head/net/pacemaker2/files/pacemaker.in 525041 2020-02-03 14:22:42Z egypcio $
 
 # PROVIDE: pacemaker
 # REQUIRE: corosync

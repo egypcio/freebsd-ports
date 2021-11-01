@@ -1,5 +1,4 @@
 # Created by: Daniel Kahn Gillmor <dkg@fifthhorseman.net>
-# $FreeBSD: head/security/monkeysphere/Makefile 493870 2019-02-25 14:43:23Z egypcio $
 
 PORTNAME=	monkeysphere
 PORTVERSION=	0.42

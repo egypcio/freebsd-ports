@@ -1,5 +1,4 @@
 # Created by: David Shane Holden <dpejesh@yahoo.com>
-# $FreeBSD: head/net/corosync2/Makefile.common 525147 2020-02-04 11:10:07Z egypcio $
 
 PORTNAME=		corosync
 CATEGORIES=		net
@@ -12,11 +11,11 @@ LICENSE=		BSD3CLAUSE
 
 LIB_DEPENDS=		libnspr4.so:devel/nspr \
 			libnss3.so:security/nss \
-			libqb.so.0:devel/libqb
+			libqb.so:devel/libqb
 
 TEST_DEPENDS=		augparse:textproc/augeas
 
-USES=			gmake groff libtool pathfix pkgconfig
+USES=			cpe gmake groff libtool pathfix pkgconfig
 USE_BINUTILS=		yes
 USE_LDCONFIG=		yes
 USE_RC_SUBR=		${PORTNAME} ${PORTNAME}-notifyd

@@ -1,5 +1,3 @@
-# $FreeBSD: head/irc/weechat-otr/Makefile 486672 2018-12-05 14:09:12Z egypcio $
-
 PORTNAME=	weechat-otr
 DISTVERSIONPREFIX=	v
 DISTVERSION=	1.9.2

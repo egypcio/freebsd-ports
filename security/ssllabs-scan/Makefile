@@ -1,5 +1,3 @@
-# $FreeBSD: head/security/ssllabs-scan/Makefile 517745 2019-11-16 12:52:39Z dmgk $
-
 PORTNAME=		ssllabs-scan
 DISTVERSIONPREFIX=	v
 DISTVERSION=		1.5.0

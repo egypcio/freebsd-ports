@@ -1,5 +1,4 @@
 # Created by: Veniamin Gvozdikov <vg@FreeBSD.org>
-# $FreeBSD: head/devel/busybee/Makefile 486672 2018-12-05 14:09:12Z egypcio $
 
 PORTNAME=		busybee
 PORTVERSION=		0.7.0

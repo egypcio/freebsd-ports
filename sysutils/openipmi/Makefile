@@ -1,8 +1,7 @@
 # Created by: Alex Deiter <alex.deiter@gmail.com>
-# $FreeBSD: head/sysutils/openipmi/Makefile 521940 2020-01-03 13:38:39Z egypcio $
 
 PORTNAME=	openipmi
-PORTVERSION=	2.0.28
+PORTVERSION=	2.0.29
 CATEGORIES=	sysutils
 MASTER_SITES=	SF/${PORTNAME}/OpenIPMI%202.0%20Library
 DISTNAME=	OpenIPMI-${PORTVERSION}
@@ -85,9 +84,8 @@ USES+=			python
 USE_PYTHON=		py3kplist
 CONFIGURE_ARGS+=	--with-python --with-swig
 CONFIGURE_ENV+=	ac_cv_path_pythonprog=${PYTHON_CMD}
-BUILD_DEPENDS+=		swig3.0:devel/swig30
+BUILD_DEPENDS+=		swig:devel/swig
 PLIST_SUB+=		OIPMIPYTHON=""
-BINARY_ALIAS=		swig=swig3.0
 .else
 CONFIGURE_ARGS+=	--with-python=no --with-swig=no
 PLIST_SUB+=		OIPMIPYTHON="@comment "

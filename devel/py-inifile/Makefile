@@ -1,5 +1,3 @@
-# $FreeBSD: head/devel/py-inifile/Makefile 506618 2019-07-14 14:02:28Z egypcio $
-
 PORTNAME=	inifile
 PORTVERSION=	0.4
 CATEGORIES=	devel python
@@ -11,7 +9,7 @@ COMMENT=	Small INI library for Python
 
 LICENSE=	BSD3CLAUSE
 
-USES=		python zip
+USES=		python:3.6+ zip
 USE_PYTHON=	autoplist distutils
 
 NO_ARCH=	yes

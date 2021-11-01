@@ -1,8 +1,7 @@
 # Created by: Andrew 'derfi' Sidorov <derfi@vei.ru>
-# $FreeBSD: head/net-mgmt/nagvis/Makefile 532977 2020-04-25 20:42:21Z egypcio $
 
 PORTNAME=	nagvis
-PORTVERSION=	1.9.19
+PORTVERSION=	1.9.27
 CATEGORIES=	net-mgmt
 MASTER_SITES=	http://www.nagvis.org/share/
 
@@ -12,7 +11,7 @@ COMMENT=	Visualization addon for Nagios
 LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/COPYING
 
-USES=		gettext php:web
+USES=		cpe gettext php:web
 USE_PHP=	gd gettext mbstring session json pdo pdo_sqlite
 
 NO_BUILD=	yes

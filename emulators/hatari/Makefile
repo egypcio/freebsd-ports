@@ -1,5 +1,4 @@
 # Created by: Michael Neumann <mneumann@ntecs.de>
-# $FreeBSD: head/emulators/hatari/Makefile 516802 2019-11-05 15:48:40Z zeising $
 
 PORTNAME=	hatari
 PORTVERSION=	2.2.1
@@ -29,8 +28,6 @@ SHEBANG_FILES=	python-ui/*.py tools/*.py \
 CMAKE_ARGS=	-DETCDIR:PATH="${PREFIX}/etc" \
 		-DMANDIR:PATH="man/man1" \
 		-DREADLINE_FOUND:BOOL=ON
-
-INSTALLS_ICONS=	yes
 
 OPTIONS_DEFINE=		DEBUG DOCS SDL2 WINUAE
 

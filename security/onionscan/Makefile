@@ -1,5 +1,3 @@
-# $FreeBSD: head/security/onionscan/Makefile 519603 2019-12-09 12:19:29Z egypcio $
-
 PORTNAME=	onionscan
 DISTVERSIONPREFIX=	OnionScan-
 DISTVERSION=	0.2

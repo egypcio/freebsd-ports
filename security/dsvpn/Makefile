@@ -1,5 +1,3 @@
-# $FreeBSD: head/security/dsvpn/Makefile 519607 2019-12-09 13:06:25Z egypcio $
-
 PORTNAME=	dsvpn
 PORTVERSION=	0.1.4
 CATEGORIES=	security net net-vpn

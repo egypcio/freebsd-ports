@@ -1,5 +1,4 @@
 # Created by: Remington Lang <MrL0Lz@gmail.com>
-# $FreeBSD: head/security/openvpn-admin/Makefile 517058 2019-11-08 13:17:00Z tobik $
 
 PORTNAME=	openvpn-admin
 PORTVERSION=	1.9.4

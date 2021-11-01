@@ -1,5 +1,4 @@
 # Created by: Nobuhiro Yasutomi <nobu@psrc.isac.co.jp>
-# $FreeBSD: head/sysutils/xbatt/Makefile 516988 2019-11-07 17:17:53Z zeising $
 
 PORTNAME=	xbatt
 PORTVERSION=	1.2.1

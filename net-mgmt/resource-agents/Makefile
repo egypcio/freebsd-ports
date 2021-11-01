@@ -1,8 +1,7 @@
 # Created by: dpejesh@yahoo.com
-# $FreeBSD: head/net-mgmt/resource-agents/Makefile 525486 2020-02-07 13:36:44Z egypcio $
 
 PORTNAME=	resource-agents
-PORTVERSION=	4.4.0
+PORTVERSION=	4.9.0
 DISTVERSIONPREFIX=v
 CATEGORIES=	net-mgmt
 
@@ -12,7 +11,8 @@ COMMENT=	OCF Compliant Resource Agents
 LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/COPYING
 
-BUILD_DEPENDS=	bash:shells/bash
+BUILD_DEPENDS=	bash:shells/bash \
+		redis-cli:databases/redis
 RUN_DEPENDS=	bash:shells/bash
 
 USES=		autoreconf gmake gnome pkgconfig python shebangfix
@@ -25,7 +25,7 @@ CONFIGURE_ARGS=	--disable-fatal-warnings --with-version=${PORTVERSION} \
 		PACKAGE_STRING="${PORTNAME} ${PORTVERSION}" \
 		PACKAGE_VERSION="${PORTVERSION}"
 
-CONFLICTS=	heartbeat-[0-9]*
+CONFLICTS=	heartbeat
 
 SHEBANG_LANG=	sh
 sh_OLD_CMD=	/bin/sh
@@ -52,6 +52,10 @@ post-patch:
 	  ${WRKSRC}/heartbeat/sybaseASE.in \
 	  ${WRKSRC}/rgmanager/src/resources/utils/config-utils.sh.in \
 	  ${WRKSRC}/rgmanager/src/resources/ASEHAagent.sh.in
+	${REINPLACE_CMD} 's|/etc/redis|${LOCALBASE}/etc/redis|g' \
+	  ${WRKSRC}/heartbeat/redis.in
+	${REINPLACE_CMD} 's|/usr/bin/redis|${LOCALBASE}/bin/redis|g' \
+	  ${WRKSRC}/heartbeat/redis.in	
 
 post-install:
 	${RM} ${STAGEDIR}/${LOCALBASE}/resource-agents.conf
