@@ -13,6 +13,7 @@ LICENSE=	BSD3CLAUSE
 
 BUILD_DEPENDS=	autoconf-2.13:devel/autoconf213 \
 		automake:devel/automake \
+		clang${LLVM_DEFAULT}:devel/llvm${LLVM_DEFAULT} \
 		yasm:devel/yasm \
 		zip:archivers/zip \
 		wx31-gtk3>=0:x11-toolkits/wxgtk31 \
@@ -20,11 +21,11 @@ BUILD_DEPENDS=	autoconf-2.13:devel/autoconf213 \
 		dbus-glib>=0:devel/dbus-glib \
 		fontconfig>=0:x11-fonts/fontconfig \
 		rustc:lang/rust \
-		llvm90>=0:devel/llvm90 \
 		rust-cbindgen>=0:devel/rust-cbindgen \
 		node>=0:www/node \
 		nasm:devel/nasm \
 		python3>=0:lang/python3
+
 LIB_DEPENDS=	libgconf-2.so:devel/gconf2 \
 		libgtk-x11-2.0.so:x11-toolkits/gtk20 \
 		libpangocairo-1.0.so:x11-toolkits/pango \
@@ -32,17 +33,18 @@ LIB_DEPENDS=	libgconf-2.so:devel/gconf2 \
 		libXt.so:x11-toolkits/libXt \
 		libIDL-2.so:devel/libIDL \
 		libnspr4.so:devel/nspr
+
 RUN_DEPENDS=	tor:security/tor \
 		obfs4proxy:security/obfs4proxy-tor
 
-USES=		cargo compiler:c++11-lib cpe libtool gmake \
-		perl5 pkgconfig python:3.6+ shebangfix localbase:ldflags
+USES=		cargo cpe gmake libtool perl5 pkgconfig python:3.6+ \
+		localbase shebangfix compiler:c++14-lang
+
+CPE_VENDOR=     torproject
+CPE_PRODUCT=    tor_browser
 
 CARGO_CONFIGURE=	no
 GNU_CONFIGURE=		yes
-
-CPE_VENDOR=	torproject
-CPE_PRODUCT=	tor_browser
 
 BUNDLE_LIBS=	yes
 MAKEFILE=	${WRKSRC}/client.mk
@@ -51,17 +53,18 @@ PLIST_DIRS=	bin lib \
 
 TOR_FIREFOX=	78.15.0esr-10.5-1-build3
 TOR_LAUNCHER=	0.2.30
+
 WRKSRC=		${WRKDIR}/firefox-${PORTNAME}-${TOR_FIREFOX}
-CONFIGURE_ENV=	LLVM_CONFIG=${LOCALBASE}/bin/llvm-config90
+
+CC=		${LOCALBASE}/bin/clang${LLVM_DEFAULT}
+CPP=		${LOCALBASE}/bin/clang-cpp${LLVM_DEFAULT}
+CXX=		${LOCALBASE}/bin/clang++${LLVM_DEFAULT}
+LLVM_CONFIG=	${LOCALBASE}/bin/llvm-config${LLVM_DEFAULT}
 
 pre-configure:
 	${CP} ${FILESDIR}/mozconfig ${WRKSRC}/.mozconfig && \
-	(cd ${WRKSRC} && \
-	  ${LOCALBASE}/bin/autoconf-2.13) && \
-	(cd ${WRKSRC}/js/src && \
-	  ${LOCALBASE}/bin/autoconf-2.13) && \
-	(cd ${WRKSRC} && \
-	  ${SETENV} ${CONFIGURE_ENV} ${MAKE_ENV} ${SH} mach bootstrap)
+	(cd ${WRKSRC} && ${LOCALBASE}/bin/autoconf-2.13) && \
+	(cd ${WRKSRC}/js/src && ${LOCALBASE}/bin/autoconf-2.13)
 
 do-configure:
 	(cd ${WRKSRC} && \
