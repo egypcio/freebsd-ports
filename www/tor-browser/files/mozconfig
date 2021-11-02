@@ -1,13 +1,12 @@
 ### . $topsrcdir/build/mozconfig.common
 
-TOOLTOOL_DIR=${TOOLTOOL_DIR:-$topsrcdir}
-RUSTC_BOOTSTRAP=0
-#
 CARGO="${PREFIX}/bin/cargo"
 CBINDGEN="${PREFIX}/bin/cbindgen"
 RUSTC="${PREFIX}/bin/rustc"
+RUSTC_BOOTSTRAP=0
 RUSTDOC="${PREFIX}/bin/rustdoc"
 RUSTFMT="${PREFIX}/bin/rustfmt"
+TOOLTOOL_DIR=${TOOLTOOL_DIR:-$topsrcdir}
 
 #
 # This mozconfig file is not used in official Tor Browser builds.
